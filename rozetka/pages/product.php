@@ -11,7 +11,7 @@ $product = $similar_products[$product_id];
 </pre>
 <div class="product-page">
 <ul class="breadcrums">
-<li class="breadcrum-item home">
+   <li class="breadcrum-item home">
         <a href="#" class="breadcrum-link">
         <?php include 'svg/home.svg' ?>
         </a>

@@ -79,18 +79,18 @@
     </div>
     <div class="left-menu-apps">
         <h3>Скачивайте наше приложение</h3>
-            <a><img src="svg/button-google-play-ru.svg" alt=""></a>    
-            <a><img src="svg/button-appstore-ru.svg" alt="">  </a>
+            <a target="_blank" href="https://play.google.com/store/apps/details/?id=ua.com.rozetka.shop&referrer=utm_source%3Dfullversion%26utm_medium%3Dsite%26utm_campaign%3Dfullversion"><img src="svg/button-google-play-ru.svg" alt=""></a>    
+            <a target="_blank" href="https://itunes.apple.com/app/apple-store/id740469631/?pt=3132803&ct=fullversion&at=1000l3MB&mt=8"><img src="svg/button-appstore-ru.svg" alt="">  </a>
     </div>
     <div class="left-menu-socials">
             <h3>Мы в социальных сетях</h3>
             <ul>
-            <a class="left-menu-socials-facebook"><?php include "svg/facebook.svg" ?></a> 
-            <a class="left-menu-socials-twitter"><?php include "svg/twitter.svg" ?></a>
-            <a class="left-menu-socials-youtube2"><?php include "svg/youtube2.svg" ?></a>
-            <a class="left-menu-socials-instagram"><?php include "svg/instagram.svg" ?></a>
-            <a class="left-menu-socials-viber"><?php include "svg/viber.svg" ?></a>
-            <a class="left-menu-socials-telegram"><?php include "svg/telegram.svg" ?></a>
+            <li><a href="#" class="left-menu-socials-facebook"><?php include "svg/facebook.svg" ?></a> </li>
+            <li><a href="#"  class="left-menu-socials-twitter"><?php include "svg/twitter.svg" ?></a></li>
+            <li><a href="#"  class="left-menu-socials-youtube2"><?php include "svg/youtube2.svg" ?></a></li>
+            <li><a href="#"  class="left-menu-socials-instagram"><?php include "svg/instagram.svg" ?></a></li>
+            <li><a href="#"  class="left-menu-socials-viber"><?php include "svg/viber.svg" ?></a></li>
+            <li><a href="#"  class="left-menu-socials-telegram"><?php include "svg/telegram.svg" ?></a></li>
             </ul>
     </div>
     <div class="left-menu-logout">

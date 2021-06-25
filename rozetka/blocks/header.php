@@ -53,7 +53,7 @@ if(!defined('ROOT')){
               ></path>
             </g>
           </svg>
-          <a href="?action=modal-test">Каталог</a>
+          <a href="?action=category">Каталог</a>
         </div>
         <form class="search-block" action="index.php">
           <input type="hidden" name="action" value="search">
