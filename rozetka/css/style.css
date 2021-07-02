@@ -1425,15 +1425,25 @@ font-size: 16px;
     width: 50px;
     box-shadow: 0 0 2px #999 ;
     border-radius: 4px;
+    font-size: 21px;
 }
 
 .pagination > a::before{
     height: 20px;
+    background-image: none;
+    display: none;
+    
+}
+
+.pagination > a.disabled{
+    cursor: default;
+    color: #ccc;
 }
 
 .pagination > ul{
     display: flex;
     list-style: none;
+    margin: 0;
 }
 
 .pagination > ul a{
@@ -1462,3 +1472,27 @@ a[target="_blank"]::after{
     position: absolute;
 }
 
+.pagination > ul a.active{
+    border-color: #3e77aa;
+    color: #999;
+
+}
+
+.category .before-products{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    padding: 0 15px;
+}
+/* Фильтры */
+
+.category .category-settings select{
+    padding: 5px 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.category .fast-info{
+    color: #797878;
+    font-size: 12px;
+}
