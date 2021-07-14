@@ -91,10 +91,44 @@
                     &nbsp; <a href="#">для владельцев Premium</a> 
                     </div>
                 </div>
+                 <div class="specs">
+                     <h2>Характеристики</h2>
+                     <ul class="fast-info">
+                     <?php foreach($product ['fast_info'] as $spec => $value): ?>
+                     <li>
+                         <span class="spec-name"><s><?= $spec ?>:</s></span> 
+                         <span class="spec-value"><?= $value ?></span>
+                     </li>
+                     <?php endforeach; ?>
+                     </ul>
+                 </div>
             </div>
-
         </div>
     </div>
+        <div class="product-bottom">
+                     <div class="description">
+                         <h2>Описание</h2>
+                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta nam error, amet nulla eveniet eum saepe. Ea vitae, aspernatur quaerat omnis dignissimos itaque qui doloremque ducimus cum, beatae nam aliquid!</p>
+                         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo reiciendis impedit sequi ab voluptate voluptatibus, necessitatibus fugiat corrupti harum blanditiis rerum quam dolorem pariatur placeat animi eveniet, explicabo, doloremque consequuntur.</p>
+                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores distinctio placeat eos totam sit porro a voluptatibus ipsa quas cum accusantium, veniam ex excepturi illum. Rem repellendus voluptatem inventore itaque.</p>
+                        </div>
+                        <div class="reviews">
+                            <h2>Отзывы покупателей</h2>
+                            <div class="review-block">
+                                <div class="review-head">Ivan Ivanov <span class="date"><i class="bi bi-clock"></i> 15 june 2020</span></div>
+                                <div class="review-body">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae doloribus explicabo tempora doloremque eius, omnis et nemo a natus pariatur est cupiditate ducimus! Cumque eum id et perferendis, voluptas aut!</div>
+                            </div>
+                            <div class="review-block">
+                                <div class="review-head">Ivan Ivanov <span class="date"><i class="bi bi-clock"></i> 15 june 2020</span></div>
+                                <div class="review-body">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae doloribus explicabo tempora doloremque eius, omnis et nemo a natus pariatur est cupiditate ducimus! Cumque eum id et perferendis, voluptas aut!</div>
+                            </div>
+                            <div class="review-block">
+                                <div class="review-head">Ivan Ivanov <span class="date"><i class="bi bi-clock"></i> 15 june 2020</span></div>
+                                <div class="review-body">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae doloribus explicabo tempora doloremque eius, omnis et nemo a natus pariatur est cupiditate ducimus! Cumque eum id et perferendis, voluptas aut!</div>
+                            </div>
+                        </div>
+                 </div>
+    
 
 </div>
 

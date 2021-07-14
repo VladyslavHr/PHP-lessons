@@ -488,7 +488,7 @@ display: flex
 
 .product-options{
     width: 50%;
-
+    padding-left: 15px;
 }
 
 .product-images{
@@ -1495,4 +1495,175 @@ a[target="_blank"]::after{
 .category .fast-info{
     color: #797878;
     font-size: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.category .fast-info span{
+    color: #3e77aa;
+}
+
+.product-page .fast-info{
+list-style: none;
+padding: 0;
+margin: 15px 0;
+
+}
+
+.product-page .spec-name {
+    width: 50%;
+    display: inline-block;
+}
+
+.product-page .spec-name s{
+position: relative;
+text-decoration: none;
+background: #fff;
+z-index: 1;
+
+}
+
+.product-page .spec-name s::after{
+    content: '';
+    display: block;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    bottom: 9px;
+}
+
+.product-page .spec-value{
+    color: #3e77aa;
+}
+
+.product-page .product-bottom{
+    display: flex;
+    margin-top: 30px;
+}
+
+.product-page .product-bottom h2{
+    color: #555;
+}
+
+.product-page .description{
+    width: 50%;
+}
+
+.product-page .reviews{
+    width: 50%;
+    padding-left: 15px;
+}
+
+.product-page .review-block{
+    margin-bottom: 20px;
+}
+
+.product-page .review-head{
+border: 1px solid #ccc;
+padding: 8px 20px;
+border-radius: 4px 4px 0 0;
+border-bottom: 0;
+}
+
+.product-page .review-head .date{
+    color: #999;
+    font-size: 80%;
+    float: right;
+}
+
+.product-page .review-body{
+    border: 1px solid #ccc;
+padding: 8px 20px;
+border-radius: 0px 0px 4px 4px;
+}
+
+.footer-head{
+    display: flex;
+    background: #00a046;
+    padding: 10px;
+
+}
+
+.footer-head .caption{
+margin: auto;
+color: white;
+font-size: 20px;
+letter-spacing: 1px;
+
+}
+
+.footer-head .apps a{
+display: inline-block;
+padding: 1px;
+height: 40px;
+}
+
+.footer-body-wrap{
+    background: #f5f5f5;
+}
+
+.footer-body{
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    margin: 0px 25px 0px 25px;
+    
+}
+
+.footer-social-clock{
+    margin: 10px;
+}
+
+.footer-call-centr{
+    font-size: 15px;
+}
+
+.footer-call-centr i{
+    margin: 10px;
+}
+
+.footer-body-socials{
+    display: flex;
+    list-style: none;
+    padding: 0px;
+}
+
+.footer-body-socials li{
+    margin-left: 6px;
+}
+
+.footer-columns{
+    display: flex;
+}
+
+.footer-columns ul{
+    list-style: none;
+    font-size: 14px;
+    margin: 0;
+}
+
+.footer-columns h3{
+    color: #797878;
+    font-size: 12px;
+}
+
+.footer-columns li{
+    padding: 2px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+}
+
+.footer-bottom{
+    padding: 15px;
+}
+
+.footer-payment-master{
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.footer-payment-visa{
+    border: 0;
+    background: none;
+    cursor: pointer;
 }

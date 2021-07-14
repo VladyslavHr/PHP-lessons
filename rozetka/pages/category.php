@@ -31,7 +31,7 @@ if (!empty($_GET['sorting']) && $_GET['sorting'] === 'rating'){
     return $a['rating'] < $b['rating'];
 });
 }
-$similar_products = array_slice($similar_products, $offset, $limit);
+$similar_products = array_slice($similar_products, $offset, $limit, true);
 $product_count = count($similar_products);
 ?>
 <div class="category">
@@ -100,7 +100,13 @@ $product_count = count($similar_products);
                 <div class="is-over">&nbsp;</div>
               <?php endif; ?>
               <div class="rating">rating: <?= !empty($product ['rating']) ? $product ['rating'] : 0  ?></div>
-              <div class="fast-info"><?= !empty($product ['fast_info']) ? $product ['fast_info'] : ''  ?></div>
+              <?php if(!empty($product ['fast_info']) && is_array($product ['fast_info'])) : ?>
+              <ul class="fast-info">
+                <?php foreach($product ['fast_info'] as $spec => $value): ?>
+                  <li><?= $spec ?>: <span><?= $value ?></span></li>
+                <?php endforeach; ?>
+                </ul>
+              <?php endif; ?>
               <?php if(!empty($product['finger_print']) && $product['finger_print']): ?>
               <div class="finger-print"><img src="img/finger-info.png" alt=""></div>
               <?php endif; ?>
