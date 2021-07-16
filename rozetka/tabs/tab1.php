@@ -63,11 +63,11 @@
                 <div class="product-about">
                     <div class="trade">
                     <div class="price">
-                        <?php if(empty($_GET['old_price'])): ?>
-                            <?= _get('price')  ?> ₴
+                        <?php if(empty($product['old_price'])): ?>
+                            <?= $product['price']  ?> ₴
                         <?php else: ?>
-                            <span class="reg-price"><?= _get('price') ?> ₴ </span> 
-                            <span class="old-price"><?= _get('old_price') ?> ₴ </span> 
+                            <span class="reg-price"><?= $product['price'] ?> ₴ </span> 
+                            <span class="old-price"><?= $product['old_price'] ?> ₴ </span> 
                             
                         <?php endif; ?>
 

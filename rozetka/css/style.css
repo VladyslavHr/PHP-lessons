@@ -14,6 +14,10 @@ a{
     font-family: BlinkMacSystemFont,-apple-system,Arial,Segoe UI,Roboto,Helvetica,sans-serif;
 }
 
+img{
+    max-width: 100%;
+}
+
 .text-center{
     text-align: center;
 }
@@ -31,6 +35,7 @@ a{
     color: white;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 
@@ -45,6 +50,7 @@ a{
     border-radius: 4px;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 
 }
 .catalog-btn:hover{
@@ -175,6 +181,7 @@ margin-right: 10px;
 
 .main-container{
     display: flex;
+    flex-wrap: wrap;
 }
 
 .sidebar{
@@ -331,6 +338,7 @@ padding: 5px 10px;
 .new-videos{
     background: #4d4b4b;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .video-item{
@@ -418,10 +426,12 @@ fill: #c1c8cc;
     display: flex;
     justify-content: space-between;
     margin: 0 0 25px;
+    flex-wrap: wrap;
 }
 
 .product-page .rating{
     display: flex;
+    flex-wrap: wrap;
 }
 
 .product-page .stars{
@@ -482,7 +492,8 @@ fill: #c1c8cc;
 }
 
 .product-info{
-display: flex
+display: flex;
+flex-wrap: wrap;
 
 }
 
@@ -566,6 +577,7 @@ top: 15px;
 display: flex;
 flex-direction: column;
 align-items: baseline;
+flex-wrap: wrap;
 
 }
 
@@ -613,8 +625,6 @@ align-items: baseline;
 
 .delivery{
     position: relative;
-
-   
 }
 
 .delivery svg{
@@ -648,6 +658,7 @@ height: 120px;
     .product-about .trade{
         display: flex;
         padding: 15px;
+        flex-wrap: wrap;
     }
 
     .product-about .trade > *{
@@ -659,6 +670,7 @@ height: 120px;
         display: flex;
         align-items: center;
         position: relative;
+        flex-wrap: wrap;
     }
 
     .product-about .reg-price{
@@ -682,6 +694,7 @@ height: 120px;
         color: #fff;
         border-radius: 4px;
         font-size: 20px;
+        flex-wrap: wrap;
 
 
     }
@@ -710,6 +723,7 @@ height: 120px;
         width: 48px;
         justify-content: center;
         border-radius: 4px;
+        flex-wrap: wrap;
     }
     .product-about .compare:hover,
     .product-about .favorite:hover{
@@ -731,6 +745,7 @@ height: 120px;
         align-items: center;
         padding: 15px;
         border-top: 1px solid #eee;
+        flex-wrap: wrap;
     }
 
     .product-about .bonuses svg{
@@ -852,7 +867,7 @@ cursor: pointer;
 .modal-login .body{
     display: flex;
     padding: 24px;
-
+    flex-wrap: wrap;
 }
 
 .modal-login .body-left{
@@ -913,6 +928,7 @@ background-position: 96% 11px;
     justify-content: space-between;
     margin-bottom: 15px;
     user-select: none;
+    flex-wrap: wrap;
 }
 
 .modal-login .login-btn{
@@ -1060,6 +1076,7 @@ border: 1px solid #ebebeb;
     background: #221f1f;
     justify-content: space-between;
     padding: 15px 0;
+    flex-wrap: wrap;
 }
 
 .left-menu-close{
@@ -1080,6 +1097,7 @@ border: 1px solid #ebebeb;
     display: flex;
     align-items: center;
     padding: 10px;
+    flex-wrap: wrap;
 }
 
 .left-menu-avatar{
@@ -1289,7 +1307,7 @@ border: 1px solid #ebebeb;
 display: flex;
 align-items: center;
 padding-left: 15px;
-
+flex-wrap: wrap;
 }
 
 .left-menu-langs h3,
@@ -1332,7 +1350,7 @@ font-size: 16px;
     padding: 0 0 0 15px;
     justify-content: space-between;
     margin: 5px 36px 0px 0px;
-    
+    flex-wrap: wrap;
 }
 
 .left-menu-socials-facebook svg{
@@ -1415,6 +1433,7 @@ font-size: 16px;
     display: flex;
     justify-content: space-between;
     margin: 20px 15px;
+    flex-wrap: wrap;
 }
 
 .pagination > a{
@@ -1444,6 +1463,7 @@ font-size: 16px;
     display: flex;
     list-style: none;
     margin: 0;
+    flex-wrap: wrap;
 }
 
 .pagination > ul a{
@@ -1483,6 +1503,7 @@ a[target="_blank"]::after{
     justify-content: space-between;
     margin-bottom: 25px;
     padding: 0 15px;
+    flex-wrap: wrap;
 }
 /* Фильтры */
 
@@ -1539,6 +1560,7 @@ z-index: 1;
 .product-page .product-bottom{
     display: flex;
     margin-top: 30px;
+    flex-wrap: wrap;
 }
 
 .product-page .product-bottom h2{
@@ -1581,7 +1603,7 @@ border-radius: 0px 0px 4px 4px;
     display: flex;
     background: #00a046;
     padding: 10px;
-
+    flex-wrap: wrap;
 }
 
 .footer-head .caption{
@@ -1606,7 +1628,7 @@ height: 40px;
     display: flex;
     border-bottom: 1px solid #ccc;
     margin: 0px 25px 0px 25px;
-    
+    flex-wrap: wrap;
 }
 
 .footer-social-clock{
@@ -1625,6 +1647,7 @@ height: 40px;
     display: flex;
     list-style: none;
     padding: 0px;
+    flex-wrap: wrap;
 }
 
 .footer-body-socials li{
@@ -1633,12 +1656,16 @@ height: 40px;
 
 .footer-columns{
     display: flex;
+    width: 100%;
+    flex-wrap: wrap;
 }
 
 .footer-columns ul{
     list-style: none;
     font-size: 14px;
     margin: 0;
+    width: 25%;
+
 }
 
 .footer-columns h3{
@@ -1666,4 +1693,83 @@ height: 40px;
     border: 0;
     background: none;
     cursor: pointer;
+}
+
+.not-found{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    }
+.not-found h1{
+    justify-content: center;
+    color: #00a046;
+    font-size: 100px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    }
+
+    .not-found a{
+        padding: 15px;
+        margin-bottom: 10px;
+        background: #00a046;
+        border-radius: 7px;
+        color: white;
+    }
+
+    .not-found img{
+        width: 15%;
+        padding: 10px;
+        margin: 20px;
+
+    }
+
+
+@media (max-width: 767px){
+    .product-images,
+    .product-options{
+        width: 100%;
+    }
+    .footer-columns ul{
+        width: 50%;
+        padding-left: 0px;
+    }
+    .product-page .product-bottom .description,
+    .product-page .product-bottom .reviews{
+        width: 100%;
+        padding-left: 0px;
+    }
+    .product-tabs-item{
+        width: 100%;
+    }
+    .delivery svg{
+        width: 60px;
+        height: 60px;
+    }
+    .delivery-text{
+        bottom: 13px;
+        font-size: 6px;
+    }
+    .badges > div{
+    font-size: 0.5em;
+    }
+    .product-page .fast-info{
+        font-size: 0.6em;
+    }
+    .product-page .spec-name{
+        width: 80%;
+    }
+    .product-page .spec-name s::after{
+        bottom: 6px;
+    }
+    .product-about .trade > div{
+        margin-bottom: 10%;
+    }
+
+    
+}
+
+@media (max-width: 991px){
+
 }
