@@ -3,6 +3,8 @@ if(!defined('ROOT')){
   die('Direct request not allowed');
 }
 ?>
+
+<div class="sidebar-wrapper js-open-modal" data-target="left_sidebar" id="left_sidebar">
 <div class="sidebar">
         <ul class="menu-categories">
           <li>
@@ -104,4 +106,5 @@ if(!defined('ROOT')){
             <?php echo date('Y-m-d H:i') ?>
           </li>
         </ul>
+      </div>
       </div>

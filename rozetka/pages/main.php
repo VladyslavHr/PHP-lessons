@@ -1,5 +1,5 @@
 <?php if(!defined('ROOT')){ die('Direct request not allowed'); }?>
-<div class="main-container">
+<div class="main-container main">
 <?php include 'blocks/sidebar.php' ?>
       <div class="main-content">
         <div class="slim-slider">
@@ -34,6 +34,7 @@
         </script>
 
         <h2 class="block-title" id="viewed">Просмотренные товары</h2>
+        <button class="js-open-modal open-sidebar-button" data-target="left_sidebar">Open menu</button>
         <div class="products">
           <?php foreach($similar_products as $id => $product): 
 

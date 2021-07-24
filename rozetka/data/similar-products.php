@@ -1,8 +1,9 @@
 <?php
 
+
 $similar_products = [
     1 =>[
-        'title' => 'First product', 
+        'title' => 'First pro"duct', 
         'price' => 355.99,
         'fav' => false,
         'ends' => false,
@@ -308,5 +309,14 @@ $similar_products = [
     ],
 ];
 
+// $mysqli = new mysqli("localhost", "root", "", "rozetka");
+
+// $result = $mysqli->query("SELECT * FROM products");
+
+// for ($row_no = $result->num_rows - 1; $row_no >= 0; $row_no--) {
+//     $result->data_seek($row_no);
+//     $row = $result->fetch_assoc();
+//     pa($row['name']);
+// }
 
 ?>

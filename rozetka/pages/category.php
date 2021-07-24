@@ -61,7 +61,7 @@ $product_count = count($similar_products);
            Показано <?= $product_count ?> товар<?= sklonenie($product_count, '', 'а', 'ов') ?>
         </div>
         <div class="category-settings">
-        Товаров на странице
+        <span class="category-settings-text">Товаров на странице</span>
         <select oninput="location.href = this.value">
         <!-- <option>Товаров на странице</option> -->
           <option <?= if_selected('limit', '5')  ?> value="<?= query_add(['offset' => 0,'limit' => '5'])?>">5</option>
@@ -81,12 +81,24 @@ $product_count = count($similar_products);
           <!-- <option> Новинки </option>
           <option> Акционные </option> -->        
         </select>
+        <div class="view-type">
+        <input id="view_type1" type="radio" name="view_type" checked onchange="change_view_type()">
+        <input id="view_type2" type="radio" name="view_type" onchange="change_view_type()">
+          <label for="view_type1"><i class="bi bi-grid"></i></label>
+          <label for="view_type2"><i class="bi bi-list"></i></label>
+          <script>
+            function change_view_type(input){
+              document.all.category_product_list.classList.toggle('list')
+            }
+          </script>
+        </div>
         </div>
     </div>
-    <div class="products">
+    <div class="products" id="category_product_list">
     <?php foreach($similar_products as $id => $product): ?>
         <a class="product" href="?action=product&tab=1&id=<?= $id ?>">
-            <img src="<?php echo get_random_img_src() ?>" alt="">
+            <div class="category-list-item-left"><img src="<?php echo get_random_img_src() ?>" alt=""></div>
+            <div class="category-list-item-right">
             <h2 class="title"><?= $product['title'] ?></h2>
             <?php if(isset($product['old_price'])): ?>
               <div class="old-price"><?= $product['old_price'] ?> ₴ </div>
@@ -110,8 +122,10 @@ $product_count = count($similar_products);
               <?php if(!empty($product['finger_print']) && $product['finger_print']): ?>
               <div class="finger-print"><img src="img/finger-info.png" alt=""></div>
               <?php endif; ?>
-            </a>
+              </div>
 
+            </a>
+           
         <?php endforeach ?>
-    </div>
+              </div>
 </div>
