@@ -83,8 +83,9 @@ $product_count = count($similar_products);
         </select>
         <div class="view-type">
         <input id="view_type1" type="radio" name="view_type" checked onchange="change_view_type()">
+        <label for="view_type1"><i class="bi bi-grid"></i></label>
         <input id="view_type2" type="radio" name="view_type" onchange="change_view_type()">
-          <label for="view_type1"><i class="bi bi-grid"></i></label>
+          
           <label for="view_type2"><i class="bi bi-list"></i></label>
           <script>
             function change_view_type(input){

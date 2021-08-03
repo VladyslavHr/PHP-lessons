@@ -6,4 +6,4 @@
     <h3>Такой страницы не найдено</h3>
     <a href="http://php-lessons.loc/rozetka/index.php?action=main">Перейти на главную</a>
     </div>
-    </div>
+</div>

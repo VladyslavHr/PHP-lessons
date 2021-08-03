@@ -1,10 +1,11 @@
 <?php 
 define('ROOT',__DIR__);
 require_once 'vendor/autoload.php';
+include 'classes/DB.class.php';
+include 'functions.php';
 include 'auth.php';
 include 'data/similar-products.php';
 include 'data/images-arr.php';
-include 'functions.php';
 include 'blocks/header.php';
 
   if (!empty($_GET['action']) && file_exists('pages/'.$_GET['action'].'.php')){
