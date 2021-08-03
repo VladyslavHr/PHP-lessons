@@ -4,15 +4,30 @@ if(!defined('ROOT')){
   }
   session_start();
 
-  if (isset($_POST['email']) && isset($_POST['password'])){
+  // if($_GET['action'] !== 'login' && !isset($_SESSION['user'])){
+  //   $_SESSION['flash_message'] = 'Please authorise!';
+  //   header('Location:admin.php?action=login');
+  // }
 
-    if ($_POST['email'] === 'admin' && $_POST['password'] === '123'){
-       
-        $_SESSION['user'] = [
-            'name' => 'Admin',
-        ];
-    }
-    header('Location:?');
+  if (isset($_POST['login']) && isset($_POST['email']) && isset($_POST['password'])){
+pa($_POST);
+      $email = db_escape($_POST['email']);
+      $user = db_query("SELECT `role`,`password` FROM users WHERE email = '$email' ");
+      if($user){
+        $user = $user[0];
+        $current_password = $user['password'];
+        $entered_password = $_POST['password'];
+        $is_password_correct = password_verify($entered_password, $current_password);
+        pa($user);
+        var_dump($is_password_correct);
+        if($user['role'] === 'admin' && $is_password_correct){
+          $_SESSION['user'] = $user;
+          header('Location:admin.php?action=console');
+        }else{
+          $_SESSION['flash_message'] = 'Wrong email or password! OR not enough permission';
+          // header('Location:admin.php?action=login');
+        }
+      }
   }
 
   if (isset($_GET['logout'])) {

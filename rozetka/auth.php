@@ -4,7 +4,7 @@ if(!defined('ROOT')){
   }
   session_start();
 
-  if (isset($_POST['email']) && isset($_POST['password'])){
+  if (isset($_POST['login']) && isset($_POST['email']) && isset($_POST['password'])){
 
     if ($_POST['email'] === 'admin' && $_POST['password'] === '123'){
        

@@ -6,7 +6,7 @@
     border-radius: 6px; 
 }
 
-.left-menu-wrap{
+.admin-left-menu-wrap{
     background: #3c434a;
     color: white;
     position: fixed;
@@ -16,159 +16,59 @@
     border-right: 1px solid #ccc;
 }
 
-.left-menu-wrap h3,
-.left-menu-products h5,
-.left-menu-users h5
+.admin-left-menu-wrap h3,
+.admin-left-menu h5
 {
     user-select: none;
     cursor: pointer;
+    padding-left: 15px;
 }
 
-.left-menu-products{
+.admin-left-menu{
     list-style: none;
     padding: 0px;
     font-size: 14px;
     border-bottom: 1px solid;
     border-top: 1px solid;
     border-color: #e9e9e9;
-    /* display: none; */
     overflow: hidden;
 }
 
-.left-menu-products li{
+.admin-left-menu-sub li{
     height: 0;
     transition: height .3s;
-    /* display: none; */
+    overflow: hidden;
+    padding-left: 15px;
 }
 
-.left-menu-checkbox{
-    display: none;
-}
-
-.left-menu-checkbox2:checked ~ .left-menu-products li{
-    /* display: none; */
+ .admin-left-menu-sub.active li{
     height: 30px;
-    transition: height .3s;
-}
+} 
 
-.left-menu-products li a{
+.admin-left-menu-sub li a{
     padding: 7px 7px 7px 15px;
-    color: #333;
+    color: white;
     display: block;
+    text-decoration: none;
 }
 
-.left-menu-products.active li{
+/* .admin-left-menu.active li{
     display: block;
+} */
+
+.admin-main-content{
+    padding-left: 270px;
+    padding-right: 15px;
 }
 
-.left-menu-products.active li{
-    animation: 0.4s left-menu-products-show;
-}
-
-
-.left-menu-products.fade li{
-    animation: 0.4s left-menu-products-fade;
-}
-
-@keyframesy left-menu-products-show{
-from{
-    top: -400px;
-}
-to{
-    top: 0px;
-}
-}
-
-@keyframesy left-menu-products-fade{
-    from{
-        top: 0px;
-    }
-    to{
-        top: -400px;
-    }
-    }
 
 
 
 
-    .test-menu{
-        list-style: none;
-        padding: 0px;
-        font-size: 14px;
-        border-bottom: 1px solid;
-        border-top: 1px solid;
-        border-color: #e9e9e9;
-        /* display: none; */
-        overflow: hidden;
-    }
-    
-    
-    
-    .test-menu-checkbox{
-        display: none;
-    }
-    
-    .test-menu h3{
-        color: #797878;
-        font-size: 25px;
-        padding-left: 15px;
-    }
-    
-    .test-sub-nav{
-        list-style: none;
-        margin: 0px;
-    }
-
-    .test-sub-nav li{
-        height: 0;
-        transition: height .3s;
-        /* display: none; */
-    }
-    
-    .test-menu-checkbox:checked ~ .test-sub-nav li{
-        /* display: block; */
-        height: 30px;
-    }
-    
-    .test-sub-nav li a{
-        padding: 7px 7px 7px 15px;
-        color: #333;
-        display: block;
-    }
-    
-    .test-sub-nav li a:hover{
-        text-decoration: underline;
-    }
-    
-    .test-sub-nav.active li{
-        display: block;
-    }
-    
-    .test-sub-nav.active li{
-        animation: 0.4s left-menu-li-show;
-    }
-    
-    .test-sub-nav.fade li{
-        animation: 0.4s test-sub-nav-li-fade;
-    }
-    
-    @keyframes test-sub-nav-li-show{
-        from{
-            top: -400px;
-        }
-        to{
-            top: 0;
-        }
-    }
-    
-    @keyframes test-sub-nav-li-fade{
-        from{
-            top: 0;
-        }
-        to{
-            top: -400px;
-        }
-    }
 
 
 
+
+
+
+   

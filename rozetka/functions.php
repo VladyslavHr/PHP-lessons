@@ -173,8 +173,7 @@ function query_add($values = [])
 
 function if_selected($name, $value)
 {
-    if(empty($_GET[$name])) return '';
-    return $_GET[$name] === $value ? 'selected' : '';
+    return $name === $value ? 'selected' : '';
 }
 
 function pa($arr)
