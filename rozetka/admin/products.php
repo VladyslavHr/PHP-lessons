@@ -13,7 +13,6 @@ function decode_fast_info_json($product)
 }
 $products = array_map('decode_fast_info_json',$products);
 
-
 ?>
 <h2>Products</h2>
 
@@ -29,7 +28,7 @@ $products = array_map('decode_fast_info_json',$products);
       <th>Rating</th>
       <th>Reviews</th>
       <th>Questions</th>
-      <th>Fast info</th>
+      <th style="width: 30%;">Fast info</th>
       <th></th>
 
   </tr>
@@ -45,7 +44,19 @@ $products = array_map('decode_fast_info_json',$products);
         <td><?= $product['rating'] ?></td>
         <td><?= $product['reviews'] ?></td>
         <td><?= $product['questions'] ?></td>
-        <td><?= $product['fast_info'] ?></td>
+        <td >
+          
+          <?php 
+        if(is_array($product['fast_info'])){
+          foreach ($product['fast_info'] as $key => $value) {
+            echo '<div class="fs-80">';
+            echo $key;
+            echo '=>';
+            echo $value;
+            echo '</div>';
+          }
+        }
+        ?></td>
         <td>
         <a href="?action=products-edit&product_id=<?= $product['id']?>" class="me-3 text-sucsess"><i class="bi bi-pencil"></i></a>
         <a onclick="if(!confirm('Are you sure?')) return false" href="?action=products&delete=<?= $product['id']?>" ><i class="bi bi-trash ms-auto text-danger"></i></a>

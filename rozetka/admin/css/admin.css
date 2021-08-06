@@ -1,3 +1,7 @@
+.fs-80{
+    font-size: 80%;
+}
+
 .login-form{
     max-width: 500px;
     margin: 100px auto 0;
@@ -61,7 +65,28 @@
     padding-right: 15px;
 }
 
+.admin-top-panel{
+    display: flex;
+    justify-content: space-between;
+    background: #3c434a;
+}
 
+.admin-profile{
+    margin: 10px;
+}
+
+.admin-top-panel h3,
+.admin-profile .name{
+    color: white;
+}
+
+.admin-profile a{
+    color: red;
+    text-align: center;
+    display: block;
+    font-size: 20px;
+
+}
 
 
 

@@ -12,8 +12,20 @@
 <body>
     
 <?php if(!(isset($_GET['action']) && $_GET['action'] === 'login')): ?>
+    <div class="admin-top-panel">
+     <h3>Console</h3>
+     <div class="admin-profile">
+         <div class="name">
+            <?php
+            $user = $_SESSION['user'];
+            ?>
+             HEllo <?= $user['name'] ?> <?= $user['last_name'] ?> (<?= $user['email'] ?>)
+         </div>
+         <a href="?logout"><i class="bi bi-x-square"></i></a>
+     </div>
+    </div>
 <div class="admin-left-menu-wrap">
-    <h3>Console</h3>
+   
 <div class="admin-left-menu">
     <h5 class="js-open-modal" data-target="left-menu-sub-products">Products</h5>
     <ul class="admin-left-menu-sub list-unstyled" id="left-menu-sub-products">

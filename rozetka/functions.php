@@ -182,3 +182,8 @@ function pa($arr)
     print_r($arr);
     echo '</pre>';
 }
+
+function esc_attr($str)
+{
+	 return htmlspecialchars($str, ENT_QUOTES);
+}
