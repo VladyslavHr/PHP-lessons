@@ -75,6 +75,10 @@
     margin: 10px;
 }
 
+.admin-top-panel a{
+    text-decoration: none;
+}
+
 .admin-top-panel h3,
 .admin-profile .name{
     color: white;

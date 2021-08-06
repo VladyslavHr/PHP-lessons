@@ -13,7 +13,7 @@
     
 <?php if(!(isset($_GET['action']) && $_GET['action'] === 'login')): ?>
     <div class="admin-top-panel">
-     <h3>Console</h3>
+        <a href="admin.php?action=console"><h3>Console</h3></a>
      <div class="admin-profile">
          <div class="name">
             <?php
