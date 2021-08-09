@@ -8,11 +8,17 @@ if(!empty($_GET['delete'])){
   
   }
 
-$users = db_query("SELECT * FROM users");
+  $offset = $_GET['offset'] ?? 0;
+  $limit = $_GET['limit'] ?? 5;
+  $total_count = db_query("SELECT count(*) FROM users");
+  $total_count = $total_count ? $total_count[0]['count(*)'] : 0;
+
+$users = db_query("SELECT * FROM users LIMIT $limit OFFSET $offset");
 
 // pa($users);
 ?>
 <h2>Users</h2>
+<?php bs_pagination($offset, $limit, $total_count); ?>
 <table class="table table-striped">
   <tr>
       <th>Name</th>

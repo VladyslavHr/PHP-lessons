@@ -9,12 +9,15 @@ if(isset($_POST['edit_product'])){
     $price = db_escape($_POST['price']);
     $old_price = db_escape($_POST['old_price']);
     $favorite = db_escape($_POST['favorite']);
+    $ends = db_escape($_POST['ends']);
     $sku = db_escape($_POST['sku']); //Экранирует строку для использования в mysql_query
     $rating = db_escape($_POST['rating']);
     $reviews = db_escape($_POST['reviews']);
     $questions = db_escape($_POST['questions']);
     $fast_info = [];
     foreach ($_POST['fast_info'] as $row){
+      if(!trim($row['name'])) continue;
+      if(!trim($row['value'])) continue;
       $fast_info[$row['name']] = $row['value'];
     }
    $fast_info = json_encode($fast_info);
@@ -25,6 +28,7 @@ if(isset($_POST['edit_product'])){
       price = '$price',
       old_price = '$old_price',
       favorite = '$favorite',
+      ends = '$ends',
       sku = '$sku',
       rating = '$rating',
       reviews = '$reviews',
@@ -52,34 +56,46 @@ $product = array_map(function($value)
 
 <div class="row my-3">
   <div class="col">
+    <label class="form-label">Title</label>
     <input name="title" value="<?=$product['title']?>" type="text" class="form-control" placeholder="Title" aria-label="Title">
+    <label class="form-label">Sku</label>
+    <input name="sku" value="<?=$product['sku']?>" type="text" class="form-control" placeholder="Sku" aria-label="Sku">
   </div>
   <div class="col">
-    <input name="description" value="<?=$product['description']?>" type="text" max="50" class="form-control" placeholder="Description" aria-label="description">
+  <label class="form-label">Description</label>
+    <textarea name="description" rows="4" value="<?=$product['description']?>" type="text" max="50" class="form-control" placeholder="Description" aria-label="description"> </textarea>
   </div>
 </div>
 
 <div class="row my-3">
   <div class="col">
+  <label class="form-label">Price</label>
     <input name="price" value="<?=$product['price']?>" type="number" class="form-control" step=".01" placeholder="Price" aria-label="Price">
   </div>
   <div class="col">
+  <label class="form-label">Old price</label>
     <input name="old_price" value="<?=$product['old_price']?>" type="number" class="form-control" step=".01" placeholder="Old price" aria-label="Old price">
   </div>
 </div>
 
 <div class="row my-3">
   <div class="col">
-    <input name="sku" value="<?=$product['sku']?>" type="text" class="form-control" placeholder="Sku" aria-label="Sku">
-  </div>
-  <div class="col">
-    <select name="favorite" class="form-control">
+  <label class="form-label">Favorite</label>
+    <select name="favorite" class="form-select">
     <option <?= if_selected($product['favorite'], '1') ?> value="1">like</option>
     <option <?= if_selected($product['favorite'], '0') ?> value="0">dislike</option>
     </select>
   </div>
   <div class="col">
-    <select name="rating" class="form-control">
+  <label class="form-label">Ends</label>
+    <select name="ends" class="form-select">
+    <option <?= if_selected($product['ends'], '1') ?> value="1">yes</option>
+    <option <?= if_selected($product['ends'], '0') ?> value="0">no</option>
+    </select>
+  </div>
+  <div class="col">
+  <label class="form-label">Rating</label>
+    <select name="rating" class="form-select">
     <option <?= if_selected($product['rating'], '1') ?> value="1">1</option>
     <option <?= if_selected($product['rating'], '2') ?> value="2">2</option>
     <option <?= if_selected($product['rating'], '3') ?> value="3">3</option>
@@ -91,16 +107,18 @@ $product = array_map(function($value)
 
 <div class="row my-3">
   <div class="col">
+  <label class="form-label">Reviews</label>
     <input name="reviews" value="<?=$product['reviews']?>" type="text" class="form-control" placeholder="Reviews" aria-label="Reviews">
   </div>
   <div class="col">
+  <label class="form-label">Questions</label>
     <input name="questions" value="<?=$product['questions']?>" type="text" class="form-control" placeholder="Questions" aria-label="Questions">
   </div>
 </div>
 
 <div>
   <div>
-    <h3>Fast info</h3>
+    <h3>Fast info </h3>
     <?php 
     $product['fast_info'] = json_decode(htmlspecialchars_decode($product['fast_info']), true);
     if(is_array($product['fast_info'])){
@@ -118,6 +136,15 @@ $product = array_map(function($value)
       $i++;
       }
     }
+        echo '<div class="row my-3">';
+        echo '<div class="col-3">';
+        echo '<input name="fast_info['.$i.'][name]" class="form-control" value="">';
+        echo '</div>';
+        echo '<div class="col-1 text-center"> => </div>';
+        echo '<div class="col-3">';
+        echo '<input name="fast_info['.$i.'][value] class="form-control" value="">';
+        echo '</div>';
+      echo '</div>';
     ?>
   </div>
 </div>

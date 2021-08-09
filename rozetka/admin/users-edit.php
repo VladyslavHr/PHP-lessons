@@ -31,28 +31,34 @@ $user = $user[0];
 
 <div class="row my-3">
   <div class="col">
+  <label class="form-label">Name</label>
     <input name="name" value="<?= $user['name'] ?>" type="text" class="form-control" placeholder="First name" aria-label="First name">
   </div>
   <div class="col">
+  <label class="form-label">Last name</label>
     <input name="last_name" value="<?= $user['last_name'] ?>" type="text" class="form-control" placeholder="Last name" aria-label="Last name">
   </div>
 </div>
 
 <div class="row my-3">
   <div class="col">
+  <label class="form-label">Email</label>
     <input name="email" value="<?= $user['email'] ?>" type="text" class="form-control" placeholder="Email" aria-label="First name">
   </div>
   <div class="col">
+  <label class="form-label">Password</label>
     <input name="password" type="password" class="form-control" placeholder="Password" aria-label="Last name">
   </div>
 </div>
 
 <div class="row my-3">
   <div class="col">
+  <label class="form-label">Age</label>
     <input name="age" value="<?= $user['age'] ?>" type="number" min="1" max="150" class="form-control" placeholder="Age" aria-label="First name">
   </div>
   <div class="col">
-    <select name="gender" class="form-control">
+  <label class="form-label">Gender</label>
+    <select name="gender" class="form-select">
     <option <?= if_selected($user['gender'], 'male') ?> value="male">male</option>
     <option <?= if_selected($user['gender'], 'female') ?> value="female">female</option>
     </select>

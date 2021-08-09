@@ -43,6 +43,23 @@ return "active";
   
 }
 
+function menu_item_active($current_tab)
+{
+    if(isset($_GET['action'])&& $_GET['action'] == $current_tab){
+        return "active";
+            }else{
+                return '';
+            }
+}
+
+function menu_sub_active($menu_name)
+{
+    if (isset($_GET['action']) && strpos($_GET['action'], $menu_name) === 0){
+        return 'active';
+    }
+    return '';
+}
+
 function tovarov($count)
 
 {
@@ -105,6 +122,8 @@ function my_pagination ($offset, $limit, $total_count)
     $new_offset = in_range($offset + $limit, 0, $total_count); 
     $next_link = query_add(['offset'=> $new_offset]);
     // "?action=$action&offset=$new_offset&limit=$limit";
+}
+
 ?>
  <div class="pagination">
     <?php if($offset > 0): ?>
@@ -155,6 +174,72 @@ function my_pagination ($offset, $limit, $total_count)
         <a class="prev disabled"><i class="bi bi-arrow-right"></i></a>
     <?php endif ?>
 </div>
+
+<?php
+function bs_pagination ($offset, $limit, $total_count)
+{
+    if ($total_count < $limit) return ''; 
+    // $action = $_GET['action'];
+    $new_offset = in_range($offset - $limit, 0, $total_count); 
+    $prev_link = query_add(['offset'=> $new_offset]);
+    // "?action=$action&offset=$new_offset&limit=$limit";
+    $new_offset = in_range($offset + $limit, 0, $total_count); 
+    $next_link = query_add(['offset'=> $new_offset]);
+    // "?action=$action&offset=$new_offset&limit=$limit";
+
+
+?>
+ <div class="bs-pagination">
+    <?php if($offset > 0): ?>
+        <a href="<?= $prev_link ?>" class="prev active"><i class="bi bi-arrow-left"></i></a>
+    <?php else: ?>
+        <a class="prev disabled"><i class="bi bi-arrow-left"></i></a>
+    <?php endif ?>
+    <ul>
+        <?php 
+        $last_page = ceil($total_count / $limit);
+        $left_prefix = $right_prefix = '';
+        $link_first_page = query_add(['offset'=> 0]);
+        //  "?action=$action&offset=0&limit=$limit"; 
+        $link_last_page = query_add(['offset'=> $last_page]);
+        //  "?action=$action&offset=$last_page&limit=$limit";
+        // ceil($total_count / $limit) кол-во страниц
+        $button_count = 0;
+        $current_page = floor($offset / $limit);
+        
+        $from = $current_page - 2;
+        if($current_page >= 3) $left_prefix = "<li><a href='$link_first_page'>1</a></li><li>...</li>";
+        if($from < 0) $from = 0;
+        $to = $current_page + 3;
+        if($to > $last_page) $to = $last_page;
+        if($last_page - $current_page > 3) $right_prefix = "<li>...</li><li><a href='$link_last_page'>$last_page</a></li>";
+        if($last_page - $current_page == 4) $right_prefix = "<li><a href='$link_last_page'>$last_page</a></li>";
+        echo $left_prefix;
+        for ($i=$from; $i < $to; $i++): 
+            // $new_offset = ($i) * $limit;
+            $link = query_add(['offset'=> $i * $limit]);
+            //  "?action=$action&offset=$new_offset&limit=$limit";
+            $button_count++ ;
+           if ($current_page ) {
+               # code...
+           }
+        ?>
+        <?php if($current_page == $i): ?>
+        <li><a class="active"><?= $i + 1 ?></a></li>
+        <?php else: ?>
+            <li><a href="<?=  $link ?>"><?= $i + 1 ?></a></li>
+            <?php endif ?>
+        <?php endfor;
+        echo $right_prefix; ?>
+    </ul>
+    <?php if($total_count > $offset + $limit): ?>
+        <a href="<?= $next_link ?>" class="prev active"><i class="bi bi-arrow-right"></i></a>
+    <?php else: ?>
+        <a class="prev disabled"><i class="bi bi-arrow-right"></i></a>
+    <?php endif ?>
+</div>
+
+
 <?php
 }
 

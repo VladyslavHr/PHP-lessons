@@ -18,6 +18,7 @@
     overflow-y: auto;
     height: 100%;
     border-right: 1px solid #ccc;
+    padding-top: 50px;
 }
 
 .admin-left-menu-wrap h3,
@@ -45,6 +46,7 @@
     padding-left: 15px;
 }
 
+
  .admin-left-menu-sub.active li{
     height: 30px;
 } 
@@ -56,6 +58,11 @@
     text-decoration: none;
 }
 
+.admin-left-menu-sub li a.active{
+    font-weight: bold;
+}
+
+
 /* .admin-left-menu.active li{
     display: block;
 } */
@@ -63,16 +70,22 @@
 .admin-main-content{
     padding-left: 270px;
     padding-right: 15px;
+    padding-top: 60px;
 }
 
 .admin-top-panel{
     display: flex;
     justify-content: space-between;
     background: #3c434a;
+    padding: 0 15px;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
 }
 
 .admin-profile{
-    margin: 10px;
+    display: flex;
+    margin: 10px 0;
 }
 
 .admin-top-panel a{
@@ -84,12 +97,12 @@
     color: white;
 }
 
-.admin-profile a{
+.admin-profile a.logout{
     color: red;
     text-align: center;
     display: block;
     font-size: 20px;
-
+    padding: 0px 10px;
 }
 
 

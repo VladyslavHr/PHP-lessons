@@ -21,23 +21,23 @@
             ?>
              HEllo <?= $user['name'] ?> <?= $user['last_name'] ?> (<?= $user['email'] ?>)
          </div>
-         <a href="?logout"><i class="bi bi-x-square"></i></a>
+         <a href="?logout" class="logout"><i class="bi bi-x-square"></i></a>
      </div>
     </div>
 <div class="admin-left-menu-wrap">
    
 <div class="admin-left-menu">
     <h5 class="js-open-modal" data-target="left-menu-sub-products">Products</h5>
-    <ul class="admin-left-menu-sub list-unstyled" id="left-menu-sub-products">
-    <li><a href="?action=products">Products list</a></li>
-    <li><a href="?action=products-add">Add product</a></li>
+    <ul class="admin-left-menu-sub list-unstyled <?= menu_sub_active('products')?>" id="left-menu-sub-products">
+    <li><a class="<?= menu_item_active('products')?>" href="?action=products">Products list</a></li>
+    <li><a class="<?= menu_item_active('products-add')?>" href="?action=products-add">Add product</a></li>
     </ul>
 </div>
 <div class="admin-left-menu">
     <h5 class="js-open-modal" data-target="left-menu-sub-users">Users</h5>
-    <ul class="admin-left-menu-sub list-unstyled" id="left-menu-sub-users">
-    <li><a href="?action=users">Users list</a></li>
-    <li><a href="?action=users-add">Add user</a></li>
+    <ul class="admin-left-menu-sub list-unstyled <?= menu_sub_active('users')?>" id="left-menu-sub-users">
+    <li><a class="<?= menu_item_active('users')?>" href="?action=users">Users list</a></li>
+    <li><a class="<?= menu_item_active('users-add')?>" href="?action=users-add">Add user</a></li>
     </ul>
 </div>
 
