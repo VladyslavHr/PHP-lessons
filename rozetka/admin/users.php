@@ -18,7 +18,7 @@ $users = db_query("SELECT * FROM users LIMIT $limit OFFSET $offset");
 // pa($users);
 ?>
 <h2>Users</h2>
-<?php bs_pagination($offset, $limit, $total_count); ?>
+<?php include 'blocks/admin-page-top.php';?> 
 <table class="table table-striped">
   <tr>
       <th>Name</th>

@@ -1,6 +1,8 @@
 <?php if(!defined('ROOT')){ die('Direct request not allowed'); }?>
 <?php
 
+$sorting = $_GET['sorting'] ?? 'default';
+
 $offset = $_GET['offset'] ?? 0;
 $limit = $_GET['limit'] ?? 10;
 $total_count = count($similar_products);
@@ -65,20 +67,20 @@ $product_count = count($similar_products);
         <span class="category-settings-text">Товаров на странице</span>
         <select oninput="location.href = this.value">
         <!-- <option>Товаров на странице</option> -->
-          <option <?= if_selected($_GET['limit'], '5')  ?> value="<?= query_add(['offset' => 0,'limit' => '5'])?>">5</option>
-          <option <?= if_selected($_GET['limit'], '10')  ?> value="<?= query_add(['offset' => 0,'limit' => '10'])?>">10</option>
-          <option <?= if_selected($_GET['limit'], '20')  ?> value="<?= query_add(['offset' => 0,'limit' => '20'])?>">20</option>
-          <option <?= if_selected($_GET['limit'], '50')  ?> value="<?= query_add(['offset' => 0,'limit' => '50'])?>">50</option>
-          <option <?= if_selected($_GET['limit'], '100')  ?> value="<?= query_add(['offset' => 0,'limit' => '100'])?>">100</option>
+          <option <?= if_selected($limit, '5')  ?> value="<?= query_add(['offset' => 0,'limit' => '5'])?>">5</option>
+          <option <?= if_selected($limit, '10')  ?> value="<?= query_add(['offset' => 0,'limit' => '10'])?>">10</option>
+          <option <?= if_selected($limit, '20')  ?> value="<?= query_add(['offset' => 0,'limit' => '20'])?>">20</option>
+          <option <?= if_selected($limit, '50')  ?> value="<?= query_add(['offset' => 0,'limit' => '50'])?>">50</option>
+          <option <?= if_selected($limit, '100')  ?> value="<?= query_add(['offset' => 0,'limit' => '100'])?>">100</option>
           <!-- <option> Новинки </option>
           <option> Акционные </option> -->        
         </select>
         <select oninput="location.href = this.value">
-          <option <?= if_selected($_GET['sorting'], 'default')  ?> value="<?= query_add(['offset' => 0,'sorting' => 'default'])?>">Сортировать</option>
-          <option <?= if_selected($_GET['sorting'], 'price_asc')  ?> value="<?= query_add(['offset' => 0,'sorting' => 'price_asc'])?>"> От дешевых к дорогим </option>
-          <option <?= if_selected($_GET['sorting'], 'price_desc')  ?> value="<?= query_add(['offset' => 0,'sorting' => 'price_desc'])?>"> От дорогих к дешевым </option>
-          <option <?= if_selected($_GET['sorting'], 'rating')  ?> value="<?= query_add(['offset' => 0,'sorting' => 'rating'])?>"> Популярные </option>
-          <option <?= if_selected($_GET['sorting'], 'title')  ?> value="<?= query_add(['offset' => 0,'sorting' => 'title'])?>"> По названию </option>
+          <option <?= if_selected($sorting, 'default')  ?> value="<?= query_add(['offset' => 0,'sorting' => 'default'])?>">Сортировать</option>
+          <option <?= if_selected($sorting, 'price_asc')  ?> value="<?= query_add(['offset' => 0,'sorting' => 'price_asc'])?>"> От дешевых к дорогим </option>
+          <option <?= if_selected($sorting, 'price_desc')  ?> value="<?= query_add(['offset' => 0,'sorting' => 'price_desc'])?>"> От дорогих к дешевым </option>
+          <option <?= if_selected($sorting, 'rating')  ?> value="<?= query_add(['offset' => 0,'sorting' => 'rating'])?>"> Популярные </option>
+          <option <?= if_selected($sorting, 'title')  ?> value="<?= query_add(['offset' => 0,'sorting' => 'title'])?>"> По названию </option>
           <!-- <option> Новинки </option>
           <option> Акционные </option> -->        
         </select>

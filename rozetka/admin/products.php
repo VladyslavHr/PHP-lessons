@@ -5,12 +5,13 @@
   
   }
 
-  $offset = $_GET['offset'] ?? 0;
-  $limit = $_GET['limit'] ?? 5;
-  $total_count = db_query("SELECT count(*) FROM products");
-  $total_count = $total_count ? $total_count[0]['count(*)'] : 0;
+$offset = $_GET['offset'] ?? 0;
+$limit = $_GET['limit'] ?? 5;
 
-$products = db_query("SELECT * FROM products LIMIT $limit OFFSET $offset");
+$total_count = db_query("SELECT count(*) FROM products");
+$total_count = $total_count ? $total_count[0]['count(*)'] : 0;
+
+$products = db_query("SELECT * FROM products LIMIT $limit OFFSET $offset ");
 function decode_fast_info_json($product)
 {
     $product['fast_info'] = json_decode($product['fast_info'], true);
@@ -18,9 +19,10 @@ function decode_fast_info_json($product)
 }
 $products = array_map('decode_fast_info_json',$products);
 
+
 ?>
 <h2>Products <a href="?action=products-add" class="btn btn-primary">Add product</a></h2>
-<?php bs_pagination($offset, $limit, $total_count); ?>
+<?php include 'blocks/admin-page-top.php';?> 
 <table class="table table-striped">
   <tr>
       <th>Title</th>
@@ -33,7 +35,7 @@ $products = array_map('decode_fast_info_json',$products);
       <th>Rating</th>
       <th>Reviews</th>
       <th>Questions</th>
-      <th style="width: 30%;">Fast info</th>
+      <th style="width: 30%">Fast info</th>
       <th></th>
 
   </tr>
@@ -43,24 +45,22 @@ $products = array_map('decode_fast_info_json',$products);
         <td><?= $product['description'] ?></td>
         <td><?= $product['price'] ?></td>
         <td><?= $product['old_price'] ?></td>
-        <td><?= $product['favorite'] ?'<i class="bi bi-heart-fill"></i>' : '<i class="bi bi-heart"></i>' ?></td>
-        <td><?= $product['ends'] ?'<i class="bi bi-emoji-frown-fill"></i>' : '<i class="bi bi-emoji-smile"></i>'?></td>
+        <td><?= $product['favorite'] ? '<i class="bi bi-heart-fill"></i>' : '<i class="bi bi-heart"></i>' ?></td>
+        <td><?= $product['ends'] ? '<i class="bi bi-emoji-frown-fill"></i>' : '<i class="bi bi-emoji-smile"></i>' ?></td>
         <td><?= $product['sku'] ?></td>
         <td><?= $product['rating'] ?></td>
         <td><?= $product['reviews'] ?></td>
         <td><?= $product['questions'] ?></td>
-        <td >
-          
-          <?php 
-        if(is_array($product['fast_info'])){
-          foreach ($product['fast_info'] as $key => $value) {
-            echo '<div class="fs-80">';
-            echo $key;
-            echo '=>';
-            echo $value;
-            echo '</div>';
+        <td><?php
+          if(is_array($product['fast_info'])){
+            foreach ($product['fast_info'] as $key => $value) {
+              echo '<div class="fs-80">';
+              echo $key;
+              echo ' => ';
+              echo $value;
+              echo '</div>';
+            }
           }
-        }
         ?></td>
         <td>
         <a href="?action=products-edit&product_id=<?= $product['id']?>" class="me-3 text-sucsess"><i class="bi bi-pencil"></i></a>

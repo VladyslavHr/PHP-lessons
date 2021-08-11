@@ -22,8 +22,43 @@ if(isset($_POST['new_product'])){
       reviews = '$reviews',
       questions = '$questions',
       fast_info = '$fast_info'");
-    header('Location: admin.php?action=products');
+    // redirect('admin.php?action=products');
+  
 
+}
+
+if ($_POST) $_SESSION['post'] = $_POST;
+if ($_GET) $_SESSION['get'] = $_GET;
+
+if($_GET['action'] !== 'products-add' && !isset($_SESSION['user'])){
+    $_SESSION['flash_message'] = 'Pleas authorise!';
+    redirect('admin.php?action=products-add');
+}
+
+if (isset($_POST['users-add'])) {
+  if (empty($_POST['title'])){
+    $message = 'Please add title!';
+    flash_set($message);
+    redirect('admin.php?action=products-add');
+  }
+
+  if (empty($_POST['price'])){
+    $message = 'Please add title!';
+    flash_set($message);
+    redirect('admin.php?action=products-add');
+  }
+
+  if (empty($_POST['description'])){
+    $message = 'Please add title!';
+    flash_set($message);
+    redirect('admin.php?action=products-add');
+  }
+  
+  if (empty($_POST['sku'])){
+    $message = 'Please add title!';
+    flash_set($message);
+    redirect('admin.php?action=products-add');
+  }
 }
 
 
@@ -31,24 +66,26 @@ if(isset($_POST['new_product'])){
 
 <h2>Add Product</h2>
 <form action="?action=products-add" method="Post">
-
+<div class="text-center text-danger">
+    <?= flash_get() ?>
+  </div>
 <div class="row my-3">
   <div class="col">
   <label class="form-label">Title</label>
-    <input name="title" type="text" class="form-control" placeholder="Title" aria-label="Title">
+    <input name="title" value="<?= session_take_post('title')?>" type="text" class="form-control" placeholder="Title" aria-label="Title">
     <label class="form-label">Sku</label>
-    <input name="sku" type="text" class="form-control" placeholder="Sku" aria-label="Sku">
+    <input name="sku" value="<?= session_take_post('sku')?>" type="text" class="form-control" placeholder="Sku" aria-label="Sku">
   </div>
   <div class="col">
   <label class="form-label">Description</label>
-    <textarea name="description" rows="4" type="text" max="50" class="form-control" placeholder="Description" aria-label="description"></textarea>
+    <textarea name="description" value="<?= session_take_post('description')?>" rows="4" type="text" max="50" class="form-control" placeholder="Description" aria-label="description"></textarea>
   </div>
 </div>
 
 <div class="row my-3">
   <div class="col">
   <label class="form-label">Price</label>
-    <input name="price" type="number" class="form-control" step=".01" placeholder="Price" aria-label="Price">
+    <input name="price" value="<?= session_take_post('price')?>" type="number" class="form-control" step=".01" placeholder="Price" aria-label="Price">
   </div>
   <div class="col">
   <label class="form-label">Old price</label>
@@ -56,9 +93,6 @@ if(isset($_POST['new_product'])){
   </div>
 </div>
 
-<!-- <div class="row my-3">
-  <div class="col">
-  </div> -->
 
   <div class="col">
   <label class="form-label">Favorite</label>
@@ -77,7 +111,7 @@ if(isset($_POST['new_product'])){
     <option value="5">5</option>
     </select>
   </div>
-</div>
+
 
 <div class="row my-3">
   <div class="col">
@@ -98,5 +132,6 @@ if(isset($_POST['new_product'])){
 </div>
 
 <button name="new_product" type="submit" class="btn btn-primary">Save</button>
+
 
 </form>
