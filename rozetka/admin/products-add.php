@@ -1,4 +1,31 @@
 <?php
+
+if (isset($_POST['new_product'])) {
+if (empty($_POST['title'])){
+  $message = 'Please add title!';
+  flash_alert('danger', $message);
+  redirect('admin.php?action=products-add');
+}
+
+if (empty($_POST['price'])){
+  $message = 'Please add price!';
+  flash_alert('danger', $message);
+  redirect('admin.php?action=products-add');
+}
+
+if (empty($_POST['description'])){
+  $message = 'Please add description!';
+  flash_alert('danger', $message);
+  redirect('admin.php?action=products-add');
+}
+
+if (empty($_POST['sku'])){
+  $message = 'Please add sku!';
+  flash_alert('danger', $message);
+  redirect('admin.php?action=products-add');
+}
+}
+
 // Create
 if(isset($_POST['new_product'])){
     $title = db_escape($_POST['title']);
@@ -11,6 +38,12 @@ if(isset($_POST['new_product'])){
     $reviews = db_escape($_POST['reviews']);
     $questions = db_escape($_POST['questions']);
     $fast_info = db_escape($_POST['fast_info']);
+    $card_title = '';
+    if(isset($_FILES['card'])){
+      $card_title = time() . '-' . $_FILES["card"]["title"];    
+    move_uploaded_file($_FILES["card"]["tmp_title"], "products-pictures/$card_title");
+    $card_title = db_escape($card_title);
+    }
     db_query("INSERT INTO products SET
       title = '$title',
       `description` = '$description',
@@ -21,54 +54,28 @@ if(isset($_POST['new_product'])){
       rating = '$rating',
       reviews = '$reviews',
       questions = '$questions',
-      fast_info = '$fast_info'");
-    // redirect('admin.php?action=products');
+      fast_info = '$fast_info'
+      'card' = '$card_title'");
+
+      $message = 'Product add successfully!';
+      flash_alert('success', $message);
+    redirect('admin.php?action=products');
   
 
 }
 
-if ($_POST) $_SESSION['post'] = $_POST;
-if ($_GET) $_SESSION['get'] = $_GET;
 
-if($_GET['action'] !== 'products-add' && !isset($_SESSION['user'])){
-    $_SESSION['flash_message'] = 'Pleas authorise!';
-    redirect('admin.php?action=products-add');
-}
 
-if (isset($_POST['users-add'])) {
-  if (empty($_POST['title'])){
-    $message = 'Please add title!';
-    flash_set($message);
-    redirect('admin.php?action=products-add');
-  }
-
-  if (empty($_POST['price'])){
-    $message = 'Please add title!';
-    flash_set($message);
-    redirect('admin.php?action=products-add');
-  }
-
-  if (empty($_POST['description'])){
-    $message = 'Please add title!';
-    flash_set($message);
-    redirect('admin.php?action=products-add');
-  }
-  
-  if (empty($_POST['sku'])){
-    $message = 'Please add title!';
-    flash_set($message);
-    redirect('admin.php?action=products-add');
-  }
-}
 
 
 ?>
 
 <h2>Add Product</h2>
 <form action="?action=products-add" method="Post">
-<div class="text-center text-danger">
-    <?= flash_get() ?>
-  </div>
+<div class="mb-3">
+  <label for="formFile" class="form-label">Card</label>
+  <input name="card" class="form-control" type="file" id="formFile">
+</div>
 <div class="row my-3">
   <div class="col">
   <label class="form-label">Title</label>

@@ -5,22 +5,23 @@ session_start();
 if ($_POST) $_SESSION['post'] = $_POST;
 if ($_GET) $_SESSION['get'] = $_GET;
 
+// редиректит на страницу логина не авторизованых пользователей
 if($_GET['action'] !== 'login' && !isset($_SESSION['user'])){
-    $_SESSION['flash_message'] = 'Pleas authorise!';
+    flash_alert('danger','Pleas authorise!');
     redirect('admin.php?action=login');
 }
 
 if (isset($_POST['login'])) {
     if (empty($_POST['email'])){
         $message = 'Please enter email!';
-        flash_set($message);
+        flash_alert('danger',$message);
         redirect('admin.php?action=login');
         
     }
 
     if (empty($_POST['password'])){
         $message = 'Please enter password!';
-        flash_set($message);
+        flash_alert('danger' ,$message);
         redirect('admin.php?action=login');
         
     }
@@ -36,9 +37,12 @@ if (isset($_POST['login'])) {
         var_dump($is_password_correct);
         if($user['role'] === 'admin' && $is_password_correct){
             $_SESSION['user'] = $user;
+            $message = "Welcome <b>$user[name]!</b>";
+            flash_alert('primary', $message);
             redirect('admin.php?action=console');
         }else{
-            $_SESSION['flash_message'] = 'Wrong email or password! Or not enough permission!';
+            $message = 'Wrong email or password! Or not enough permission!';
+            flah_alert('danger', $message);
             redirect('admin.php?action=login');
         }
     }

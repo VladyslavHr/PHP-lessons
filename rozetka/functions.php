@@ -303,3 +303,18 @@ function session_take_get($key)
 {
     return $_SESSION['get'][$key] ?? '';
 }
+
+function alert($type, $message)
+{
+    return
+    '<div class="alert alert-'.$type.' alert-dismissible fade show" role="alert">
+     '.$message.'
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>';
+
+}
+
+function flash_alert($type, $message)
+{
+    return flash_set(alert($type, $message));
+}

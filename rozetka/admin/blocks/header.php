@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="admin/css/admin.css">
 </head>
-<body>
+<body class="<?= $_GET['action'] ?? '' ?>">
     
 <?php if(!(isset($_GET['action']) && $_GET['action'] === 'login')): ?>
     <div class="admin-top-panel">
@@ -44,3 +44,7 @@
 </div>
 <?php endif ?>
     <div class="admin-main-content">
+
+    <div class="alert-wrapper">
+    <?= flash_get() ?>
+  </div>

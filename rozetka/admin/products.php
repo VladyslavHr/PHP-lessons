@@ -22,9 +22,11 @@ $products = array_map('decode_fast_info_json',$products);
 
 ?>
 <h2>Products <a href="?action=products-add" class="btn btn-primary">Add product</a></h2>
+
 <?php include 'blocks/admin-page-top.php';?> 
 <table class="table table-striped">
   <tr>
+      <th></th>
       <th>Title</th>
       <th>Desctiption</th>
       <th>Price</th>
@@ -41,6 +43,9 @@ $products = array_map('decode_fast_info_json',$products);
   </tr>
   <?php foreach($products as $product): ?>
   <tr>
+        <td>
+          <img class="admin-product-picture" src="cards/<?= $product['card']?>" alt="">
+        </td>
         <td><?= $product['title'] ?></td>
         <td><?= $product['description'] ?></td>
         <td><?= $product['price'] ?></td>

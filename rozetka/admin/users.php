@@ -17,10 +17,11 @@ $users = db_query("SELECT * FROM users LIMIT $limit OFFSET $offset");
 
 // pa($users);
 ?>
-<h2>Users</h2>
+<h2>Users <a href="?action=users-add" class="btn btn-primary">Add new user</a></h2>
 <?php include 'blocks/admin-page-top.php';?> 
 <table class="table table-striped">
   <tr>
+      <th></th>
       <th>Name</th>
       <th>Last name</th>
       <th>Email</th>
@@ -31,6 +32,9 @@ $users = db_query("SELECT * FROM users LIMIT $limit OFFSET $offset");
   </tr>
 <?php foreach($users as $user): ?>
     <tr>
+        <td>
+          <img class="admin-users-avatar" src="avatars/<?= $user['avatar']?>" alt="">
+        </td>
         <td><?= $user['name'] ?></td>
         <td><?= $user['last_name'] ?></td>
         <td><?= $user['email'] ?></td>

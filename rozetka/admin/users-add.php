@@ -1,38 +1,36 @@
 <?php
 
-if ($_POST) $_SESSION['post'] = $_POST;
-if ($_GET) $_SESSION['get'] = $_GET;
 
-if($_GET['action'] !== 'users-add' && !isset($_SESSION['user'])){
-    $_SESSION['flash_message'] = 'Pleas authorise!';
-    redirect('admin.php?action=users-add');
-}
-
-if (isset($_POST['users-add'])) {
+if (isset($_POST['new_user'])) {
   if (empty($_POST['last_name'])){
-    $message = 'Please enter your Last Name!';
-    flash_set($message);
+    $message = 'Please enter Last Name!';
+    flash_alert('danger', $message);
     redirect('admin.php?action=users-add');
   }
   if (empty($_POST['name'])){
-    $message = 'Please enter your Name!';
-    flash_set($message);
+    $message = 'Please enter Name!';
+    flash_alert('danger', $message);
     redirect('admin.php?action=users-add');
   }
 
   if (empty($_POST['email'])){
-    $message = 'Please enter your Email!';
-    flash_set($message);
+    $message = 'Please enter Email!';
+    flash_alert('danger', $message);
     redirect('admin.php?action=users-add');
   }
 
   if (empty($_POST['password'])){
-    $message = 'Please enter your Password!';
-    flash_set($message);
+    $message = 'Please enter Password!';
+    flash_alert('danger', $message);
     redirect('admin.php?action=users-add');
   }
 
 }
+
+pa($_POST);
+
+pa($_FILES);
+
 // Create
 if(isset($_POST['new_user'])){
     $name = db_escape($_POST['name']);
@@ -41,13 +39,23 @@ if(isset($_POST['new_user'])){
     $age = db_escape($_POST['age']);
     $gender = db_escape($_POST['gender']);
     $password = db_escape(password_hash($_POST['password'], PASSWORD_DEFAULT)); //Экранирует строку для использования в mysql_query
+    $avatar_name = '';
+    if(isset($_FILES['avatar'])){
+      $avatar_name = time() . '-' . $_FILES["avatar"]["name"];    
+    move_uploaded_file($_FILES["avatar"]["tmp_name"], "avatars/$avatar_name");
+    $avatar_name = db_escape($avatar_name);
+    }
     db_query("INSERT INTO users SET
       `name` = '$name',
       last_name = '$last_name',
       email = '$email',
       age = '$age',
       gender = '$gender',
-      `password` = '$password'");
+      `password` = '$password',
+      avatar = '$avatar_name'");
+
+      $message = "User <b> $name </b> add successfully!";
+      flash_alert('success', $message);
     redirect('admin.php?action=users');
 
 }
@@ -57,10 +65,12 @@ if(isset($_POST['new_user'])){
 
 
 <h2>Add User</h2>
-<form action="?action=users-add" method="Post">
-<div class="text-center text-danger">
-    <?= flash_get() ?>
-  </div>
+<form action="?action=users-add" method="POST" enctype='multipart/form-data'>
+<div class="mb-3">
+  <label for="formFile" class="form-label">Avatar</label>
+  <input name="avatar" class="form-control" type="file" id="formFile">
+</div>
+
 <div class="row my-3">
   <div class="col">
   <label class="form-label">Name</label>
