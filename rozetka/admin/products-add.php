@@ -34,14 +34,14 @@ if(isset($_POST['new_product'])){
     $old_price = db_escape($_POST['old_price']);
     $favorite = db_escape($_POST['favorite']);
     $sku = db_escape($_POST['sku']); //Экранирует строку для использования в mysql_query
-    $rating = db_escape($_POST['raiting']);
+    $rating = db_escape($_POST['rating']);
     $reviews = db_escape($_POST['reviews']);
     $questions = db_escape($_POST['questions']);
     $fast_info = db_escape($_POST['fast_info']);
     $card_title = '';
     if(isset($_FILES['card'])){
-      $card_title = time() . '-' . $_FILES["card"]["title"];    
-    move_uploaded_file($_FILES["card"]["tmp_title"], "products-pictures/$card_title");
+      $card_title = time() . '-' . $_FILES["card"]["name"];    
+    move_uploaded_file($_FILES["card"]["tmp_name"], "cards/$card_title");
     $card_title = db_escape($card_title);
     }
     db_query("INSERT INTO products SET
@@ -54,11 +54,12 @@ if(isset($_POST['new_product'])){
       rating = '$rating',
       reviews = '$reviews',
       questions = '$questions',
-      fast_info = '$fast_info'
-      'card' = '$card_title'");
+      fast_info = '$fast_info',
+      `card` = '$card_title'");
 
       $message = 'Product add successfully!';
       flash_alert('success', $message);
+
     redirect('admin.php?action=products');
   
 
@@ -71,11 +72,11 @@ if(isset($_POST['new_product'])){
 ?>
 
 <h2>Add Product</h2>
-<form action="?action=products-add" method="Post">
-<div class="mb-3">
+<form action="?action=products-add" method="Post" enctype='multipart/form-data'>
+<!-- <div class="mb-3">
   <label for="formFile" class="form-label">Card</label>
   <input name="card" class="form-control" type="file" id="formFile">
-</div>
+</div> -->
 <div class="row my-3">
   <div class="col">
   <label class="form-label">Title</label>

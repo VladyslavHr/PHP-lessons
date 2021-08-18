@@ -14,6 +14,17 @@ if(isset($_POST['edit_product'])){
     $rating = db_escape($_POST['rating']);
     $reviews = db_escape($_POST['reviews']);
     $questions = db_escape($_POST['questions']);
+    $card_title = '';
+    if(isset($_FILES['card'])  && $_FILES['card']['size'] > 0){
+
+      if(file_exists("cards/$card_title")) unlink("cards/$card_title");
+
+      $card_title = time() . '-' . $_FILES["card"]["name"]; 
+      $file_path = "cards/$card_title";   
+    move_uploaded_file($_FILES["card"]["tmp_name"], "cards/$card_title");
+    resizeSaveImage($file_path, $file_path, 300);
+    $card_title = db_escape($card_title);
+    }
     $fast_info = [];
     foreach ($_POST['fast_info'] as $row){
       if(!trim($row['name'])) continue;
@@ -33,10 +44,10 @@ if(isset($_POST['edit_product'])){
       rating = '$rating',
       reviews = '$reviews',
       questions = '$questions',
+      `card` = '$card_title';
       fast_info = '$fast_info'
       WHERE id = '$product_id'");
-    header('Location: admin.php?action=products');
-    exit;
+    redirect('admin.php?action=products');
 }
 
 $product_id = (int)$_GET['product_id'];
@@ -48,12 +59,19 @@ $product = array_map(function($value)
   return esc_attr($value);
 }, $product);
 
+$card = $product['card'] ? 'cards/'.$product['card'] : 'https://via.placeholder.com/250';
+
+
 ?>
 
 <h2>Edit Product <?= $product['title'] ?> <?= $product['description'] ?> (<?= $product['sku'] ?>)</h2>
 
-<form action="?action=products-edit" method="Post">
+<form action="?action=products-edit" method="Post"  enctype='multipart/form-data'>
 
+<div class="mb-3">
+  <label for="formFile" class="form-label">Card</label>
+  <input name="card" class="form-control" type="file" id="formFile">
+</div>
 <div class="row my-3">
   <div class="col">
     <label class="form-label">Title</label>
