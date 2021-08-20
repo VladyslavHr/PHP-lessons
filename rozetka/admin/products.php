@@ -41,10 +41,11 @@ $products = array_map('decode_fast_info_json',$products);
       <th></th>
 
   </tr>
-  <?php foreach($products as $product): ?>
+  <?php foreach($products as $product): 
+    ?>
   <tr>
         <td>
-          <img class="admin-product-picture" src="cards/<?= $product['card']?>" alt="">
+          <img class="admin-product-picture" src="<?= get_product_image_src($product) ?>" alt="">
         </td>
         <td><?= $product['title'] ?></td>
         <td><?= $product['description'] ?></td>
@@ -68,8 +69,12 @@ $products = array_map('decode_fast_info_json',$products);
           }
         ?></td>
         <td>
-        <a href="?action=products-edit&product_id=<?= $product['id']?>" class="me-3 text-sucsess"><i class="bi bi-pencil"></i></a>
-        <a onclick="if(!confirm('Are you sure?')) return false" href="?action=products&delete=<?= $product['id']?>" ><i class="bi bi-trash ms-auto text-danger"></i></a>
+        <a href="?action=products-edit&product_id=<?= $product['id']?>" class="me-3 text-info">
+        <?= bi('pencil') ?></a>
+        <a class="mx-auto text-danger" onclick="if(!confirm('Are you sure?')) return false" href="?action=products&delete=<?= $product['id']?>" >
+        <?= bi('trash') ?></a>
+        <a class="text-success" href="index.php?action=product&tab=1&id=<?= $product['id'] ?>" 
+        target="_blank"><?= bi('eye') ?></a>
         </td>
  </tr>
  <?php endforeach ?>

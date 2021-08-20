@@ -44,7 +44,7 @@ if(isset($_POST['new_user'])){
       $avatar_name = time() . '-' . $_FILES["avatar"]["name"];    
     $file_path = "avatars/$avatar_name";    
     move_uploaded_file($_FILES["avatar"]["tmp_name"], $file_path);
-    resizeSaveImage($file_path, $file_path, 300);
+    resizeImage($file_path, $file_path, 300);
     $avatar_name = db_escape($avatar_name);
     }
     db_query("INSERT INTO users SET

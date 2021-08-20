@@ -14,7 +14,9 @@ if(isset($_POST['edit_product'])){
     $rating = db_escape($_POST['rating']);
     $reviews = db_escape($_POST['reviews']);
     $questions = db_escape($_POST['questions']);
-    $card_title = '';
+    $product = db_query("SELECT `card` FROM products WHERE id = '$product_id' ");
+    $card_title = $product[0]['card'];
+
     if(isset($_FILES['card'])  && $_FILES['card']['size'] > 0){
 
       if(file_exists("cards/$card_title")) unlink("cards/$card_title");
@@ -44,7 +46,7 @@ if(isset($_POST['edit_product'])){
       rating = '$rating',
       reviews = '$reviews',
       questions = '$questions',
-      `card` = '$card_title';
+      `card` = '$card_title',
       fast_info = '$fast_info'
       WHERE id = '$product_id'");
     redirect('admin.php?action=products');
@@ -59,8 +61,6 @@ $product = array_map(function($value)
   return esc_attr($value);
 }, $product);
 
-$card = $product['card'] ? 'cards/'.$product['card'] : 'https://via.placeholder.com/250';
-
 
 ?>
 
@@ -68,10 +68,17 @@ $card = $product['card'] ? 'cards/'.$product['card'] : 'https://via.placeholder.
 
 <form action="?action=products-edit" method="Post"  enctype='multipart/form-data'>
 
-<div class="mb-3">
+<div class="row">
+  <div class="col-lg-3">
+    <img src="<?= get_product_image_src($product) ?>" class="img-thumbnail" alt="..."> 
+    <div class="mb-3">
   <label for="formFile" class="form-label">Card</label>
   <input name="card" class="form-control" type="file" id="formFile">
 </div>
+  </div>
+  <div class="col-lg-9">
+
+
 <div class="row my-3">
   <div class="col">
     <label class="form-label">Title</label>
@@ -168,5 +175,8 @@ $card = $product['card'] ? 'cards/'.$product['card'] : 'https://via.placeholder.
 </div>
 
 <button name="edit_product" value="<?= $product['id']?>" type="submit" class="btn btn-primary">Save</button>
+
+</div>
+  </div>
 
 </form>

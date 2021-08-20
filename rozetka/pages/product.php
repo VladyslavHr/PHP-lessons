@@ -1,19 +1,15 @@
 <?php if(!defined('ROOT')){ die('Direct request not allowed'); }?>
 <pre>
 <?php 
-$product_id = $_GET['id'];
-$product = $similar_products[$product_id];
-// print_r($_GET);
-// print_r($similar_products);
-// print_r($product);
-// $title = $product['title']
-if (isset($_GET['fake'])){
-    $faker = Faker\Factory::create();
-    $product = array_merge($product, [
-        'title' => $faker->jobTitle(),
-        'price' => $faker->randomFloat(2,0,10000),
-    ]);
-}
+$product_id = (int)$_GET['id'];
+ $product = db_query("SELECT * FROM products WHERE id = $product_id");
+ $product = $product[0];
+
+ $product['fast_info'] = json_decode($product['fast_info'], true);
+// // print_r($_GET);
+// // print_r($similar_products);
+// // print_r($product);
+// // $title = $product['title']
 ?>
 </pre>
 <div class="product-page">
