@@ -16,10 +16,7 @@
         <a href="admin.php?action=console"><h3>Console</h3></a>
      <div class="admin-profile">
          <div class="name">
-            <?php
-            $user = $_SESSION['user'];
-            ?>
-             HEllo <?= $user['name'] ?> <?= $user['last_name'] ?> (<?= $user['email'] ?>)
+             HEllo <b><?= auth_user('name') ?> <?= auth_user('last_name') ?></b> (<i><?= auth_user('email') ?></i>)
          </div>
          <a href="?logout" class="logout"><i class="bi bi-x-square"></i></a>
      </div>

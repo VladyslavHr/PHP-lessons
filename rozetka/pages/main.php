@@ -36,31 +36,27 @@
         <h2 class="block-title" id="viewed">Просмотренные товары</h2>
         <button class="js-open-modal open-sidebar-button" data-target="left_sidebar">Open menu</button>
         <div class="products">
-          <?php foreach($similar_products as $id => $product): 
+          <?php 
+          
+          $products = db_query("SELECT * FROM products ORDER BY RAND() LIMIT 15");
+          foreach($products as $product): 
 
 
-              if(!empty($_GET['query'])){
-             $position = stripos($product['title'], $_GET['query']);
-             $position2 = stripos(@$product['sku'], $_GET['query']);
-              if($position === false && $position2 === false ){
-                continue;
-              }
-            }
 
 
             ?>
           <div class="product-wrapper">    
             <div class="product">
-              <?php if($product['fav']): ?>
+              <?php if($product['favorite']): ?>
               <div class="heart"></div>
               <?php else: ?>
                 <div class="heart heart-empty"></div>
               <?php endif; ?>
               <img
-                src="https://content.rozetka.com.ua/goods/images/preview/100267119.jpg"
+                src="<?= get_product_image_src($product) ?>"
                 alt=""
               />
-              <a href="?<?= 'action=product&tab=1&id=' . $id ?>" class = "product-title">
+              <a href="?<?= 'action=product&tab=1&id=' . $product['id'] ?>" class = "product-title">
               <?= $product['title'] ?>
               </a>
              

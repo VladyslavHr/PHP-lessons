@@ -90,6 +90,22 @@ function auth_check()
     }
 }
 
+function auth_admin()
+{
+    if(auth_check() && $_SESSION['user']['role'] === 'admin'){
+        return true;
+    }
+    return false;
+}
+
+function auth_user($key = false)
+{
+    if(!auth_check()) return null;
+    if($key) return $_SESSION ['user'][$key];
+
+    return $_SESSION['user'];
+}
+
 function get_random_img_src()
 {
     global $images_arr;
@@ -373,4 +389,16 @@ function get_product_image_src(&$product)
 function bi($icon_name)
 {
     return "<i class='bi bi-$icon_name'></i>";
+}
+
+
+function edit_product_link($product_id)
+{
+     if(auth_admin()) : ?>
+        <form class="redirect-edit-form" action="admin.php" method="GET" target="_blank">
+          <input type="hidden" name="action" value="products-edit"> 
+          <input type="hidden" name="product_id" value="<?= $product_id ?>">
+          <button class="redirect-edit-button" type="submit"><?= bi('pencil') ?></button>
+        </form> 
+      <?php endif ;
 }

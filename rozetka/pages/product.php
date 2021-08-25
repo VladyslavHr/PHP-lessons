@@ -53,8 +53,10 @@ $product_id = (int)$_GET['id'];
 
 </ul>
 
-<div class="product-title"><?php echo $product['title'] ?></div>
+<h1 class="product-title"><?php echo $product['title'] ?>
 
+     <?php edit_product_link($product['id'])?>
+</h1>
 <div class="under-title">
     <div class="rating">
 <div class="stars">

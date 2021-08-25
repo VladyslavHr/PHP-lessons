@@ -98,43 +98,43 @@ $products = array_map('decode_fast_info_json',$products);
     </div>
     <div class="products" id="category_product_list">
     <?php foreach($products as $id => $product):   ?>
-       <div class="redirect-edit">
-            <a href="admin.php?action=products-edit&product_id=<?= $product['id']?>" class=" text-info" target="_blank">
-            <?= bi('pencil') ?></a>
-            </div>
-        <a class="product" href="?action=product&tab=1&id=<?= $id ?>">
+        <a class="product" href="?action=product&tab=1&id=<?= $product['id'] ?>">
             <div class="category-list-item-left">
               <img src="<?= get_product_image_src($product) ?>" alt="">
             </div>
             <div class="category-list-item-right">
-            <h2 class="title"><?= $product['title'] ?></h2>
-            <!-- <div class="redirect-edit">
-            <a href="admin.php?action=products-edit&product_id=<?= $product['id']?>" class="me-3 text-info" target="_blank">
-            <?= bi('pencil') ?></a>
-            </div> -->
+            <h2 class="title"><?= $product['id'] ?>
+
+            <?php edit_product_link($product['id'])?> 
+
+            </h2>
+
+
             <?php if(isset($product['old_price'])): ?>
               <div class="old-price"><?= $product['old_price'] ?> ₴ </div>
-              <?php else: ?>
-                <div class="old-price no-style">&nbsp;</div>
-                <?php endif; ?>
-              <div class="price"><?php echo $product[ 'price'] ?> ₴ </div>
+                <?php else: ?>
+                  <div class="old-price no-style">&nbsp;</div>
+                    <?php endif; ?>
+            <div class="price"><?php echo $product[ 'price'] ?> ₴ </div>
+            <div class="status"><?= !empty($product['status']) ? $product['status'] : '' ?></div> 
+      
               <?php if($product['ends']): ?>
                 <div class="is-over">Заканчивается</div>
-              <?php else: ?>
-                <div class="is-over">&nbsp;</div>
-              <?php endif; ?>
+                  <?php else: ?>
+                    <div class="is-over">&nbsp;</div>
+                      <?php endif; ?>
               <div class="rating">rating: <?= !empty($product ['rating']) ? $product ['rating'] : 0  ?></div>
               <?php if(!empty($product ['fast_info']) && is_array($product ['fast_info'])) : ?>
-              <ul class="fast-info">
-                <?php foreach($product ['fast_info'] as $spec => $value): ?>
-                  <li><?= $spec ?>: <span><?= $value ?></span></li>
-                <?php endforeach; ?>
-                </ul>
-              <?php endif; ?>
+                <ul class="fast-info">
+                  <?php foreach($product ['fast_info'] as $spec => $value): ?>
+                    <li><?= $spec ?>: <span><?= $value ?></span></li>
+                      <?php endforeach; ?>
+                        </ul>
+                          <?php endif; ?>
               <?php if(!empty($product['finger_print']) && $product['finger_print']): ?>
-              <div class="finger-print"><img src="img/finger-info.png" alt=""></div>
-              <?php endif; ?>
-              </div>
+                <div class="finger-print"><img src="img/finger-info.png" alt=""></div>
+                  <?php endif; ?>
+                    </div>
 
             </a>
            

@@ -35,6 +35,7 @@ if(isset($_POST['new_product'])){
     $favorite = db_escape($_POST['favorite']);
     $sku = db_escape($_POST['sku']); //Экранирует строку для использования в mysql_query
     $rating = db_escape($_POST['rating']);
+    $status = db_escape($_POST['status']);
     $reviews = db_escape($_POST['reviews']);
     $questions = db_escape($_POST['questions']);
     $fast_info = db_escape($_POST['fast_info']);
@@ -52,6 +53,7 @@ if(isset($_POST['new_product'])){
       favorite = '$favorite',
       sku = '$sku',
       rating = '$rating',
+      `status` = '$status',
       reviews = '$reviews',
       questions = '$questions',
       fast_info = '$fast_info',
@@ -73,6 +75,16 @@ if(isset($_POST['new_product'])){
 
 <h2>Add Product</h2>
 <form action="?action=products-add" method="Post" enctype='multipart/form-data'>
+
+<div class="row">
+  <div class="col-lg-3">
+   <label for="product_card_input" class="cursor-pointer"> <img src="<?= get_product_image_src($product) ?>" class="img-thumbnail" alt="..."> 
+   </label>
+    <div class="mb-3">
+  <label for="formFile" class="form-label">Card</label>
+  <input name="card" class="form-control" type="file" id="product_card_input">
+</div>
+  </div>
 <!-- <div class="mb-3">
   <label for="formFile" class="form-label">Card</label>
   <input name="card" class="form-control" type="file" id="formFile">
@@ -117,6 +129,14 @@ if(isset($_POST['new_product'])){
     <option value="3">3</option>
     <option value="4">4</option>
     <option value="5">5</option>
+    </select>
+  </div>
+  <div class="col">
+  <label class="form-label">Status</label>
+    <select name="status" class="form-select">
+    <option selected="selected" value="In stock">In stock</option>
+    <option  value="Out of stock">Out of stock</option>
+    <option  value="From Varhaus">From Varhaus</option>
     </select>
   </div>
 

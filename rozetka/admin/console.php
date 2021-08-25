@@ -1,7 +1,5 @@
-<?php
-$user = $_SESSION['user'];
-?>
+
 <h1>Admin Console</h1>
 <p>
-    HEllo <?= $user['name'] ?> <?= $user['last_name'] ?> (<?= $user['email'] ?>)
+    HEllo <?= auth_user('name') ?> <?= auth_user('last_name') ?> (<?= auth_user('email') ?>)
 </p>

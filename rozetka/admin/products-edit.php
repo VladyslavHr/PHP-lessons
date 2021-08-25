@@ -12,6 +12,7 @@ if(isset($_POST['edit_product'])){
     $ends = db_escape($_POST['ends']);
     $sku = db_escape($_POST['sku']); //Экранирует строку для использования в mysql_query
     $rating = db_escape($_POST['rating']);
+    $status = db_escape($_POST['status']);
     $reviews = db_escape($_POST['reviews']);
     $questions = db_escape($_POST['questions']);
     $product = db_query("SELECT `card` FROM products WHERE id = '$product_id' ");
@@ -44,6 +45,7 @@ if(isset($_POST['edit_product'])){
       ends = '$ends',
       sku = '$sku',
       rating = '$rating',
+      `status` = '$status',
       reviews = '$reviews',
       questions = '$questions',
       `card` = '$card_title',
@@ -70,10 +72,11 @@ $product = array_map(function($value)
 
 <div class="row">
   <div class="col-lg-3">
-    <img src="<?= get_product_image_src($product) ?>" class="img-thumbnail" alt="..."> 
+   <label for="product_card_input" class="cursor-pointer"> <img src="<?= get_product_image_src($product) ?>" class="img-thumbnail" alt="..."> 
+   </label>
     <div class="mb-3">
   <label for="formFile" class="form-label">Card</label>
-  <input name="card" class="form-control" type="file" id="formFile">
+  <input name="card" class="form-control" type="file" id="product_card_input">
 </div>
   </div>
   <div class="col-lg-9">
@@ -126,6 +129,14 @@ $product = array_map(function($value)
     <option <?= if_selected($product['rating'], '3') ?> value="3">3</option>
     <option <?= if_selected($product['rating'], '4') ?> value="4">4</option>
     <option <?= if_selected($product['rating'], '5') ?> value="5">5</option>
+    </select>
+  </div>
+  <div class="col">
+  <label class="form-label">Status</label>
+    <select name="status" class="form-select">
+    <option <?= if_selected($product['status'], '1') ?> value="In stock">In stock</option>
+    <option <?= if_selected($product['status'], '2') ?> value="Out of stock">Out of stock</option>
+    <option <?= if_selected($product['status'], '3') ?> value="From Varhaus">From Varhaus</option>
     </select>
   </div>
 </div>

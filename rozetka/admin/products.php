@@ -35,6 +35,7 @@ $products = array_map('decode_fast_info_json',$products);
       <th>Ends</th>
       <th>Sku</th>
       <th>Rating</th>
+      <th>Status</th>
       <th>Reviews</th>
       <th>Questions</th>
       <th style="width: 30%">Fast info</th>
@@ -55,6 +56,7 @@ $products = array_map('decode_fast_info_json',$products);
         <td><?= $product['ends'] ? '<i class="bi bi-emoji-frown-fill"></i>' : '<i class="bi bi-emoji-smile"></i>' ?></td>
         <td><?= $product['sku'] ?></td>
         <td><?= $product['rating'] ?></td>
+        <td><?= $product['status'] ?></td>
         <td><?= $product['reviews'] ?></td>
         <td><?= $product['questions'] ?></td>
         <td><?php
