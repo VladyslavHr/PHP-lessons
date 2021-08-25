@@ -134,9 +134,9 @@ if(isset($_POST['new_product'])){
   <div class="col">
   <label class="form-label">Status</label>
     <select name="status" class="form-select">
-    <option selected="selected" value="In stock">In stock</option>
-    <option  value="Out of stock">Out of stock</option>
-    <option  value="From Varhaus">From Varhaus</option>
+    <option selected="selected" value="in_stock">In stock</option>
+    <option  value="out_of_stock">Out of stock</option>
+    <option  value="from_warehouse">From Varhaus</option>
     </select>
   </div>
 

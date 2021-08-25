@@ -103,7 +103,7 @@ $products = array_map('decode_fast_info_json',$products);
               <img src="<?= get_product_image_src($product) ?>" alt="">
             </div>
             <div class="category-list-item-right">
-            <h2 class="title"><?= $product['id'] ?>
+            <h2 class="title"><?= $product['title'] ?>
 
             <?php edit_product_link($product['id'])?> 
 
