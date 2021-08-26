@@ -313,6 +313,25 @@ padding: 5px 10px;
     font-size: 20px;
 }
 
+.category-status > div{
+    display: flex;
+}
+
+.category-status .instock svg{
+    color: green;
+    margin-right: 10px;
+}
+
+.category-status .outofstock svg{
+    color: grey;
+    margin-right: 10px;
+}
+
+.category-status .fromwarehouse svg{
+    color: orange;
+    margin-right: 10px;
+}
+
 .products .is-over{
     font-size: 11px;
     color: orange;
@@ -599,20 +618,34 @@ flex-wrap: wrap;
     background: red;
 }
 
-.instock{
-    color: #00a460;
-    padding:0 12px 12px;
+.stock-status > div{
+    padding:8px 12px 6px;
     background-color: #f4faf6;
-    display: inline-block;
+    display: flex;
     border-radius: 6px;
     margin-top: 8px;
-
+    align-items: center;
+    width: 200px;
 }
-.instock svg{
+
+.stock-status svg{
     width: 30px;
     height: 30px;
-    transform: translateY(8px);
+    margin-right: 10px;
 }
+
+.stock-status .instock{
+    color: #00a460;
+}
+
+.stock-status .outofstock{
+    color: grey;
+}
+
+.stock-status .fromwarehouse{
+    color: orange;
+}
+
 
 .sprite{
     background-image: url('../img/sprite.png');

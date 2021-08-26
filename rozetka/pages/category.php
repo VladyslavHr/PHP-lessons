@@ -116,7 +116,25 @@ $products = array_map('decode_fast_info_json',$products);
                   <div class="old-price no-style">&nbsp;</div>
                     <?php endif; ?>
             <div class="price"><?php echo $product[ 'price'] ?> ₴ </div>
-            <div class="status"><?= !empty($product['status']) ? $product['status'] : '' ?></div> 
+            <!-- <div class="status"><?= !empty($product['status']) ? $product['status'] : '' ?></div>  -->
+        <div class="category-status">
+            <?php if($product['status'] === 'in_stock'): ?>
+              <div class="instock">
+                <?php include 'svg/bootstrap/check-circle.svg' ?>
+                    В наличии
+              </div>
+            <?php elseif($product['status'] === 'out_of_stock'): ?>
+              <div class="outofstock">
+                <?php include 'svg/bootstrap/dash-circle.svg' ?>
+                    Нет в наличии
+              </div>
+            <?php elseif($product['status'] === 'from_warehouse'): ?>
+              <div class="fromwarehouse">
+                <?php include 'svg/bootstrap/truck.svg' ?>
+                    Со склада
+              </div>
+            <?php endif ?>
+          </div>
       
               <?php if($product['ends']): ?>
                 <div class="is-over">Заканчивается</div>

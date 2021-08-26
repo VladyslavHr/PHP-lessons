@@ -56,7 +56,22 @@ $products = array_map('decode_fast_info_json',$products);
         <td><?= $product['ends'] ? '<i class="bi bi-emoji-frown-fill"></i>' : '<i class="bi bi-emoji-smile"></i>' ?></td>
         <td><?= $product['sku'] ?></td>
         <td><?= $product['rating'] ?></td>
-        <td><?= $product['status'] ?></td>
+        <td>
+          <?php if ($product['status'] === 'in_stock'): ?>
+            <div class="instock">
+                <?php include 'svg/bootstrap/check-circle.svg' ?>
+                </div>
+          <?php elseif ($product['status'] === 'out_of_stock'): ?>
+            <div class="outofstock">
+                <?php include 'svg/bootstrap/dash-circle.svg' ?>
+            </div>
+          <?php elseif ($product['status'] === 'from_warehouse'): ?>
+            <div class="fromwarehouse">
+              <?php include 'svg/bootstrap/truck.svg' ?>
+            </div>
+          <?php endif ?>
+      
+      </td>
         <td><?= $product['reviews'] ?></td>
         <td><?= $product['questions'] ?></td>
         <td><?php
@@ -71,7 +86,7 @@ $products = array_map('decode_fast_info_json',$products);
           }
         ?></td>
         <td>
-        <a href="?action=products-edit&product_id=<?= $product['id']?>" class="me-3 text-info">
+        <a title="edit product" href="?action=products-edit&product_id=<?= $product['id']?>" class="me-3 text-info">
         <?= bi('pencil') ?></a>
         <a class="mx-auto text-danger" onclick="if(!confirm('Are you sure?')) return false" href="?action=products&delete=<?= $product['id']?>" >
         <?= bi('trash') ?></a>

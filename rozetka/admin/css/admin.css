@@ -118,6 +118,17 @@
     max-height: 80px;
 }
 
+.table-striped .instock svg{
+    color: green;
+}
+
+.table-striped .otofstock svg{
+    color: grey;
+}
+
+.table-striped .fromwarehouse{
+    color: orange;
+}
 
 
 

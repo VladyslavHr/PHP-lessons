@@ -93,7 +93,7 @@ if(isset($_POST['new_product'])){
   <div class="col">
   <label class="form-label">Title</label>
     <input name="title" value="<?= session_take_post('title')?>" type="text" class="form-control" placeholder="Title" aria-label="Title">
-    <label class="form-label">Sku</label>
+      <label class="form-label">Sku</label>
     <input name="sku" value="<?= session_take_post('sku')?>" type="text" class="form-control" placeholder="Sku" aria-label="Sku">
   </div>
   <div class="col">
@@ -117,26 +117,26 @@ if(isset($_POST['new_product'])){
   <div class="col">
   <label class="form-label">Favorite</label>
     <select name="favorite" class="form-select">
-    <option value="like">like</option>
-    <option value="dislike">dislike</option>
+      <option value="like">like</option>
+      <option value="dislike">dislike</option>
     </select>
   </div>
   <div class="col">
   <label class="form-label">Rating</label>
     <select name="rating" class="form-select">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
     </select>
   </div>
   <div class="col">
   <label class="form-label">Status</label>
     <select name="status" class="form-select">
-    <option selected="selected" value="in_stock">In stock</option>
-    <option  value="out_of_stock">Out of stock</option>
-    <option  value="from_warehouse">From Varhaus</option>
+      <option selected="selected" value="in_stock">In stock</option>
+      <option  value="out_of_stock">Out of stock</option>
+      <option  value="from_warehouse">From Varhaus</option>
     </select>
   </div>
 

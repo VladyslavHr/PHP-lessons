@@ -3,7 +3,7 @@
 if(isset($_POST['edit_product'])){
   // pa($_POST);
   // return;
-    $product_id = (int)$_POST['edit_product'];
+    $product_id = (int)$_POST['product_id'];
     $title = db_escape($_POST['title']);
     $description = db_escape($_POST['description']);
     $price = db_escape($_POST['price']);
@@ -51,7 +51,10 @@ if(isset($_POST['edit_product'])){
       `card` = '$card_title',
       fast_info = '$fast_info'
       WHERE id = '$product_id'");
-    redirect('admin.php?action=products');
+
+    if($_POST['edit_product'] === 'save') redirect("admin.php?action=products-edit&product_id=$product_id");
+    if($_POST['edit_product'] === 'save_list') redirect('admin.php?action=products');
+    if($_POST['edit_product'] === 'save_open') redirect("index.php?action=product&tab=1&id=$product_id");
 }
 
 $product_id = (int)$_GET['product_id'];
@@ -69,6 +72,8 @@ $product = array_map(function($value)
 <h2>Edit Product <?= $product['title'] ?> <?= $product['description'] ?> (<?= $product['sku'] ?>)</h2>
 
 <form action="?action=products-edit" method="Post"  enctype='multipart/form-data'>
+
+<input type="hidden" name="product_id" value="<?= $product['id']?>">
 
 <div class="row">
   <div class="col-lg-3">
@@ -134,9 +139,9 @@ $product = array_map(function($value)
   <div class="col">
   <label class="form-label">Status</label>
     <select name="status" class="form-select">
-    <option <?= if_selected($product['status'], '1') ?> value="In stock">In stock</option>
-    <option <?= if_selected($product['status'], '2') ?> value="Out of stock">Out of stock</option>
-    <option <?= if_selected($product['status'], '3') ?> value="From Varhaus">From Varhaus</option>
+    <option <?= if_selected($product['status'], 'in_stock') ?> value="in_stock">In stock</option>
+    <option <?= if_selected($product['status'], 'out_of_stock') ?> value="out_of_stock">Out of stock</option>
+    <option <?= if_selected($product['status'], 'from_warehouse') ?> value="from_warehouse">From Varhaus</option>
     </select>
   </div>
 </div>
@@ -185,7 +190,10 @@ $product = array_map(function($value)
   </div>
 </div>
 
-<button name="edit_product" value="<?= $product['id']?>" type="submit" class="btn btn-primary">Save</button>
+<button name="edit_product" value="save" type="submit" class="btn btn-primary">Save</button>
+<button name="edit_product" value="save_list" type="submit" class="btn btn-primary"><?= bi('list-ul') ?> Save Show List</button>
+<button name="edit_product" value="save_open" type="submit" class="btn btn-primary"><?= bi('eye') ?> Save and Open</button>
+
 
 </div>
   </div>

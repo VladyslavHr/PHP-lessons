@@ -57,11 +57,24 @@ $card = $product['card'] ? 'cards/'.$product['card'] : 'img/noimage.png';
             </div>
         </div>
         <div class="product-options">
-            <div class="stock-atatus">
+            <div class="stock-status">
+                <?php if($product['status'] === 'in_stock'): ?>
                 <div class="instock">
-                    <?php include 'svg/ok.svg'?>
+                    <?php include 'svg/bootstrap/check-circle.svg' ?>
                     В наличии
                 </div>
+            <?php elseif($product['status'] === 'out_of_stock'): ?>
+            <div class="outofstock">
+                <?php include 'svg/bootstrap/dash-circle.svg' ?>
+                    Нет в наличии
+            </div>
+            <?php elseif($product['status'] === 'from_warehouse'): ?>
+            <div class="fromwarehouse">
+                <?php include 'svg/bootstrap/truck.svg' ?>
+                    Со склада
+            </div>
+                <?php endif ?>
+            </div>
                 <!-- <div class="sprite"></div> -->
                 <div class="product-about">
                     <div class="trade">
@@ -105,7 +118,7 @@ $card = $product['card'] ? 'cards/'.$product['card'] : 'img/noimage.png';
                      <?php endforeach; ?>
                      </ul>
                  </div>
-            </div>
+            
         </div>
     </div>
         <div class="product-bottom">

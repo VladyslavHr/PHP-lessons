@@ -395,7 +395,7 @@ function bi($icon_name)
 function edit_product_link($product_id)
 {
      if(auth_admin()) : ?>
-        <form class="redirect-edit-form" action="admin.php" method="GET" target="_blank">
+        <form class="redirect-edit-form" action="admin.php" method="GET" >
           <input type="hidden" name="action" value="products-edit"> 
           <input type="hidden" name="product_id" value="<?= $product_id ?>">
           <button class="redirect-edit-button" type="submit"><?= bi('pencil') ?></button>
