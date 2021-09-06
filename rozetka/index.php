@@ -2,6 +2,7 @@
 define('ROOT',__DIR__);
 require_once 'vendor/autoload.php';
 include 'classes/DB.class.php';
+include 'classes/simple_html_dom.php';
 include 'functions.php';
 include 'auth.php';
 include 'data/similar-products.php';

@@ -81,6 +81,17 @@ if(isset($_GET['open-modal'])){
 <a href="#" class="arrow-up">🠑</a>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
+<div class="line-console">
+	<ul class="line-items" >
+		<li><a href="admin.php?action=console">
+		<?php include 'svg/bootstrap/clipboard-data.svg' ?>	
+		Admin Console</a></li>
+		<li><a href="index.php?action=tests" >
+		<?php include 'svg/bootstrap/cup-straw.svg' ?>		
+		Test Page</a></li>
+	</ul>
+</div>
+
 
 <script>
  document.querySelectorAll('.js-open-modal').forEach(function(el){

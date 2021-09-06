@@ -49,7 +49,7 @@ $products = array_map('decode_fast_info_json',$products);
           <img class="admin-product-picture" src="<?= get_product_image_src($product) ?>" alt="">
         </td>
         <td><?= $product['title'] ?></td>
-        <td><?= $product['description'] ?></td>
+        <td><?= mb_substr($product['description'],0 , 150) ?>...</td>
         <td><?= $product['price'] ?></td>
         <td><?= $product['old_price'] ?></td>
         <td><?= $product['favorite'] ? '<i class="bi bi-heart-fill"></i>' : '<i class="bi bi-heart"></i>' ?></td>
@@ -58,15 +58,15 @@ $products = array_map('decode_fast_info_json',$products);
         <td><?= $product['rating'] ?></td>
         <td>
           <?php if ($product['status'] === 'in_stock'): ?>
-            <div class="instock">
+            <div class="instock" title="instock">
                 <?php include 'svg/bootstrap/check-circle.svg' ?>
                 </div>
           <?php elseif ($product['status'] === 'out_of_stock'): ?>
-            <div class="outofstock">
+            <div class="outofstock" title="outofstock">
                 <?php include 'svg/bootstrap/dash-circle.svg' ?>
             </div>
           <?php elseif ($product['status'] === 'from_warehouse'): ?>
-            <div class="fromwarehouse">
+            <div class="fromwarehouse" title="fromwarehouse">
               <?php include 'svg/bootstrap/truck.svg' ?>
             </div>
           <?php endif ?>

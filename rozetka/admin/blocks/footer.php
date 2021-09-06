@@ -1,6 +1,7 @@
 </div> 
 <!-- admin-main-content -->
 
+
 <script>
  document.querySelectorAll('.js-open-modal').forEach(function(el){
     el.addEventListener('click', function(e){

@@ -1,21 +1,21 @@
 <?php if(!defined('ROOT')){ die('Direct request not allowed'); }?>
 <div class="main-container main">
-<?php include 'blocks/sidebar.php' ?>
+    <?php include 'blocks/sidebar.php' ?>
       <div class="main-content">
-        <div class="slim-slider">
-          <div class="slim-slide" data-thumb="img/PIC1.jpg">
-            <img src="img/PIC1.jpg" />
-          </div>
-          <div class="slim-slide" data-thumb="img/pic2.jpg">
-            <img src="img/pic2.jpg" />
-          </div>
-          <div class="slim-slide" data-thumb="img/pic3.jpg">
-            <img src="img/pic3.jpg" />
-          </div>
-          <div class="slim-slide" data-thumb="img/pic4.jpg">
-            <img src="img/pic4.jpg" />
-          </div>
-        </div>
+         <div class="slim-slider">
+            <div class="slim-slide" data-thumb="img/PIC1.jpg">
+              <img src="img/PIC1.jpg" />
+            </div>
+            <div class="slim-slide" data-thumb="img/pic2.jpg">
+              <img src="img/pic2.jpg" />
+            </div>
+            <div class="slim-slide" data-thumb="img/pic3.jpg">
+              <img src="img/pic3.jpg" />
+            </div>
+            <div class="slim-slide" data-thumb="img/pic4.jpg">
+              <img src="img/pic4.jpg" />
+            </div>
+         </div>
 
         <script>
           let Slider = new SlimSlider({
@@ -78,6 +78,9 @@
           
 
         </div>
+
+
+
         <h2 class="block-title">Новые видео на канале <a href="#">ROZETKA</a> 
             <span class="youtube"> You Tube</span>
         </h2>

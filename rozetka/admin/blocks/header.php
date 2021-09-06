@@ -12,8 +12,15 @@
 <body class="<?= $_GET['action'] ?? '' ?>">
     
 <?php if(!(isset($_GET['action']) && $_GET['action'] === 'login')): ?>
-    <div class="admin-top-panel">
-        <a href="admin.php?action=console"><h3>Console</h3></a>
+    <div class="admin-top-panel ">
+            <ul class="line-items" >
+            <li><a href="index.php?action=main">
+            <?php include 'svg/bootstrap/clipboard-data.svg' ?>	
+            Shop</a></li>
+            <li><a href="index.php?action=tests" >
+            <?php include 'svg/bootstrap/cup-straw.svg' ?>		
+            Test Page</a></li>
+            </ul>
      <div class="admin-profile">
          <div class="name">
              HEllo <b><?= auth_user('name') ?> <?= auth_user('last_name') ?></b> (<i><?= auth_user('email') ?></i>)

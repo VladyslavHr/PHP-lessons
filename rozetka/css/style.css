@@ -286,7 +286,6 @@ padding: 5px 10px;
     border: 1px solid #eaeaea;
     margin-right: -1px;
     margin-top: -1px;
-    height: 100%;
 }
 
 .products .product img{
@@ -313,8 +312,18 @@ padding: 5px 10px;
     font-size: 20px;
 }
 
+.category-status{
+    display: flex;
+    margin: 10px 0;
+}
+
 .category-status > div{
     display: flex;
+    padding: 8px 12px 6px;
+    background-color: #f4faf6;
+    align-items: center;
+    border-radius: 6px;
+     
 }
 
 .category-status .instock svg{
@@ -1676,7 +1685,6 @@ margin: auto;
 color: white;
 font-size: 20px;
 letter-spacing: 1px;
-
 }
 
 
@@ -1851,6 +1859,113 @@ height: 40px;
     color: red;
     cursor: pointer;
 }
+
+.tests-list{
+   list-style: none;
+}
+
+.tests-list li a{
+    background: linear-gradient(to bottom, #eeeeee 0%,#cccccc 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+.line-console{
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
+}
+
+.line-console:hover{
+    opacity: 1;
+}
+
+.line-items{
+    display: flex; 
+    position: absolute; 
+    top: 0; margin: 0px; 
+    list-style: none; 
+    background: white; 
+    padding-left: 0;
+}
+
+.line-items li{
+    border-right: 1px solid #fff; 
+}
+
+.line-items li:last-child{
+    border: 0;
+}
+
+.line-items a{
+    display: inline-block;
+    padding: 8px 15px;
+    color: black; 
+    width: max-content;
+    background: #1b2839;
+    color: #fff;
+}
+
+.recommend{
+    font-size: 20px;
+}
+
+.recommend-products-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.recommend-product-wrap{
+    width: 12.5%;
+}
+
+.recommend-product{
+    padding: 50px;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    height: 100%;
+}
+
+.recommend-product .old-price{
+    font-size: 10;
+    text-decoration: line-through;
+    color: #999;
+}
+
+.recommend-product .price{
+    font-size: 20px;
+    color: #f97d7d;
+    font-size: 20px;
+}
+
+.recommend-product .is-over{
+    color: orange;
+    font-size: 15px;
+}
+
+.recommend-product .rating{
+    display: inline-block;
+    font-size: 12px;
+}
+
+.recommend-product .reviews{
+    display: inline;
+    font-size: 12px;
+}
+
+.recommend-product .leave-reviwe{
+    display: inline;
+    font-size: 12px;
+}
+
+
+
+
+
+
+
+
 
 
 

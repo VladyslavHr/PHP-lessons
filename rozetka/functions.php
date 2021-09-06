@@ -382,6 +382,7 @@ function resizeSaveImage($input, $output, $new_size)
 
 function get_product_image_src(&$product)
 {
+    if(strpos($product['card'], 'rozetka.com.ua')) return $product['card'];
     return $product['card'] ? 'cards/'.$product['card'] : 'img/noimage.png';
 }
 

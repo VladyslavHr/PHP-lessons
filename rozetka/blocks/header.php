@@ -63,7 +63,7 @@ if(!defined('ROOT')){
           <a href="#" class="active">RU</a>|<a href="#">UA</a>
         </div>
 
-        <div class="premium-btn">
+        <a href="?action=tests" class="premium-btn">
           <p>Попробуйте</p>
           <svg viewBox="0 0 96 32" id="icon-premium">
             <path
@@ -92,7 +92,7 @@ if(!defined('ROOT')){
               ></path>
             </g>
           </svg>
-        </div>
+      </a>
         <div class="top-icons">
           <div class="counter">
             <?= isset($_SESSION['count']) ? $_SESSION['count'] : '' ?>

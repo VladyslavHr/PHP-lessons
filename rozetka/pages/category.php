@@ -116,7 +116,7 @@ $products = array_map('decode_fast_info_json',$products);
                   <div class="old-price no-style">&nbsp;</div>
                     <?php endif; ?>
             <div class="price"><?php echo $product[ 'price'] ?> ₴ </div>
-            <!-- <div class="status"><?= !empty($product['status']) ? $product['status'] : '' ?></div>  -->
+            
         <div class="category-status">
             <?php if($product['status'] === 'in_stock'): ?>
               <div class="instock">

@@ -6,6 +6,8 @@ $product_id = (int)$_GET['id'];
  $product = $product[0];
 
  $product['fast_info'] = json_decode($product['fast_info'], true);
+
+ $limit = $product['reviews'];
 // // print_r($_GET);
 // // print_r($similar_products);
 // // print_r($product);
@@ -125,9 +127,48 @@ $product_id = (int)$_GET['id'];
     <div class="tab-content">Тут будет: Покупают вместе </div> 
 <?php endif ?>
 
-
 </div>
 
+<h2 class="recommend">Вас так же может заинтересовать</h2>
+<div class="recommend-products-wrapper">
+    <?php 
+          
+        $products = db_query("SELECT * FROM products ORDER BY RAND() LIMIT 8");
+        foreach($products as $product): 
 
-
+    ?>
+    <div class="recommend-product-wrap">
+       <div class="recommend-product">
+                <a href="?<?= 'action=product&tab=1&id=' . $product['id'] ?>" class = "recommend-product-title">
+                    <img 
+                        src="<?= get_product_image_src($product) ?>"
+                        alt=""
+                    />
+                    <?= $product['title'] ?>
+                </a>             
+              
+            <?php if(isset($product['old_price'])): ?>
+                <div class="old-price"><?= $product['old_price'] ?> ₴ </div>
+            <?php else: ?>
+                <div class="old-price no-style">&nbsp;</div>
+            <?php endif; ?>
+                <div class="price"><?php echo $product[ 'price'] ?> ₴ </div>
+            <?php if($product['rating']):?>
+                <div class="rating"><?= $product['rating'] ?></div>
+            <?php else: ?>
+                <div></div>
+            <?php endif; ?> 
+            <?php if($product['reviews']):?>   
+                <div class="reviews"> <a href="#"><?= $limit ?> Отзыв<?= sklonenie($limit, '', 'а', 'ов') ?></a></div>
+            <?php else: ?>
+                <div class="leave-reviwe"><a href="#">Оставить отзыв</a></div>
+            <?php endif; ?>    
+            <?php if($product['ends']): ?>
+                <div class="is-over">Заканчивается</div>
+            <?php else: ?>
+                <div class="is-over">&nbsp;</div>
+            <?php endif; ?>
+       </div>
+    </div>
+            <?php endforeach; ?>    
 </div>

@@ -27,33 +27,44 @@ $card = $product['card'] ? 'cards/'.$product['card'] : 'img/noimage.png';
                <img src="<?= get_product_image_src($product)?>" alt="">
             </a>
         </div>
-       <div class="img-prev img-prev2">
-           <a href="https://content1.rozetka.com.ua/goods/images/big/56474743.jpg" data-fancybox="gallery">
-               <img src="https://content1.rozetka.com.ua/goods/images/preview/56474743.jpg" alt="">
+        <?php 
+        if ($product['gallery']):
+            $images_arr = json_decode($product['gallery'], true);
+            foreach ($images_arr as $key => $image):
+                ?> 
+       <div class="img-prev img-prev<?= ($key + 2)?>">
+           <a href="<?= $image ?>" data-fancybox="gallery">
+               <img src="<?= $image ?>" alt="">
             </a>
         </div>
-       <div class="img-prev img-prev3">
-           <a href="https://content.rozetka.com.ua/goods/images/big/56474747.jpg" data-fancybox="gallery">
-               <img src="https://content.rozetka.com.ua/goods/images/preview/56474747.jpg" alt="">
-            </a>
-        </div>
-       <div class="img-prev img-prev4">
-           <a href="https://content1.rozetka.com.ua/goods/images/big/56474749.jpg" data-fancybox="gallery">
-               <img src="https://content1.rozetka.com.ua/goods/images/preview/56474749.jpg" alt="">
-            </a>
-        </div>
-       <div class="img-prev img-prev5">
-           <a href="https://content.rozetka.com.ua/goods/images/big/56474746.jpg" data-fancybox="gallery">
-               <img src="https://content.rozetka.com.ua/goods/images/preview/56474746.jpg" alt="">
-            </a>
-        </div> 
+        <?php
+            if($key > 3) break;
+
+            endforeach;
+            endif;
+        ?>
+    
        
         <div class="main-image">
             <img class="img1" src="<?= get_product_image_src($product)?>" alt="">
-            <img class="img2" src="https://content1.rozetka.com.ua/goods/images/big/56474743.jpg" alt="">
-            <img class="img3" src="https://content.rozetka.com.ua/goods/images/big/56474747.jpg" alt="">
-            <img class="img4" src="https://content1.rozetka.com.ua/goods/images/big/56474749.jpg" alt="">
-            <img class="img5" src="https://content.rozetka.com.ua/goods/images/big/56474746.jpg" alt="">
+            <?php 
+        if ($product['gallery']):
+            $images_arr = json_decode($product['gallery'], true);
+            foreach ($images_arr as $key => $image):
+                ?> 
+       <img class="img<?= ($key + 2)?>" src="<?= $image ?>" alt="">
+       <div class="img-prev img-prev<?= ($key + 2)?>">
+           <a href="<?= $image ?>" data-fancybox="gallery">
+               <img src="<?= $image ?>" alt="">
+            </a>
+        </div>
+        <?php
+            if($key > 3) break;
+
+            endforeach;
+            endif;
+        ?>
+            
             </div>
         </div>
         <div class="product-options">
@@ -79,7 +90,7 @@ $card = $product['card'] ? 'cards/'.$product['card'] : 'img/noimage.png';
                 <div class="product-about">
                     <div class="trade">
                     <div class="price">
-                        <?php if(empty($product['old_price'])): ?>
+                        <?php if($product['old_price']): ?>
                             <?= $product['price']  ?> ₴
                         <?php else: ?>
                             <span class="reg-price"><?= $product['price'] ?> ₴ </span> 
@@ -124,10 +135,8 @@ $card = $product['card'] ? 'cards/'.$product['card'] : 'img/noimage.png';
         <div class="product-bottom">
                      <div class="description">
                          <h2>Описание</h2>
-                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta nam error, amet nulla eveniet eum saepe. Ea vitae, aspernatur quaerat omnis dignissimos itaque qui doloremque ducimus cum, beatae nam aliquid!</p>
-                         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo reiciendis impedit sequi ab voluptate voluptatibus, necessitatibus fugiat corrupti harum blanditiis rerum quam dolorem pariatur placeat animi eveniet, explicabo, doloremque consequuntur.</p>
-                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores distinctio placeat eos totam sit porro a voluptatibus ipsa quas cum accusantium, veniam ex excepturi illum. Rem repellendus voluptatem inventore itaque.</p>
-                        </div>
+                         <p><?= $product['description']?></p>
+                         
                         <div class="reviews">
                             <h2>Отзывы покупателей</h2>
                             <div class="review-block">
