@@ -7,7 +7,7 @@ $product_id = (int)$_GET['id'];
 
  $product['fast_info'] = json_decode($product['fast_info'], true);
 
- $limit = $product['reviews'];
+ 
 // // print_r($_GET);
 // // print_r($similar_products);
 // // print_r($product);
@@ -67,7 +67,7 @@ $product_id = (int)$_GET['id'];
     <?php endfor; ?>
 </div>
 
-        <a href="#">14 отзывов</a>
+        <a href="#"> <?=$product['reviews'] ?> отзыв<?= sklonenie($product['reviews'], '', 'а', 'ов') ?></a>
     </div>
     <div class="sku">
       <small>Код:</small><?php echo $product['sku']?>
@@ -132,38 +132,38 @@ $product_id = (int)$_GET['id'];
 <h2 class="recommend">Вас так же может заинтересовать</h2>
 <div class="recommend-products-wrapper">
     <?php 
-          
+        
         $products = db_query("SELECT * FROM products ORDER BY RAND() LIMIT 8");
-        foreach($products as $product): 
-
+        foreach($products as $product_r): 
+        $reviews = $product_r['reviews'];
     ?>
     <div class="recommend-product-wrap">
        <div class="recommend-product">
-                <a href="?<?= 'action=product&tab=1&id=' . $product['id'] ?>" class = "recommend-product-title">
+                <a href="?<?= 'action=product&tab=1&id=' . $product_r['id'] ?>" class = "recommend-product-title">
                     <img 
-                        src="<?= get_product_image_src($product) ?>"
+                        src="<?= get_product_image_src($product_r) ?>"
                         alt=""
                     />
-                    <?= $product['title'] ?>
+                    <?= $product_r['title'] ?>
                 </a>             
               
-            <?php if(isset($product['old_price'])): ?>
-                <div class="old-price"><?= $product['old_price'] ?> ₴ </div>
+            <?php if(isset($product_r['old_price'])): ?>
+                <div class="old-price"><?= $product_r['old_price'] ?> ₴ </div>
             <?php else: ?>
                 <div class="old-price no-style">&nbsp;</div>
             <?php endif; ?>
-                <div class="price"><?php echo $product[ 'price'] ?> ₴ </div>
-            <?php if($product['rating']):?>
-                <div class="rating"><?= $product['rating'] ?></div>
+                <div class="price"><?php echo $product_r[ 'price'] ?> ₴ </div>
+            <?php if($product_r['rating']):?>
+                <div class="rating"><?= $product_r['rating'] ?></div>
             <?php else: ?>
                 <div></div>
             <?php endif; ?> 
-            <?php if($product['reviews']):?>   
-                <div class="reviews"> <a href="#"><?= $limit ?> Отзыв<?= sklonenie($limit, '', 'а', 'ов') ?></a></div>
+            <?php if($reviews):?>   
+                <div class="reviews"> <a href="#"><?= $reviews ?> Отзыв<?= sklonenie($reviews, '', 'а', 'ов') ?></a></div>
             <?php else: ?>
                 <div class="leave-reviwe"><a href="#">Оставить отзыв</a></div>
             <?php endif; ?>    
-            <?php if($product['ends']): ?>
+            <?php if($product_r['ends']): ?>
                 <div class="is-over">Заканчивается</div>
             <?php else: ?>
                 <div class="is-over">&nbsp;</div>
@@ -171,4 +171,7 @@ $product_id = (int)$_GET['id'];
        </div>
     </div>
             <?php endforeach; ?>    
+</div>
+
+
 </div>

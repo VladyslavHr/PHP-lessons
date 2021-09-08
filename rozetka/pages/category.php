@@ -56,7 +56,8 @@ $products = array_map('decode_fast_info_json',$products);
     </li>
 </ul>
   <h2 class="category-title text-center">Product category</h2>
-<?php my_pagination($offset, $limit, $total_count); ?>
+  
+<?php bs_category_pagination($offset, $limit, $total_count); ?>
     <div class="before-products">
         <div class="count">
            Показано <?= $limit ?> товар<?= sklonenie($limit, '', 'а', 'ов') ?>

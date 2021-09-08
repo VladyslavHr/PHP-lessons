@@ -69,7 +69,7 @@ $product = array_map(function($value)
 
 ?>
 
-<h2>Edit Product <?= $product['title'] ?> <?= $product['description'] ?> (<?= $product['sku'] ?>)</h2>
+<h2>Edit Product <?= $product['title'] ?> (<?= $product['sku'] ?>)</h2>
 
 <form action="?action=products-edit" method="Post"  enctype='multipart/form-data'>
 
