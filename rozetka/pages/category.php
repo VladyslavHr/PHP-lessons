@@ -4,7 +4,7 @@
 $sorting = $_GET['sorting'] ?? 'default';
 
 $offset = $_GET['offset'] ?? 0;
-$limit = $_GET['limit'] ?? 5;
+$limit = $_GET['limit'] ?? 20;
 
 $total_count = db_query("SELECT count(*) FROM products");
 $total_count = $total_count ? $total_count[0]['count(*)'] : 0;
@@ -56,8 +56,9 @@ $products = array_map('decode_fast_info_json',$products);
     </li>
 </ul>
   <h2 class="category-title text-center">Product category</h2>
-  
-<?php bs_category_pagination($offset, $limit, $total_count); ?>
+  <div class="category-pagination">
+<?php bs_pagination($offset, $limit, $total_count); ?>
+</div>
     <div class="before-products">
         <div class="count">
            Показано <?= $limit ?> товар<?= sklonenie($limit, '', 'а', 'ов') ?>
@@ -111,7 +112,7 @@ $products = array_map('decode_fast_info_json',$products);
             </h2>
 
 
-            <?php if(isset($product['old_price'])): ?>
+            <?php if(isset($product['old_price']) && $product['old_price'] !== $product['price']): ?>
               <div class="old-price"><?= $product['old_price'] ?> ₴ </div>
                 <?php else: ?>
                   <div class="old-price no-style">&nbsp;</div>
@@ -119,23 +120,31 @@ $products = array_map('decode_fast_info_json',$products);
             <div class="price"><?php echo $product[ 'price'] ?> ₴ </div>
             
         <div class="category-status">
-            <?php if($product['status'] === 'in_stock'): ?>
-              <div class="instock">
-                <?php include 'svg/bootstrap/check-circle.svg' ?>
-                    В наличии
-              </div>
-            <?php elseif($product['status'] === 'out_of_stock'): ?>
-              <div class="outofstock">
-                <?php include 'svg/bootstrap/dash-circle.svg' ?>
+        <?php if($product['sell_status'] === 'available'): ?>
+                <div class="available">
+                    <?php include 'svg/bootstrap/check-circle.svg' ?>
+                    Есть в наличии
+                </div>
+
+                <?php elseif($product['sell_status'] === 'unavailable'): ?>
+                <div class="unavailable">
+                    <?php include 'svg/bootstrap/dash-circle.svg' ?>
                     Нет в наличии
-              </div>
-            <?php elseif($product['status'] === 'from_warehouse'): ?>
-              <div class="fromwarehouse">
-                <?php include 'svg/bootstrap/truck.svg' ?>
-                    Со склада
-              </div>
-            <?php endif ?>
-          </div>
+                </div>
+
+                <?php elseif($product['sell_status'] === 'limited'): ?>
+                <div class="limited">
+                    <?php include 'svg/bootstrap/clock.svg' ?>
+                    Заканчивается
+                </div>
+                
+                <?php elseif($product['sell_status'] === 'out_of_stock'): ?>
+                <div class="out_of_stock">
+                    <?php include 'svg/bootstrap/dash-circle.svg' ?>
+                    Нет в наличии
+                </div>
+                    <?php endif ?>
+                </div>
       
               <?php if($product['ends']): ?>
                 <div class="is-over">Заканчивается</div>

@@ -46,18 +46,25 @@ $card = $product['card'] ? 'cards/'.$product['card'] : 'img/noimage.png';
     
        
         <div class="main-image">
-            <img class="img1" src="<?= get_product_image_src($product)?>" alt="">
+            <div class="img-wrapper img1">
+                <img class="" src="<?= get_product_image_src($product)?>" alt="">
+            </div>
             <?php 
         if ($product['gallery']):
             $images_arr = json_decode($product['gallery'], true);
             foreach ($images_arr as $key => $image):
-                ?> 
-       <img class="img<?= ($key + 2)?>" src="<?= $image ?>" alt="">
-       <div class="img-prev img-prev<?= ($key + 2)?>">
+                ?>
+            <div class="img-wrapper img<?= ($key + 2)?>"> 
+                <img class="" src="<?= $image ?>" alt="">
+            </div> 
+
+
+<!-- select distinct status from products запрос дз -->
+       <!-- <div class="img-prev img-prev<?= ($key + 2)?>">
            <a href="<?= $image ?>" data-fancybox="gallery">
                <img src="<?= $image ?>" alt="">
             </a>
-        </div>
+        </div> -->
         <?php
             if($key > 3) break;
 
@@ -69,28 +76,36 @@ $card = $product['card'] ? 'cards/'.$product['card'] : 'img/noimage.png';
         </div>
         <div class="product-options">
             <div class="stock-status">
-                <?php if($product['status'] === 'in_stock'): ?>
-                <div class="instock">
+                <?php if($product['sell_status'] === 'available'): ?>
+                <div class="available">
                     <?php include 'svg/bootstrap/check-circle.svg' ?>
-                    В наличии
+                    Есть в наличии
                 </div>
-            <?php elseif($product['status'] === 'out_of_stock'): ?>
-            <div class="outofstock">
-                <?php include 'svg/bootstrap/dash-circle.svg' ?>
+
+                <?php elseif($product['sell_status'] === 'unavailable'): ?>
+                <div class="unavailable">
+                    <?php include 'svg/bootstrap/dash-circle.svg' ?>
                     Нет в наличии
-            </div>
-            <?php elseif($product['status'] === 'from_warehouse'): ?>
-            <div class="fromwarehouse">
-                <?php include 'svg/bootstrap/truck.svg' ?>
-                    Со склада
-            </div>
-                <?php endif ?>
-            </div>
+                </div>
+
+                <?php elseif($product['sell_status'] === 'limited'): ?>
+                <div class="limited">
+                    <?php include 'svg/bootstrap/clock.svg' ?>
+                    Заканчивается
+                </div>
+                
+                <?php elseif($product['sell_status'] === 'out_of_stock'): ?>
+                <div class="out_of_stock">
+                    <?php include 'svg/bootstrap/dash-circle.svg' ?>
+                    Нет в наличии
+                </div>
+                    <?php endif ?>
+                </div>
                 <!-- <div class="sprite"></div> -->
                 <div class="product-about">
                     <div class="trade">
                     <div class="price">
-                        <?php if($product['old_price']): ?>
+                        <?php if(!$product['old_price'] || $product['old_price'] === $product['price']): ?>
                             <?= $product['price']  ?> ₴
                         <?php else: ?>
                             <span class="reg-price"><?= $product['price'] ?> ₴ </span> 
@@ -115,7 +130,7 @@ $card = $product['card'] ? 'cards/'.$product['card'] : 'img/noimage.png';
                         <?php include 'svg/icon-bonus-premium.svg' ?>
                     <b>+ 189 бонусных ₴</b>&nbsp; 
                     при покупке этого товара
-                    &nbsp; <a href="#">для владельцев Premium</a> 
+                    &nbsp; <a href="<?= $product['url'] ?>">дельцев Premium</a> 
                     </div>
                 </div>
                  <div class="specs">
@@ -135,7 +150,7 @@ $card = $product['card'] ? 'cards/'.$product['card'] : 'img/noimage.png';
         <div class="product-bottom">
                      <div class="description">
                          <h2>Описание</h2>
-                         <p><?= $product['description']?></p>
+                         <div class="description-text"><?= $product['description']?></div>
                          
                         <div class="reviews">
                             <h2>Отзывы покупателей</h2>

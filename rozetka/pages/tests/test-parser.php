@@ -2,7 +2,9 @@
 
 <?php
 
-$products = db_query("SELECT id,`url`,title FROM products WHERE title = '' LIMIT 5 ");
+set_time_limit(500);
+
+$products = db_query("SELECT id,`url`,title FROM products WHERE title = '' LIMIT 400 ");
 
 pa($products);
 
@@ -107,9 +109,10 @@ $get_goods_total = json_decode($get_goods_total, true);
 if($arr['image'])$card = str_replace('base_action', 'big', array_shift($arr['image']));
 if($arr['image'])$gallery = json_encode($arr['image']);
 
+
 $product_arr = [
     'title' => $arr['name'],
-    'description' => $arr['description'],
+    'description' => $description,
     'price' => $arr['offers']['price'],
     'old_price' => '0',
     'favorite' => '0',
@@ -238,18 +241,32 @@ $get_goods_total = json_decode($get_goods_total, true);
 if($arr['image'])$card = str_replace('base_action', 'big', array_shift($arr['image']));
 if($arr['image'])$gallery = json_encode($arr['image']);
 
+$get_price = file_get_contents("https://common-api.rozetka.com.ua/v2/goods/get-price/?country=UA&lang=ru&id=$product_id&r=0.07322456907586417&with_show_in_site=1&lng=ru");
+
+if($get_price){
+  $get_price = json_decode($get_price, true);
+  // pa($get_price); 
+}
+
+
+$description = $html->find('.product-about__description-content', 0);
+
+$description = $description ? $description->innertext : '';
+
+
 $product_arr = [
     'title' => $arr['name'],
-    'description' => $arr['description'],
-    'price' => $arr['offers']['price'],
-    'old_price' => '0',
+    'description' => $description,
+    'price' => $get_price['price'] ?? '',
+    'old_price' => $get_price['old_price'] ?? '',
     'favorite' => '0',
     'ends' => '0',
     'sku' => $arr['sku'],
     'rating' => '0',
-    'status' => $arr['offers']['availability'] === 'http://schema.org/InStock' ? 'instock' : 'outofstock',
-    'reviews' => $get_goods_total['data'][0]['comments']['amount'],
-    'questions' => $get_goods_total['data'][0]['questions']['amount'],
+    'status' => $get_price['status'] ?? '',
+    'sell_status' => $get_price['sell_status'] ?? '',
+    'reviews' => $get_goods_total['data'][0]['comments']['amount'] ?? '0',
+    'questions' => $get_goods_total['data'][0]['questions']['amount'] ?? '0',
     'card' => $card ?? '',
     'gallery' => $gallery ?? '',
     'fast_info' => json_encode($fast_info),
@@ -268,6 +285,7 @@ $ends = db_escape($product_arr['ends']);
 $sku = db_escape($product_arr['sku']); //Экранирует строку для использования в mysql_query
 $rating = db_escape($product_arr['rating']);
 $status = db_escape($product_arr['status']);
+$sell_status = db_escape($product_arr['sell_status']);
 $reviews = db_escape($product_arr['reviews']);
 $questions = db_escape($product_arr['questions']);
 $card = db_escape($product_arr['card']);
@@ -290,6 +308,7 @@ db_query("UPDATE products SET
   sku = '$sku',
   rating = '$rating',
   `status` = '$status',
+  `sell_status` = '$sell_status',
   reviews = '$reviews',
   questions = '$questions',
   `card` = '$card',
