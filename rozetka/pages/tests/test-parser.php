@@ -1,37 +1,66 @@
 <div style="padding: 25px">
-
+<style>
+  .color-item{
+    display:inline-block;
+    width: 24px;
+    height: 24px;
+    margin: 3px;
+    box-shadow: 0 0 9px #777;
+  }
+</style>
 <?php
 
 set_time_limit(500);
 
-$products = db_query("SELECT id,`url`,title FROM products WHERE title = '' LIMIT 400 ");
+// $products = db_query("SELECT id,`url`,title FROM products WHERE title = '' LIMIT 400 ");
 
-pa($products);
+// pa($products);
 
 
-foreach ($products as $key => $product){
-    parse_product_update($product['url']);
-}
-// for ($page_num=16; $page_num <= 67; $page_num++){
-//   parse_category_page($page_num);
+// foreach ($products as $key => $product){
+//     parse_product_update($product['url']);
 // }
+for ($page_num=1; $page_num <= 1; $page_num++){
+  parse_category_page($page_num);
+}
 
 function parse_category_page($page_num){
 
   $html = file_get_html('https://rozetka.com.ua/mobile-phones/c80003/page='.$page_num.'/');
 
-  $products = $html->find('.goods-tile__heading');
+  $products = $html->find('.goods-tile.ng-star-inserted');
 
   if($products){
     pa(count($products));
     foreach($products as $product) {
       // echo $product->href;
       // echo '<hr>';
-      $url = db_escape($product->href);
+      $link = $product->find('.goods-tile__heading', 0);
+      $url = $link ? db_escape($link->href) : '';
+      pa('<a href="'.$url.'">'.$url.'</a>');
+      $colors = $product->find('.goods-tile__colors-content');
+      $color_names = [];
+      if($colors){
+        foreach($colors as $key => $color){
+          $color_name = $color->style;
+          if($color_name === 'background-color:false;'){
+            $img = $color->find('img', 0);
+            $color_name = $img ? $img->src : '';
+            $color_name = "background-image:url($color_name);";
+          }
+          $color_names[] = $color_name;
+          // echo $color_name;
+
+          echo "<span class='color-item' style='$color_name'></span>";
+        }
+        $color_names = implode('|',  $color_names);
+        $color_names = db_escape( $color_names);
       $product_exists = db_query("SELECT id FROM products WHERE `url` = '$url'");
       if(!$product_exists){
-        db_query("INSERT INTO products SET `url` = '$url' ");
+        db_query("UPDATE  products SET colors = '$color_names' WHERE `url` = '$url' ");
       }
+      }
+
 
       // parse_product($product->href);
     }

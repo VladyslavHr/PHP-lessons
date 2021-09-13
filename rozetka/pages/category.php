@@ -99,17 +99,31 @@ $products = array_map('decode_fast_info_json',$products);
         </div>
     </div>
     <div class="products" id="category_product_list">
-    <?php foreach($products as $id => $product):   ?>
+      <?php foreach($products as $id => $product):   ?>
         <a class="product" href="?action=product&tab=1&id=<?= $product['id'] ?>">
             <div class="category-list-item-left">
               <img src="<?= get_product_image_src($product) ?>" alt="">
             </div>
-            <div class="category-list-item-right">
+          <div class="category-list-item-right">
             <h2 class="title"><?= $product['title'] ?>
-
-            <?php edit_product_link($product['id'])?> 
-
+              <?php edit_product_link($product['id'])?> 
             </h2>
+          <div class="category-color-wrapper">
+            <ul class="category-color">
+              <li class="category-color-red">
+                  <span class="category-color-red-content">.</span>
+              </li>
+              <li class="category-color-yellow">
+                  <span class="category-color-yellow-content">.</span>
+              </li>
+              <li class="category-color-blue">
+                  <span class="category-color-blue-content">.</span>
+              </li>
+              <li class="category-color-green">
+                  <span class="category-color-green-content">.</span>
+              </li>
+            </ul>
+          </div>
 
 
             <?php if(isset($product['old_price']) && $product['old_price'] !== $product['price']): ?>
@@ -141,7 +155,7 @@ $products = array_map('decode_fast_info_json',$products);
                 <?php elseif($product['sell_status'] === 'out_of_stock'): ?>
                 <div class="out_of_stock">
                     <?php include 'svg/bootstrap/dash-circle.svg' ?>
-                    Нет в наличии
+                    Товар закончился
                 </div>
                     <?php endif ?>
                 </div>

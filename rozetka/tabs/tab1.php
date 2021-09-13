@@ -97,10 +97,30 @@ $card = $product['card'] ? 'cards/'.$product['card'] : 'img/noimage.png';
                 <?php elseif($product['sell_status'] === 'out_of_stock'): ?>
                 <div class="out_of_stock">
                     <?php include 'svg/bootstrap/dash-circle.svg' ?>
-                    Нет в наличии
+                    Товар закончился
                 </div>
                     <?php endif ?>
                 </div>
+
+
+                <div class="tab-color-wrapper">
+            <ul class="tab-color">
+              <li class="tab-color-red">
+                    <span class="tab-color-red-content">.</span>
+              </li>
+              <li class="tab-color-yellow">
+                  <span class="tab-color-yellow-content">.</span>
+              </li>
+              <li class="tab-color-blue">
+                  <span class="tab-color-blue-content">.</span>
+              </li>
+              <li class="tab-color-green">
+                  <span class="tab-color-green-content">.</span>
+              </li>
+            </ul>
+          </div>
+
+
                 <!-- <div class="sprite"></div> -->
                 <div class="product-about">
                     <div class="trade">
@@ -148,10 +168,15 @@ $card = $product['card'] ? 'cards/'.$product['card'] : 'img/noimage.png';
         </div>
     </div>
         <div class="product-bottom">
-                     <div class="description">
-                         <h2>Описание</h2>
-                         <div class="description-text"><?= $product['description']?></div>
-                         
+            <div class="description-wrapper">
+                <div class="description-background js-open-modal" data-target="product_description" id="product_description">
+                        <div class="description" >
+                            <h2>Описание</h2>
+                            <div class="description-text" ><?= $product['description']?></div>
+                                <div class="buy-credit more-btn js-open-modal" data-target="product_description">Подробнее...</div> 
+                        </div>
+                </div>
+            </div>
                         <div class="reviews">
                             <h2>Отзывы покупателей</h2>
                             <div class="review-block">

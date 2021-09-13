@@ -49,7 +49,7 @@ $products = array_map('decode_fast_info_json',$products);
           <img class="admin-product-picture" src="<?= get_product_image_src($product) ?>" alt="">
         </td>
         <td><?= $product['title'] ?></td>
-        <td><?= mb_substr($product['description'],0 , 150) ?>...</td>
+        <td><?= mb_substr(strip_tags($product['description']),0 , 150) ?>...</td>
         <td><?= $product['price'] ?></td>
         <td><?= $product['old_price'] ?></td>
         <td><?= $product['favorite'] ? '<i class="bi bi-heart-fill"></i>' : '<i class="bi bi-heart"></i>' ?></td>
