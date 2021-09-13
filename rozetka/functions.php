@@ -387,6 +387,12 @@ function get_product_image_src(&$product)
     return $product['card'] ? 'cards/'.$product['card'] : 'img/noimage.png';
 }
 
+function get_gallery_image_src(&$product)
+{
+    $gallery = json_decode($product['gallery'], true);
+    return  $gallery[0] ?? 'img/noimage.png';
+}
+
 
 function bi($icon_name)
 {

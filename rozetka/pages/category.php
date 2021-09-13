@@ -100,28 +100,30 @@ $products = array_map('decode_fast_info_json',$products);
     </div>
     <div class="products" id="category_product_list">
       <?php foreach($products as $id => $product):   ?>
-        <a class="product" href="?action=product&tab=1&id=<?= $product['id'] ?>">
+        <div class="product" href="?action=product&tab=1&id=<?= $product['id'] ?>">
             <div class="category-list-item-left">
-              <img src="<?= get_product_image_src($product) ?>" alt="">
+              <a class="category-product-image" href="?action=product&tab=1&id=<?= $product['id'] ?>">
+                <img class="image-main" src="<?= get_product_image_src($product) ?>" alt="" >
+                <img class="image-hover" src="<?= get_gallery_image_src($product) ?>" alt="" >
+              </a>
             </div>
           <div class="category-list-item-right">
-            <h2 class="title"><?= $product['title'] ?>
+            
+              <h2 class="title">
+                <a href="?action=product&tab=1&id=<?= $product['id'] ?>">
+                  <?= $product['title'] ?> <?php if(auth_admin()): ?> [<?=$product['id'] ?>] <?php endif ?>
+                </a>
               <?php edit_product_link($product['id'])?> 
             </h2>
           <div class="category-color-wrapper">
-            <ul class="category-color">
-              <li class="category-color-red">
-                  <span class="category-color-red-content">.</span>
-              </li>
-              <li class="category-color-yellow">
-                  <span class="category-color-yellow-content">.</span>
-              </li>
-              <li class="category-color-blue">
-                  <span class="category-color-blue-content">.</span>
-              </li>
-              <li class="category-color-green">
-                  <span class="category-color-green-content">.</span>
-              </li>
+            <ul class="category-colors">
+            <?php
+            if($product['colors']){
+                $colors = explode('|', $product['colors']);
+            foreach ($colors as $color){
+               echo "<li class='category-color'><span style='$color'></span></li>";
+            }
+        } ?>
             </ul>
           </div>
 
@@ -178,7 +180,7 @@ $products = array_map('decode_fast_info_json',$products);
                   <?php endif; ?>
                     </div>
 
-            </a>
+              </div>
            
         <?php endforeach ?>
               </div>

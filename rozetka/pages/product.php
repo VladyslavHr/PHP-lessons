@@ -17,7 +17,7 @@ $product_id = (int)$_GET['id'];
 <div class="product-page">
 <ul class="breadcrums">
    <li class="breadcrum-item home">
-        <a href="#" class="breadcrum-link">
+        <a href="?action=main" class="breadcrum-link">
         <?php include 'svg/home.svg' ?>
         </a>
     </li>
@@ -25,19 +25,19 @@ $product_id = (int)$_GET['id'];
            <?php include 'svg/breadcrum-arrow.svg' ?>
        </li>
     <li class="breadcrum-item">
-        <a href="#" class="breadcrum-link">Спорт и увлечения</a>
+        <a href="?action=category" class="breadcrum-link">Все товары</a>
     </li>
     <li class="breadcrum-devider">
            <?php include 'svg/breadcrum-arrow.svg' ?>
        </li>
     <li class="breadcrum-item">
-        <a href="#" class="breadcrum-link">Активный отдых, туризм и хобби</a>
+        <a href="#" class="breadcrum-link">Бренды</a>
     </li>
     <li class="breadcrum-devider">
            <?php include 'svg/breadcrum-arrow.svg' ?>
        </li>
     <li class="breadcrum-item">
-        <a href="#" class="breadcrum-link">Радиоуправляемые модели</a>
+        <a href="#" class="breadcrum-link">Samsung</a>
     </li>
     <li class="breadcrum-devider">
            <?php include 'svg/breadcrum-arrow.svg' ?>

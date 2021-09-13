@@ -23,7 +23,7 @@
                 <p>Бесплатная доставка весь год</p>
             </a>
     <ul class="left-menu-main-nav">
-                    <li><a href="#"><i class="bi bi-menu-button-fill"></i>Каталог товаров</a></li>
+                    <li><a href="?action=brands"><i class="bi bi-menu-button-fill"></i>Каталог товаров</a></li>
                     <li><a href="#"><i class="bi bi-cart3"></i>Корзина</a></li>
                     <li><a href="#"><i class="bi bi-signpost-2"></i>Сравнения</a></li>
                     <li><a href="#"><i class="bi bi-journal-text"></i>Справочный центр</a></li>

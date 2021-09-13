@@ -12,17 +12,22 @@
 
 set_time_limit(500);
 
-// $products = db_query("SELECT id,`url`,title FROM products WHERE title = '' LIMIT 400 ");
+$products = db_query("SELECT id,`url`,title FROM products WHERE `status` <> 'brand_parsed' LIMIT 300 ");
 
-// pa($products);
+pa($products);
 
-
-// foreach ($products as $key => $product){
-//     parse_product_update($product['url']);
-// }
-for ($page_num=1; $page_num <= 1; $page_num++){
-  parse_category_page($page_num);
+foreach ($products as $key => $product){
+    parse_product_update($product['url']);
 }
+
+
+
+// for ($page_num=1; $page_num <= 1; $page_num++){
+//   parse_category_page($page_num);
+// }
+
+parse_product_update($url = 'https://rozetka.com.ua/apple_mhda3/p260862296/');
+
 
 function parse_category_page($page_num){
 
@@ -56,7 +61,7 @@ function parse_category_page($page_num){
         $color_names = implode('|',  $color_names);
         $color_names = db_escape( $color_names);
       $product_exists = db_query("SELECT id FROM products WHERE `url` = '$url'");
-      if(!$product_exists){
+      if($product_exists){
         db_query("UPDATE  products SET colors = '$color_names' WHERE `url` = '$url' ");
       }
       }
@@ -299,6 +304,8 @@ $product_arr = [
     'card' => $card ?? '',
     'gallery' => $gallery ?? '',
     'fast_info' => json_encode($fast_info),
+    'brand_name' => $arr['brand']['name'] ?? '',
+    'brand_url' => $arr['brand']['url'] ?? '',
 
 ];
 
@@ -322,6 +329,8 @@ $gallery = db_escape($product_arr['gallery']);
 $fast_info = db_escape($product_arr['fast_info']);
 $url = db_escape($url);
 $card_title = '';
+$brand_name = db_escape($product_arr['brand_name']);
+$brand_url = db_escape($product_arr['brand_url']);
 if(isset($_FILES['card'])){
   $card_title = time() . '-' . $_FILES["card"]["name"];    
 move_uploaded_file($_FILES["card"]["tmp_name"], "cards/$card_title");
@@ -336,12 +345,14 @@ db_query("UPDATE products SET
   ends = '$ends',
   sku = '$sku',
   rating = '$rating',
-  `status` = '$status',
+  `status` = 'brand_parsed',
   `sell_status` = '$sell_status',
   reviews = '$reviews',
   questions = '$questions',
   `card` = '$card',
   gallery = '$gallery',
+  brand_name = '$brand_name',
+  brand_url = '$brand_url',
   fast_info = '$fast_info' WHERE `url` = '$url' ");
 
 }

@@ -103,20 +103,16 @@ $card = $product['card'] ? 'cards/'.$product['card'] : 'img/noimage.png';
                 </div>
 
 
+
                 <div class="tab-color-wrapper">
-            <ul class="tab-color">
-              <li class="tab-color-red">
-                    <span class="tab-color-red-content">.</span>
-              </li>
-              <li class="tab-color-yellow">
-                  <span class="tab-color-yellow-content">.</span>
-              </li>
-              <li class="tab-color-blue">
-                  <span class="tab-color-blue-content">.</span>
-              </li>
-              <li class="tab-color-green">
-                  <span class="tab-color-green-content">.</span>
-              </li>
+            <ul class="tab-colors">
+            <?php
+            if($product['colors']){
+                $colors = explode('|', $product['colors']);
+            foreach ($colors as $color){
+               echo "<li><span style='$color'></span></li>";
+            }
+        } ?>
             </ul>
           </div>
 
