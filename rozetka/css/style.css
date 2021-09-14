@@ -2227,9 +2227,12 @@ height: 40px;
 }
 
 .brand-content a:hover{
-    border: 1px solid rgba(67, 76, 82, 0.48);
+    text-decoration: underline 2px;
+    text-decoration-color: #00a046;
+    text-decoration-style: solid;
+    /* border: 1px solid rgba(67, 76, 82, 0.48);
     border-radius: 21%;
-    box-shadow: 0px 3px 8px 0px rgb(67 76 82 / 48%);
+    box-shadow: 0px 3px 8px 0px rgb(67 76 82 / 48%); */
     
 }
 
