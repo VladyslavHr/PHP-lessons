@@ -26,3 +26,30 @@ if(!defined('ROOT')){
   }else{
     $_SESSION['count'] ++;
   }
+
+
+  if(isset($_GET['favorite']) && auth_check()) {
+    $user_id = (int)auth_user('id');
+    if($_GET['favorite'] === 'add'){
+      $user_favs = db_query("SELECT favorites FROM users WHERE id = '$user_id'");
+      pa($user_favs);
+      $user_favs = $user_favs[0]['favorites'];
+      if($user_favs){
+        $user_favs = explode('|', $user_favs);
+        pa($user_favs);
+        $user_favs[] = $_GET['id'];
+        pa($user_favs);
+      }else{
+        $user_favs = [$_GET['id']];
+      }
+      $user_favs = implode('|', $user_favs);
+      $user_favs = db_escape($user_favs);
+      
+      db_query("UPDATE users SET favorites = '$user_favs' WHERE id = '$user_id' ");
+      
+    }
+    if($_GET['favorite'] === 'remove'){
+  
+    }
+    // redirect('?action=category');
+  }

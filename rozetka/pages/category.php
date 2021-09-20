@@ -1,31 +1,54 @@
 <?php if(!defined('ROOT')){ die('Direct request not allowed'); }?>
 <?php
 
+
+
+
+
+
+
+
+
+
+
 $sorting = $_GET['sorting'] ?? 'default';
 
 $offset = $_GET['offset'] ?? 0;
 $limit = $_GET['limit'] ?? 20;
 
-$total_count = db_query("SELECT count(*) FROM products");
+
+
+if(!empty($_GET['brand'])){
+  $brand_name = db_escape($_GET['brand']);
+  $where = "WHERE brand_name = '$brand_name'";
+}
+else{
+  $brand_name = '';
+  $where = '';
+}
+
+$total_count = db_query("SELECT count(*) FROM products $where");
 $total_count = $total_count ? $total_count[0]['count(*)'] : 0;
 
 
 if (!empty($_GET['sorting']) && $_GET['sorting'] === 'title'){
-  $products = db_query("SELECT * FROM products ORDER BY title LIMIT $limit OFFSET $offset ");
+  $order_by = 'ORDER BY title';
 
 }
 elseif (!empty($_GET['sorting']) && $_GET['sorting'] === 'price_asc'){
-  $products = db_query("SELECT * FROM products ORDER BY price LIMIT $limit OFFSET $offset ");
+  $order_by = 'ORDER BY price';
 }
 elseif (!empty($_GET['sorting']) && $_GET['sorting'] === 'price_desc'){
-  $products = db_query("SELECT * FROM products ORDER BY price DESC LIMIT $limit OFFSET $offset ");
+  $order_by = 'ORDER BY price DESC';
 }
 elseif (!empty($_GET['sorting']) && $_GET['sorting'] === 'rating'){
-  $products = db_query("SELECT * FROM products ORDER BY rating DESC LIMIT $limit OFFSET $offset ");
+  $order_by = 'ORDER BY rating DESC';
 }
 else{
-  $products = db_query("SELECT * FROM products LIMIT $limit OFFSET $offset ");
+  $order_by = '';
 }
+
+$products = db_query("SELECT * FROM products $where $order_by LIMIT $limit OFFSET $offset ");
 
 function decode_fast_info_json($product)
 {
@@ -33,6 +56,14 @@ function decode_fast_info_json($product)
     return $product;
 }
 $products = array_map('decode_fast_info_json',$products);
+
+
+  $user_id = (int)auth_user('id');
+  $user_favs = db_query("SELECT favorites FROM users WHERE id = '$user_id'");
+  $user_favs = $user_favs[0]['favorites'];
+  $user_favs = explode('|', $user_favs);
+
+
 
 ?>
 <div class="category">
@@ -61,7 +92,11 @@ $products = array_map('decode_fast_info_json',$products);
 </div>
     <div class="before-products">
         <div class="count">
-           Показано <?= $limit ?> товар<?= sklonenie($limit, '', 'а', 'ов') ?>
+          <?php
+            $amount = $limit < $total_count ? $limit : $total_count;
+          ?>
+           Показано <?= $amount  ?> товар<?= sklonenie($amount, '', 'а', 'ов') ?>.
+           <?= $brand_name ? "Бренд: <b>$brand_name</b>" : '' ?>
         </div>
         <div class="category-settings">
         <span class="category-settings-text">Товаров на странице</span>
@@ -100,8 +135,13 @@ $products = array_map('decode_fast_info_json',$products);
     </div>
     <div class="products" id="category_product_list">
       <?php foreach($products as $id => $product):   ?>
-        <div class="product" href="?action=product&tab=1&id=<?= $product['id'] ?>">
+        <div class="product">
             <div class="category-list-item-left">
+            <?php if(in_array($product['id'], $user_favs)): ?>
+                <a href="?action=category&id=<?= $product['id'] ?>&favorite=remove" class="heart"></a>
+              <?php else: ?>
+                <a href="?action=category&id=<?= $product['id'] ?>&favorite=add" class="heart heart-empty"></a>
+              <?php endif; ?>
               <a class="category-product-image" href="?action=product&tab=1&id=<?= $product['id'] ?>">
                 <img class="image-main" src="<?= get_product_image_src($product) ?>" alt="" >
                 <img class="image-hover" src="<?= get_gallery_image_src($product) ?>" alt="" >

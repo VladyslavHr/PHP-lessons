@@ -23,7 +23,7 @@ if(!defined('ROOT')){
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
   </head>
-  <body>
+  <body class="<?= $_GET['action'] ?? '' ?>">
 <div class="header">
       <div class="top-banner">
         <img src="img/top-banner.jpg" alt="" title="Модный взрыв" />
@@ -93,6 +93,9 @@ if(!defined('ROOT')){
             </g>
           </svg>
       </a>
+        <div class="favorites-page">
+          <a href="?action=favorites"><?php include 'svg/heart-empty.svg'?></a>
+        </div>
         <div class="top-icons">
           <div class="counter">
             <?= isset($_SESSION['count']) ? $_SESSION['count'] : '' ?>

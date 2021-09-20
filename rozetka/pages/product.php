@@ -1,6 +1,8 @@
 <?php if(!defined('ROOT')){ die('Direct request not allowed'); }?>
 <pre>
 <?php 
+
+
 $product_id = (int)$_GET['id'];
  $product = db_query("SELECT * FROM products WHERE id = $product_id");
  $product = $product[0];
@@ -12,6 +14,16 @@ $product_id = (int)$_GET['id'];
 // // print_r($similar_products);
 // // print_r($product);
 // // $title = $product['title']
+if(!isset($_SESSION['viewed'])) $_SESSION['viewed'] = [];
+if(!in_array($product_id, $_SESSION['viewed'])) $_SESSION['viewed'][] = $product_id;
+if(count($_SESSION['viewed']) > 8){
+    $_SESSION['viewed'] = array_slice($_SESSION['viewed'], count($_SESSION['viewed']) - 8);
+} 
+
+
+// pa($_SESSION['viewed']);
+
+
 ?>
 </pre>
 <div class="product-page">
@@ -31,26 +43,13 @@ $product_id = (int)$_GET['id'];
            <?php include 'svg/breadcrum-arrow.svg' ?>
        </li>
     <li class="breadcrum-item">
-        <a href="#" class="breadcrum-link">Бренды</a>
+        <a href="?action=brands" class="breadcrum-link">Бренды</a>
     </li>
     <li class="breadcrum-devider">
            <?php include 'svg/breadcrum-arrow.svg' ?>
        </li>
     <li class="breadcrum-item">
-        <a href="#" class="breadcrum-link">Samsung</a>
-    </li>
-    <li class="breadcrum-devider">
-           <?php include 'svg/breadcrum-arrow.svg' ?>
-       </li>
-    <li class="breadcrum-item">
-        <a href="#" class="breadcrum-link">Квадрокоптеры</a>
-    </li>
-    <li class="breadcrum-devider">
-           <?php include 'svg/breadcrum-arrow.svg' ?>
-       </li>
-    <li class="breadcrum-item">
-        <a href="#" class="breadcrum-link">Квадрокоптеры Visuo
-</a>
+        <a href="?action=category&brand=<?= $product['brand_name']?>" class="breadcrum-link"><?= $product['brand_name']?></a>
     </li>
 
 </ul>
@@ -172,6 +171,62 @@ $product_id = (int)$_GET['id'];
     </div>
             <?php endforeach; ?>    
 </div>
+
+
+<h2 class="recommend">Просмотренные товары</h2>
+<div class="recommend-products-wrapper">
+    <?php 
+        $viewed = $_SESSION['viewed'];
+        $viewed = array_reverse($viewed);
+        $viewed = implode(',', $viewed);
+        $products = db_query("SELECT * FROM products WHERE id IN($viewed) LIMIT 8");
+        foreach($products as $product_r): 
+        $reviews = $product_r['reviews'];
+    ?>
+    <div class="recommend-product-wrap">
+       <div class="recommend-product">
+                <a href="?<?= 'action=product&tab=1&id=' . $product_r['id'] ?>" class = "recommend-product-title">
+                    <img 
+                        src="<?= get_product_image_src($product_r) ?>"
+                        alt=""
+                    />
+                    <?= $product_r['title'] ?>
+                    <?php
+                    if(auth_admin()){
+                        echo "[$product_r[id]]";
+                    }
+
+                    ?>
+                </a>             
+              
+            <?php if(isset($product_r['old_price'])): ?>
+                <div class="old-price"><?= $product_r['old_price'] ?> ₴ </div>
+            <?php else: ?>
+                <div class="old-price no-style">&nbsp;</div>
+            <?php endif; ?>
+                <div class="price"><?php echo $product_r[ 'price'] ?> ₴ </div>
+            <?php if($product_r['rating']):?>
+                <div class="rating"><?= $product_r['rating'] ?></div>
+            <?php else: ?>
+                <div></div>
+            <?php endif; ?> 
+            <?php if($reviews):?>   
+                <div class="reviews"> <a href="#"><?= $reviews ?> Отзыв<?= sklonenie($reviews, '', 'а', 'ов') ?></a></div>
+            <?php else: ?>
+                <div class="leave-reviwe"><a href="#">Оставить отзыв</a></div>
+            <?php endif; ?>    
+            <?php if($product_r['ends']): ?>
+                <div class="is-over">Заканчивается</div>
+            <?php else: ?>
+                <div class="is-over">&nbsp;</div>
+            <?php endif; ?>
+       </div>
+    </div>
+            <?php endforeach; ?>    
+</div>
+
+
+
 
 
 </div>

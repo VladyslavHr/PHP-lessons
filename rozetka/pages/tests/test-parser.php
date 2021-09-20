@@ -12,19 +12,19 @@
 
 set_time_limit(500);
 
-$products = db_query("SELECT id,`url`,title FROM products WHERE `status` <> 'brand_parsed' LIMIT 300 ");
+// $products = db_query("SELECT id,`url`,title FROM products WHERE `status` <> 'brand_parsed' LIMIT 300 ");
 
-pa($products);
+// pa($products);
 
-foreach ($products as $key => $product){
-    parse_product_update($product['url']);
-}
-
-
-
-// for ($page_num=1; $page_num <= 1; $page_num++){
-//   parse_category_page($page_num);
+// foreach ($products as $key => $product){
+//     parse_product_update($product['url']);
 // }
+
+
+
+for ($page_num=1; $page_num <= 1; $page_num++){
+  parse_category_page($page_num);
+}
 
 parse_product_update($url = 'https://rozetka.com.ua/apple_mhda3/p260862296/');
 
@@ -65,6 +65,12 @@ function parse_category_page($page_num){
         db_query("UPDATE  products SET colors = '$color_names' WHERE `url` = '$url' ");
       }
       }
+
+
+      // $rating_svg = $product->find('.goods-tile__stars svg', 0);
+      // if($rating_svg){
+      //   pa($rating_svg->attr['arial-label']);
+      // }
 
 
       // parse_product($product->href);

@@ -1,18 +1,8 @@
 <?php if(!defined('ROOT')){ die('Direct request not allowed'); }?>
-<?php $result_arr = array_filter($similar_products, function($product)
-{
-        $position = stripos($product['title'], $_GET['query']);
-        $position2 = stripos(@$product['sku'], $_GET['query']);
-         if($position === false && $position2 === false ){
-            return false;
-         }else{
-            return true;
-         }
-       
-    
+<?php 
 
-
-});
+$query = db_escape($_GET['query']);
+$result_arr = db_query("SELECT * FROM products WHERE title like '%$query%' ");
 $count = count($result_arr);
 
 
@@ -44,22 +34,22 @@ $count = count($result_arr);
 
 
       <div class="products">
-          <?php foreach($result_arr as $id => $product): 
+          <?php foreach($result_arr as $product): 
 
 
             ?>
           <div class="product-wrapper">    
             <div class="product">
-              <?php if($product['fav']): ?>
+              <?php if($product['favorite']): ?>
               <div class="heart"></div>
               <?php else: ?>
                 <div class="heart heart-empty"></div>
               <?php endif; ?>
+              <a href="?action=product&tab=1&id=<?= $product['id'] ?>">
               <img
-                src="https://content.rozetka.com.ua/goods/images/preview/100267119.jpg"
-                alt=""
-              />
-              <a href="?action=product&tab=1&id=<?= $id ?>" class = "product-title">
+                src="<?= get_product_image_src($product) ?>" alt=""/>
+              </a>
+              <a href="?action=product&tab=1&id=<?= $product['id'] ?>" class = "product-title">
               <?= $product['title'] ?>
               </a>
              
