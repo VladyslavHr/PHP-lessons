@@ -14,7 +14,7 @@ $brands = array_column($brands, 'brand_name');
 ?>
 
 <div class="brands-wrapp">
-    <div class="brands">
+    <div class="brands-block">
             <div class="brands-letter"><?= first_letter($brands[0]) ?></div>
                 <div class="brands-list">
                     <ul class="brand-content">
@@ -25,7 +25,7 @@ $brands = array_column($brands, 'brand_name');
                               echo  '</ul>
                                 </div>
                             </div>  
-                            <div class="brands">
+                            <div class="brands-block">
                                <div class="brands-letter">'.first_letter($brand).'</div>
                                     <div class="brands-list">
                                         <ul class="brand-content">';

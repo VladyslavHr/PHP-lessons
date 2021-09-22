@@ -2,7 +2,7 @@
 if(!defined('ROOT')){
     die('Direct request not allowed');
   }
-  session_start();
+  
 
   if (isset($_POST['login']) && isset($_POST['email']) && isset($_POST['password'])){
 
@@ -30,15 +30,14 @@ if(!defined('ROOT')){
 
   if(isset($_GET['favorite']) && auth_check()) {
     $user_id = (int)auth_user('id');
+    $user_favs = db_get_row("SELECT favorites FROM users WHERE id = '$user_id'");
+    $user_favs = $user_favs['favorites'];
     if($_GET['favorite'] === 'add'){
-      $user_favs = db_query("SELECT favorites FROM users WHERE id = '$user_id'");
-      pa($user_favs);
-      $user_favs = $user_favs[0]['favorites'];
+      
+      // pa($user_favs);
       if($user_favs){
         $user_favs = explode('|', $user_favs);
-        pa($user_favs);
         $user_favs[] = $_GET['id'];
-        pa($user_favs);
       }else{
         $user_favs = [$_GET['id']];
       }
@@ -49,7 +48,23 @@ if(!defined('ROOT')){
       
     }
     if($_GET['favorite'] === 'remove'){
-  
+      if($user_favs){
+        $user_favs = explode('|', $user_favs);
+        $user_favs = array_flip($user_favs); // меняем местами ключи и значения
+        unset($user_favs[$_GET['id']]); //удаляем элемент масива
+        $user_favs = array_flip($user_favs); 
+        $user_favs = implode('|', $user_favs);
+        $user_favs = db_escape($user_favs);
+        db_query("UPDATE users SET favorites = '$user_favs' WHERE id = '$user_id' ");
+      }else{
+        // $user_favs = [$_GET['id']];
+      }
     }
-    // redirect('?action=category');
+    redirect(query_del(['id', 'favorite']));
   }
+
+  if(isset($_GET['action']) && $_GET['action'] === 'favorites' && !auth_check()) {
+    redirect('index.php');
+  }
+
+

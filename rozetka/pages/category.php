@@ -58,10 +58,7 @@ function decode_fast_info_json($product)
 $products = array_map('decode_fast_info_json',$products);
 
 
-  $user_id = (int)auth_user('id');
-  $user_favs = db_query("SELECT favorites FROM users WHERE id = '$user_id'");
-  $user_favs = $user_favs[0]['favorites'];
-  $user_favs = explode('|', $user_favs);
+
 
 
 
@@ -137,11 +134,7 @@ $products = array_map('decode_fast_info_json',$products);
       <?php foreach($products as $id => $product):   ?>
         <div class="product">
             <div class="category-list-item-left">
-            <?php if(in_array($product['id'], $user_favs)): ?>
-                <a href="?action=category&id=<?= $product['id'] ?>&favorite=remove" class="heart"></a>
-              <?php else: ?>
-                <a href="?action=category&id=<?= $product['id'] ?>&favorite=add" class="heart heart-empty"></a>
-              <?php endif; ?>
+              <?php product_heart($product) ?>
               <a class="category-product-image" href="?action=product&tab=1&id=<?= $product['id'] ?>">
                 <img class="image-main" src="<?= get_product_image_src($product) ?>" alt="" >
                 <img class="image-hover" src="<?= get_gallery_image_src($product) ?>" alt="" >

@@ -47,11 +47,7 @@
             ?>
           <div class="product-wrapper">    
             <div class="product">
-              <?php if($product['favorite']): ?>
-              <div class="heart"></div>
-              <?php else: ?>
-                <div class="heart heart-empty"></div>
-              <?php endif; ?>
+            <?php product_heart($product) ?>
               <img
                 src="<?= get_product_image_src($product) ?>"
                 alt=""

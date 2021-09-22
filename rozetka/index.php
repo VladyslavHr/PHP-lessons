@@ -1,5 +1,6 @@
 <?php 
 define('ROOT',__DIR__);
+session_start();
 require_once 'vendor/autoload.php';
 include 'classes/DB.class.php';
 include 'classes/simple_html_dom.php';

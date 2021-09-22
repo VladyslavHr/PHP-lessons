@@ -21,6 +21,13 @@ function db_query($query){
     }
 }
 
+function db_get_row($query)
+{
+    $res = db_query($query);
+    if($res) return $res[0];
+    return[];
+}
+
 function db_escape($string)
 {
     return DB::getInstance()->escape($string);
@@ -256,10 +263,18 @@ function in_range($number, $min, $max)
     return $number;
 }
 
-function query_add($values = [])
+function query_add($params = [])
 {
-    $new_array = array_merge($_GET, $values);
+    $new_array = array_merge($_GET, $params);
     return '?' . http_build_query($new_array);
+}
+
+function query_del($params)
+{
+    foreach($params as $param){
+        if(isset($_GET[$param])) unset($_GET[$param]);
+    }
+    return '?' . http_build_query($_GET);
 }
 
 function if_selected($name, $value)
@@ -415,4 +430,25 @@ function edit_product_link($product_id)
 function first_letter($string)
 {
     return substr($string, 0, 1);
+}
+
+if(auth_check()){
+    $user_id = (int)auth_user('id');
+    $user_favs_g = db_query("SELECT favorites FROM users WHERE id = '$user_id'");
+    $user_favs_g = $user_favs_g[0]['favorites'];
+    $user_favs_g = explode('|', $user_favs_g);
+  }else{
+    $user_favs_g = [];
+  }
+
+function product_heart(&$product)
+{
+    global $user_favs_g;
+     if(auth_check()): 
+         if(in_array($product['id'], $user_favs_g)): ?>
+            <a href="<?= query_add(['id' => $product ['id'], 'favorite' => 'remove']) ?>" class="heart"></a>
+          <?php else: ?>
+            <a href="<?= query_add(['id' => $product ['id'], 'favorite' => 'add']) ?>" class="heart heart-empty"></a>
+          <?php endif;
+           endif; 
 }
