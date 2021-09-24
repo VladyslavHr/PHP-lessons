@@ -113,13 +113,13 @@ function auth_user($key = false)
     return $_SESSION['user'];
 }
 
-function get_random_img_src()
-{
-    global $images_arr;
-    $count = count($images_arr);
-    $random_index = random_int(0, $count - 1);
-    return $images_arr[$random_index];
-}
+// function get_random_img_src()
+// {
+//     global $images_arr;
+//     $count = count($images_arr);
+//     $random_index = random_int(0, $count - 1);
+//     return $images_arr[$random_index];
+// }
 
 function sklonenie($count, $p1, $p2, $p3)
 {
@@ -451,4 +451,15 @@ function product_heart(&$product)
             <a href="<?= query_add(['id' => $product ['id'], 'favorite' => 'add']) ?>" class="heart heart-empty"></a>
           <?php endif;
            endif; 
+}
+
+function cart_items_count ()
+{
+    $count = 0;
+    if(is_array($_SESSION['cart']['items'])) {
+        foreach ($_SESSION['cart']['items'] as $cart_item_count) {
+            $count = $count + $cart_item_count;
+        }
+    }
+    return $count;
 }

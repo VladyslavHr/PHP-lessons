@@ -166,8 +166,12 @@ $products = array_map('decode_fast_info_json',$products);
                 <?php else: ?>
                   <div class="old-price no-style">&nbsp;</div>
                     <?php endif; ?>
-            <div class="price"><?php echo $product[ 'price'] ?> ₴ </div>
-            
+            <div class="category-price-cart">
+                <div class="price"><?php echo $product[ 'price'] ?> ₴ </div>
+                <div class="category-add-cart">
+                  <a href="<?= query_add(['add_to_cart' => 1, 'product_id' => $product['id']])?>"><?= include "svg/bootstrap/cart4.svg"?></a>
+                </div>
+            </div>
         <div class="category-status">
         <?php if($product['sell_status'] === 'available'): ?>
                 <div class="available">

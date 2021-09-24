@@ -119,6 +119,7 @@ $card = $product['card'] ? 'cards/'.$product['card'] : 'img/noimage.png';
 
                 <!-- <div class="sprite"></div> -->
                 <div class="product-about">
+                    <!-- <?php pa($_SESSION['cart']) ?> -->
                     <div class="trade">
                     <div class="price">
                         <?php if(!$product['old_price'] || $product['old_price'] === $product['price']): ?>
@@ -130,9 +131,9 @@ $card = $product['card'] ? 'cards/'.$product['card'] : 'img/noimage.png';
                         <?php endif; ?>
 
                         </div>
-                        <div class="add-to-cart">
+                        <a href="<?= query_add(['add_to_cart' => 1, 'product_id' => $product['id']])?>" class="add-to-cart">
                         <?php include 'svg/cart.svg' ?>   
-                        Купить</div>
+                        Купить</a>
                         <div class="buy-credit">Купить в кредит</div>
                         <div class="compare">
                             <?php include 'svg/icon-compare.svg'?>

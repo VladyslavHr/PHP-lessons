@@ -63,8 +63,28 @@ if(!defined('ROOT')){
     redirect(query_del(['id', 'favorite']));
   }
 
+  // не пускаем неавторизованных на page = favorites
   if(isset($_GET['action']) && $_GET['action'] === 'favorites' && !auth_check()) {
     redirect('index.php');
   }
 
 
+  if(isset($_GET['add_to_cart'])) {
+    if(!isset($_SESSION['cart']['items'])){
+      $_SESSION['cart'] = [
+        'items' =>[
+          // 55 => 2,
+          // 12 => 4,
+        ],
+        // 'total_sum' = 0,
+      ];
+    }
+    $product_id = (int)$_GET['product_id'];
+    $product_qtt = (int)$_GET['add_to_cart']; //1
+    if(isset( $_SESSION['cart']['items'][$product_id])){
+      $_SESSION['cart']['items'][$product_id] = $_SESSION['cart']['items'][$product_id] + $product_qtt;
+    }else{
+      $_SESSION['cart']['items'][$product_id] = $product_qtt;
+    }
+    redirect(query_del(['add_to_cart', 'prduct_id']));
+  }
