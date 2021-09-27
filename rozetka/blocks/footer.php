@@ -1,10 +1,14 @@
+
+</div> <!--  main-conten-wrapper -->
 <footer>
-<div class="footer-head">
-	<div class="caption">Скачивайте наше приложение</div>
-	<div class="apps">
-	<a target="_blank" href="https://play.google.com/store/apps/details/?id=ua.com.rozetka.shop&amp;referrer=utm_source%3Dfullversion%26utm_medium%3Dsite%26utm_campaign%3Dfullversion"><img src="svg/button-google-play-ru.svg" alt=""></a>
-	<a target="_blank" href="https://itunes.apple.com/app/apple-store/id740469631/?pt=3132803&amp;ct=fullversion&amp;at=1000l3MB&amp;mt=8"><img src="svg/button-appstore-ru.svg" alt="">  </a>	
-</div>
+<div class="footer-head-wrapper">
+	<div class="footer-head">
+		<div class="caption">Скачивайте наше приложение</div>
+		<div class="apps">
+		<a target="_blank" href="https://play.google.com/store/apps/details/?id=ua.com.rozetka.shop&amp;referrer=utm_source%3Dfullversion%26utm_medium%3Dsite%26utm_campaign%3Dfullversion"><img src="svg/button-google-play-ru.svg" alt=""></a>
+		<a target="_blank" href="https://itunes.apple.com/app/apple-store/id740469631/?pt=3132803&amp;ct=fullversion&amp;at=1000l3MB&amp;mt=8"><img src="svg/button-appstore-ru.svg" alt="">  </a>	
+	</div>
+	</div>
 </div>
 
 <div class="footer-body-wrap">
@@ -54,14 +58,16 @@
 	</div>
 
  </div>
- <div class="footer-bottom">
-	 <button class="footer-payment-master" type="button">
-	 <img src="https://xl-static.rozetka.com.ua/assets/img/design/mastercard-logo.svg" alt="">
-	 </button>
-	 <button class="footer-payment-visa" type="button">
-	 <img src="https://xl-static.rozetka.com.ua/assets/img/design/visa-logo.svg" alt="">
-	 </button>
- </div>
+	
+			<div class="footer-bottom">
+				<button class="footer-payment-master" type="button">
+				<img src="https://xl-static.rozetka.com.ua/assets/img/design/mastercard-logo.svg" alt="">
+				</button>
+				<button class="footer-payment-visa" type="button">
+				<img src="https://xl-static.rozetka.com.ua/assets/img/design/visa-logo.svg" alt="">
+				</button>
+			</div>
+	
 </div>
 
 </footer>

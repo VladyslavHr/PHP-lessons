@@ -45,6 +45,7 @@ if(!defined('ROOT')){
       $user_favs = db_escape($user_favs);
       
       db_query("UPDATE users SET favorites = '$user_favs' WHERE id = '$user_id' ");
+      flash_alert($type = 'success', $message = 'Товар добавлен в избранное');
       
     }
     if($_GET['favorite'] === 'remove'){
@@ -56,6 +57,7 @@ if(!defined('ROOT')){
         $user_favs = implode('|', $user_favs);
         $user_favs = db_escape($user_favs);
         db_query("UPDATE users SET favorites = '$user_favs' WHERE id = '$user_id' ");
+        flash_alert($type = 'warning', $message = 'Товар удален из избранных');
       }else{
         // $user_favs = [$_GET['id']];
       }
@@ -86,5 +88,16 @@ if(!defined('ROOT')){
     }else{
       $_SESSION['cart']['items'][$product_id] = $product_qtt;
     }
+    flash_alert($type = 'success', $message = 'Товар добавлен в корзину');
     redirect(query_del(['add_to_cart', 'prduct_id']));
+  }
+
+
+
+
+  if(isset($_GET['remove_from_cart'])){
+    $product_id = (int)$_GET['remove_from_cart'];
+    if(isset($_SESSION['cart']['items'][$product_id])) unset($_SESSION['cart']['items'][$product_id]);
+    flash_alert($type = 'warning', $message = 'Товар удален из корзины');
+    redirect(query_del(['remove_from_cart']));
   }

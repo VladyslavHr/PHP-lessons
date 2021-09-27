@@ -329,7 +329,7 @@ function alert($type, $message)
     return
     '<div class="alert alert-' . $type . ' alert-dismissible fade show" role="alert">
       ' . $message . '
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">Close</button>
     </div>';
 }
 
@@ -456,10 +456,31 @@ function product_heart(&$product)
 function cart_items_count ()
 {
     $count = 0;
-    if(is_array($_SESSION['cart']['items'])) {
+    if(isset($_SESSION['cart']['items']) && is_array($_SESSION['cart']['items'])) {
         foreach ($_SESSION['cart']['items'] as $cart_item_count) {
             $count = $count + $cart_item_count;
         }
     }
     return $count;
 }
+
+function cart_item_count (&$product)
+{
+    if(isset($_SESSION['cart']['items']) && is_array($_SESSION['cart']['items']) && isset($_SESSION['cart']['items'][$product['id']])) {
+        return $_SESSION['cart']['items'][$product['id']];
+    }
+    return '';
+}
+
+function in_the_cart(&$product)
+{
+    if(isset($_SESSION['cart']['items']) && is_array($_SESSION['cart']['items']) && isset($_SESSION['cart']['items'][$product['id']]))
+    {
+        return '<div class="in-the-cart">в корзине</div>' ;
+    }
+    return '';
+}
+
+
+// стилизировать кнопку алерт. числа возле корзины , стилизация страницы корзина
+

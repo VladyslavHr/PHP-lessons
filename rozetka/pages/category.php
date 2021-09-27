@@ -169,7 +169,16 @@ $products = array_map('decode_fast_info_json',$products);
             <div class="category-price-cart">
                 <div class="price"><?php echo $product[ 'price'] ?> ₴ </div>
                 <div class="category-add-cart">
-                  <a href="<?= query_add(['add_to_cart' => 1, 'product_id' => $product['id']])?>"><?= include "svg/bootstrap/cart4.svg"?></a>
+                  <a class="in-the-cart-add" href="<?= query_add(['add_to_cart' => 1, 'product_id' => $product['id']])?>"><?php include "svg/bootstrap/cart4.svg"?>
+                        <span class="in-the-cart-count"><?= cart_item_count($product) ?></span>
+                        <span class="in-the-cart-desc"><?= in_the_cart($product) ?></span>
+                      <?php if  (cart_item_count($product)) :?>
+                        <div class="cart-add-check">
+                          <?php include "svg/bootstrap/check-lg.svg" ?>
+                        </div>
+                        <?php else: ?>
+                        <?php endif ?>
+                  </a>
                 </div>
             </div>
         <div class="category-status">
