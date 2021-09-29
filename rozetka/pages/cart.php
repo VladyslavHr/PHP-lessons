@@ -12,6 +12,13 @@ if(is_array($_SESSION['cart']['items']) && $_SESSION['cart']['items']){
     $products = [];
 }
 
+function decode_fast_info_json($product)
+{
+    $product['price_formated'] = number_format( $product[ 'price'], 0, '', ' ');
+    $product['old_price_formated'] = number_format( $product[ 'old_price'], 0, '', ' ');
+    return $product;
+}
+$products = array_map('decode_fast_info_json',$products);
 
 
 
@@ -46,14 +53,13 @@ foreach($products as $product):   ?>
             <div class="old-price no-style">&nbsp;</div>
             <?php endif; ?>
             <div class="price">
-                <div class="price-per-one"><?php echo (int)$product[ 'price'] ?> ₴ </div>
+                <div class="price-per-one"><?php echo $product[ 'price_formated'] ?> ₴ </div>
                 <div class="items-count input-group mb-3">
-                    <button class="btn btn-outline-secondary" type="button"><?php include 'svg/bootstrap/dash-lg.svg'?></button>
-                    <span name="cart-items"><?= $cart_items[$product['id']] ?></span>
-                    <input type="number" name="cart-items" class="form-control" placeholder="" aria-label="Example text with two button addons">
-                    <button class="btn btn-outline-secondary" type="button"><?php include 'svg/bootstrap/plus-lg.svg'?></button>
+                    <a href="<?= query_add(['cart_item_qtty_minus' => $product['id']] )?>" class="btn btn-outline-secondary" ><?php include 'svg/bootstrap/dash-lg.svg'?></a>
+                    <input class="cart-item-qtty" type="number" name="cart-items" value="<?= $cart_items[$product['id']] ?>" placeholder="" aria-label="Example text with two button addons">
+                    <a href="<?= query_add(['cart_item_qtty_plus' => $product['id']] )?>" class="btn btn-outline-secondary" ><?php include 'svg/bootstrap/plus-lg.svg'?></a>
                 </div>
-                <div class="price-per-all"><?= $product_sum = $product[ 'price'] * $cart_items[$product['id']]; ?> ₴</div>
+                <div class="price-per-all"><?= thousands($product_sum = $product[ 'price'] * $cart_items[$product['id']])  ?> ₴</div>
             </div>
                 <div class="fav-and-del">
                     <?php product_heart($product) ?>
@@ -73,8 +79,8 @@ foreach($products as $product):   ?>
     </div>
     <div class="cart-summary-right">
         <div class="cart-total">
-            <div class="total-sum"><?= $total_sum ?> UAH</div>
-            <a href="#" class="checkout">Оформить заказ</a>
+            <div class="total-sum"><?= thousands($total_sum) ?> UAH</div>
+            <a href="?action=checkout" class="checkout">Оформить заказ</a>
         </div>
     </div>
 </div>

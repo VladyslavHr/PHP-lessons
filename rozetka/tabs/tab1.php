@@ -176,19 +176,34 @@ $card = $product['card'] ? 'cards/'.$product['card'] : 'img/noimage.png';
             </div>
                         <div class="reviews">
                             <h2>Отзывы покупателей</h2>
+                            <form action="<?= query_add(['add_product_comment' => $product['id']]) ?>" class="reviews-form" method="POST">
+                                <input class="author" type="text" name="author">
+                                <select class="rating" name="rating" id="">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <button class="submit" type="submit">Отправить</button>
+                                <textarea class="comment" name="comment" id="" cols="30" rows="10"></textarea>
+                                
+                            </form>
+                            <?php 
+                                $reviews = db_query("SELECT * FROM reviews WHERE product_id = '$product[id]'");
+                                foreach ($reviews as $key => $review):
+                            
+                            ?>
                             <div class="review-block">
-                                <div class="review-head">Ivan Ivanov <span class="date"><i class="bi bi-clock"></i> 15 june 2020</span></div>
-                                <div class="review-body">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae doloribus explicabo tempora doloremque eius, omnis et nemo a natus pariatur est cupiditate ducimus! Cumque eum id et perferendis, voluptas aut!</div>
+                                <div class="review-head"><?= $review['author'] ?> <?= $review['rating'] ?> <span class="date"><i class="bi bi-clock"></i> <?= $review['created_at']?></span></div>
+                                <div class="review-body">
+                                    <?= $review ['comment'] ?>
+                                </div>
                             </div>
-                            <div class="review-block">
-                                <div class="review-head">Ivan Ivanov <span class="date"><i class="bi bi-clock"></i> 15 june 2020</span></div>
-                                <div class="review-body">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae doloribus explicabo tempora doloremque eius, omnis et nemo a natus pariatur est cupiditate ducimus! Cumque eum id et perferendis, voluptas aut!</div>
-                            </div>
-                            <div class="review-block">
-                                <div class="review-head">Ivan Ivanov <span class="date"><i class="bi bi-clock"></i> 15 june 2020</span></div>
-                                <div class="review-body">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae doloribus explicabo tempora doloremque eius, omnis et nemo a natus pariatur est cupiditate ducimus! Cumque eum id et perferendis, voluptas aut!</div>
-                            </div>
+                            <?php endforeach ?>
                         </div>
+                        
+
                  </div>
     
 

@@ -101,3 +101,38 @@ if(!defined('ROOT')){
     flash_alert($type = 'warning', $message = 'Товар удален из корзины');
     redirect(query_del(['remove_from_cart']));
   }
+
+  if(isset($_GET['cart_item_qtty_minus'])) {
+    $product_id = (int)$_GET['cart_item_qtty_minus'];
+    if(isset($_SESSION['cart']['items'][$product_id])){
+      if( $_SESSION['cart']['items'][$product_id] < 2){
+        unset($_SESSION['cart']['items'][$product_id]);
+      }else{
+        $_SESSION['cart']['items'][$product_id] -= 1;
+        // $_SESSION['cart']['items'][$product_id] -- ;
+      }
+    }
+    
+    redirect(query_del(['cart_item_qtty_minus']));
+  }
+
+  if(isset($_GET['cart_item_qtty_plus'])) {
+    $product_id = (int)$_GET['cart_item_qtty_plus'];
+    if(isset($_SESSION['cart']['items'][$product_id])){
+        $_SESSION['cart']['items'][$product_id] += 1;
+        // $_SESSION['cart']['items'][$product_id] -- ;
+      }
+    
+    redirect(query_del(['cart_item_qtty_plus']));
+  }
+
+  if(isset($_GET['add_product_comment']))
+  {
+    $product_id = (int)$_GET['add_product_comment'];
+    $author = db_escape($_POST['author']);
+    $rating = db_escape($_POST['rating']);
+    $comment = db_escape($_POST['comment']);
+    db_query("INSERT INTO reviews SET product_id = '$product_id', author = '$author', rating = '$rating', comment = '$comment', created_at = now()");
+    flash_alert($type = 'success', $message = 'Отзыв успешно добавлен');
+    redirect(query_del(['add_product_comment']));
+  }

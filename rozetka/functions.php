@@ -481,6 +481,10 @@ function in_the_cart(&$product)
     return '';
 }
 
+function thousands($number)
+{
+    return number_format( $number, 0, '', ' ');
+}
 
 // стилизировать кнопку алерт. числа возле корзины , стилизация страницы корзина
 

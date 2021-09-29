@@ -53,6 +53,8 @@ $products = db_query("SELECT * FROM products $where $order_by LIMIT $limit OFFSE
 function decode_fast_info_json($product)
 {
     $product['fast_info'] = json_decode($product['fast_info'], true);
+    $product['price'] = number_format( $product[ 'price'], 0, '', ' ');
+    $product['old_price'] = number_format( $product[ 'old_price'], 0, '', ' ');
     return $product;
 }
 $products = array_map('decode_fast_info_json',$products);
