@@ -2879,25 +2879,6 @@ height: 40px;
     width: 90%;
 }
 
-.checkout-delivery-type li,
-.checkout-payment-method li{
-    display: flex;
-    align-items: center;
-    padding: 15px 0 15px 0;
-}
-
-.checkout-delivery-price{
-    display: inline-block;
-    text-align: end;
-}
-
-
-.checkout-delivery-price li{
-    padding: 15px 0 15px 0;
-    color: var(--rozetkaGreen);
-    font-size: 18px;
-}
-
 .checkout-payment-method input,
 .checkout-delivery-type input{
     height: 20px;
@@ -2914,12 +2895,12 @@ height: 40px;
 .checkout-total{
     display: inline-block;
     position: fixed;
-    top: 30%;
+    top: 186px;
     right: 8%;
     background: #efebeb;
     border-radius: 5px;
     padding: 0px 5px 15px 15px;
-    width: 14%;
+    width: 260px;
 }
 
 .checkout-total h4{
@@ -3025,29 +3006,158 @@ height: 40px;
 
 }
 
+.delivery-input{
+    display: none;
+}
 
+.delivery-block{
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #eaeaea;
+    padding: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
 
+.delivery-radio{
+    display: block;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #d2d2d2;
+    border-radius: 50%;
+    box-shadow: 0 0 0 5px #fff;
+    background: #fff;
+    margin-right: 15px;
+    align-items: center;
+}
 
+.delivery-input:checked + .delivery-block{
+    border-color: var(--rozetkaGreen);
+}
 
+.delivery-input:checked + .delivery-block .delivery-radio{
+    background-color: var(--rozetkaGreen);
+}
 
+.delivery-block .delivery-adress{
+    display: none;
+    width: 100%;
+    margin-top: 10px;
+}
 
+.delivery-block .delivery-adress textarea{
+    width: 100%;
+    border-color: #eee;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
 
+.delivery-block .delivery-adress textarea:focus-visible{
+    border: 1px solid var(--rozetkaGreen);
+    outline: 0;
+}
 
+.delivery-input:checked + .delivery-block .delivery-adress{
+    display: block;
+    
+}
 
+.delivery-free{
+    margin-left: auto;
+    font-size: 20px;
+    color: var(--rozetkaGreen);
+}
 
+.produscts-with-sidebar{
+    display: flex;
+}
 
+.sidebar-filtr{
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+    max-width: 250px;
+}
 
+.category-brands-filtr,
+.category-price-filtr{
+    padding: 10px;
+    border-bottom: 1px solid #eaeaea;
+}
 
+.filtr-brands-input{
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid var(--rozetkaGreen);
+}
 
+.filtr-brands-input:focus-visible{
+    border-color: var(--rozetkaGreen);
+    border-radius: 4px;
+    outline: none;
+}
 
+.category-filtr-list{
+    display: block;
+    list-style: none;
+    padding: 0;
+}
 
+.category-filtr-schedule{
+    margin: 10px 0 10px 0;
+}
 
+.filtr-link{
+    color: #343030;
+}
 
+.category-price-filtr-input-wrap{
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+}
 
+.category-price-filtr-input-wrap input{
+    width: 60px;
+    height: 30px;
+}
 
+.category-price-filtr-input-wrap span{
+    margin: 0px 10px 0px 10px;
+    font-size: 15px;
+    color: #a6a5a5;
+}
 
+.category-price-filtr-input-wrap button{
+    height: 30px;
+    width: 45px;
+    margin-left: 15px;
+    border: none;
+    border-radius: 4px;
+    background: #eaeaea;
+    cursor: pointer;
+}
 
+.category-price-filtr-input-wrap p{
+    margin: 0;
+}
 
+.category-price-filtr-input-wrap p:hover{
+    color: rgb(68, 68, 219);
+}
+
+.category-connections,
+.category-screen,
+.category-battery,
+.category-memory,
+.category-cameras-special,
+.category-camras-mgp,
+.category-matrix,
+.category-screen-refresh{
+    padding: 10px;
+    border-bottom: 1px solid #eaeaea;
+}
 
 
 

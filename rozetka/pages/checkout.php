@@ -18,11 +18,9 @@ $products = array_map('decode_fast_info_json',$products);
 $total_count = db_query("SELECT count(*) FROM products WHERE id IN($ids_list) ");
 $total_count = $total_count ? $total_count[0]['count(*)'] : 0;
 
-
-foreach ($products as $product):
 $total_sum = 0;
-$cart_items[$product['id']];
-thousands($product_sum = $product['price'] * $cart_items[$product['id']]);
+foreach ($products as $product):
+$product_sum = $product['price'] * $cart_items[$product['id']];
 $total_sum += $product_sum;
 endforeach;
 
@@ -30,7 +28,11 @@ endforeach;
 
 
 ?>
-
+<style>
+    #input_name_error{
+        color: red;
+    }
+</style>
 
 
 <div class="checkout-form">
@@ -48,8 +50,8 @@ endforeach;
                 <input type="text" name="label-surname">
             </div>
             <div class="check-name">
-                <label for="label-name">Имя</label>
-                <input type="text" name="label-name">
+                <label for="label-name">Имя <span id="input_name_error"></span></label>
+                <input type="text" name="label-name" id="input_name">
             </div>
         </div>
             <div class="checkout-phone-city">
@@ -81,6 +83,7 @@ endforeach;
             </div>
             <div class="checkout-order-products-wrap">
                 <?php
+
                 foreach ($products as $product):
                 ?>
                 <div class="checkout-order-products">
@@ -118,7 +121,6 @@ endforeach;
                     </div>
                 </div>
                     <?php 
-                        $total_sum += $product_sum;
                         endforeach; 
                     ?>
                 
@@ -143,25 +145,33 @@ endforeach;
         <div class="checkout-delivery-type">
             <ul>
                 <li> 
-                    <input type="radio" name="delivery" value="shop">
-                    <p>Самовывоз с магазина</p>
+                    <input class="delivery-input" type="radio" name="delivery" value="shop" id="delivery-1">
+                        <label class="delivery-block" for="delivery-1">
+                            <div class="delivery-radio"></div>
+                            <p>Самовывоз с магазина</p>
+                            <span class="delivery-free">Бесплатно</span>
+                        </label>
                 </li>
                 <li>
-                    <input type="radio" name="delivery" value="post"> 
-                    <p>Доставка на отеделние почты</p>
+                    <input class="delivery-input" type="radio" name="delivery" value="post" id="delivery-2">
+                        <label class="delivery-block" for="delivery-2">
+                            <div class="delivery-radio"></div>
+                            <p>Доставка на отеделние почты</p>
+                            <span class="delivery-free">Бесплатно</span>
+                        </label>
                 </li>
                 <li>
-                    <input type="radio" name="delivery" value="courier"> 
-                    <p>Доставка курьером</p>
+                    <input class="delivery-input" type="radio" name="delivery" value="courier" id="delivery-3"> 
+                        <label class="delivery-block" for="delivery-3">
+                            <div class="delivery-radio"></div>
+                            <p>Доставка курьером</p>
+                            <span class="delivery-free">Бесплатно</span>
+                            <div class="delivery-adress">
+                                <textarea name="adress" id="" cols="30" rows="10"></textarea>
+                            </div>
+                        </label>
                 </li>  
             </ul>
-            <div class="checkout-delivery-price">
-                <ul>
-                    <li>Бесплатно</li>
-                    <li>Бесплатно</li>
-                    <li>Бесплатно</li>
-                </ul>
-            </div>
         </div>
     </div>
     <div class="checkout-pay-by">
@@ -172,16 +182,28 @@ endforeach;
         <div class="checkout-payment-method">
             <ul>
                 <li>
-                    <input type="radio" name="payment" value="cash">
-                     <p>Оплата наличными при получении</p>
+                <input class="delivery-input" type="radio" name="payment" value="cash" value="shop" id="payment-1">
+                        <label class="delivery-block" for="payment-1">
+                            <div class="delivery-radio"></div>
+                            <p>Оплата наличными при получении</p>
+                        </label>
                 </li>
                 <li>
-                    <input type="radio" name="payment" value="card">
-                    <p>Оплата онлайн картой</p>
+                <input class="delivery-input" type="radio" name="payment" value="card"  value="shop" id="payment-2">
+                        <label class="delivery-block" for="payment-2">
+                            <div class="delivery-radio"></div>
+                            <p>Оплата онлайн картой</p>
+                        </label>
                 </li>
                 <li>
-                    <input type="radio" name="payment" value="pp">
-                    <p>Оплата PayPal</p>
+                <input class="delivery-input" type="radio" name="payment" value="pp" id="payment-3">
+                        <label class="delivery-block" for="payment-3">
+                            <div class="delivery-radio"></div>
+                            <p>Оплата PayPal</p>
+                            <span class="delivery-free">Комиссия 3,5%</span>
+                        </label>
+                    
+
                 </li>
             </ul>
         </div>
@@ -190,7 +212,7 @@ endforeach;
         <h4>Итого</h4>
         <div class="checkout-amount">
             <span><?= $total_count ?> товар<?= sklonenie($total_count, '', 'а', 'ов') ?> на сумму</span>
-            <div class="checkout-amount-sum"><?= $total_sum ?> ₴</div> 
+            <div class="checkout-amount-sum"><?= thousands($total_sum) ?> ₴</div> 
         </div>
         <div class="checkout-total-delivery">
             <p>Стоимость доставки</p>
@@ -198,10 +220,29 @@ endforeach;
         </div>
         <div class="checkout-total-for-pay">
             <p>К оплате</p>
-            <span><?= $total_sum ?> ₴</span>
+            <span><?= thousands($total_sum) ?> ₴</span>
         </div>
         <div class="checkout-confirm-order">
-            <a href="#">Заказ подтверждаю</a>
+            <a href="#" id="checkout_submit_btn">Заказ подтверждаю</a>
         </div>
     </div>
 </div>
+
+
+<script>
+    var input_name = document.getElementById('input_name')
+    var input_name_error = document.getElementById('input_name_error')
+
+    input_name.addEventListener('keyup', function(event){
+        console.log(this.value.length)
+        var input_value = this.value
+        if(input_value.length < 3){
+            input_name_error.innerHTML = '(Please enter more than 3 charachters)'
+        }else if(input_value.length > 10){
+            input_name_error.innerHTML = '(Please enter less than 10 charachters)'
+        }else{
+            input_name_error.innerHTML = ''
+        }
+    })
+
+</script>
