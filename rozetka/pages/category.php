@@ -141,29 +141,17 @@ $brands = array_column($brands, 'brand_name');
         <div class="category-brands-filtr">
           <a href="?action=brands">Бренд</a> 
           <input class="filtr-brands-input" type="text">
-          <ul class="category-filtr-list"> 
-            <a href="#" class="filtr-a-name">Алфавитный указатель</a>
+          <a href="#" class="filtr-a-name">Алфавитный указатель</a>
+          <ul class="category-filtr-list category-brands-list"> 
+            <?php foreach($brands as $brand): ?>
             <li class="category-filtr-schedule">
               <a class="filtr-link" href="#">
                 <span class="filtr-checkbox"></span>
                 <input class="filtr-input" type="checkbox" id="Apple">
-                <label class="filtr-label" for="Apple">Apple</label>
+                <label class="filtr-label" for="Apple"><?= $brand ?></label>
               </a>
             </li>
-            <li class="category-filtr-schedule">
-            <a class="filtr-link" href="#">
-                <span class="filtr-checkbox"></span>
-                <input class="filtr-input" type="checkbox" id="Nokia">
-                <label class="filtr-label" for="Nokia">Nokia</label>
-              </a>
-            </li>
-            <li class="category-filtr-schedule">
-            <a class="filtr-link" href="#">
-                <span class="filtr-checkbox"></span>
-                <input class="filtr-input" type="checkbox" id="Samsung">
-                <label class="filtr-label" for="Samsung">Samsung</label>
-              </a>
-            </li>
+            <?php endforeach ?>
           </ul>
         </div>
           
@@ -489,6 +477,18 @@ $brands = array_column($brands, 'brand_name');
           </div>
                 
                     <?php endforeach ?>
+                    <button onclick="show_more_products()"> Показать еще </button>
+                    <script>
+                      function show_more_products(){
+                        console.log($)
+                        $.post('?', {show_more_products: 1, hello: 'world'}, function(data){
+                          // console.log(data)
+                          $('.products').append(data)
+                        })
+                      }
+
+                    </script>
       </div>
+                        
     </div>
-</div>
+</div> 

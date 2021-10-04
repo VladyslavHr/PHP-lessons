@@ -35,6 +35,7 @@
     <ul class="admin-left-menu-sub list-unstyled <?= menu_sub_active('products')?>" id="left-menu-sub-products">
     <li><a class="<?= menu_item_active('products')?>" href="?action=products">Products list</a></li>
     <li><a class="<?= menu_item_active('products-add')?>" href="?action=products-add">Add product</a></li>
+    <li><a class="<?= menu_item_active('orders-main')?>" href="?action=orders-main">Orders</a></li>
     </ul>
 </div>
 <div class="admin-left-menu">

@@ -5,6 +5,7 @@
     <ul class="admin-left-menu-sub list-unstyled" id="left-menu-sub-products">
     <li><a href="?action=products">Products list</a></li>
     <li><a href="?action=products-add">Add product</a></li>
+    <li><a href="?action=orders-main">Orders</a></li>
     </ul>
 </div>
 <div class="admin-left-menu">

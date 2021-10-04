@@ -35,7 +35,9 @@ endforeach;
 </style>
 
 
-<div class="checkout-form">
+<form class="checkout-form" method="POST">
+    <input type="hidden" name="products" value="<?= esc_attr(json_encode($_SESSION['cart']['items'])) ?>">
+    <input type="hidden" name="total_sum" value="<?= $total_sum ?>">
     <div class="checkout-title">
         <h1>Оформление заказа</h1>
     </div>
@@ -46,28 +48,22 @@ endforeach;
         </div>
         <div class="checkout-contact-data">
             <div class="check-surname">
-                <label for="label-surname">Фамилия</label>
-                <input type="text" name="label-surname">
+                <label for="label-surname">Фамилия </label>
+                <input type="text" name="last_name" value="<?= auth_user('last_name') ?? '' ?>" id="label-surname">
             </div>
             <div class="check-name">
-                <label for="label-name">Имя <span id="input_name_error"></span></label>
-                <input type="text" name="label-name" id="input_name">
+                <label for="input_name">Имя <span id="input_name_error"></span></label>
+                <input type="text" name="name" value="<?= auth_user('name') ?? '' ?>" id="input_name">
             </div>
         </div>
             <div class="checkout-phone-city">
                 <div class="check-phone">
                     <label for="label-phone">Мобильный телефон</label>
-                    <input type="tel" name="phone" value="+380 ">
+                    <input type="tel" name="phone" value="+380 " id="label-phone">
                 </div>
-                <div class="check-city">
-                    <label for="label-city">Город</label>
-                    <select name="city" id="label-city">
-                        <option value="Днепр">Днепр</option>
-                        <option value="Львов">Львов</option>
-                        <option value="Киев">Киев</option>
-                        <option value="Харьков">Харьков</option>
-                        <option value="Одесса">Одесса</option>
-                    </select>
+                <div class="check-name">
+                    <label for="label-email">Email</label>
+                    <input type="tel" name="phone" value="<?= auth_user('name') ?? '' ?>" id="label-email">
                 </div>
             </div>
         
@@ -145,7 +141,7 @@ endforeach;
         <div class="checkout-delivery-type">
             <ul>
                 <li> 
-                    <input class="delivery-input" type="radio" name="delivery" value="shop" id="delivery-1">
+                    <input checked class="delivery-input" type="radio" name="delivery" value="shop" id="delivery-1">
                         <label class="delivery-block" for="delivery-1">
                             <div class="delivery-radio"></div>
                             <p>Самовывоз с магазина</p>
@@ -167,7 +163,7 @@ endforeach;
                             <p>Доставка курьером</p>
                             <span class="delivery-free">Бесплатно</span>
                             <div class="delivery-adress">
-                                <textarea name="adress" id="" cols="30" rows="10"></textarea>
+                                <textarea name="address" id="" cols="30" rows="10"></textarea>
                             </div>
                         </label>
                 </li>  
@@ -182,14 +178,14 @@ endforeach;
         <div class="checkout-payment-method">
             <ul>
                 <li>
-                <input class="delivery-input" type="radio" name="payment" value="cash" value="shop" id="payment-1">
+                <input checked class="delivery-input" type="radio" name="payment" value="cash" id="payment-1">
                         <label class="delivery-block" for="payment-1">
                             <div class="delivery-radio"></div>
                             <p>Оплата наличными при получении</p>
                         </label>
                 </li>
                 <li>
-                <input class="delivery-input" type="radio" name="payment" value="card"  value="shop" id="payment-2">
+                <input class="delivery-input" type="radio" name="payment" value="card" id="payment-2">
                         <label class="delivery-block" for="payment-2">
                             <div class="delivery-radio"></div>
                             <p>Оплата онлайн картой</p>
@@ -223,10 +219,10 @@ endforeach;
             <span><?= thousands($total_sum) ?> ₴</span>
         </div>
         <div class="checkout-confirm-order">
-            <a href="#" id="checkout_submit_btn">Заказ подтверждаю</a>
+            <button type="submit" name="new_order" id="checkout_submit_btn">Заказ подтверждаю</button>
         </div>
     </div>
-</div>
+</form>
 
 
 <script>

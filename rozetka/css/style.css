@@ -25,6 +25,10 @@ img{
     max-width: 100%;
 }
 
+button{
+    cursor: pointer;
+}
+
 .text-center{
     text-align: center;
 }
@@ -2954,11 +2958,14 @@ height: 40px;
     padding: 15px 0 15px 0;
 }
 
-.checkout-confirm-order a{
+.checkout-confirm-order button{
     color: #fff;
     padding: 20px 15px 20px 15px;
     background: var(--rozetkaGreen);
     border-radius: 7px;
+    border: 0;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .checkout-price-per-one{
@@ -3158,6 +3165,113 @@ height: 40px;
     padding: 10px;
     border-bottom: 1px solid #eaeaea;
 }
+
+.category-brands-list{
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.thankyou-wrap{
+    display: grid;
+    justify-content: space-around;
+    padding: 50px;
+}
+
+.thanks{
+    background: #ffe9d9;
+    padding: 20px;
+    border: 1px solid;
+    border-radius: 40px;
+    border-color: #ffe9d9;
+}
+
+.thanks h1{
+    text-align: center;
+}
+
+.thanks-time,
+.thanks-approve{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #d7cfcf;
+}
+
+.thanks-clock,
+.thanks-loc,
+.thanks-ok{
+    margin-right: 15px;
+    color: var(--rozetkaGreen);
+}
+
+.thanks-clock svg,
+.thanks-loc svg,
+.thanks-ok svg{
+    width: 20px;
+    height: 20px;
+}
+
+.thanks-info{
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+
+.thanks-adress{
+    display: block;
+    border-bottom: 1px solid #d7cfcf;
+}
+
+.thansk-link{
+    display: block;
+    text-align: center;
+    padding: 50px;
+}
+
+.thansk-link a{
+    border: 1px solid;
+    padding: 25px;
+    color: #fff;
+    background: var(--rozetkaGreen);
+    border-radius: 5px;
+}
+
+.thansk-link a:hover{
+    filter: brightness(130%);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

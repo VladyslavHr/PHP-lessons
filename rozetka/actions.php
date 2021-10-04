@@ -136,3 +136,31 @@ if(!defined('ROOT')){
     flash_alert($type = 'success', $message = 'Отзыв успешно добавлен');
     redirect(query_del(['add_product_comment']));
   }
+
+  if(isset($_POST['new_order'])){
+    pa($_POST);
+
+    foreach($_POST as $key => $value){
+      $_POST[$key] = db_escape($value);
+    }
+    $delivery = isset($_POST['delivery']) ? $_POST['delivery'] : '';
+    $payment = isset($_POST['payment']) ? $_POST['payment'] : '';
+    db_query("INSERT INTO orders SET 
+      `name` = '$_POST[name]',
+      last_name = '$_POST[last_name]',
+      phone = '$_POST[phone]',
+      city = '$_POST[city]',
+      delivery = '$delivery',
+      `address` = '$_POST[address]',
+      payment = '$payment',
+      products = '$_POST[products]',
+      total_sum = '$_POST[total_sum]',
+      created_at = NOW() ");
+      $_SESSION['cart'] = '';
+      redirect('?action=thankyou');
+  }
+
+  if (isset($_POST['show_more_products'])) {
+    echo '<h2>Here is your products </h2>';
+    exit;
+  }
