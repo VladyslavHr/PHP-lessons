@@ -157,10 +157,17 @@ if(!defined('ROOT')){
       total_sum = '$_POST[total_sum]',
       created_at = NOW() ");
       $_SESSION['cart'] = '';
-      redirect('?action=thankyou');
+      $_SESSION['last_order_id'] = db_query()->lastid();
+      redirect("?action=thankyou");
   }
 
   if (isset($_POST['show_more_products'])) {
     echo '<h2>Here is your products </h2>';
     exit;
   }
+
+  if(is_cart_empty() && isset($_GET['action']) && $_GET['action'] === 'checkout' ){ 
+      flash_alert($type = 'danger', $message = 'выберете товары перед оформлением заказа');
+      redirect('?action=cart');
+    }
+  

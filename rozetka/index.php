@@ -4,6 +4,7 @@ session_start();
 require_once 'vendor/autoload.php';
 include 'classes/DB.class.php';
 include 'classes/simple_html_dom.php';
+include 'langs.php';
 include 'functions.php';
 include 'actions.php';
 include 'blocks/header.php';

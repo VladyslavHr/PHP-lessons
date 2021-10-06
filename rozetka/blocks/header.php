@@ -47,11 +47,12 @@ if(!defined('ROOT')){
           </div>
           <form class="search-block" action="index.php">
             <input type="hidden" name="action" value="search">
-            <input name="query" value="<?= @$_GET['query'] ?>" type="text" placeholder="Я ищу..." />
-            <button type="submit">Найти</button>
+            <input name="query" value="<?= @$_GET['query'] ?>" type="text" placeholder="<?= langs('look for', 'Я ищу...') ?>" />
+            <button type="submit"><?= langs('btn.search', 'Найти') ?></button>
           </form>
           <div class="langs-block">
-            <a href="#" class="active">RU</a>|<a href="#">UA</a>
+            <a href="<?= query_add(['lang' => 'ru']) ?>" class="<?= lang_is('ru','active') ?>">RU</a>|
+            <a href="<?= query_add(['lang' => 'ua']) ?>" class="<?= lang_is('ua','active') ?>">UA</a>
           </div>
 
           <a href="?action=tests" class="premium-btn">

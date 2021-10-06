@@ -1,10 +1,10 @@
 <?php
-if(is_array($_SESSION['cart']['items']) && $_SESSION['cart']['items']){
+if(is_cart_empty()){
+    $products = [];
+}else{
     $cart_items = $_SESSION['cart']['items'];
     $ids_list = implode(',', array_keys($cart_items));
     $products = db_query("SELECT id, title, price, old_price, `card` FROM products WHERE id IN($ids_list)");
-}else{
-    $products = [];
 }
 
 function decode_fast_info_json($product)

@@ -11,7 +11,7 @@ define('db_NAME', 'rozetka');
 
 
 
-function db_query($query){
+function db_query($query = false){
 	if(!$query) return DB::getInstance();
 
     if (stripos($query, 'select') === 0 || stripos($query, 'show') === 0 || stripos($query, 'describe') === 0) {
@@ -486,5 +486,40 @@ function thousands($number)
     return number_format( $number, 0, '', ' ');
 }
 
-// стилизировать кнопку алерт. числа возле корзины , стилизация страницы корзина
 
+function is_cart_empty($if_true = 1, $if_false = ''){
+    if(isset($_SESSION['cart']['items']) && is_array($_SESSION['cart']['items']) && $_SESSION['cart']['items']){
+        return $if_false;
+    }else{
+        return $if_true;
+    }
+}
+
+
+function langs($message, $message_default = '')
+{
+    global $langs;
+    if(isset($_GET['lang']) && $_GET['lang'] === 'ru') {
+        $lang = 'ru';
+    }else{
+        $lang = 'ua';
+    }
+     if(isset($langs[$message][$lang])){
+        return $langs[$message][$lang];
+    }elseif($message_default){
+        return $message_default;
+    }else{
+        return $message;
+    }
+}
+
+function lang_is($lang_is, $if_true = 1, $if_false = '')
+{
+    if(isset($_GET['lang']) && $_GET['lang'] === $lang_is) {
+        return $if_true;
+    }
+    if(!isset($_GET['lang']) && $lang_is === 'ua'){
+        return  $if_true;
+    }
+    return $if_false;
+}

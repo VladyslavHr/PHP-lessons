@@ -1,4 +1,5 @@
-<?php include 'functions.php'
+<?php 
+include 'functions.php'
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +35,7 @@ if(isset($_POST['save'])){
   $task = substr($task, 0, 400);
   $task = db_escape($task);
   $task_id = (int)$_POST['save'];
-  db_query("UPDATE todo_list SET task = '$task' WHERE id = '$task_id' ");
+  db_query("UPDATE to_do_list SET task = '$task' WHERE id = '$task_id' ");
   header('Location: index.php');
 }
 // Delete

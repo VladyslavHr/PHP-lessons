@@ -113,12 +113,13 @@ margin-right: 10px;
 }
 
 .langs-block a{
-    color: white;
+    color: #797878;
     margin: 8px;
 }
 
 .langs-block a.active{
-    color: #797878;
+    color: #fff;
+    border-bottom: 4px double #fff;
 }
 
 .top-console .premium-btn{
@@ -2440,6 +2441,10 @@ height: 40px;
     margin-left: 20px;
 }
 
+.cart-total .checkout.disabled{
+    background-color: #ccc;
+}
+
 .cart .heart{
     width: 30px;
     height: 30px;
@@ -3213,7 +3218,11 @@ height: 40px;
 .thanks-info{
     display: flex;
     align-items: center;
-    height: 50px;
+    flex-wrap: wrap;
+}
+
+.thanks-info ul{
+    width: 100%;
 }
 
 .thanks-adress{
@@ -3221,13 +3230,13 @@ height: 40px;
     border-bottom: 1px solid #d7cfcf;
 }
 
-.thansk-link{
+.thanks-link{
     display: block;
     text-align: center;
     padding: 50px;
 }
 
-.thansk-link a{
+.thanks-link a{
     border: 1px solid;
     padding: 25px;
     color: #fff;
@@ -3235,7 +3244,7 @@ height: 40px;
     border-radius: 5px;
 }
 
-.thansk-link a:hover{
+.thanks-link a:hover{
     filter: brightness(130%);
 }
 

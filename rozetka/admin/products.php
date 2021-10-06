@@ -42,8 +42,7 @@ $products = array_map('decode_fast_info_json',$products);
       <th></th>
 
   </tr>
-  <?php foreach($products as $product): 
-    ?>
+  <?php foreach($products as $product): ?>
   <tr>
         <td>
           <img class="admin-product-picture" src="<?= get_product_image_src($product) ?>" alt="">

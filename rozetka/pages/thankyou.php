@@ -1,31 +1,9 @@
 <?php
-$min = 1;
-$max = 999999;
 
-// if(is_array($_SESSION['cart']['items']) && $_SESSION['cart']['items']){
-//     $cart_items = $_SESSION['cart']['items'];
-//     $ids_list = implode(',', array_keys($cart_items));
-//     $products = db_query("SELECT id, title, price, old_price, `card` FROM products WHERE id IN($ids_list)");
-// }else{
-//     $products = [];
-// }
 
-// function decode_fast_info_json($product)
-// {
-//     $product['price_formated'] = number_format( $product[ 'price'], 0, '', ' ');
-//     $product['old_price_formated'] = number_format( $product[ 'old_price'], 0, '', ' ');
-//     return $product;
-// }
-// $products = array_map('decode_fast_info_json',$products);
+$order_id = (int)$_SESSION['last_order_id'];
 
-// $total_count = db_query("SELECT count(*) FROM products WHERE id IN($ids_list) ");
-// $total_count = $total_count ? $total_count[0]['count(*)'] : 0;
-
-// $total_sum = 0;
-// foreach ($products as $product):
-// $product_sum = $product['price'] * $cart_items[$product['id']];
-// $total_sum += $product_sum;
-// endforeach;
+$order = db_query("SELECT * FROM orders WHERE id = '$order_id'")[0];
 
 
 ?>
@@ -44,21 +22,28 @@ $max = 999999;
                 <?php include 'svg/bootstrap/geo-alt-fill.svg' ?>
             </div>
             <h4>Информация о заказе: </h4>
+            <ul>
+                <li>Способ оплаты: <?= langs('payment.'.$order['payment']) ?></li>
+                <li>Способ доставки: <?= langs('delivery.'.$order['delivery'], 'Неизвестно') ?></li>
+            </ul>
         </div>
         <div class="thanks-adress">
-            <p> Ваша посылка будет доставлена по адрессу:</p>
+            <p> Ваша посылка будет доставлена по адрессу: <?= $order['address'] ?></p>
             <span></span>
         </div>
         <div class="thanks-approve">
             <div class="thanks-ok">
                 <?php include 'svg/bootstrap/check-circle.svg' ?>
             </div>
-            <h4>Номер вашего заказа: <?= rand($min, $max) ?></h4>
-            <!-- <div class="thanks-total">
-               Сумма заакза: <?= thousands($total_sum)  ?>₴
-            </div> -->
+            <h4>Номер вашего заказа: <?= $order_id ?></h4>
         </div>
-        <div class="thansk-link">
+        <div class="thanks-approve">
+            <div class="thanks-ok">
+                    <?php include 'svg/bootstrap/check-circle.svg' ?>
+            </div>
+                <h4>Сумма заакза: <?= thousands($order['total_sum'])  ?>₴</h4>
+        </div>
+        <div class="thanks-link">
             <a href="?action=main">Перейти на главную страницу</a>
         </div>
     </div>

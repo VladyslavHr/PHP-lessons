@@ -3,13 +3,13 @@
 
 // pa($_SESSION['cart']);
 // pa(array_keys($_SESSION['cart']['items']));
-if(is_array($_SESSION['cart']['items']) && $_SESSION['cart']['items']){
+if(is_cart_empty()){
+    $products = [];
+}else{
     $cart_items = $_SESSION['cart']['items'];
     $ids_list = implode(',', array_keys($cart_items));
     // pa($ids_list);
     $products = db_query("SELECT id, title, price, old_price, `card` FROM products WHERE id IN($ids_list)");
-}else{
-    $products = [];
 }
 
 function decode_fast_info_json($product)
@@ -80,7 +80,7 @@ foreach($products as $product):   ?>
     <div class="cart-summary-right">
         <div class="cart-total">
             <div class="total-sum"><?= thousands($total_sum) ?> UAH</div>
-            <a href="?action=checkout" class="checkout">Оформить заказ</a>
+            <a <?= is_cart_empty('', 'href="?action=checkout"') ?> class="checkout <?= is_cart_empty('disabled') ?>">Оформить заказ</a>
         </div>
     </div>
 </div>
