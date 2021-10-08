@@ -2,8 +2,9 @@
 define('ROOT',__DIR__);
 require_once 'vendor/autoload.php';
 include 'classes/DB.class.php';
+include 'langs.php';
 include 'functions.php';
-include 'admin/auth.php';
+include 'admin/actions.php';
 include 'admin/blocks/header.php';
 
 

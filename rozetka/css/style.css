@@ -3248,9 +3248,26 @@ height: 40px;
     filter: brightness(130%);
 }
 
+.show-more-btn{
+    display: block;
+    text-align: center;
+    padding: 25px;
+}
 
+.show-more-btn span{
 
+}
 
+.show-more-btn button{
+    color: #4594af;
+    border: 0;
+    background: none;
+    font-size: 30px;
+}
+
+.show-more-btn button:hover{
+    filter: drop-shadow(3px 4px 3px #4594af)
+}
 
 
 

@@ -30,27 +30,29 @@
     </div>
 <div class="admin-left-menu-wrap">
    
-<div class="admin-left-menu">
-    <h5 class="js-open-modal" data-target="left-menu-sub-products">Products</h5>
-    <ul class="admin-left-menu-sub list-unstyled <?= menu_sub_active('products')?>" id="left-menu-sub-products">
-    <li><a class="<?= menu_item_active('products')?>" href="?action=products">Products list</a></li>
-    <li><a class="<?= menu_item_active('products-add')?>" href="?action=products-add">Add product</a></li>
-    </ul>
-</div>
-<div class="admin-left-menu">
-    <h5 class="js-open-modal" data-target="left-menu-sub-users">Users</h5>
-    <ul class="admin-left-menu-sub list-unstyled <?= menu_sub_active('users')?>" id="left-menu-sub-users">
-    <li><a class="<?= menu_item_active('users')?>" href="?action=users">Users list</a></li>
-    <li><a class="<?= menu_item_active('users-add')?>" href="?action=users-add">Add user</a></li>
-    </ul>
-</div>
-<div class="admin-left-menu">
-    <h5 class="js-open-modal" data-target="left-menu-sub-orders">Orders</h5>
-    <ul class="admin-left-menu-sub list-unstyled <?= menu_sub_active('orders')?>" id="left-menu-sub-orders">
-    <li><a class="<?= menu_item_active('orders')?>" href="?action=orders">Orders list</a></li>
-    <li><a class="<?= menu_item_active('orders-add')?>" href="?action=orders-add">Add order</a></li>
-    </ul>
-</div>
+    <div class="admin-left-menu">
+        <h5 class="js-open-modal" data-target="left-menu-sub-products">Products</h5>
+        <ul class="admin-left-menu-sub list-unstyled <?= menu_sub_active('products')?>" id="left-menu-sub-products">
+        <li><a class="<?= menu_item_active('products')?>" href="?action=products">Products list</a></li>
+        <li><a class="<?= menu_item_active('products-add')?>" href="?action=products-add">Add product</a></li>
+        </ul>
+    </div>
+
+    <div class="admin-left-menu">
+        <h5 class="js-open-modal" data-target="left-menu-sub-users">Users</h5>
+        <ul class="admin-left-menu-sub list-unstyled <?= menu_sub_active('users')?>" id="left-menu-sub-users">
+        <li><a class="<?= menu_item_active('users')?>" href="?action=users">Users list</a></li>
+        <li><a class="<?= menu_item_active('users-add')?>" href="?action=users-add">Add user</a></li>
+        </ul>
+    </div>
+
+    <div class="admin-left-menu">
+        <h5 class="js-open-modal" data-target="left-menu-sub-orders">Orders</h5>
+        <ul class="admin-left-menu-sub list-unstyled <?= menu_sub_active('orders')?>" id="left-menu-sub-orders">
+        <li><a class="<?= menu_item_active('orders')?>" href="?action=orders">Orders list</a></li>
+        <li><a class="<?= menu_item_active('orders-add')?>" href="?action=orders-add">Add order</a></li>
+        </ul>
+    </div>
 
 </div>
 <?php endif ?>
@@ -58,4 +60,4 @@
 
     <div class="alert-wrapper">
     <?= flash_get() ?>
-  </div>
+    </div>

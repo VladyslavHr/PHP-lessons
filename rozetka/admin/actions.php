@@ -60,3 +60,11 @@ if (!isset($_SESSION['count'])) {
 }else{
     $_SESSION['count']++;
 }
+
+
+if(!empty($_GET['order_status'])){
+    $order_id = (int)$_GET['order_id'];
+    $order_status = db_escape($_GET['order_status']);
+    db_query("UPDATE orders SET `status` = '$order_status' WHERE id = '$order_id' ");
+    redirect(query_del(['order_id', 'order_status']));
+  }

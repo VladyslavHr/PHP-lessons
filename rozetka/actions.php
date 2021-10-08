@@ -162,7 +162,13 @@ if(!defined('ROOT')){
   }
 
   if (isset($_POST['show_more_products'])) {
-    echo '<h2>Here is your products </h2>';
+    $offset = (int)$_POST['offset'];
+    $limit = (int)$_POST['limit'];
+    $products = db_query("SELECT * FROM products LIMIT $limit OFFSET $offset ");
+    foreach ($products as $product){
+      include 'blocks/category-product.php';
+    }
+    echo ' <button onclick="show_more_products(this,'.$offset + $limit.','.$limit.')"> Показать еще </button>';
     exit;
   }
 
@@ -171,3 +177,4 @@ if(!defined('ROOT')){
       redirect('?action=cart');
     }
   
+
