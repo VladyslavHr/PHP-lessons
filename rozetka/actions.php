@@ -29,7 +29,7 @@ if(!defined('ROOT')){
 
 
   if(isset($_GET['favorite']) && auth_check()) {
-    $user_id = (int)auth_user('id');
+    $user_id = isset($_GET['ajax']) ? (int)$_GET['userId'] : (int)auth_user('id');
     $user_favs = db_get_row("SELECT favorites FROM users WHERE id = '$user_id'");
     $user_favs = $user_favs['favorites'];
     if($_GET['favorite'] === 'add'){
@@ -37,9 +37,9 @@ if(!defined('ROOT')){
       // pa($user_favs);
       if($user_favs){
         $user_favs = explode('|', $user_favs);
-        $user_favs[] = $_GET['id'];
+        $user_favs[] = $_GET['product_id'];
       }else{
-        $user_favs = [$_GET['id']];
+        $user_favs = [$_GET['product_id']];
       }
       $user_favs = implode('|', $user_favs);
       $user_favs = db_escape($user_favs);
@@ -52,7 +52,7 @@ if(!defined('ROOT')){
       if($user_favs){
         $user_favs = explode('|', $user_favs);
         $user_favs = array_flip($user_favs); // меняем местами ключи и значения
-        unset($user_favs[$_GET['id']]); //удаляем элемент масива
+        unset($user_favs[$_GET['product_id']]); //удаляем элемент масива
         $user_favs = array_flip($user_favs); 
         $user_favs = implode('|', $user_favs);
         $user_favs = db_escape($user_favs);
@@ -62,7 +62,13 @@ if(!defined('ROOT')){
         // $user_favs = [$_GET['id']];
       }
     }
-    redirect(query_del(['id', 'favorite']));
+    if (isset($_GET['ajax'])){
+      echo 1;
+      exit;
+    }else{
+      redirect(query_del(['id', 'favorite']));
+    }
+    
   }
 
   // не пускаем неавторизованных на page = favorites
@@ -164,11 +170,29 @@ if(!defined('ROOT')){
   if (isset($_POST['show_more_products'])) {
     $offset = (int)$_POST['offset'];
     $limit = (int)$_POST['limit'];
-    $products = db_query("SELECT * FROM products LIMIT $limit OFFSET $offset ");
+
+    if (!empty($_GET['sorting']) && $_GET['sorting'] === 'title'){
+      $order_by = 'ORDER BY title';
+    
+    }
+    elseif (!empty($_GET['sorting']) && $_GET['sorting'] === 'price_asc'){
+      $order_by = 'ORDER BY price';
+    }
+    elseif (!empty($_GET['sorting']) && $_GET['sorting'] === 'price_desc'){
+      $order_by = 'ORDER BY price DESC';
+    }
+    elseif (!empty($_GET['sorting']) && $_GET['sorting'] === 'rating'){
+      $order_by = 'ORDER BY rating DESC';
+    }
+    else{
+      $order_by = '';
+    }
+
+    $products = db_query("SELECT * FROM products $order_by LIMIT $limit OFFSET $offset ");
     foreach ($products as $product){
       include 'blocks/category-product.php';
     }
-    echo ' <button onclick="show_more_products(this,'.$offset + $limit.','.$limit.')"> Показать еще </button>';
+    echo show_more_btn($offset, $limit);
     exit;
   }
 

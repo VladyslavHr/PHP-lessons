@@ -387,25 +387,9 @@ $brands = array_column($brands, 'brand_name');
           <?php foreach($products as $id => $product):   ?>
               <?php include 'blocks/category-product.php' ?>
             <?php endforeach; ?>
+            <?= show_more_btn($offset, $limit); ?>
         </div>       
     </div>
 
 </div> 
-
-      <div class="show-more-btn">
-      <button onclick="show_more_products(this, <?= $offset + $limit ?>, <?= $limit ?>)"> <span><?=bi('arrow-repeat')?></span> <?= langs('show-more-btn.button')?> </button>
-      </div>
-                    <script>
-                      function show_more_products(current_button, offset, limit){
-                        console.log(offset)
-                        console.log(limit)
-                        $.post('?', 
-                          {show_more_products: 1, offset: offset, limit: limit}, 
-                          function(data){
-                            current_button.remove()
-                          // console.log(data)
-                          $('.products').append(data)
-                        })
-                      }
-
-                    </script>                   
+                 

@@ -6,17 +6,18 @@
     <div class="left-menu-close js-open-modal" data-target="left_menu"> × </div>
     </div>
     <div class="left-menu-profile">
-        <a class="left-menu-avatar">
+        <a href="?action=user-page" class="left-menu-avatar">
             <?php if($avatar_exists = false): ?>
             <img src="" alt="">
             <?php else: ?>
                 <span>A</span>
             <?php endif ?>
         </a>
-        <div class="left-menu-user">
+        <a href="?action=user-page" class="left-menu-user">
                 <h3>Vlad</h3>
                 <p>Vladysalvhrebennikov@gmail.com</p>
-        </div>
+        </a>
+        
     </div>
     <a class="left-menu-premium">
                 <h3>premium</h3>

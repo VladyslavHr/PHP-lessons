@@ -22,7 +22,7 @@ if(!defined('ROOT')){
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
   </head>
-  <body class="<?= $_GET['action'] ?? '' ?>">
+  <body class="<?= $_GET['action'] ?? '' ?>" data-userid=<?= auth_user('id') ?>> 
 <div class="header">
         <div class="top-banner">
           <img src="img/top-banner.jpg" alt="" title="Модный взрыв" />

@@ -198,8 +198,6 @@ endforeach;
                             <p>Оплата PayPal</p>
                             <span class="delivery-free">Комиссия 3,5%</span>
                         </label>
-                    
-
                 </li>
             </ul>
         </div>

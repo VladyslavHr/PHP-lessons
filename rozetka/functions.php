@@ -445,11 +445,17 @@ function product_heart(&$product)
 {
     global $user_favs_g;
      if(auth_check()): 
+        
          if(in_array($product['id'], $user_favs_g)): ?>
-            <a href="<?= query_add(['id' => $product ['id'], 'favorite' => 'remove']) ?>" class="heart"></a>
-          <?php else: ?>
-            <a href="<?= query_add(['id' => $product ['id'], 'favorite' => 'add']) ?>" class="heart heart-empty"></a>
+         <div class="heart-wrapper" onclick="add_to_favorites(event)" data-productid="<?= $product ['id'] ?>">
+            <a href="<?= query_add(['prdoct_id' => $product ['id'], 'favorite' => 'remove']) ?>" class="heart"></a>
+        </div>
+            <?php else: ?>
+        <div class="heart-wrapper" onclick="add_to_favorites(event)" data-productid="<?= $product ['id'] ?>">
+            <a href="<?= query_add(['prdoct_id' => $product ['id'], 'favorite' => 'add']) ?>" class="heart heart-empty"></a>
+        </div>
           <?php endif;
+          
            endif; 
 }
 
@@ -522,4 +528,12 @@ function lang_is($lang_is, $if_true = 1, $if_false = '')
         return  $if_true;
     }
     return $if_false;
+}
+
+function show_more_btn($offset, $limit)
+{
+    return '<div class="show-more-btn">
+    <button onclick="show_more_products(this,' .$offset + $limit.',' .$limit .')"> 
+    <span> '.bi('arrow-repeat').'</span>' .langs('show-more-btn.button').' </button>
+    </div>';
 }
