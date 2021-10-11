@@ -3509,7 +3509,10 @@ height: 40px;
     
 }
 
-
+.personal-info-block .checkout-delivery-type,
+.personal-info-block .checkout-payment-method{
+    margin-left: 48px;
+}
 
 
 
