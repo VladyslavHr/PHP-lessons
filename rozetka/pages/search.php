@@ -33,9 +33,12 @@ $count = count($result_arr);
 
 
 
-      <div class="products">
+      <div class="category products">
           <?php foreach($result_arr as $product): 
 
+            include  'blocks/category-product.php';
+
+            continue;
 
             ?>
           <div class="product-wrapper">    

@@ -1,6 +1,8 @@
 <?php 
 $favorites_total = db_query("SELECT favorites FROM users WHERE id = '$user_id'");
 
+$favorites_count = count(explode('|', $favorites_total[0]['favorites']));
+
 // pa($favorites_total);
 
 ?>
@@ -33,9 +35,10 @@ $favorites_total = db_query("SELECT favorites FROM users WHERE id = '$user_id'")
                         <a href="?action=favorites">
                             <span><?= bi('heart') ?></span>    
                             <p>Список желаний</p> 
-                            <!-- <?= $favorites_total?> -->
+                            <div class="user-favs-count"><?= $favorites_count ?></div> 
                         </a>
                     </li>
+                    
                     <li>
                         <a href="#">
                             <span><?= bi('eye') ?></span>

@@ -1,4 +1,5 @@
 <div class="product">
+        <?php edit_product_link($product['id'])?> 
             <div class="category-list-item-left">
               <?php product_heart($product) ?>
                 <a class="category-product-image" href="?action=product&tab=1&id=<?= $product['id'] ?>">
@@ -7,11 +8,11 @@
                 </a>
             </div>
             <div class="category-list-item-right">
-              <h2 class="title">
+              <h2 class="category-title">
                 <a href="?action=product&tab=1&id=<?= $product['id'] ?>">
                   <?= $product['title'] ?> <?php if(auth_admin()): ?> [<?=$product['id'] ?>] <?php endif ?>
                 </a>
-                <?php edit_product_link($product['id'])?> 
+                
               </h2>
               <div class="category-color-wrapper">
                 <ul class="category-colors">
@@ -25,7 +26,7 @@
                   ?>
                 </ul>
               </div>
-              <?php if(isset($product['old_price']) && $product['old_price'] !== $product['price']): ?>
+              <?php if(isset($product['old_price']) && $product['old_price']  && $product['old_price'] !== $product['price']): ?>
                 <div class="old-price"><?= $product['old_price'] ?> ₴ </div>
               <?php else: ?>
                 <div class="old-price no-style">&nbsp;</div>
@@ -33,7 +34,10 @@
               <div class="category-price-cart">
                 <div class="price"><?php echo $product[ 'price'] ?> ₴ </div>
                 <div class="category-add-cart">
-                    <a class="in-the-cart-add" href="<?= query_add(['add_to_cart' => 1, 'product_id' => $product['id']])?>"><?php include "svg/bootstrap/cart4.svg"?>
+                    <a class="in-the-cart-add" 
+                    onclick="add_to_cart(event)"
+                    data-productid="<?=$product['id']?>" 
+                    href="<?= query_add(['add_to_cart' => 1, 'product_id' => $product['id']])?>"><?php include "svg/bootstrap/cart4.svg"?>
                       <span class="in-the-cart-count"><?= cart_item_count($product) ?></span>
                       <span class="in-the-cart-desc"><?= in_the_cart($product) ?></span>
                       <?php if  (cart_item_count($product)) :?>

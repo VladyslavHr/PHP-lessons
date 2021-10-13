@@ -33,17 +33,21 @@
           console.log(Slider);
         </script>
 
-        <h2 class="block-title" id="viewed">Просмотренные товары</h2>
+        <h2 class="block-title" id="viewed">Акционные предложения</h2>
         <button class="js-open-modal open-sidebar-button" data-target="left_sidebar">Open menu</button>
-        <div class="products">
+        <div class="products category">
           <?php 
           
-          $products = db_query("SELECT * FROM products ORDER BY RAND() LIMIT 15");
+          $products = db_query("SELECT * FROM products ORDER BY RAND() LIMIT 12");
+          
+          
+          
+          
           foreach($products as $product): 
 
+            include 'blocks/category-product.php';
 
-
-
+            continue;
             ?>
           <div class="product-wrapper">    
             <div class="product">

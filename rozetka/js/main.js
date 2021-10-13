@@ -1,3 +1,5 @@
+let { log } = console
+
 // js open modal
 document.querySelectorAll('.js-open-modal').forEach(function(el){
     el.addEventListener('click', function(e){
@@ -52,4 +54,13 @@ function show_more_products(current_button, offset, limit){
             // heart_wrapper.html(data)
             heart_wrapper.find('.heart').toggleClass('heart-empty')
       })
+  }
+
+
+  function add_to_cart(event)
+  {
+    event.preventDefault()
+    let add_to_cart_link = $(event.currentTarget)
+    let product_id = add_to_cart_link.data('productid')
+    log(product_id)
   }

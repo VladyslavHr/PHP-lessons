@@ -47,7 +47,7 @@ if(!defined('ROOT')){
           </div>
           <form class="search-block" action="index.php">
             <input type="hidden" name="action" value="search">
-            <input name="query" value="<?= @$_GET['query'] ?>" type="text" placeholder="<?= langs('look for', 'Я ищу...') ?>" />
+            <input id="search_input" name="query" value="<?= @$_GET['query'] ?>" type="text" placeholder="<?= langs('look for', 'Я ищу...') ?>" />
             <button type="submit"><?= langs('btn.search', 'Найти') ?></button>
           </form>
           <div class="langs-block">

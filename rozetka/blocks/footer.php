@@ -99,6 +99,34 @@ if(isset($_GET['open-modal'])){
 </div>
 
 
+<div class="chat js-open-modal" data-target="chat-head" id="chat-head">
+	<div class="chat-head">
+		<div class="chat-logo">
+			<img src="img/rozetka-logo.png" alt="" />
+		</div>
+		<h4>Чат</h4>
+		<button class="js-open-modal" type="submit" data-target="chat-head">X</button>
+	</div>
+	<div class="chat-dialog">
+		<div class="chat-manager">
+			<p>Добрый день</p>
+		</div>
+		<div class="chat-user">
+			<p>Здравствуйте</p>
+		</div>
+	</div>
+	<div class="chat-message-sent">
+		<textarea name="chat-message-sent" maxlenght="1000" placeholder="Введите сообщение ..."> </textarea>
+		<button type="submit"><?= bi('arrow-right-circle') ?></button>
+	</div>
+	<div class="chat-add">
+		<span><?= bi('emoji-smile') ?></span>
+		<span><?= bi('plus-lg') ?></span>
+		<span><?= bi('three-dots-vertical') ?></span>
+	</div>
+</div>
+
+
 <script src="js/main.js"></script>
 
 </body>

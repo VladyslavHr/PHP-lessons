@@ -1,6 +1,11 @@
 hello sql
 
+
+
 <?php 
+
+pa($_SERVER);
+
 
 $total_count = db_query("SELECT count(*) FROM products");
 $total_count = $total_count ? $total_count[0]['count(*)'] : 0;

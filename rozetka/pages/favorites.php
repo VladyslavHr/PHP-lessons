@@ -121,7 +121,11 @@ $products = array_map('decode_fast_info_json',$products);
         </div>
     </div>
     <div class="products" id="category_product_list">
-      <?php foreach($products as $id => $product):   ?>
+      <?php foreach($products as $id => $product): 
+        
+        include 'blocks/category-product.php';
+        continue;
+        ?>
         <div class="product">
             <div class="category-list-item-left">
             <?php product_heart($product) ?>

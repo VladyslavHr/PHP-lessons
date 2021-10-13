@@ -129,12 +129,15 @@ if(count($_SESSION['viewed']) > 8){
 </div>
 
 <h2 class="recommend">Вас так же может заинтересовать</h2>
-<div class="recommend-products-wrapper">
+<div class="recommend-products-wrapper products category">
     <?php 
         
-        $products = db_query("SELECT * FROM products ORDER BY RAND() LIMIT 8");
-        foreach($products as $product_r): 
-        $reviews = $product_r['reviews'];
+        $products = db_query("SELECT * FROM products ORDER BY RAND() LIMIT 6");
+        foreach($products as $product): 
+        // $reviews = $product_r['reviews'];
+
+        include 'blocks/category-product.php';
+        continue;
     ?>
     <div class="recommend-product-wrap">
        <div class="recommend-product">
@@ -174,14 +177,17 @@ if(count($_SESSION['viewed']) > 8){
 
 
 <h2 class="recommend">Просмотренные товары</h2>
-<div class="recommend-products-wrapper">
+<div class="recommend-products-wrapper products category">
     <?php 
         $viewed = $_SESSION['viewed'];
         $viewed = array_reverse($viewed);
         $viewed = implode(',', $viewed);
-        $products = db_query("SELECT * FROM products WHERE id IN($viewed) LIMIT 8");
-        foreach($products as $product_r): 
-        $reviews = $product_r['reviews'];
+        $products = db_query("SELECT * FROM products WHERE id IN($viewed) LIMIT 6");
+        foreach($products as $product): 
+        // $reviews = $product_r['reviews'];
+
+        include 'blocks/category-product.php';
+        continue;
     ?>
     <div class="recommend-product-wrap">
        <div class="recommend-product">
