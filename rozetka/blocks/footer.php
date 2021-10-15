@@ -116,7 +116,7 @@ if(isset($_GET['open-modal'])){
 		</div>
 	</div>
 	<div class="chat-message-sent">
-		<textarea name="chat-message-sent" maxlenght="1000" placeholder="Введите сообщение ..."> </textarea>
+		<textarea name="chat-message-sent" maxlenght="1000" placeholder="Введите сообщение ..."></textarea>
 		<button type="submit"><?= bi('arrow-right-circle') ?></button>
 	</div>
 	<div class="chat-add">

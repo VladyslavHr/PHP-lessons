@@ -91,6 +91,8 @@ margin-right: 10px;
 
 .search-block{
     font-size: 0px;
+    flex-grow: 1;
+    display: flex;
 }
 
 .search-block input{
@@ -99,6 +101,8 @@ margin-right: 10px;
     padding: 0px 0 0 10px;
     font-size: 16px;
     border-radius: 4px 0px 0px 4px;
+    flex-grow: 1;
+
 }
 
 .search-block button{
@@ -109,7 +113,6 @@ margin-right: 10px;
     font-size: 16px;
     border-radius: 0px 4px 4px 0px;
     padding: 0 12px 0 12px;
-
 }
 
 .langs-block a{
@@ -2611,6 +2614,8 @@ height: 40px;
 .in-the-cart-desc{
     font-size: 12px;
     color: var(--rozetkaGreen);
+    display: flex;
+    align-items: center;
 }
 
 .cart-add-check svg{
@@ -3622,6 +3627,16 @@ height: 40px;
     margin-left: 170px;
     height: fit-content;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

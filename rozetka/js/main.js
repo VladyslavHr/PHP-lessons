@@ -63,4 +63,12 @@ function show_more_products(current_button, offset, limit){
     let add_to_cart_link = $(event.currentTarget)
     let product_id = add_to_cart_link.data('productid')
     log(product_id)
+    $.get(location.href,
+      {add_to_cart: 1, ajax: 1, product_id: product_id },
+      function(data){
+        log(data)
+        add_to_cart_link.find('.in-the-cart-count').html(data.cart_item_count)
+        add_to_cart_link.find('.in-the-cart-desc').html(data.in_the_cart)
+        $('.cart-count').html(data.cart_items_count)
+    }, 'json')
   }

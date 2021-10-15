@@ -35,7 +35,7 @@ if (isset($_POST['login'])) {
         $is_password_correct = password_verify($entered_password, $current_password);
         // pa($user);
         // var_dump($is_password_correct);
-        sllep(1);
+        sleep(1);
         if($user['role'] === 'admin' && $is_password_correct){
             $_SESSION['user'] = $user;
             $message = "Welcome <b>$user[name]!</b>";

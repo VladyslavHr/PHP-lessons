@@ -45,7 +45,7 @@ if(!defined('ROOT')){
       $user_favs = db_escape($user_favs);
       
       db_query("UPDATE users SET favorites = '$user_favs' WHERE id = '$user_id' ");
-      flash_alert($type = 'success', $message = 'Товар добавлен в избранное');
+      if  (!isset($_GET['ajax'])) flash_alert($type = 'success', $message = 'Товар добавлен в избранное');
       
     }
     if($_GET['favorite'] === 'remove'){
@@ -57,7 +57,7 @@ if(!defined('ROOT')){
         $user_favs = implode('|', $user_favs);
         $user_favs = db_escape($user_favs);
         db_query("UPDATE users SET favorites = '$user_favs' WHERE id = '$user_id' ");
-        flash_alert($type = 'warning', $message = 'Товар удален из избранных');
+        if  (!isset($_GET['ajax'])) flash_alert($type = 'warning', $message = 'Товар удален из избранных');
       }else{
         // $user_favs = [$_GET['id']];
       }
@@ -94,8 +94,20 @@ if(!defined('ROOT')){
     }else{
       $_SESSION['cart']['items'][$product_id] = $product_qtt;
     }
-    flash_alert($type = 'success', $message = 'Товар добавлен в корзину');
-    redirect(query_del(['add_to_cart', 'prduct_id']));
+    if (isset($_GET['ajax']))
+    {
+      $product = ['id' => $product_id];
+      echo json_encode(['status' => 'ok', 
+      'cart_item_count' => cart_item_count($product),
+      'cart_items_count' => cart_items_count(), 
+      'in_the_cart' => in_the_cart($product),
+    ]);
+      exit;
+    }else{
+      flash_alert($type = 'success', $message = 'Товар добавлен в корзину');
+      redirect(query_del(['add_to_cart', 'prduct_id']));
+    }
+
   }
 
 
@@ -201,4 +213,5 @@ if(!defined('ROOT')){
       redirect('?action=cart');
     }
   
+
 

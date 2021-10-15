@@ -54,6 +54,12 @@
         </ul>
     </div>
 
+    <div class="admin-left-menu">
+        <h5 class="js-open-modal" data-target="left-menu-sub-chats">Chats</h5>
+        <ul class="admin-left-menu-sub list-unstyled <?= menu_sub_active('chats')?>" id="left-menu-sub-chats">
+        <li><a class="<?= menu_item_active('chats')?>" href="?action=chats">Chats list</a></li>
+        </ul>
+    </div>
 </div>
 <?php endif ?>
     <div class="admin-main-content">

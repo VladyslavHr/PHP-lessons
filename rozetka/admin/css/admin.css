@@ -167,6 +167,91 @@
     color: #fff;
 }
 
+.admin-chat-wrap{
+    display: block;
+}
 
+.admin-chat-id-name{
+    display: block;
+    text-align: center;
+    background: #95bfa9;
+    padding: 25px;
+    font-size: 25px;
+    border-radius: 5px;
+}
 
-   
+.admin-chat-id-name a{
+    display: block;
+    text-align: start;
+}
+
+.text-space{
+    padding: 100px;
+    height: 546px;
+}
+
+.admin-user-message{
+    display: block;
+    text-align: start;
+    padding: 20px;
+}
+
+.admin-user-message span{
+    background: #bdbffd;
+    padding: 5px;
+    border-radius: 15px;
+}
+
+.admin-message{
+    display: block;
+    text-align: end;
+    padding: 20px;
+}
+
+.admin-message span{
+    background: #fdbdbd;
+    padding: 5px;
+    border-radius: 15px;
+}
+
+.message-panel{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #95bfa9;
+    border-radius: 10px;
+}
+
+.admin-chat-add span{
+    font-size: 25px;
+    margin: 30px;
+    color: #fd6363;
+}
+
+.admin-chat-message-sent{
+    width: 60%;
+}
+
+.admin-chat-message-sent textarea{
+    width: 90%;
+    height: 150px;
+    flex-grow: 1;
+    background: #dff1e8;
+    border: 0;
+    resize: none;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.admin-chat-message-sent textarea:focus-visible{
+    outline: 0;
+}
+
+.admin-chat-message-sent button{
+    position: absolute;
+    margin: 60px;
+    border: 0;
+    background: none;
+    font-size: 30px;
+    color: #fd6363;
+}

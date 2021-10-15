@@ -480,9 +480,15 @@ function cart_item_count (&$product)
 
 function in_the_cart(&$product)
 {
-    if(isset($_SESSION['cart']['items']) && is_array($_SESSION['cart']['items']) && isset($_SESSION['cart']['items'][$product['id']]))
+    if(isset($_SESSION['cart']['items']) && 
+    is_array($_SESSION['cart']['items']) && 
+    isset($_SESSION['cart']['items'][$product['id']]))
     {
-        return '<div class="in-the-cart">в корзине</div>' ;
+        return 'в корзине
+        <span class="cart-add-check">'
+        . file_get_contents("svg/bootstrap/check-lg.svg") .
+        '</span>'
+        ;
     }
     return '';
 }
