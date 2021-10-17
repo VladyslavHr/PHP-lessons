@@ -10,6 +10,6 @@ pa($files);
     <?php for ($i=2; $i < count($files); $i++): 
         $file = str_replace('.php', '', $files[$i] );
         ?>
-        <li><a href="?action=tests/<?= $file ?>"><?= $file ?></a></li>
+        <li><a href="?action=tests/<?= $file ?>"><?= str_replace('test-', '', $file) ?></a></li>
     <?php endfor ?>
 </ul>

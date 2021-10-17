@@ -30,7 +30,7 @@
             itemsPerSlide: 1,
             autoPlay: false,
           });
-          console.log(Slider);
+          // console.log(Slider);
         </script>
 
         <h2 class="block-title" id="viewed">Акционные предложения</h2>

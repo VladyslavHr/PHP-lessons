@@ -4,6 +4,9 @@
     --templateWidth: 1600px;
 }
 
+.hide{
+    display: none;
+}
 
 *{
     box-sizing: border-box;
@@ -3542,7 +3545,6 @@ height: 40px;
     background: #fff;
     border-radius: 10px;
     margin: 15px;
-    height: 380px;
     width: 300px;
     display: block;
     border: 1px solid #eddddd;

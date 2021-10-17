@@ -168,16 +168,24 @@
 }
 
 .admin-chat-wrap{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.admin-message-wrap{
+    width: 70%;
     display: block;
+    border-right: 1px solid #e9e9e9;
 }
 
 .admin-chat-id-name{
     display: block;
     text-align: center;
-    background: #95bfa9;
+    background: #f1f5ff;
     padding: 25px;
     font-size: 25px;
-    border-radius: 5px;
+    border-bottom: 1px solid #e9e9e9;
 }
 
 .admin-chat-id-name a{
@@ -218,14 +226,14 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background: #95bfa9;
-    border-radius: 10px;
+    background: #f1f5ff;
+    border-top: 1px solid #e9e9e9;
 }
 
 .admin-chat-add span{
     font-size: 25px;
     margin: 30px;
-    color: #fd6363;
+    color: #5a48f5;
 }
 
 .admin-chat-message-sent{
@@ -234,9 +242,9 @@
 
 .admin-chat-message-sent textarea{
     width: 90%;
-    height: 150px;
+    height: 50px;
     flex-grow: 1;
-    background: #dff1e8;
+    background: #f1f5ff;
     border: 0;
     resize: none;
     border-radius: 10px;
@@ -249,9 +257,92 @@
 
 .admin-chat-message-sent button{
     position: absolute;
-    margin: 60px;
+    margin: 10px;
     border: 0;
     background: none;
     font-size: 30px;
-    color: #fd6363;
+    color: #5a48f5;
+}
+
+.chats-list{
+    width: 30%;
+    display: block;
+}
+
+.chat-avatar img{
+    width: 70px;
+    height: 50px;
+}
+
+.chat-list-search{
+    display: block;
+    padding: 25px;
+}
+
+.chat-list-search input{
+    height: 37px;
+    margin-right: 40px;
+    border: none;
+}
+
+.chat-list-search input:focus-visible{
+    outline: 0;
+}
+
+.chat-list-search button{
+    font-size: 17px;
+    border: none;
+    background: #d4e0ff;
+    border-radius: 5px;
+    border-bottom: 1px solid #e9e9e9;
+}
+
+.user-chats-wrapp{
+    height: 614px;
+    overflow-y: auto;
+    border-top: 1px solid #e9e9e9;
+    border-bottom: 1px solid #e9e9e9;
+}
+
+.message-name img{
+    width: 80px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.chat-link{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 25px;
+    text-decoration: none;
+}
+
+.message-name{
+    display: block;
+}
+
+.chat-user-info{
+    width: 60%;
+}
+
+.message-and-time{
+    display: flex;
+    justify-content: space-between;
+}
+
+.chat-user-name{
+    color: black;
+    font-size: 20px;
+}
+
+.message-and-time{
+    margin-top: 10px;
+}
+
+.chat-user-last-message{
+    color: #444141;
+}
+
+.message-time{
+    color: #a59f9f;
 }

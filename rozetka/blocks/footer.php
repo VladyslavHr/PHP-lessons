@@ -107,7 +107,10 @@ if(isset($_GET['open-modal'])){
 		<h4>Чат</h4>
 		<button class="js-open-modal" type="submit" data-target="chat-head">X</button>
 	</div>
-	<div class="chat-dialog">
+	<div class="chat-greeting ">
+		<h3 class="text-center">Enter your name</h3>
+	</div>
+	<div class="chat-dialog hide">
 		<div class="chat-manager">
 			<p>Добрый день</p>
 		</div>
@@ -116,8 +119,8 @@ if(isset($_GET['open-modal'])){
 		</div>
 	</div>
 	<div class="chat-message-sent">
-		<textarea name="chat-message-sent" maxlenght="1000" placeholder="Введите сообщение ..."></textarea>
-		<button type="submit"><?= bi('arrow-right-circle') ?></button>
+		<textarea id = "chat_input" maxlenght="1000" placeholder="Введите сообщение ..."></textarea>
+		<button id="chat_submit"><?= bi('arrow-right-circle') ?></button>
 	</div>
 	<div class="chat-add">
 		<span><?= bi('emoji-smile') ?></span>
@@ -127,7 +130,21 @@ if(isset($_GET['open-modal'])){
 </div>
 
 
+
+
+
 <script src="js/main.js"></script>
+
+<script>
+	$('#chat_submit').click(function(event) {
+		var chat_input = $('#chat_input')
+		var chat_input_value = chat_input.val()
+		chat_input.val('')
+		log(chat_input_value)
+		$('.chat-greeting').addClass('hide')
+		$('.chat-dialog').removeClass('hide')
+	})
+</script>
 
 </body>
 </html>
