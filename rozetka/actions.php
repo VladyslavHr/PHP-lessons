@@ -213,5 +213,34 @@ if(!defined('ROOT')){
       redirect('?action=cart');
     }
   
+  if (isset($_POST['create_chat'])){
+
+    $user_name = db_escape($_POST['user_name']);
+    db_query("INSERT INTO chat_dialogs SET user_name = '$user_name' ");
+
+    $chat_dialog_id = db_query()->lastid();
+
+    echo json_encode([
+      'status' => 'ok',
+      'chat_dialog_id' => $chat_dialog_id,
+    ]);
+    exit;
+  }
+
+
+  if (isset($_POST['send_chat_message']))
+  {
+    $chat_dialog_id = (int)$_POST['chat_dialog_id'];
+    $message = db_escape($_POST['message']);
+    db_query("INSERT INTO chat_messages SET
+    chat_dialog_id = '$chat_dialog_id',
+    `message` = '$message',
+    sent_at = NOW() ");
+        echo json_encode([
+          'status' => 'ok',
+        ]);
+        exit;
+  }
+
 
 

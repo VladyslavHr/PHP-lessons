@@ -112,10 +112,10 @@ if(isset($_GET['open-modal'])){
 	</div>
 	<div class="chat-dialog hide">
 		<div class="chat-manager">
-			<p>Добрый день</p>
+			Добрый день
 		</div>
 		<div class="chat-user">
-			<p>Здравствуйте</p>
+			Здравствуйте
 		</div>
 	</div>
 	<div class="chat-message-sent">
@@ -136,14 +136,53 @@ if(isset($_GET['open-modal'])){
 <script src="js/main.js"></script>
 
 <script>
+var chat_dialog_id 
+var chat_started = false
+
 	$('#chat_submit').click(function(event) {
 		var chat_input = $('#chat_input')
 		var chat_input_value = chat_input.val()
 		chat_input.val('')
 		log(chat_input_value)
+		
+		if(!chat_started){
+			if (chat_input_value.trim()) {
+				start_chat(chat_input_value)
+				chat_started = true
+			}else{
+				$('#chat_input').addClass('fail')
+			}
+	    }else{
+			send_message(chat_input_value)
+		}
+
+	})
+
+
+	function send_message(message) {
+		$.post(location.href,
+			{send_chat_message: 1, chat_dialog_id: chat_dialog_id, message: message},
+			function (data) {
+				if(data.status === 'ok') $('.chat-dialog').append(`<div class="chat-user">${message}</div>`)
+			}, 'json')
+	}
+
+	$('#chat_input').keyup(function() {
+		if(this.value.trim()){
+			$(this).removeClass('fail')
+		}
+	})
+
+
+	function start_chat(chat_input_value) {
 		$('.chat-greeting').addClass('hide')
 		$('.chat-dialog').removeClass('hide')
-	})
+		$.post(location.href,
+		{create_chat: 1, user_name: chat_input_value},
+		function (data) {
+			chat_dialog_id = data.chat_dialog_id
+		}, 'json')
+	}
 </script>
 
 </body>

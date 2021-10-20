@@ -3577,6 +3577,7 @@ height: 40px;
 .chat-dialog{
     height: 250px;
     overflow-y: auto;
+    font-size: 0.8em;
 }
 
 .chat-message-sent{
@@ -3596,6 +3597,10 @@ height: 40px;
 
 .chat-message-sent textarea:focus-visible{
     outline: 0;
+}
+
+.chat-message-sent textarea.fail{
+    outline: 1px solid lightcoral;
 }
 
 .chat-message-sent button{
@@ -3619,22 +3624,49 @@ height: 40px;
 }
 
 .chat-manager{
-    display: block;
-    margin: 9px;
+    display: inline-block;
+    margin: 25px;
     height: fit-content;
+    background: #dfa6a6;
+    border-radius: 7px;
+    padding: 5px;
+    filter: brightness(123%);
 }
 
 .chat-user{
     display: inline-block;
     margin-left: 170px;
     height: fit-content;
+    margin-bottom: 25px;
+    background: #b7b7e5;
+    border-radius: 7px;
+    filter: brightness(123%);
+    padding: 5px;
 }
 
+.jquery-rules-list{
+    background: #e9e9e9;
+    margin: 0px -40px;
+    padding: 40px;
+}
 
+.jquery-rules .block{
+    background: #fff;
+    padding: 15px;
+    margin: 20px 0px;
+}
 
+.jquery-rules .block .title{
+    font-size: 30px;
+}
 
+.jquery-rules .block .description{
+    margin: 20px 0px;
+}
 
+.jquery-rules .block .example{
 
+}
 
 
 
