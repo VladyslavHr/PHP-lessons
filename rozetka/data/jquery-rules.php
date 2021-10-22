@@ -3,6 +3,7 @@
 $jquery_rules = [
     [
         'title' => '.addClass()',
+        'type' => 'JavaScript',
         'description' => 'Adds the specified class(es) to each element in the set of matched elements.',
         'example' => '$( "p" ).addClass( "myClass yourClass" );',
     ],

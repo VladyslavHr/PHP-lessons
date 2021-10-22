@@ -4,18 +4,28 @@ let { log } = console
 document.querySelectorAll('.js-open-modal').forEach(function(el){
     el.addEventListener('click', function(e){
     	if(e.target !== this) return false
-        var modal = document.getElementById(this.dataset.target)
-    	
-    	if(modal.classList.contains('active')){
-    		setTimeout(function(){modal.classList.remove('active')}, 400)
-    		modal.classList.add('fade')
-    	}else{
-    		modal.classList.remove('fade')
-    		modal.classList.add('active')
-    	}
+      js_open_modal(this)
     })
 })
 
+
+// js open modal-nocheck
+document.querySelectorAll('.js-open-modal-nocheck').forEach(function(el){
+  el.addEventListener('click', function(e){
+    js_open_modal(this)
+  })
+})
+
+function js_open_modal(element) {
+  var modal = document.getElementById(element.dataset.target)	
+  if(modal.classList.contains('active')){
+    setTimeout(function(){modal.classList.remove('active')}, 400)
+    modal.classList.add('fade')
+  }else{
+    modal.classList.remove('fade')
+    modal.classList.add('active')
+  }
+}
 
 
 //show-more-btn

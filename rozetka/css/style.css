@@ -32,6 +32,10 @@ button{
     cursor: pointer;
 }
 
+.d-flex{
+    display: flex;
+}
+
 .text-center{
     text-align: center;
 }
@@ -3548,6 +3552,15 @@ height: 40px;
     width: 300px;
     display: block;
     border: 1px solid #eddddd;
+    display: none;
+}
+
+.chat.active{
+    display: block;
+}
+
+.chat.fade{
+    display: none;
 }
 
 .chat-head{
@@ -3664,13 +3677,62 @@ height: 40px;
     margin: 20px 0px;
 }
 
-.jquery-rules .block .example{
-
+.jquery-rules .block .badge{
+    float: right;
+    font-size: 16px;
+    padding: 5px 20px;
+    border: 1px solid #ccc;
+    background: #eee;
+    border-radius: 6px;
 }
 
+.jquery-rules .block .badge.JavaScript{
+    border-color: #c8cb00;
+    background: #f7d117;
+}
 
+.jquery-rules .block .badge.jQuery{
+    border-color: #0769ad;;
+    background: #7acef4;;
+}
 
+.jquery-rules-input{
+    flex-grow: 1;
+    margin-left: 50px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
 
+.jquery-rules-input:focus-visible{
+    outline: 1px solid lightskyblue;
+}
+
+.jquery-rules #result_count{
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: normal;
+    color: green;
+}
+
+.chat-button{
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    background: green;
+    left: 15px;
+    bottom: 15px;
+    color: #fff;
+    line-height: 60px;
+    text-align: center;
+    font-size: 37px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.chat-button svg{
+    width: 25px;
+    height: 25px;
+}
 
 
 

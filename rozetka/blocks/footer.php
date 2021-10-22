@@ -95,17 +95,24 @@ if(isset($_GET['open-modal'])){
 		<li><a href="index.php?action=tests" >
 		<?php include 'svg/bootstrap/cup-straw.svg' ?>		
 		Test Page</a></li>
+		<li><a href="index.php?action=jquery-rules" >
+		<?php include 'svg/bootstrap/tools.svg' ?>		
+		jQuery</a></li>
 	</ul>
 </div>
 
 
-<div class="chat js-open-modal" data-target="chat-head" id="chat-head">
+<div class="chat-button js-open-modal-nocheck" data-target="chat_wrapper">
+	<?php include 'svg/bootstrap/chat-dots.svg' ?>
+</div>
+
+<div class="chat js-open-modal" id="chat_wrapper">
 	<div class="chat-head">
 		<div class="chat-logo">
 			<img src="img/rozetka-logo.png" alt="" />
 		</div>
 		<h4>Чат</h4>
-		<button class="js-open-modal" type="submit" data-target="chat-head">X</button>
+		<button class="js-open-modal-nocheck" data-target="chat_wrapper"><?php include 'svg/bootstrap/x.svg' ?></button>
 	</div>
 	<div class="chat-greeting ">
 		<h3 class="text-center">Enter your name</h3>
