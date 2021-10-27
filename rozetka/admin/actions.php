@@ -69,3 +69,38 @@ if(!empty($_GET['order_status'])){
     db_query("UPDATE orders SET `status` = '$order_status' WHERE id = '$order_id' ");
     redirect(query_del(['order_id', 'order_status']));
   }
+
+  if(isset($_POST['generate_jquery_export'])){
+
+    $arr = db_query("SELECT * FROM jq_rules");
+
+    $json = json_encode($arr);
+
+    $bytes = file_put_contents('data/jquery_export.json', $json);
+
+    echo json_encode([
+      'status' => $bytes ? 'ok' : 'error',
+    ]);
+    exit;
+  }
+
+  if(isset($_GET['jquery_import'])){
+    if($_FILES['import_file']['size'] > 0){
+        move_uploaded_file($_FILES["import_file"]["tmp_name"], 'data/file-for-import.json');
+        $file = file_get_contents('data/file-for-import.json');
+        $rules = json_decode($file, true);
+        foreach ( $rules as $rule)
+        {
+            $rule = db_escape($rule);
+            $sql = "UPDATE jq_rules SET 
+            title = '$rule[title]',
+            `description` = '$rule[description]',
+            example = '$rule[example]',
+            `type` = '$rule[type]'
+            WHERE id = '$rule[id]'";
+            db_query($sql);
+        }
+    }
+    redirect(query_del(['jquery_import']));
+    // exit;
+  }

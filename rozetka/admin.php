@@ -5,7 +5,9 @@ include 'classes/DB.class.php';
 include 'langs.php';
 include 'functions.php';
 include 'admin/actions.php';
-include 'admin/blocks/header.php';
+
+
+if(!$_POST) include 'admin/blocks/header.php';
 
 
 
@@ -17,4 +19,7 @@ include 'admin/blocks/header.php';
   }
 
 
- include 'admin/blocks/footer.php';
+if(!$_POST) include 'admin/blocks/footer.php';
+
+
+

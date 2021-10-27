@@ -8,11 +8,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="admin/css/admin.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"  crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
 </head>
 <body class="<?= $_GET['action'] ?? '' ?>">
     
@@ -67,10 +67,10 @@
     </div>
 
     <div class="admin-left-menu">
-        <h5 class="js-open-modal" data-target="left-menu-sub-chats">jQuery-rules</h5>
-        <ul class="admin-left-menu-sub list-unstyled <?= menu_sub_active('chats')?>" id="left-menu-sub-chats">
-        <li><a class="<?= menu_item_active('chats')?>" href="?action=jquery">jQuery-rules</a></li>
-        <li><a class="<?= menu_item_active('chats')?>" href="?action=jquery-add">jQuery-rules-add</a></li>
+        <h5 class="js-open-modal" data-target="left-menu-sub-jquery">jQuery-rules</h5>
+        <ul class="admin-left-menu-sub list-unstyled <?= menu_sub_active('jquery')?>" id="left-menu-sub-jquery">
+        <li><a class="<?= menu_item_active('jquery')?>" href="?action=jquery">jQuery-rules</a></li>
+        <li><a class="<?= menu_item_active('jquery-add')?>" href="?action=jquery-add">jQuery-rules-add</a></li>
         </ul>
     </div>
 

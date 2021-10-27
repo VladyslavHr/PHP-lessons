@@ -63,8 +63,8 @@ if (isset($_POST['new_rule'])) {
     <div class="col">
         <label class="form-label">Type</label>
             <select name="type" class="form-select">
-            <option selected="selected" value="j_query">jQuery</option>
-            <option  value="java_script">JavaScript</option>
+            <option selected="selected" value="jQuery">jQuery</option>
+            <option  value="JavaScript">JavaScript</option>
             </select>
     </div>
   </div>

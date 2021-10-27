@@ -354,7 +354,7 @@
     padding: 40px;
 }
 
- block{
+.block{
     background: #fff;
     padding: 15px;
     margin: 20px 0px;
@@ -408,4 +408,33 @@
 .rule-delete{
     font-size: 20px;
     margin-left: 35px;
+}
+
+.admin-search{
+    margin-left: 50px;
+    display: flex;
+    flex-grow: 1;
+}
+
+.admin-search input{
+    flex-grow: 1;
+    font-size: 20px;
+    height: 45px;
+    padding: 10px;
+    border-radius: 7px;
+    border: 1px solid #e9e9e9;
+}
+
+.admin-search input:focus-visible{
+
+    outline: 0;
+}
+
+.admin-search button{
+    border-radius: 7px;
+    height: 45px;
+    font-size: 18px;
+    background-color: #0d6efd;
+    color: #fff;
+    border: none;
 }
