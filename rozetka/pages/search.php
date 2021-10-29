@@ -2,7 +2,7 @@
 <?php 
 
 $query = db_escape($_GET['query']);
-$result_arr = db_query("SELECT * FROM products WHERE title like '%$query%' ");
+$result_arr = db_query("SELECT * FROM products WHERE title like '%$query%' LIMIT 50 ");
 $count = count($result_arr);
 
 

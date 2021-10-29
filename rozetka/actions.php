@@ -4,15 +4,41 @@ if(!defined('ROOT')){
   }
   
 
-  if (isset($_POST['login']) && isset($_POST['email']) && isset($_POST['password'])){
+  if (isset($_POST['email']) && isset($_POST['password'])){
 
-    if ($_POST['email'] === 'admin' && $_POST['password'] === '123'){
-       
-        $_SESSION['user'] = [
-            'name' => 'Admin',
-        ];
+      if (empty($_POST['email'])){
+        $message = 'Please enter email!';
+        flash_alert('danger',$message);
+        
+        
     }
-    header('Location:?');
+
+    if (empty($_POST['password'])){
+        $message = 'Please enter password!';
+        flash_alert('danger' ,$message);
+        
+    }
+
+    $email = db_escape($_POST['email']);
+    $user = db_query("SELECT * FROM users WHERE email = '$email' ");
+    if($user){
+        $user = $user[0];
+        $current_password = $user['password'];
+        $entered_password = $_POST['password'];
+        $is_password_correct = password_verify($entered_password, $current_password);
+        // pa($user);
+        // var_dump($is_password_correct);
+        sleep(1);
+        if($is_password_correct){
+            $_SESSION['user'] = $user;
+            $message = "Welcome <b>$user[name]!</b>";
+            flash_alert('primary', $message);
+        }else{
+            $message = 'Wrong email or password!';
+            flash_alert('danger', $message);
+        }
+    }
+    redirect(query_del([]));
   }
 
   if (isset($_GET['logout'])) {

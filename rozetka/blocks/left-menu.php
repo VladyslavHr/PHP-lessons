@@ -10,12 +10,12 @@
             <?php if($avatar_exists = false): ?>
             <img src="" alt="">
             <?php else: ?>
-                <span>A</span>
+                <span><?= auth_check() ? auth_user('name')[0] : 'X' ?></span>
             <?php endif ?>
         </a>
         <a href="?action=user-page" class="left-menu-user">
-                <h3>Vlad</h3>
-                <p>Vladysalvhrebennikov@gmail.com</p>
+                <h3><?= auth_check() ? auth_user('name') : 'Please login' ?></h3>
+                <p><?= auth_check() ? auth_user('email') : '' ?></p>
         </a>
         
     </div>

@@ -100,6 +100,7 @@ margin-right: 10px;
     font-size: 0px;
     flex-grow: 1;
     display: flex;
+    position: relative;
 }
 
 .search-block input{
@@ -281,11 +282,6 @@ margin-right: 10px;
 .menu-categories li>ul a{
 display: block;
 padding: 5px 10px;
-}
-
-.logo img{
-    /* transition: all 0.5s cubic-bezier(.17,.67,.98,.63); */
-    animation: 3s infinite logo-show;
 }
 
 .logo:hover img{
@@ -3734,8 +3730,41 @@ height: 40px;
     height: 25px;
 }
 
+.carousel-buttons,
+.thumbs{
+    z-index: 1;
+}
 
+.result-list{
+    margin: 0;
+    position: absolute;
+    width: 100%;
+    font-size: 16px;
+    background: #fff;
+    list-style: none;
+    padding: 15px 0px 15px 0px ;
+    z-index: 1;
+    top: 100%;
+}
 
+.result-list li{
+    padding: 10px 10px 15px 10px;
+    cursor: pointer;
+}
+
+.result-list a{
+    color: black;
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+.result-list li:last-child{
+    padding: 10px;
+}
+
+.result-list li:hover{
+    background: #e9e9e9;
+}
 
 
 

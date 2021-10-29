@@ -1,1 +1,74 @@
-[{"id":"1","title":".addClass()","description":"Adds the specified class(es) to each element in the set of matched elements.","example":"$( \"p\" ).addClass( \"myClass yourClass\" );","type":"JavaScript"},{"id":"2","title":".removeClass()","description":"Remove a single class or multiple classes from each element in the set of matched elements.","example":"$( \"p\" ).removeClass( \"myClass noClass\" ).addClass( \"yourClass\" );","type":"jQuery"},{"id":"3","title":".hasClass()","description":"Determine whether any of the matched elements are assigned the given class.","example":"$( \"#mydiv\" ).hasClass( \"foo\" )","type":"jQuery"},{"id":"4","title":".val([string])","description":"Get the current value of the first element in the set of matched elements.","example":"\/\/ Get the value from the selected option in a dropdown\r\n        $( \"select#foo option:checked\" ).val();\r\n         \r\n        \/\/ Get the value from a dropdown select directly\r\n        $( \"select#foo\" ).val();\r\n         \r\n        \/\/ Get the value from a checked checkbox\r\n        $( \"input[type=checkbox][name=bar]:checked\" ).val();\r\n         \r\n        \/\/ Get the value from a set of radio buttons\r\n        $( \"input[type=radio][name=baz]:checked\" ).val();","type":"jQuery"},{"id":"5","title":"jQuery.post()","description":"Send data to the server using a HTTP POST request.","example":"$.post( \"ajax\/test.html\", function( data ) {\r\n            $( \".result\" ).html( data );\r\n          });","type":"jQuery"},{"id":"6","title":"jQuery.trim()","description":"Remove the whitespace from the beginning and end of a string.","example":"$.trim(\"    hello, how are you?    \");","type":"jQuery"},{"id":"7","title":"jQuery.append()","description":"Insert content, specified by the parameter, to the end of each element in the set of matched elements.","example":"$( \".inner\" ).append( \"<p>Test<\/p>\" );\r\n        $( \".container\" ).append( $( \"h2\" ) );","type":"jQuery"},{"id":"8","title":"jQuery.click()","description":"Bind an event handler to the \"click\" JavaScript event, or trigger that event on an element.","example":"$( \"#target\" ).click(function() {\r\n            alert( \"Handler for .click() called.\" );\r\n          });\r\n          $( \"#other\" ).click(function() {\r\n            $( \"#target\" ).click();\r\n          });","type":"jQuery"},{"id":"9","title":"jQuery.keyup()","description":"Bind an event handler to the \"keyup\" JavaScript event, or trigger that event on an element.","example":"$( \"#target\" ).keyup(function() {\r\n            alert( \"Handler for .keyup() called.\" );\r\n          });\r\n          $( \"#other\" ).click(function() {\r\n            $( \"#target\" ).keyup();\r\n          });","type":"jQuery"}]
+[
+    {
+        "id": "1",
+        "title": ".TESTaddClass()",
+        "description": "Adds the specified class(es) to each element in the set of matched elements.",
+        "example": "$( \"p\" ).addClass( \"myClass yourClass\" );",
+        "type": "JavaScript",
+        "link": "https:\/\/api.jquery.com\/addclass\/"
+    },
+    {
+        "id": "2",
+        "title": ".removeClass()",
+        "description": "Remove a single class or multiple classes from each element in the set of matched elements.",
+        "example": "$( \"p\" ).removeClass( \"myClass noClass\" ).addClass( \"yourClass\" );",
+        "type": "jQuery",
+        "link": ""
+    },
+    {
+        "id": "3",
+        "title": ".hasClass()",
+        "description": "Determine whether any of the matched elements are assigned the given class.",
+        "example": "$( \"#mydiv\" ).hasClass( \"foo\" )",
+        "type": "jQuery",
+        "link": ""
+    },
+    {
+        "id": "4",
+        "title": ".val([string])",
+        "description": "Get the current value of the first element in the set of matched elements.",
+        "example": "\/\/ Get the value from the selected option in a dropdown\r\n        $( \"select#foo option:checked\" ).val();\r\n         \r\n        \/\/ Get the value from a dropdown select directly\r\n        $( \"select#foo\" ).val();\r\n         \r\n        \/\/ Get the value from a checked checkbox\r\n        $( \"input[type=checkbox][name=bar]:checked\" ).val();\r\n         \r\n        \/\/ Get the value from a set of radio buttons\r\n        $( \"input[type=radio][name=baz]:checked\" ).val();",
+        "type": "jQuery",
+        "link": ""
+    },
+    {
+        "id": "5",
+        "title": "jQuery.post()",
+        "description": "Send data to the server using a HTTP POST request.",
+        "example": "$.post( \"ajax\/test.html\", function( data ) {\r\n            $( \".result\" ).html( data );\r\n          });",
+        "type": "jQuery",
+        "link": ""
+    },
+    {
+        "id": "6",
+        "title": "jQuery.trim()",
+        "description": "Remove the whitespace from the beginning and end of a string.",
+        "example": "$.trim(\"    hello, how are you?    \");",
+        "type": "jQuery",
+        "link": ""
+    },
+    {
+        "id": "7",
+        "title": "jQuery.append()",
+        "description": "Insert content, specified by the parameter, to the end of each element in the set of matched elements.",
+        "example": "$( \".inner\" ).append( \"<p>Test<\/p>\" );\r\n        $( \".container\" ).append( $( \"h2\" ) );",
+        "type": "jQuery",
+        "link": ""
+    },
+    {
+        "id": "8",
+        "title": "jQuery.click()",
+        "description": "Bind an event handler to the \"click\" JavaScript event, or trigger that event on an element.",
+        "example": "$( \"#target\" ).click(function() {\r\n            alert( \"Handler for .click() called.\" );\r\n          });\r\n          $( \"#other\" ).click(function() {\r\n            $( \"#target\" ).click();\r\n          });",
+        "type": "jQuery",
+        "link": ""
+    },
+    {
+        "id": "9",
+        "title": "jQuery.keyup()",
+        "description": "Bind an event handler to the \"keyup\" JavaScript event, or trigger that event on an element.",
+        "example": "$( \"#target\" ).keyup(function() {\r\n            alert( \"Handler for .keyup() called.\" );\r\n          });\r\n          $( \"#other\" ).click(function() {\r\n            $( \"#target\" ).keyup();\r\n          });",
+        "type": "jQuery",
+        "link": ""
+    }
+]

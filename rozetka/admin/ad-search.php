@@ -12,16 +12,15 @@ $limit = $_GET['limit'] ?? 5;
 
 
 $query = db_escape($_GET['query']);
-$result_arr = db_query("SELECT * FROM jq_rules WHERE title like '%$query%' ");
+$result_arr = db_query("SELECT * FROM jq_rules WHERE title like '%$query%' LIMIT $limit OFFSET $offset ");
 
 
-$total_count = db_query("SELECT count(*) FROM jq_rules");
+$total_count = db_query("SELECT count(*) FROM jq_rules WHERE title like '%$query%' ");
 $total_count = $total_count ? $total_count[0]['count(*)'] : 0;
 
 ?>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"  crossorigin="anonymous"></script>
 
@@ -75,3 +74,11 @@ $total_count = $total_count ? $total_count[0]['count(*)'] : 0;
     </div>
     <?php endforeach ?>
 </div>
+
+
+
+<script>
+      document.querySelectorAll('pre code').forEach((el) => {
+    hljs.highlightElement(el);
+});
+</script>

@@ -79,6 +79,8 @@ function tovarov($count)
     
     if($count < 5) return "Найдено $count товара";
 
+    if($count > 49) return "Показано первые $count товаров";
+
     else return "Найдено $count товаров";
 }
 

@@ -74,7 +74,7 @@ if(!empty($_GET['order_status'])){
 
     $arr = db_query("SELECT * FROM jq_rules");
 
-    $json = json_encode($arr);
+    $json = json_encode($arr, 128);
 
     $bytes = file_put_contents('data/jquery_export.json', $json);
 
@@ -91,14 +91,28 @@ if(!empty($_GET['order_status'])){
         $rules = json_decode($file, true);
         foreach ( $rules as $rule)
         {
+            if(!$rule['link']) continue;
             $rule = db_escape($rule);
-            $sql = "UPDATE jq_rules SET 
-            title = '$rule[title]',
-            `description` = '$rule[description]',
-            example = '$rule[example]',
-            `type` = '$rule[type]'
-            WHERE id = '$rule[id]'";
-            db_query($sql);
+            $exists = db_query("SELECT id FROM jq_rules WHERE link = '$rule[link]' ");
+            if($exists){
+                $sql = "UPDATE jq_rules SET 
+                    title = '$rule[title]',
+                    `description` = '$rule[description]',
+                    example = '$rule[example]',
+                    `type` = '$rule[type]',
+                    link = '$rule[link]'
+                    WHERE link = '$rule[link]'";
+                db_query($sql);
+            }else{
+                $sql = "INSERT INTO jq_rules SET 
+                    title = '$rule[title]',
+                    `description` = '$rule[description]',
+                    example = '$rule[example]',
+                    `type` = '$rule[type]',
+                    link = '$rule[link]'";
+                db_query($sql);
+            }
+
         }
     }
     redirect(query_del(['jquery_import']));
