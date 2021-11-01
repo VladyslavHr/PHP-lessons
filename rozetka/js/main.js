@@ -30,8 +30,6 @@ function js_open_modal(element) {
 
 //show-more-btn
 function show_more_products(current_button, offset, limit){
-    console.log(offset)
-    console.log(limit)
     $.post(location.href, 
       {show_more_products: 1, offset: offset, limit: limit}, 
       function(data){
@@ -55,9 +53,6 @@ function show_more_products(current_button, offset, limit){
       }
       var userId = $('body').data('userid')
       var product_id = $(event.currentTarget).data('productid')
-      console.log(event.currentTarget)
-      console.log(action)
-      console.log(userId)
       $.get(location.href,  
         {favorite: action, userId: userId, product_id: product_id, ajax: 1},
         function(data){
@@ -72,13 +67,30 @@ function show_more_products(current_button, offset, limit){
     event.preventDefault()
     let add_to_cart_link = $(event.currentTarget)
     let product_id = add_to_cart_link.data('productid')
-    log(product_id)
     $.get(location.href,
       {add_to_cart: 1, ajax: 1, product_id: product_id },
       function(data){
-        log(data)
         add_to_cart_link.find('.in-the-cart-count').html(data.cart_item_count)
         add_to_cart_link.find('.in-the-cart-desc').html(data.in_the_cart)
         $('.cart-count').html(data.cart_items_count)
     }, 'json')
   }
+
+
+  
+  $('#search_input').on('keyup', function(){
+    if(this.value.length < 2) return false
+    var search_input = $(this)
+    $.post(location.href,
+      {ajax_search: 1, query: this.value},
+      function(data){
+        log(data.results)
+        if(data.results && data.results.length) {
+          search_input.addClass('has-results')
+          var results_html = data.results.map(function(el){
+            return '<li><a href="'+el.link+'">' + el.title.substr(0,80) + '</a></li>'
+          })
+          $('#result_list').html(results_html)
+        }
+      }, 'json')
+  })

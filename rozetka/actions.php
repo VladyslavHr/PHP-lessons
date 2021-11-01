@@ -269,6 +269,21 @@ if(!defined('ROOT')){
   }
 
 
+  if (isset($_POST['ajax_search'])) {
+    $query = db_escape($_POST['query']);
+    $results = db_query("SELECT id, title FROM products WHERE title LIKE '%$query%' LIMIT 10 ");
+    $results = array_map(function($product)
+    {
+      $product['link'] = product_link($product['id']);
+      return $product;
+    }, $results);
+    echo json_encode([
+      'success' => 'ok',
+      'results' => $results,
+    ]);
+    exit;
+  }
+
 
 
 

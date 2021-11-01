@@ -2,14 +2,14 @@
         <?php edit_product_link($product['id'])?> 
             <div class="category-list-item-left">
               <?php product_heart($product) ?>
-                <a class="category-product-image" href="?action=product&tab=1&id=<?= $product['id'] ?>">
+                <a class="category-product-image" href="<?= product_link($product['id']) ?>">
                   <img class="image-main" src="<?= get_product_image_src($product) ?>" alt="" >
                   <img class="image-hover" src="<?= get_gallery_image_src($product) ?>" alt="" >
                 </a>
             </div>
             <div class="category-list-item-right">
               <h2 class="category-title">
-                <a href="?action=product&tab=1&id=<?= $product['id'] ?>">
+                <a href="<?= product_link($product['id']) ?>">
                   <?= $product['title'] ?> <?php if(auth_admin()): ?> [<?=$product['id'] ?>] <?php endif ?>
                 </a>
                 

@@ -17,7 +17,7 @@ if(isset($_POST['edit_rule']))
     `type` = '$type'
     WHERE id = '$rule_id'");
 
-    if($_POST['edit_rule'] === 'save') redirect("admin.php?action=jquery-edit&edit_rule=$rule_id");
+    if($_POST['edit_rule'] === 'save') redirect("admin.php?action=jquery-edit&rule_id=$rule_id");
     if($_POST['edit_rule'] === 'save_list') redirect('admin.php?action=jquery');
 
 }
@@ -43,20 +43,20 @@ $rule = $rule[0];
   </div>
   <div class="col">
   <label class="form-label">Description</label>
-    <textarea name="description" rows="4" value="<?=$rule['description']?>" type="text" max="100" class="form-control" placeholder="Description" aria-label="description"> </textarea>
+    <textarea name="description" rows="4" class="form-control" placeholder="Description"><?=$rule['description']?></textarea>
   </div>
 </div>
 
 <div class="row my-3">
   <div class="col">
   <label class="form-label">Example</label>
-    <textarea name="example" rows="4" value="<?=$rule['example']?>" type="text" max="100" class="form-control" placeholder="Example" aria-label="Example"> </textarea>
+    <textarea name="example" rows="4" class="form-control" placeholder="Example"><?=$rule['example']?></textarea>
   </div>
   <div class="col">
   <label class="form-label">Type</label>
   <select name="type" class="form-select">
-    <option <?= if_selected($rule['type'], '1') ?> value="jquery">jQuery</option>
-    <option <?= if_selected($rule['type'], '0') ?> value="java_script">JavaScript</option>
+    <option <?= if_selected($rule['type'], 'jQuery') ?> value="jQuery">jQuery</option>
+    <option <?= if_selected($rule['type'], 'JavaScript') ?> value="JavaScript">JavaScript</option>
     </select>
   </div>
 </div>

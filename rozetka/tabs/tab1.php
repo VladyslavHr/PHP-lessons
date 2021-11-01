@@ -133,7 +133,10 @@ $card = $product['card'] ? 'cards/'.$product['card'] : 'img/noimage.png';
                         </div>
                         <a href="<?= query_add(['add_to_cart' => 1, 'product_id' => $product['id']])?>" class="add-to-cart">
                         <?php include 'svg/cart.svg' ?>   
-                        Купить</a>
+                        Купить
+                        <span class="add-to-cart-count"><?= cart_item_count($product) ?></span>
+                        </a>
+                        
                         <div class="buy-credit">Купить в кредит</div>
                         <div class="compare">
                             <?php include 'svg/icon-compare.svg'?>
