@@ -131,10 +131,10 @@ $card = $product['card'] ? 'cards/'.$product['card'] : 'img/noimage.png';
                         <?php endif; ?>
 
                         </div>
-                        <a href="<?= query_add(['add_to_cart' => 1, 'product_id' => $product['id']])?>" class="add-to-cart">
+                        <a onclick="add_to_cart(event)" data-productid="<?= $product['id'] ?>" href="<?= query_add(['add_to_cart' => 1, 'product_id' => $product['id']])?>" class="add-to-cart">
                         <?php include 'svg/cart.svg' ?>   
                         Купить
-                        <span class="add-to-cart-count"><?= cart_item_count($product) ?></span>
+                        <span class="add-to-cart-count in-the-cart-count"><?= cart_item_count($product) ?></span>
                         </a>
                         
                         <div class="buy-credit">Купить в кредит</div>
@@ -142,7 +142,8 @@ $card = $product['card'] ? 'cards/'.$product['card'] : 'img/noimage.png';
                             <?php include 'svg/icon-compare.svg'?>
                         </div>
                         <div class="favorite">
-                            <?php include 'svg/heart-empty.svg' ?>
+                            <?= product_heart($product) ?>
+                            <!-- <?php include 'svg/heart-empty.svg' ?> -->
                         </div>
 
                     </div>
@@ -150,7 +151,7 @@ $card = $product['card'] ? 'cards/'.$product['card'] : 'img/noimage.png';
                         <?php include 'svg/icon-bonus-premium.svg' ?>
                     <b>+ 189 бонусных ₴</b>&nbsp; 
                     при покупке этого товара
-                    &nbsp; <a href="<?= $product['url'] ?>">дельцев Premium</a> 
+                    &nbsp; <a href="<?= $product['url'] ?>">владельцев Premium</a> 
                     </div>
                 </div>
                  <div class="specs">

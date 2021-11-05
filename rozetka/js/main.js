@@ -1,4 +1,4 @@
-let { log } = console
+var { log } = console
 
 // js open modal
 document.querySelectorAll('.js-open-modal').forEach(function(el){
@@ -94,3 +94,6 @@ function show_more_products(current_button, offset, limit){
         }
       }, 'json')
   })
+
+  
+

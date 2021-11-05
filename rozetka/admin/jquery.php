@@ -16,7 +16,7 @@ if(!empty($_GET['delete'])){
 
 
   $offset = $_GET['offset'] ?? 0;
-  $limit = $_GET['limit'] ?? 5;
+  $limit = $_GET['limit'] ?? 100;
 
 
 if (isset($_GET['query']))

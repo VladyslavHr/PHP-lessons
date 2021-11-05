@@ -6,7 +6,7 @@ if ($_POST) $_SESSION['post'] = $_POST;
 if ($_GET) $_SESSION['get'] = $_GET;
 
 // редиректит на страницу логина не авторизованых пользователей
-if($_GET['action'] !== 'login' && !isset($_SESSION['user'])){
+if(isset($_GET['action']) && $_GET['action'] !== 'login' && !isset($_SESSION['user'])){
     flash_alert('danger','Pleas authorise!');
     redirect('admin.php?action=login');
 }
@@ -117,4 +117,29 @@ if(!empty($_GET['order_status'])){
     }
     redirect(query_del(['jquery_import']));
     // exit;
+  }
+
+  if (isset($_POST['get_chat_messages'])) {
+    $chat_id = (int)$_POST['chatId'];
+    $messages = db_query("SELECT * FROM chat_messages WHERE chat_dialog_id = '$chat_id'");
+    echo json_encode([
+      'status' => 'ok',
+      'messages' => $messages,
+    ]);
+    exit;
+  }
+
+  if(isset($_POST['admin_chat_send_message']))
+  {
+    $chat_dialog_id = (int)$_POST['chatId'];
+    $message = db_escape($_POST['message']);
+    db_query("INSERT INTO chat_messages SET
+    chat_dialog_id = '$chat_dialog_id',
+    `message` = '$message',
+    `from` = 'admin',
+    sent_at = NOW() ");
+        echo json_encode([
+          'status' => 'ok',
+        ]);
+        exit;
   }

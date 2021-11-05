@@ -19,6 +19,12 @@ if (isset($_POST['new_rule'])) {
       flash_alert('danger', $message);
       redirect('admin.php?action=jquery-add');
     }
+
+    if (empty($_POST['link'])){
+      $message = 'Please add link!';
+      flash_alert('danger', $message);
+      redirect('admin.php?action=jquery-add');
+    }
     }
     
     // Create
@@ -27,12 +33,14 @@ if (isset($_POST['new_rule'])) {
         $description = db_escape($_POST['description']);
         $type = db_escape($_POST['type']);
         $example = db_escape($_POST['example']);
+        $link = db_escape($_POST['link']);
 
         db_query("INSERT INTO jq_rules SET
           title = '$title',
           `description` = '$description',
           `type` = '$type',
-          example = '$example'");
+          example = '$example',
+          link = '$link' ");
     
           $message = 'Rule add successfully!';
           flash_alert('success', $message);
@@ -67,6 +75,9 @@ if (isset($_POST['new_rule'])) {
             <option  value="JavaScript">JavaScript</option>
             </select>
     </div>
+
+  <label class="form-label">Link</label>
+    <input name="link" type="text" class="form-control" placeholder="Link" aria-label="Link">
   </div>
 
   <div class="col">

@@ -548,5 +548,5 @@ function show_more_btn($offset, $limit)
 
 function product_link ($product_id)
 {
-    return '?action=product&tab=1&id' . $product_id;
+    return '?action=product&tab=1&id=' . $product_id;
 }

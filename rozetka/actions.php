@@ -242,13 +242,14 @@ if(!defined('ROOT')){
   if (isset($_POST['create_chat'])){
 
     $user_name = db_escape($_POST['user_name']);
-    db_query("INSERT INTO chat_dialogs SET user_name = '$user_name' ");
+    db_query("INSERT INTO chat_dialogs SET user_name = '$user_name', created_at = NOW() ");
 
     $chat_dialog_id = db_query()->lastid();
 
     echo json_encode([
       'status' => 'ok',
       'chat_dialog_id' => $chat_dialog_id,
+      'greeting' => "Добрый день $user_name!",
     ]);
     exit;
   }
@@ -269,6 +270,8 @@ if(!defined('ROOT')){
   }
 
 
+
+
   if (isset($_POST['ajax_search'])) {
     $query = db_escape($_POST['query']);
     $results = db_query("SELECT id, title FROM products WHERE title LIKE '%$query%' LIMIT 10 ");
@@ -283,6 +286,7 @@ if(!defined('ROOT')){
     ]);
     exit;
   }
+
 
 
 

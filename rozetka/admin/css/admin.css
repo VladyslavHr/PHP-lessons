@@ -171,12 +171,15 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    height: 100%;
 }
 
 .admin-message-wrap{
     width: 70%;
-    display: block;
+    display: flex;
+    flex-direction: column;
     border-right: 1px solid #e9e9e9;
+    height: 100%;
 }
 
 .admin-chat-id-name{
@@ -194,17 +197,18 @@
 }
 
 .text-space{
-    padding: 100px;
-    height: 546px;
+    padding: 50px;
+    overflow-y: auto;
+    flex-grow: 1;
 }
 
-.admin-user-message{
+.client-message{
     display: block;
     text-align: start;
     padding: 20px;
 }
 
-.admin-user-message span{
+.client-message span{
     background: #bdbffd;
     padding: 5px;
     border-radius: 15px;
@@ -240,7 +244,7 @@
     width: 60%;
 }
 
-.admin-chat-message-sent textarea{
+.admin-chat-message-sent input{
     width: 90%;
     height: 50px;
     flex-grow: 1;
@@ -251,8 +255,8 @@
     margin: 5px;
 }
 
-.admin-chat-message-sent textarea:focus-visible{
-    outline: 0;
+.admin-chat-message-sent input:focus-visible{
+    outline: 1px solid #bdbffd;
 }
 
 .admin-chat-message-sent button{
@@ -266,7 +270,9 @@
 
 .chats-list{
     width: 30%;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .chat-avatar img{
@@ -298,10 +304,10 @@
 }
 
 .user-chats-wrapp{
-    height: 614px;
     overflow-y: auto;
     border-top: 1px solid #e9e9e9;
     border-bottom: 1px solid #e9e9e9;
+    flex-grow: 1;
 }
 
 .message-name img{

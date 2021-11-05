@@ -11,8 +11,7 @@ $offset = $_GET['offset'] ?? 0;
 $limit = $_GET['limit'] ?? 20;
 
 
-if($user_favs_g){
-    $user_favorites = implode(',', $user_favs_g);
+if($user_favs_g && $user_favorites = implode(',', $user_favs_g)){
     $where = " WHERE id in($user_favorites)";
 
 

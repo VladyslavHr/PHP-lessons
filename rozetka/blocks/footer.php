@@ -118,12 +118,6 @@ if(isset($_GET['open-modal'])){
 		<h3 class="text-center">Enter your name</h3>
 	</div>
 	<div class="chat-dialog hide">
-		<div class="chat-manager">
-			Добрый день
-		</div>
-		<div class="chat-user">
-			Здравствуйте
-		</div>
 	</div>
 	<div class="chat-message-sent">
 		<textarea id = "chat_input" maxlenght="1000" placeholder="Введите сообщение ..."></textarea>
@@ -188,6 +182,7 @@ var chat_started = false
 		{create_chat: 1, user_name: chat_input_value},
 		function (data) {
 			chat_dialog_id = data.chat_dialog_id
+			if(data.status === 'ok') $('.chat-dialog').append(`<div class="chat-manager">${data.greeting}</div>`)
 		}, 'json')
 	}
 </script>

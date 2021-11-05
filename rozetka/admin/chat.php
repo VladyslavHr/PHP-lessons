@@ -1,3 +1,11 @@
+<style>
+    html,
+    body,
+    .admin-main-content{
+        height: 100%;
+    }
+</style>
+
 <div class="admin-chat-wrap">
     <div class="admin-message-wrap">
         <div class="admin-chat-id-name">
@@ -5,14 +13,8 @@
             <span>user name</span>
         </div>
 
-        <div class="text-space">
-            <div class="admin-user-message">
-                <span>Hello admin</span>
-            </div>
-
-            <div class="admin-message">
-                <span>Hello user</span>
-            </div>
+        <div class="text-space" id="chat_messages">
+            <h3 class="text-center"> Choose chat </h3>
         </div>
 
 
@@ -22,10 +24,10 @@
                 <span><?= bi('plus-lg') ?></span>
                 <span><?= bi('three-dots-vertical') ?></span>
             </div>
-            <div class="admin-chat-message-sent">
-                <textarea name="admin-chat-message-sent" maxlenght="1000" placeholder="Введите сообщение ..."></textarea>
+            <form class="admin-chat-message-sent" id="admin_chat_message_form">
+                <input disabled id="admin_chat_input" name="admin-chat-message-sent" maxlenght="1000" placeholder="Введите сообщение ..."></input>
                 <button type="submit"><?= bi('arrow-right-circle') ?></button>
-            </div>
+            </form>
 
         </div>
     </div>
@@ -38,140 +40,67 @@
             <button type="submit">Поиск</button>
         </div>
 
-        <div class="user-chats-wrapp">
-        <a class="chat-link" href="#">
-            <div class="message-name">
-                <img src="img/solar-flare.en.png" alt="">
-            </div>
-            <div class="chat-user-info">
-                <span class="chat-user-name">Vanja</span> 
-                <div class="message-and-time">
-                    <span class="chat-user-last-message">HEllo</span>
-                    <span class="message-time">11.10.2022</span>
+        <?php
+
+            $chats = db_query("SELECT * FROM chat_dialogs")
+
+        ?>
+
+        <div class="user-chats-wrapp" id="chats_list">
+
+            <?php foreach ($chats as $chat): ?>
+            <div class="chat-link cursor-pointer" data-chatid="<?= $chat['id'] ?>">
+                <div class="message-name">
+                    <img src="img/solar-flare.en.png" alt="">
+                </div>
+                <div class="chat-user-info">
+                    <span class="chat-user-name"><?= $chat['user_name'] ?></span> 
+                    <div class="message-and-time">
+                        <span class="chat-user-last-message">HEllo</span>
+                        <span class="message-time"><?= $chat['created_at']  ?></span>
+                    </div>
                 </div>
             </div>
-        </a>
-
-        <a class="chat-link" href="#">
-            <div class="message-name">
-                <img src="img/solar-flare.en.png" alt="">
-            </div>
-            <div class="chat-user-info">
-                <span class="chat-user-name">Tanja</span> 
-                <div class="message-and-time">
-                    <span class="chat-user-last-message">HEllo</span>
-                    <span class="message-time">11.10.2022</span>
-                </div>
-            </div>
-        </a>
-
-        <a class="chat-link" href="#">
-            <div class="message-name">
-                <img src="img/solar-flare.en.png" alt="">
-            </div>
-            <div class="chat-user-info">
-                <span class="chat-user-name">Oksana</span> 
-                <div class="message-and-time">
-                    <span class="chat-user-last-message">HEllo</span>
-                    <span class="message-time">11.10.2022</span>
-                </div>
-            </div>
-        </a>
-
-        <a class="chat-link" href="#">
-            <div class="message-name">
-                <img src="img/solar-flare.en.png" alt="">
-            </div>
-            <div class="chat-user-info">
-                <span class="chat-user-name">Dima</span> 
-                <div class="message-and-time">
-                    <span class="chat-user-last-message">HEllo</span>
-                    <span class="message-time">11.10.2022</span>
-                </div>
-            </div>
-        </a>
-
-        <a class="chat-link" href="#">
-            <div class="message-name">
-                <img src="img/solar-flare.en.png" alt="">
-            </div>
-            <div class="chat-user-info">
-                <span class="chat-user-name">Evgen</span> 
-                <div class="message-and-time">
-                    <span class="chat-user-last-message">HEllo</span>
-                    <span class="message-time">11.10.2022</span>
-                </div>
-            </div>
-        </a>
-
-        <a class="chat-link" href="#">
-            <div class="message-name">
-                <img src="img/solar-flare.en.png" alt="">
-            </div>
-            <div class="chat-user-info">
-                <span class="chat-user-name">Artem</span> 
-                <div class="message-and-time">
-                    <span class="chat-user-last-message">HEllo</span>
-                    <span class="message-time">11.10.2022</span>
-                </div>
-            </div>
-        </a>
-
-        <a class="chat-link" href="#">
-            <div class="message-name">
-                <img src="img/solar-flare.en.png" alt="">
-            </div>
-            <div class="chat-user-info">
-                <span class="chat-user-name">Lesya</span> 
-                <div class="message-and-time">
-                    <span class="chat-user-last-message">HEllo</span>
-                    <span class="message-time">11.10.2022</span>
-                </div>
-            </div>
-        </a>
-
-        <a class="chat-link" href="#">
-            <div class="message-name">
-                <img src="img/solar-flare.en.png" alt="">
-            </div>
-            <div class="chat-user-info">
-                <span class="chat-user-name">Mari</span> 
-                <div class="message-and-time">
-                    <span class="chat-user-last-message">HEllo</span>
-                    <span class="message-time">11.10.2022</span>
-                </div>
-            </div>
-        </a>
-
-        <a class="chat-link" href="#">
-            <div class="message-name">
-                <img src="img/solar-flare.en.png" alt="">
-            </div>
-            <div class="chat-user-info">
-                <span class="chat-user-name">Serg</span> 
-                <div class="message-and-time">
-                    <span class="chat-user-last-message">HEllo</span>
-                    <span class="message-time">11.10.2022</span>
-                </div>
-            </div>
-        </a>
-
-        <a class="chat-link" href="#">
-            <div class="message-name">
-                <img src="img/solar-flare.en.png" alt="">
-            </div>
-            <div class="chat-user-info">
-                <span class="chat-user-name">Masha</span> 
-                <div class="message-and-time">
-                    <span class="chat-user-last-message">HEllo</span>
-                    <span class="message-time">11.10.2022</span>
-                </div>
-            </div>
-        </a>
-
+            <?php endforeach ?> 
         </div>
 
+    <script>
+        var log = console.log
+        // Загрузка списка чата
+        var chatId // undefined
+        $('#chats_list').on('click', '.chat-link', function(event) {
+            $('#chat_messages').html('')
+            chatId = this.dataset.chatid
+            $.post(location.href, 
+                {get_chat_messages: 1, chatId: chatId},
+                function(data) {
+                    $('#admin_chat_input').attr('disabled', false).focus()
+                    data.messages.forEach(function(element){
+                        $('#chat_messages').append('<div class="'+ element.from +'-message"><span>' + element.message + '</span></div>')
+                    })
+                }, 'json')
+            
+        })
 
+         // Отправка сообщения
+        $('#admin_chat_message_form').on('submit', function(event){
+            event.preventDefault()
+            
+            if(!chatId) return false
+            const admin_chat_input = $('#admin_chat_input')
+            const message = admin_chat_input.val()
+            admin_chat_input.val('')
+            $.post(location.href, 
+                {admin_chat_send_message:1, chatId, message},
+                function(data){
+                    admin_chat_input.val('')
+                    if (data.status && data.status === 'ok') {
+                        $('#chat_messages').append('<div class="admin-message"><span>' + message + '</span></div>')
+                    }
+                    
+            }, 'json')
+        })
+    </script>
 
         
     </div>
