@@ -143,3 +143,10 @@ if(!empty($_GET['order_status'])){
         ]);
         exit;
   }
+
+  if(!empty($_GET['delete_rule'])){
+    $rule_id = (int)$_GET['delete_rule'];
+    db_query("DELETE FROM jq_rules WHERE id = '$rule_id'");
+    redirect('?action=jquery');
+  
+  }

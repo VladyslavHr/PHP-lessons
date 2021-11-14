@@ -326,6 +326,11 @@ function session_take_get($key)
     return $_SESSION['get'][$key] ?? '';
 }
 
+function session_post_clear()
+{
+    unset($_SESSION['post']);
+}
+
 function alert($type, $message)
 {
     return

@@ -12,21 +12,21 @@
 
 set_time_limit(500);
 
-// $products = db_query("SELECT id,`url`,title FROM products WHERE `status` <> 'brand_parsed' LIMIT 300 ");
+$products = db_query("SELECT id,`url`,title FROM products WHERE `status` <> 'brand_parsed' LIMIT 300 ");
 
-// pa($products);
+pa($products);
 
-// foreach ($products as $key => $product){
-//     parse_product_update($product['url']);
-// }
-
-
-
-for ($page_num=1; $page_num <= 1; $page_num++){
-  parse_category_page($page_num);
+foreach ($products as $key => $product){
+    parse_product_update($product['url']);
 }
 
-parse_product_update($url = 'https://rozetka.com.ua/apple_mhda3/p260862296/');
+
+
+// for ($page_num=1; $page_num <= 1; $page_num++){
+//   parse_category_page($page_num);
+// }
+
+// parse_product_update($url = 'https://rozetka.com.ua/apple_mhda3/p260862296/');
 
 
 function parse_category_page($page_num){
@@ -36,13 +36,13 @@ function parse_category_page($page_num){
   $products = $html->find('.goods-tile.ng-star-inserted');
 
   if($products){
-    pa(count($products));
+    // pa(count($products));
     foreach($products as $product) {
       // echo $product->href;
       // echo '<hr>';
       $link = $product->find('.goods-tile__heading', 0);
       $url = $link ? db_escape($link->href) : '';
-      pa('<a href="'.$url.'">'.$url.'</a>');
+      // pa('<a href="'.$url.'">'.$url.'</a>');
       $colors = $product->find('.goods-tile__colors-content');
       $color_names = [];
       if($colors){
@@ -243,7 +243,7 @@ if(!$html) return null;
 // pa($product_title);
 
 $characteristics = $html->find('.characteristics-full__list > div');
-pa(count($characteristics));
+// pa(count($characteristics));
 
 $fast_info = [];
 foreach ($characteristics as  $characteristics){

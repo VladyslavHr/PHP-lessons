@@ -25,7 +25,7 @@ if (isset($_POST['new_rule'])) {
       flash_alert('danger', $message);
       redirect('admin.php?action=jquery-add');
     }
-    }
+}
     
     // Create
     if(isset($_POST['new_rule'])){
@@ -45,6 +45,8 @@ if (isset($_POST['new_rule'])) {
           $message = 'Rule add successfully!';
           flash_alert('success', $message);
     
+          session_post_clear();
+
         redirect('admin.php?action=jquery');
       
     

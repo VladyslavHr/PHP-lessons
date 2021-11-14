@@ -5,16 +5,6 @@
 <?php
 
 
-
-
-if(!empty($_GET['delete'])){
-    $rule_id = (int)$_GET['delete'];
-    db_query("DELETE FROM jq_rules WHERE id = '$rule_id'");
-    header('Location: ?action=jquery');
-  
-  }
-
-
   $offset = $_GET['offset'] ?? 0;
   $limit = $_GET['limit'] ?? 100;
 
@@ -80,7 +70,7 @@ if (isset($_GET['query']))
     foreach($jquery_rules as $block): ?>
     <div class="block">
         <div class="title"><?= $block['title'] ?>
-            <a class="mx-auto text-danger" onclick="if(!confirm('Are you sure?')) return false" href="?action=jquery&delete=<?= $block['id']?>" >
+            <a class="mx-auto text-danger" onclick="if(!confirm('Are you sure?')) return false" href="?action=jquery&delete_rule=<?= $block['id']?>" >
                 <span class="rule-delete"><?= bi('trash') ?></span></a>
             <a title="edit rule" href="?action=jquery-edit&rule_id=<?= $block['id']?>" class="mx-auto text-info">
                 <span class="rule-edit"><?= bi('pencil') ?></span></a>

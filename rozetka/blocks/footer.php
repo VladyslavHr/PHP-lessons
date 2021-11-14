@@ -119,10 +119,10 @@ if(isset($_GET['open-modal'])){
 	</div>
 	<div class="chat-dialog hide">
 	</div>
-	<div class="chat-message-sent">
-		<textarea id = "chat_input" maxlenght="1000" placeholder="Введите сообщение ..."></textarea>
-		<button id="chat_submit"><?= bi('arrow-right-circle') ?></button>
-	</div>
+	<form class="chat-message-sent" id="chat_form">
+		<input id = "chat_input" maxlenght="1000" placeholder="Введите сообщение ...">
+		<button type="submit"><?= bi('arrow-right-circle') ?></button>
+</form>
 	<div class="chat-add">
 		<span><?= bi('emoji-smile') ?></span>
 		<span><?= bi('plus-lg') ?></span>
@@ -139,8 +139,10 @@ if(isset($_GET['open-modal'])){
 <script>
 var chat_dialog_id 
 var chat_started = false
+var greeting
 
-	$('#chat_submit').click(function(event) {
+	$('#chat_form').submit(function(event) {
+		event.preventDefault()
 		var chat_input = $('#chat_input')
 		var chat_input_value = chat_input.val()
 		chat_input.val('')
@@ -164,9 +166,10 @@ var chat_started = false
 		$.post(location.href,
 			{send_chat_message: 1, chat_dialog_id: chat_dialog_id, message: message},
 			function (data) {
-				if(data.status === 'ok') $('.chat-dialog').append(`<div class="chat-user">${message}</div>`)
+				if(data.status === 'ok') $('.chat-dialog').append(`<div class="chat-client">${message}</div>`)
 			}, 'json')
 	}
+
 
 	$('#chat_input').keyup(function() {
 		if(this.value.trim()){
@@ -178,13 +181,48 @@ var chat_started = false
 	function start_chat(chat_input_value) {
 		$('.chat-greeting').addClass('hide')
 		$('.chat-dialog').removeClass('hide')
+		sessionStorage.setItem('user_name', chat_input_value)
 		$.post(location.href,
 		{create_chat: 1, user_name: chat_input_value},
 		function (data) {
 			chat_dialog_id = data.chat_dialog_id
-			if(data.status === 'ok') $('.chat-dialog').append(`<div class="chat-manager">${data.greeting}</div>`)
+			sessionStorage.setItem('chat_dialog_id', chat_dialog_id)
+			greeting = data.greeting
+			if(data.status === 'ok') $('.chat-dialog').append(`<div class="chat-admin">${greeting}</div>`)
+			setInterval(function() {
+	    		load_messages(chat_dialog_id);
+    		}, 5000);
 		}, 'json')
 	}
+
+	var chat_dialog_id = sessionStorage.getItem('chat_dialog_id')
+	if (chat_dialog_id) {
+		continue_chat(chat_dialog_id)
+	}
+
+	function continue_chat(chat_dialog_id){
+		$('.chat-greeting').addClass('hide')
+		$('.chat-dialog').removeClass('hide')
+		var user_name = sessionStorage.getItem('user_name')
+		greeting = `Welcome back ${user_name}!`
+		load_messages(chat_dialog_id)
+		setInterval(function() {
+	    		load_messages(chat_dialog_id);
+    		}, 5000);
+	}
+
+
+	function load_messages(chatId) {
+            $.post('admin.php', 
+                {get_chat_messages: 1, chatId: chatId},
+                function(data) {
+                    $('.chat-dialog').html('')
+					$('.chat-dialog').append(`<div class="chat-admin">${greeting}</div>`)
+                    data.messages.forEach(function(element){
+                        $('.chat-dialog').append('<div class="chat-'+ element.from +'"><span>' + element.message + '</span></div>')
+                    })
+                }, 'json')
+        }
 </script>
 
 </body>

@@ -1,29 +1,5 @@
 [
     {
-        "id": "1",
-        "title": ".TESTaddClass()",
-        "description": "Adds the specified class(es) to each element in the set of matched elements.",
-        "example": "$( \"p\" ).addClass( \"myClass yourClass\" );",
-        "type": "JavaScript",
-        "link": "https:\/\/api.jquery.com\/addclass\/"
-    },
-    {
-        "id": "2",
-        "title": ".removeClass()",
-        "description": "Remove a single class or multiple classes from each element in the set of matched elements.",
-        "example": "$( \"p\" ).removeClass( \"myClass noClass\" ).addClass( \"yourClass\" );",
-        "type": "jQuery",
-        "link": ""
-    },
-    {
-        "id": "3",
-        "title": ".hasClass()",
-        "description": "Determine whether any of the matched elements are assigned the given class.",
-        "example": "$( \"#mydiv\" ).hasClass( \"foo\" )",
-        "type": "jQuery",
-        "link": ""
-    },
-    {
         "id": "4",
         "title": ".val([string])",
         "description": "Get the current value of the first element in the set of matched elements.",
@@ -70,5 +46,93 @@
         "example": "$( \"#target\" ).keyup(function() {\r\n            alert( \"Handler for .keyup() called.\" );\r\n          });\r\n          $( \"#other\" ).click(function() {\r\n            $( \"#target\" ).keyup();\r\n          });",
         "type": "jQuery",
         "link": ""
+    },
+    {
+        "id": "20",
+        "title": ".attr()",
+        "description": "Get the value of an attribute for the first element in the set of matched elements.",
+        "example": "$( \"#greatphoto\" ).attr( \"alt\", \"Beijing Brush Seller\" );\r\n\r\n$( \"#greatphoto\" ).attr({\r\n  alt: \"Beijing Brush Seller\",\r\n  title: \"photo by Kelly Clark\"\r\n});",
+        "type": "jQuery",
+        "link": ""
+    },
+    {
+        "id": "22",
+        "title": ".addClass()",
+        "description": "Adds the specified class(es) to each element in the set of matched elements.",
+        "example": "$( \"p\" ).addClass( \"myClass yourClass\" );\r\n",
+        "type": "jQuery",
+        "link": "https:\/\/api.jquery.com\/addClass\/#addClass-className"
+    },
+    {
+        "id": "23",
+        "title": ".removeClass()",
+        "description": "Remove a single class or multiple classes from each element in the set of matched elements.",
+        "example": " $( \"p\" ).removeClass( \"myClass yourClass\" )",
+        "type": "jQuery",
+        "link": "https:\/\/api.jquery.com\/removeClass\/#removeClass-className"
+    },
+    {
+        "id": "24",
+        "title": ".hasClass()",
+        "description": "Determine whether any of the matched elements are assigned the given class.",
+        "example": "$( \"#mydiv\" ).hasClass( \"foo\" )",
+        "type": "jQuery",
+        "link": "https:\/\/api.jquery.com\/hasClass\/#hasClass-className"
+    },
+    {
+        "id": "25",
+        "title": ".html()",
+        "description": "Get the HTML contents of the first element in the set of matched elements.",
+        "example": "$( \"div.demo-container\" ).html();",
+        "type": "jQuery",
+        "link": "https:\/\/api.jquery.com\/html\/#html"
+    },
+    {
+        "id": "26",
+        "title": ".on()",
+        "description": "Attach an event handler function for one or more events to the selected elements.",
+        "example": "$( \"#dataTable tbody tr\" ).on( \"click\", function() {\r\n  console.log( $( this ).text() );\r\n});",
+        "type": "jQuery",
+        "link": "https:\/\/api.jquery.com\/on\/#on-events-selector-data-handler"
+    },
+    {
+        "id": "27",
+        "title": ".forEach()",
+        "description": "\u041c\u0435\u0442\u043e\u0434 forEach() \u0432\u044b\u043f\u043e\u043b\u043d\u044f\u0435\u0442 \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u0443\u044e \u0444\u0443\u043d\u043a\u0446\u0438\u044e \u043e\u0434\u0438\u043d \u0440\u0430\u0437 \u0434\u043b\u044f \u043a\u0430\u0436\u0434\u043e\u0433\u043e \u044d\u043b\u0435\u043c\u0435\u043d\u0442\u0430 \u0432 \u043c\u0430\u0441\u0441\u0438\u0432\u0435.",
+        "example": "arr.forEach(function callback(currentValue, index, array) {\r\n    \/\/your iterator\r\n}[, thisArg]);",
+        "type": "JavaScript",
+        "link": "https:\/\/developer.mozilla.org\/ru\/docs\/Web\/JavaScript\/Reference\/Global_Objects\/Array\/forEach"
+    },
+    {
+        "id": "28",
+        "title": "Console.log()",
+        "description": "\u0412\u044b\u0432\u043e\u0434\u0438\u0442 \u0441\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u0435 \u0432 \u0432\u0435\u0431-\u043a\u043e\u043d\u0441\u043e\u043b\u044c.",
+        "example": "console.log(obj1 [, obj2, ..., objN]);\r\nconsole.log(msg [, subst1, ..., substN]);",
+        "type": "JavaScript",
+        "link": "https:\/\/developer.mozilla.org\/ru\/docs\/Web\/API\/Console\/log"
+    },
+    {
+        "id": "29",
+        "title": "Array.prototype.map()",
+        "description": "\u041c\u0435\u0442\u043e\u0434 map() \u0441\u043e\u0437\u0434\u0430\u0451\u0442 \u043d\u043e\u0432\u044b\u0439 \u043c\u0430\u0441\u0441\u0438\u0432 \u0441 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u043e\u043c \u0432\u044b\u0437\u043e\u0432\u0430 \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u043e\u0439 \u0444\u0443\u043d\u043a\u0446\u0438\u0438 \u0434\u043b\u044f \u043a\u0430\u0436\u0434\u043e\u0433\u043e \u044d\u043b\u0435\u043c\u0435\u043d\u0442\u0430 \u043c\u0430\u0441\u0441\u0438\u0432\u0430.",
+        "example": "let new_array = arr.map(function callback( currentValue[, index[, array]]) {\r\n    \/\/ \u0412\u043e\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u0442 \u044d\u043b\u0435\u043c\u0435\u043d\u0442 \u0434\u043b\u044f new_array\r\n}[, thisArg])",
+        "type": "JavaScript",
+        "link": "https:\/\/developer.mozilla.org\/ru\/docs\/Web\/JavaScript\/Reference\/Global_Objects\/Array\/map"
+    },
+    {
+        "id": "30",
+        "title": ".map()",
+        "description": "Pass each element in the current matched set through a function, producing a new jQuery object containing the return values.",
+        "example": "$( \":checkbox\" )\r\n  .map(function() {\r\n    return this.id;\r\n  })\r\n  .get()\r\n  .join();",
+        "type": "jQuery",
+        "link": "https:\/\/api.jquery.com\/map\/#map-callback"
+    },
+    {
+        "id": "31",
+        "title": ".toggleClass()",
+        "description": "Add or remove one or more classes from each element in the set of matched elements, depending on either the class's presence or the value of the state argument.",
+        "example": "$( \"#foo\" ).toggleClass( className, addOrRemove );\r\n\r\nif ( addOrRemove ) {\r\n  $( \"#foo\" ).addClass( className );\r\n} else {\r\n  $( \"#foo\" ).removeClass( className );\r\n}",
+        "type": "jQuery",
+        "link": "https:\/\/api.jquery.com\/toggleClass\/#toggleClass-className"
     }
 ]

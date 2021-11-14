@@ -42,7 +42,7 @@
 
         <?php
 
-            $chats = db_query("SELECT * FROM chat_dialogs")
+            $chats = db_query("SELECT * FROM chat_dialogs order by id desc")
 
         ?>
 
@@ -71,16 +71,29 @@
         $('#chats_list').on('click', '.chat-link', function(event) {
             $('#chat_messages').html('')
             chatId = this.dataset.chatid
+            load_messages(chatId)
+            
+            setInterval(function() {
+	            load_messages(chatId);
+            }, 5000);
+        })
+
+        function load_messages(chatId) {
             $.post(location.href, 
                 {get_chat_messages: 1, chatId: chatId},
                 function(data) {
                     $('#admin_chat_input').attr('disabled', false).focus()
+                    $('#chat_messages').html('')
                     data.messages.forEach(function(element){
                         $('#chat_messages').append('<div class="'+ element.from +'-message"><span>' + element.message + '</span></div>')
                     })
                 }, 'json')
-            
-        })
+        }
+
+
+
+
+
 
          // Отправка сообщения
         $('#admin_chat_message_form').on('submit', function(event){

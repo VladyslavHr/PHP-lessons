@@ -2000,13 +2000,13 @@ height: 40px;
 
 .tests-list{
     display: flex;
-    justify-content: center;
-    list-style: none;
+    justify-content: space-between;
+    padding: 20px;
+    width: 100%;
 }
 
 .tests-list li{
-    font-size: 20px;
-    margin: 15px;
+    list-style: none;
 }
 
 
@@ -3618,7 +3618,7 @@ height: 40px;
     border-bottom: 1px solid #e9e9e9;
 }
 
-.chat-message-sent textarea{
+.chat-message-sent input{
     width: 80%;
     border: none;
     margin: 5px;
@@ -3654,8 +3654,8 @@ height: 40px;
     margin: 20px;
 }
 
-.chat-manager{
-    display: inline-block;
+.chat-admin{
+    display: block;
     margin: 25px;
     height: fit-content;
     background: #dfa6a6;
@@ -3664,8 +3664,8 @@ height: 40px;
     filter: brightness(123%);
 }
 
-.chat-user{
-    display: inline-block;
+.chat-client{
+    display: block;
     margin-left: 170px;
     height: fit-content;
     margin-bottom: 25px;
