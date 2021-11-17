@@ -1,7 +1,7 @@
 <?php 
 define('ROOT',__DIR__);
 session_start();
-if ($argv) {
+if (!empty($argv)) {
   foreach ($argv as $k=>$v)
   {
       if ($k==0) continue;

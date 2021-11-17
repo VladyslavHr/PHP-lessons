@@ -3,13 +3,14 @@
 $brands = db_query("SELECT DISTINCT brand_name FROM products WHERE brand_name <> '' ORDER BY brand_name");
 
 
+
 $brands = array_column($brands, 'brand_name');
 
-// pa($brands);
 
-// foreach ($brands as $key => $brand){
-    // pa($brand);
-// }
+
+foreach ($brands as $key => $brand){
+
+}
 
 ?>
 

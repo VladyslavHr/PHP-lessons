@@ -273,10 +273,11 @@ function query_add($params = [])
 
 function query_del($params)
 {
+    $get = $_GET;
     foreach($params as $param){
-        if(isset($_GET[$param])) unset($_GET[$param]);
+        if(isset($get[$param])) unset($get[$param]);
     }
-    return '?' . http_build_query($_GET);
+    return '?' . http_build_query($get);
 }
 
 function if_selected($name, $value)

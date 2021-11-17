@@ -101,8 +101,15 @@ $brands = array_column($brands, 'brand_name');
       Показано <?= $amount  ?> товар<?= sklonenie($amount, '', 'а', 'ов') ?>.
       <?= $brand_name ? "Бренд: <b>$brand_name</b>" : '' ?>
     </div>
+    <div class="filter-choosen">
+      <a class="filter-reset" href="">Reset</a>
+      <?php foreach ($_GET['brands'] ?? [] as $key => $brand_) : ?>
+      <a class="filter-choosen-brand" href="<?= query_del(['brands'])?>"><?= $brand_ ?> <span><?= bi('x') ?></span></a>
+      <?php endforeach ?>
+    </div>
     <div class="category-settings">
     <span class="category-settings-text">Товаров на странице</span>
+
     <select oninput="location.href = this.value">
     <!-- <option>Товаров на странице</option> -->
       <option <?= if_selected($limit, '5')  ?> value="<?= query_add(['offset' => 0,'limit' => '5'])?>">5</option>
@@ -138,17 +145,28 @@ $brands = array_column($brands, 'brand_name');
   </div>
     <div class="produscts-with-sidebar">
       <div class="sidebar-filtr">
+        <?php pa($_GET) ?>
         <div class="category-brands-filtr">
           <a href="?action=brands">Бренд</a> 
           <input class="filtr-brands-input" type="text">
           <a href="#" class="filtr-a-name">Алфавитный указатель</a>
           <ul class="category-filtr-list category-brands-list"> 
-            <?php foreach($brands as $brand): ?>
+            <?php foreach($brands as $key => $brand):
+            if(in_array($brand, $_GET['brands'] ?? [])) {
+              $href = '';
+              $active = 'active';
+            }else{
+              $href = 'href="'.query_add(['brands[]' => $brand]) . '"';
+              $active = '';
+            }
+               ?>
             <li class="category-filtr-schedule">
-              <a class="filtr-link" href="#">
-                <span class="filtr-checkbox"></span>
-                <input class="filtr-input" type="checkbox" id="Apple">
-                <label class="filtr-label" for="Apple"><?= $brand ?></label>
+              <a class="filtr-link" <?= $href ?>>
+
+                    <span class="checkbox <?= $active ?>">&nbsp</span>
+                    <span class="brand"><?= $brand ?></span>
+
+
               </a>
             </li>
             <?php endforeach ?>
@@ -166,6 +184,8 @@ $brands = array_column($brands, 'brand_name');
             </button>
           </div>
         </div>
+
+      
 
         <div class="category-connections">
           <a href="#" class="filtr-a-name">Стандарт связи</a>
@@ -383,6 +403,7 @@ $brands = array_column($brands, 'brand_name');
           </ul>
         </div>
       </div>
+
         <div class="products" id="category_product_list">
           <?php foreach($products as $id => $product):   ?>
               <?php include 'blocks/category-product.php' ?>
