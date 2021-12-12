@@ -99,12 +99,12 @@ function auth_check()
     }
 }
 
-function auth_admin()
+function auth_admin($if_true = 1, $if_false = '')
 {
     if(auth_check() && $_SESSION['user']['role'] === 'admin'){
-        return true;
+        return $if_true;
     }
-    return false;
+    return $if_false;
 }
 
 function auth_user($key = false)
@@ -274,8 +274,19 @@ function query_add($params = [])
 function query_del($params)
 {
     $get = $_GET;
-    foreach($params as $param){
-        if(isset($get[$param])) unset($get[$param]);
+    foreach($params as $param_key => $param_val){
+        if(is_array($param_val)) {
+            foreach ($param_val as &$value) {
+                foreach ($get[$param_key] as $indx => $get_key_value) {
+                    if($value === $get_key_value){
+                        unset($get[$param_key][$indx]);
+                    }
+                }
+            }
+        }else{
+            if(isset($get[$param_val])) unset($get[$param_val]);
+        }
+        
     }
     return '?' . http_build_query($get);
 }

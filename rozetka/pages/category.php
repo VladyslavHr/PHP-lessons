@@ -16,18 +16,44 @@ $sorting = $_GET['sorting'] ?? 'default';
 $offset = $_GET['offset'] ?? 0;
 $limit = $_GET['limit'] ?? 20;
 
-
+$final_where = [];
 
 if(!empty($_GET['brand'])){
   $brand_name = db_escape($_GET['brand']);
-  $where = "WHERE brand_name = '$brand_name'";
-}
-else{
+  $final_where[] = "(brand_name = '$brand_name')";
+}elseif (!empty($_GET['brands'])) {
+  $where_brands = [];
+  foreach ($_GET['brands'] as $brand) {
+    $where_brands[] = "brand_name = '$brand'";
+  }
+  $brand_name = implode(', ' , $_GET['brands']);
   $brand_name = '';
-  $where = '';
+  $where_brands = implode(' OR ', $where_brands);
+  $final_where[] = "($where_brands)";
+}else{
+  $brand_name = '';
 }
 
-$total_count = db_query("SELECT count(*) FROM products $where");
+if(!empty($_GET['min_price']) || !empty($_GET['max_price'])) {
+  $where_price = [];
+  if(!empty($_GET['min_price'])){
+    $min_price = (float)$_GET['min_price'];
+    $where_price[] = "price > '$min_price'";
+  }
+  if(!empty($_GET['max_price'])){
+    $max_price = (float)$_GET['max_price'];
+    $where_price[] = "price < '$max_price'";
+  }
+  $where_price = implode(' AND ', $where_price);
+  $final_where[] = "($where_price)";
+}
+if($final_where){
+  $final_where = 'WHERE' .implode(' AND ', $final_where);
+}else{
+  $final_where = '';
+}
+
+$total_count = db_query("SELECT count(*) FROM products $final_where");
 $total_count = $total_count ? $total_count[0]['count(*)'] : 0;
 
 
@@ -48,7 +74,7 @@ else{
   $order_by = '';
 }
 
-$products = db_query("SELECT * FROM products $where $order_by LIMIT $limit OFFSET $offset ");
+$products = db_query("SELECT * FROM products $final_where $order_by LIMIT $limit OFFSET $offset ");
 
 function decode_fast_info_json($product)
 {
@@ -102,9 +128,9 @@ $brands = array_column($brands, 'brand_name');
       <?= $brand_name ? "Бренд: <b>$brand_name</b>" : '' ?>
     </div>
     <div class="filter-choosen">
-      <a class="filter-reset" href="">Reset</a>
+      <a class="filter-reset" href="<?= query_del([ 'brands' ])?>">Reset</a>
       <?php foreach ($_GET['brands'] ?? [] as $key => $brand_) : ?>
-      <a class="filter-choosen-brand" href="<?= query_del(['brands'])?>"><?= $brand_ ?> <span><?= bi('x') ?></span></a>
+      <a class="filter-choosen-brand" href="<?= query_del([ 'brands' => [$brand_] ])?>"><?= $brand_ ?> <span><?= bi('x') ?></span></a>
       <?php endforeach ?>
     </div>
     <div class="category-settings">
@@ -145,7 +171,7 @@ $brands = array_column($brands, 'brand_name');
   </div>
     <div class="produscts-with-sidebar">
       <div class="sidebar-filtr">
-        <?php pa($_GET) ?>
+        <?php if(auth_admin()) pa($_GET); ?>
         <div class="category-brands-filtr">
           <a href="?action=brands">Бренд</a> 
           <input class="filtr-brands-input" type="text">
@@ -175,16 +201,24 @@ $brands = array_column($brands, 'brand_name');
           
         <div class="category-price-filtr">
           <span class="price-filtr-span">Цена</span>
-          <div class="category-price-filtr-input-wrap">
-            <input type="number">
+          <form id="filter_price_form" class="category-price-filtr-input-wrap">
+            <input type="number" name="min_price">
             <span> — </span>
-            <input type="number">
+            <input type="number" name="max_price">
             <button type="submit"> 
               <p>OK</p> 
             </button>
-          </div>
+          </form>
         </div>
-
+            <script>
+              var log = console.log
+              $('#filter_price_form').on('submit', function(event){
+                event.preventDefault()
+                log(location.search)
+                log($(this).serialize())
+                location.href = location.search + '&' + $(this).serialize()
+              })
+            </script>
       
 
         <div class="category-connections">
