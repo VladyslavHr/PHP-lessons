@@ -1,29 +1,11 @@
 <?php
 
+include 'classes/Human1.php';
+include 'classes/Human2.php';
 
-class Human 
-{
-    public $human_name;
+// use Human_RU;
 
-    public $human_age;
-
-
-    function __construct($name, $age)
-    {
-        pa('I am constructor');
-        $this->human_name = $name;
-        $this->human_age = $age;
-    }
-    // public , private, protection
-
-    public function sayHello()
-    {
-        echo "Hello! My name is " . $this->human_name;
-    }
-}
-
-
-class Programmer extends Human 
+class Programmer extends \Human_RU\Human 
 {
     public $skills;
 
@@ -38,7 +20,7 @@ class Programmer extends Human
 
 
 
-class Driver extends Human 
+class Driver extends \Human_EN\Human 
 {
     public $licens;
 
@@ -56,14 +38,14 @@ $human2 = new Programmer('Anya', 16, 'beautifull');
 $human3 = new Driver ('Tolik', 44, 'A, B, C');
 
 pa($human1);
-pa($human2);
-pa($human3);
+pa($human2->sayHello());
+pa($human3->sayHello());
 
-pa($human1->sayHello());
+// pa($human1->sayHello());
 
 $human1->human_name = 'Alex';
 
-pa($human1->sayHello());
+// pa($human1->sayHello());
 
 
 // class Product 

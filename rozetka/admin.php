@@ -1,6 +1,7 @@
 <?php 
 define('ROOT',__DIR__);
 require_once 'vendor/autoload.php';
+include 'config.php';
 include 'classes/DB.class.php';
 include 'langs.php';
 include 'functions.php';

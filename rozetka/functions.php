@@ -4,12 +4,6 @@
 
 
 
-define('db_HOST', 'localhost');
-define('db_USER', 'root');
-define('db_PASS', '');
-define('db_NAME', 'rozetka');
-
-
 
 function db_query($query = false){
 	if(!$query) return DB::getInstance();

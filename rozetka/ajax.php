@@ -10,6 +10,7 @@ if (!empty($argv)) {
   }
 }
 require_once 'vendor/autoload.php';
+include 'config.php';
 include 'classes/DB.class.php';
 include 'classes/simple_html_dom.php';
 include 'langs.php';

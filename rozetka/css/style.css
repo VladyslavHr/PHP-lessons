@@ -4297,6 +4297,19 @@ social-network */
     
 }
 
+
+
+/* @media (prefers-color-scheme:dark){
+    body{
+        background: #555;
+        color: #eaeaea;
+    }
+} */
+
+
+
+
+
 @media (max-width: 575px){
 .category .product{
     width: 50%;

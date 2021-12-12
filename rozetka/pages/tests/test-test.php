@@ -30,6 +30,7 @@
 <?php
 // pa($_SESSION);
 
+echo phpinfo();
 
 pa($_GET);
 
