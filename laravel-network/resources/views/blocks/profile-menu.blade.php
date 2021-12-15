@@ -7,6 +7,6 @@
         <li><a href="#">Еще</a></li>
     </ul>
     <div class="prof-edit">
-        <a href="#" style="background: {{ $menu_btn_bg }}">Редактировать</a>
+        <a href="#">Редактировать</a>
     </div>
 </div>

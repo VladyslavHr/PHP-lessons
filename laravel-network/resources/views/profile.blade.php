@@ -1,22 +1,12 @@
 @extends('layouts.main')
 
-@section('content')
-<div class="profile-banner">
-    <img src="{{ asset ('images/banner1.jpg') }}" alt="">
-</div>
-{{-- @section('avatar-main') --}}
-<div class="profile-wrapp">
-    <div class="prof-avatar-main">
-        <img src="{{ asset ('images/cat.jpg') }}" alt="">
-    </div>
+@section('title', 'Profile-page')
 
-    @if($show_profile_menu)
-        @include('blocks.profile-menu', ['btn_bg' => 'darkblue']);
-    @else
-        @include('blocks.profile-menu', ['btn_bg' => 'darkgreen']);
-    @endif
-</div>
-{{-- @endsection --}}
+
+
+@section('content')
+
+@include('/blocks.profile-header')
 
 <div class="prof-main-content container">
     <div class="row">

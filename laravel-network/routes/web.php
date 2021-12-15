@@ -17,6 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/welcome-test', function () {
+    return view('welcome-test');
+});
+
+Route::get('/welcome-test2', function () {
+    return view('welcome-test2');
+});
+
 // Route::get('/zoho-auth', [App\Http\Controllers\ZohoController::class, 'get_token']);
 
 Route::get('/profile/{username}', function ($username) {
@@ -47,3 +55,7 @@ Route::get('/friends', function () {
         'users' => $users,
     ]);
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
