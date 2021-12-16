@@ -14,7 +14,7 @@
             <div class="left-content">
                 <div class="user-info-block">
                     <div class="name">
-                        <span>{{ $username }}</span>
+                        <span>{{ $user->name }}</span>
                     </div>
                     <div class="info-text">
                         <p>

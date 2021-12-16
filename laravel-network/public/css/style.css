@@ -98,13 +98,14 @@ body{
 .profile-menu{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: right;
     background: #fff;
 }
 
 .profile-menu .prof-list{
     display: flex;
     list-style: none;
+    margin: 0;
 }
 
 .profile-menu .prof-list li{
@@ -125,15 +126,17 @@ body{
 }
 
 .profile-menu .prof-edit{
-    padding-left: 25px;
+    margin-left: 75px;
 }
 
 .profile-menu .prof-edit a{
     text-decoration: none;
-    padding: 10px;
+    padding: 10px 25px;
     color: #fff;
     background: #dc4734;
     border-radius: 20px;
+    font-weight: bold;
+    font-size: 83%;
 }
 
 .profile-menu .prof-edit a:hover{
@@ -141,15 +144,14 @@ body{
 }
 
 .prof-avatar-main{
-    /* position: relative; */
+    position: relative;
 }
 
 .prof-avatar-main img{
-    position: absolute;
-    width: 16%;
-    left: 290px;
-    top: 230px;
+    width: 100%;
     border: 10px solid #fff;
+    position: absolute;
+    top: -130px;
 }
 
 .prof-main-content{
@@ -574,12 +576,9 @@ body{
 }
 
 .top-navi{
-    position: absolute;
-    left: 594px;
-    top: 430px;
+    display: flex;
     background: #fff;
     padding: 15px;
-    width: 52%;
 }
 
 .top-navi .navi-list{
@@ -596,10 +595,7 @@ body{
 }
 
 .friends-count{
-    display: inline;
-    position: absolute;
-    top: 16px;
-    margin-right: 35px;
+    margin-right: auto;
     font-weight: 700;
     font-size: 20px;
 }
@@ -623,31 +619,24 @@ body{
 }
 
 .friends-blocks-wrap{
-    display: block;
-    margin-top: 140px;
-    padding-left: 170px;
+    margin-top: 60px;
 }
 
 .friends-main {
-    display: flex;
-    width: 90%;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding-left: 100px;
+
 }
 
 .friend-block{
     display: flex;
-    margin: 20px;
+    margin: 7px -5px;
     padding: 10px;
     background: #fff;
     cursor: pointer;
-    width: 20%;
     box-shadow: 0px 1px 15px 0px rgb(51 51 51 / 20%);
 }
 
 .friend-block .friend-img{
-    margin: 5px 20px 5px 5px;
+    /* margin: 5px 20px 5px 5px; */
 }
 
 .friend-block .friend-img img{
@@ -673,4 +662,56 @@ body{
     background: #dc4734;
     transition: 0.5s;
     color: #fff;
+}
+
+.groups-main-wrap{
+    margin-top: 70px;
+}
+
+.groups-main{
+    background: #fff;
+    padding: 25px 15px 15px 15px;
+}
+
+.groups-image{
+    padding: 0;
+}
+
+.groups-image img{
+    width: 100%;
+}
+
+.groups-block{
+    margin: 15px;
+    background: #FFF;
+    box-shadow: 0px 1px 15px 0px rgb(51 51 51 / 20%);
+    padding: 0;
+}
+
+.groups-name-desc-subsc{
+    display: block;
+    text-align: center;
+    padding: 10px;
+}
+
+.groups-name-desc-subsc a{
+    color: black;
+    text-decoration: none;
+}
+
+.group-name{
+    font-weight: 700;
+}
+
+.group-subscribe button{
+    background: none;
+    border: 0;
+    color: #dc4734;
+}
+
+.group-subscribe button:hover{
+    color: #fff;
+    background: #dc4734;
+    border-radius: 8px;
+    transition: 0.5s;
 }
