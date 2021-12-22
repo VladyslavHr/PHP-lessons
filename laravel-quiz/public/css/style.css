@@ -1,0 +1,40 @@
+.welcome-user{
+    display: block;
+    text-align: center;
+    padding: 20px;
+}
+
+.title{
+    text-align: center;
+    padding-top: 100px;
+}
+
+.id-search{
+    text-align: center;
+    padding: 30px;
+}
+
+.result-list{
+    list-style: none;
+    padding: 0;
+}
+
+.result-list li{
+    margin: 10px;
+}
+
+.result-list li:hover{
+    background: #c9defd;
+    border-radius: 5px;
+    transition: .3s;
+}
+
+.link-list{
+    align-items: center;
+}
+
+.list-img img{
+    width: 100%;
+    padding: 10px;
+    border-radius: 10%;
+}

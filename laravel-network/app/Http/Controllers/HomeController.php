@@ -40,12 +40,11 @@ class HomeController extends Controller
 
     public function groups()
     {
-        $users = User::all();
-        // $groups = Groups::all();
+        $groups = Group::all();
         return view('groups',[
             'title' => 'groups',
-            'groups' => '$groups',
-            'users' => $users,
+            'groups' => $groups,
+            'user' => Auth::user(),
         ]);
     }
 

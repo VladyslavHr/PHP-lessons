@@ -1,0 +1,15 @@
+.welcome-user{
+    display: block;
+    text-align: center;
+    padding: 20px;
+}
+
+.title{
+    text-align: center;
+    padding-top: 100px;
+}
+
+.id-search{
+    text-align: center;
+    padding: 30px;
+}

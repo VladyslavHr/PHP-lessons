@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use App\Models\User;
+use App\Models\Group;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,5 +27,6 @@ class DatabaseSeeder extends Seeder
             'avatar' => 'images/cat.jpg',
         ]);
         User::factory(10)->create();
+        Group::factory(10)->create();
     }
 }

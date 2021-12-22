@@ -1,8 +1,6 @@
 @extends('layouts.main')
 
-@section('title')
-Groups page
-@endsection
+@section('title', 'Groups page')
 
 @section('content')
 
@@ -18,7 +16,7 @@ Groups page
                         <li><a href="#">Все</a></li>
                         <li><a href="#">Мои группы</a></li>
                         <li><a href="#">Мои подписки</a></li>
-                        <li><a href="#">Создать группу</a></li>
+                        <li><a href="{{ route('groups.create') }}">Создать группу</a></li>
                         <li><a href="#">Может быть интересным</a></li>
                         <li><button type="submit"><i class="bi bi-list"></i></button></li>
                     </ul>
@@ -31,18 +29,18 @@ col-xl-3 col-lg-4 col-md-6 col-sm-12 --}}
 
 <div class="groups-main-wrap container">
     <div class="groups-main row">
-        @foreach ($users as $user)
+        @foreach ($groups as $group)
         <div class="col-sm-4">
             <div class="groups-block row">
                 <div class="groups-image col-sm-12">
-                    <a href="#">
-                        <img src="{{ $user->avatar }}" alt="">
+                    <a href="{{ route('groups.show', $group->id ) }}">
+                        <img src="{{ $group->avatar }}" alt="">
                     </a>
                 </div>
                 <div class="groups-name-desc-subsc col-sm-12">
                     <a href="#">
-                        <div class="group-name">{{$user->name}}</div>
-                        <div class="group-description">Description</div>
+                        <div class="group-name">{{$group->name}}</div>
+                        <div class="group-description">{{$group->description}}</div>
                         <div class="group-subscribe">
                            <button type="submit">Subcribe</button>
                         </div>
