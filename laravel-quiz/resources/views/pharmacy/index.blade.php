@@ -2,12 +2,9 @@
 
 @section('content')
 
-    <div class="welcome-user">
-        <h3>Welcome user</h3>
-    </div>
     <div class="container">
         <div class="title row">
-            <h1>Enter an ID</h1>
+            <h1>PZS kod search</h1>
         </div>
         <div class="input row justify-content-md-center">
             <form class="id-search  col-sm-8">
@@ -16,66 +13,21 @@
                     <button class="btn btn-outline-primary" type="submit" id="button-addon2">Button</button>
                   </div>
                 <ul class="result-list col-sm-12">
+                    @foreach ($pharmes as $pharm)
                     <li>
-                        <a href="#" class="link-list row">
-                            <div class="list-img col-sm-3">
+                        <a href="/category" class="link-list row justify-content-between">
+                            {{-- <div class="list-img col-sm-3">
                                 <img src="{{asset ('images/no-image.jpg')}}" alt="">
-                            </div>
-                            <div class="code col-sm-3">PZS code</div>
-                            <div class="address col-sm-3">Address</div>
-                            <div class="city col-sm-3">City</div>
+                            </div> --}}
+                            <div class="code col-sm-3">{{ $pharm->pzs_kod }}</div>
+                            <div class="address col-sm-5">{{ $pharm->address }}</div>
+                            <div class="city col-sm-4">{{ $pharm->city }}</div>
                         </a>
                     </li>
-                    <li>
-                        <a href="#" class="link-list row">
-                            <div class="list-img col-sm-3">
-                                <img src="{{asset ('images/no-image.jpg')}}" alt="">
-                            </div>
-                            <div class="code col-sm-3">PZS code</div>
-                            <div class="address col-sm-3">Address</div>
-                            <div class="city col-sm-3">City</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="link-list row">
-                            <div class="list-img col-sm-3">
-                                <img src="{{asset ('images/no-image.jpg')}}" alt="">
-                            </div>
-                            <div class="code col-sm-3">PZS code</div>
-                            <div class="address col-sm-3">Address</div>
-                            <div class="city col-sm-3">City</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="link-list row">
-                            <div class="list-img col-sm-3">
-                                <img src="{{asset ('images/no-image.jpg')}}" alt="">
-                            </div>
-                            <div class="code col-sm-3">PZS code</div>
-                            <div class="address col-sm-3">Address</div>
-                            <div class="city col-sm-3">City</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="link-list row">
-                            <div class="list-img col-sm-3">
-                                <img src="{{asset ('images/no-image.jpg')}}" alt="">
-                            </div>
-                            <div class="code col-sm-3">PZS code</div>
-                            <div class="address col-sm-3">Address</div>
-                            <div class="city col-sm-3">City</div>
-                        </a>
-                    </li>
+                    @endforeach
                 </ul>
             </form>
         </div>
-    </div>
-
-    <div class="links">
-        <ul>
-            <li><a href="#">Category</a></li>
-            <li><a href="#">Product</a></li>
-        </ul>
     </div>
 
     @endsection

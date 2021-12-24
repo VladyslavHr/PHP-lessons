@@ -21,6 +21,7 @@
 
 .result-list li{
     margin: 10px;
+    line-height: 3;
 }
 
 .result-list li:hover{
@@ -30,7 +31,8 @@
 }
 
 .link-list{
-    align-items: center;
+    text-decoration: none;
+    color: black;
 }
 
 .list-img img{
@@ -38,3 +40,41 @@
     padding: 10px;
     border-radius: 10%;
 }
+
+.pharmacy-block{
+    padding: 10px;
+    margin: 25px;
+}
+
+.input-group{
+    margin: 25px 0px 25px 0px;
+    padding: 10px;
+    /* max-width: 40%; */
+}
+
+.list-group{
+    padding: 10px;
+    margin: 25px;
+}
+
+.bread-crumb{
+    margin: 20px 0px 20px 35px;
+    padding: 10px;
+}
+
+.select-1{
+    margin-right: 10px;
+}
+
+.save-button{
+    margin: auto;
+}
+
+.product-title{
+    font-size: 14px;
+    margin-right: 15px;
+}
+
+/* .label-mark{
+    font-size: 13px;
+} */

@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pharmacy;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+
 
 class PharmacyController extends Controller
 {
@@ -15,7 +19,13 @@ class PharmacyController extends Controller
      */
     public function index()
     {
-        return view('pharmacy.index');
+        return view('pharmacy.index', [
+            'pharmes' => Pharmacy::all(),
+            'user' => User::all(),
+            // 'pzs_kodes' => Pharmacy::all('pzs_kod'),
+            // 'addresses' => Pharmacy::all('address'),
+            // 'cites' => Pharmacy::all('city'),
+        ]);
     }
 
     /**
@@ -84,7 +94,7 @@ class PharmacyController extends Controller
         //
     }
 
-    public function read_exel()
+    public function read_exel_pharmacy()
     {
 
         // $inputFileName = __DIR__ . '/sampleData/example1.xls';
@@ -106,6 +116,79 @@ class PharmacyController extends Controller
                 'address' => trim($row['B']),
                 'city' => trim($row['C']),
             ]);
+        }
+
+        // return 'Hello exel';
+    }
+
+    public function read_excel_category()
+    {
+
+        // $inputFileName = __DIR__ . '/sampleData/example1.xls';
+        $inputFileName = resource_path('excel1/3.xlsx');
+        // $helper->log('Loading file ' . pathinfo($inputFileName, PATHINFO_BASENAME) . ' using IOFactory to identify the format');
+        $spreadsheet = IOFactory::load($inputFileName);
+        $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+        echo "<pre>";
+        print_r($sheetData);
+        // print_r(scandir(resource_path('excel')));
+        echo "<pre>";
+
+        foreach ($sheetData as $key => $row) {
+            // if ($key > 5) {
+            //    breake;
+            // }
+            if(trim($row['A'])){
+                Category::firstOrCreate(['name' => trim($row['A'])]);
+            }
+
+        }
+
+        // return 'Hello exel';
+    }
+
+    public function read_excel_products()
+    {
+
+        // $inputFileName = __DIR__ . '/sampleData/example1.xls';
+        $inputFileName = resource_path('excel1/3.xlsx');
+        // $helper->log('Loading file ' . pathinfo($inputFileName, PATHINFO_BASENAME) . ' using IOFactory to identify the format');
+        $spreadsheet = IOFactory::load($inputFileName);
+        $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+        echo "<pre>";
+        // print_r($sheetData);
+        // print_r(scandir(resource_path('excel')));
+        echo "<pre>";
+
+        $category_name = null;
+        $category_id = 0;
+        foreach ($sheetData as $key => $row) {
+            if (trim($row['A'])) {
+                $category_name = trim($row['A']);
+                $category_id = Category::where('name', $category_name)->first()->id;
+            }
+            $product_name = trim($row['B']);
+            echo '<div>' . $category_name . '|' . $product_name . '|' . $category_id;
+
+            $brand = '';
+            $title_arr = explode(' ', $product_name);
+            if ($title_arr) $brand = $title_arr[0];
+
+            unset($title_arr[0]);
+            $info = implode(' ', $title_arr);
+
+            Product::firstOrCreate(['title' => $product_name], [
+                'brand' => $brand,
+                'info' => $info,
+                'category_id' => $category_id,
+            ]);
+
+            // if(trim($row['A'])){
+            //     Category::firstOrCreate(['name' => trim($row['A'])], [
+            //         'name' => trim($row['A']),
+            //     ]);
+            // }
+
         }
 
         // return 'Hello exel';

@@ -33,21 +33,25 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="category" href="category/category">Category</a>
+                            <a class="nav-link active" aria-current="category" href="/category">Category</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="product/product">Product</a>
+                            <a class="nav-link" href="/product">Product</a>
                         </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto align-items-center">
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
+                                <li>
+                                    <span>Welcome user</span>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
+
                             @endif
 
                             @if (Route::has('register'))

@@ -24,6 +24,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/excel', [App\Http\Controllers\PharmacyController::class, 'index'])->name('excel');
 
-Route::get('/category', [App\Http\Controllers\PharmacyController::class, 'category'])->name('category');
+Route::get('/category', [App\Http\Controllers\CategoryController::class, 'index'])->name('category');
 
-Route::get('/product', [App\Http\Controllers\PharmacyController::class, 'product'])->name('product');
+Route::get('/product', [App\Http\Controllers\ProductController::class, 'index'])->name('product');
+
+Route::get('/excel-cat', [App\Http\Controllers\PharmacyController::class, 'read_excel_category'])->name('read_excel_category');
+
+Route::get('/excel-prod', [App\Http\Controllers\PharmacyController::class, 'read_excel_products'])->name('read_excel_products');
