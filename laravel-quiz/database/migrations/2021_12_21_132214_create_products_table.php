@@ -18,11 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('title');
             $table->string('brand');
             $table->string('info');
-            $table->string('category_id');
-            $table->tinyInteger('place_1')->nullable();
-            $table->tinyInteger('place_2')->nullable();
-            $table->tinyInteger('place_3')->nullable();
-            $table->tinyInteger('place_4')->nullable();
+            $table->integer('category_id')->nullable();
             $table->timestamps();
         });
     }

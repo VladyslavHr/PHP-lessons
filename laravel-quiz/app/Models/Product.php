@@ -4,19 +4,39 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Category;
+use App\Models\Mark;
 
 class Product extends Model
 {
     use HasFactory;
+
+    public $marks;
 
     protected $fillable = [
         'title',
         'brand',
         'info',
         'category_id',
-        'place_1',
-        'place_2',
-        'place_3',
-        'place_4',
+        'image',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function marks($pharmacy_id)
+    {
+        if($this->marks) return $this->marks;
+
+        $marks = Mark::where('product_id', $this->id)
+            ->where('pharmacy_id', $pharmacy_id)
+                ->where('user_id', auth()->user()->id)->first();
+        if (!$marks) $marks = new Mark();
+
+        $this->marks = $marks;
+
+        return $marks;
+    }
 }

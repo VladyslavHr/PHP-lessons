@@ -78,3 +78,11 @@
 /* .label-mark{
     font-size: 13px;
 } */
+
+.product-image{
+    padding-right: 10px;
+}
+
+.product-image img{
+    width: 45px;
+}

@@ -11,9 +11,9 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return view('product.product', [
+        return view('product.index', [
             'products' => Product::all(),
-            'pharm' => Pharmacy::all(),
+            'pharmacies' => Pharmacy::all(),
         ]);
     }
 }

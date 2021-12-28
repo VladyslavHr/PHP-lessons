@@ -13,21 +13,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Auth::routes();
 Auth::routes(['register' => false]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware('auth')->group(function () {
 
-Route::get('/excel', [App\Http\Controllers\PharmacyController::class, 'index'])->name('excel');
+    Route::get('/', [App\Http\Controllers\PharmacyController::class, 'index'])->name('pharmacies.index');
 
-Route::get('/category', [App\Http\Controllers\CategoryController::class, 'index'])->name('category');
+    Route::get('/pharmacies/{pharmacy}', [App\Http\Controllers\PharmacyController::class, 'show'])->name('pharmacies.show');
 
-Route::get('/product', [App\Http\Controllers\ProductController::class, 'index'])->name('product');
+    Route::get('/pharmacies/{pharmacy}/categories/{category}', [App\Http\Controllers\CategoryController::class, 'show'])
+        ->name('pharmacies.categories.show');
 
-Route::get('/excel-cat', [App\Http\Controllers\PharmacyController::class, 'read_excel_category'])->name('read_excel_category');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/excel-prod', [App\Http\Controllers\PharmacyController::class, 'read_excel_products'])->name('read_excel_products');
+    Route::get('/categories', [App\Http\Controllers\CategoryController::class, 'index'])->name('category');
+
+    Route::post('/categories/estimate', [App\Http\Controllers\CategoryController::class, 'estimate'])->name('category.estimate');
+
+    Route::post('/pharmacies/estimate_category', [App\Http\Controllers\PharmacyController::class, 'estimate_category'])->name('pharmacy.estimate_category');
+
+    Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])->name('product.index');
+
+    Route::get('/excel-cat', [App\Http\Controllers\PharmacyController::class, 'read_excel_category'])->name('read_excel_category');
+
+    Route::get('/excel-prod', [App\Http\Controllers\PharmacyController::class, 'read_excel_products'])->name('read_excel_products');
+
+});
