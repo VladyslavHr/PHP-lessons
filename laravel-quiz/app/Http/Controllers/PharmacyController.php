@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Category_mark;
+use App\Models\Pharmacy_image;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -76,14 +77,10 @@ class PharmacyController extends Controller
     {
         $category_id = $request->get('category_id');
         $pharmacy_id = $request->get('pharmacy_id');
-        $pharmacy_pzs = $request->get('pharmacy_pzs');
-        $category_name = $request->get('category_name');
 
         $category_data = [
             'category_id' => $category_id,
             'pharmacy_id' => $pharmacy_id,
-            'pharmacy_pzs' => $pharmacy_pzs,
-            'category_name' => $category_name,
             'mark_1' => $request->get('mark_1'),
             'mark_2' => $request->get('mark_2'),
             'mark_3' => $request->get('mark_3'),
@@ -93,8 +90,6 @@ class PharmacyController extends Controller
 
         $category_mark = Category_mark::where('category_id', $category_id)
             ->where('pharmacy_id', $pharmacy_id)
-            ->where('category_name', $category_name)
-            ->where('pharmacy_pzs', $pharmacy_pzs)
                 ->where('user_id', auth()->user()->id)->first();
         if($category_mark){
             $category_mark->update($category_data);
@@ -103,6 +98,31 @@ class PharmacyController extends Controller
         }
         return redirect()->back();
 
+    }
+
+    public function load_images(Request $request)
+    {
+        $this->validate($request, [
+            'filenames' => 'required',
+            'filenames.*' => 'image'
+    ]);
+
+        if($request->hasfile('filenames'))
+        {
+            foreach($request->file('filenames') as $file)
+            {
+
+                $name = time().rand(1,100).'.'.$file->extension();
+                $file->move(public_path('pharmacy_images'), $name);
+                $file= new Pharmacy_image();
+                $file->url = $name;
+                $file->pharmacy_id = $request->get('pharmacy_id');
+                $file->save();
+
+            }
+        }
+
+        return back()->with('status', 'Data Your files has been successfully added');
     }
 
     /**

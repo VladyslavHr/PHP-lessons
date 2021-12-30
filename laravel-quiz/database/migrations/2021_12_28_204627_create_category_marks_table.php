@@ -17,8 +17,6 @@ class CreateCategoryMarksTable extends Migration
             $table->id();
             $table->integer('category_id')->nullable();
             $table->integer('pharmacy_id')->nullable();
-            $table->string('pharmacy_pzs');
-            $table->string('category_name');
             $table->integer('user_id')->nullable();
             $table->tinyInteger('mark_1')->default(0);
             $table->tinyInteger('mark_2')->default(0);

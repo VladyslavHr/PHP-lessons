@@ -12,8 +12,6 @@ class Category_mark extends Model
     protected $fillable = [
         'category_id',
         'pharmacy_id',
-        'pharmacy_pzs',
-        'category_name',
         'mark_1',
         'mark_2',
         'mark_3',

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Pharmacy_image;
 
 class Pharmacy extends Model
 {
@@ -13,9 +14,13 @@ class Pharmacy extends Model
         'pzs_kod',
         'address',
         'city',
-        'images',
     ];
 
+
+    public function images()
+    {
+        return $this->hasMany(Pharmacy_image::class);
+    }
 
     // public function marks($pharmacy_id)
     // {

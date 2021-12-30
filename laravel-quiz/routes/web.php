@@ -35,9 +35,13 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/categories/estimate', [App\Http\Controllers\CategoryController::class, 'estimate'])->name('category.estimate');
 
-    Route::post('/pharmacies/estimate_category', [App\Http\Controllers\PharmacyController::class, 'estimate_category'])->name('pharmacy.estimate_category');
+    Route::post('/pharmacies/estimate_category', [App\Http\Controllers\PharmacyController::class, 'estimate_category'])->name('pharmacies.estimate_category');
+
+    Route::post('/pharmacies/load_images', [App\Http\Controllers\PharmacyController::class, 'load_images'])->name('pharmacies.load_images');
 
     Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])->name('product.index');
+
+    Route::get('/statistics', [App\Http\Controllers\StatisticController::class, 'index'])->name('statistics.index');
 
     Route::get('/excel-cat', [App\Http\Controllers\PharmacyController::class, 'read_excel_category'])->name('read_excel_category');
 

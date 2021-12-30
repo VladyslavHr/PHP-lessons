@@ -47,8 +47,7 @@
 }
 
 .input-group{
-    margin: 25px 0px 25px 0px;
-    padding: 10px;
+    /* margin: 25px 0px 25px 0px; */
     /* max-width: 40%; */
 }
 
@@ -85,4 +84,17 @@
 
 .product-image img{
     width: 45px;
+}
+
+
+.table-name{
+    font-weight: 700;
+    font-size: 20px;
+    display: block;
+    text-align: center;
+    margin: 10px;
+}
+
+.table-image{
+    width: 44px;
 }
