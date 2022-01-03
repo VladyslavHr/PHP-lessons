@@ -41,7 +41,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])->name('product.index');
 
-    Route::get('/statistics', [App\Http\Controllers\StatisticController::class, 'index'])->name('statistics.index');
+    Route::get('/statistics/products', [App\Http\Controllers\StatisticController::class, 'products'])->name('statistics.products');
+
+    Route::get('/statistics/categories', [App\Http\Controllers\StatisticController::class, 'categories'])->name('statistics.categories');
 
     Route::get('/excel-cat', [App\Http\Controllers\PharmacyController::class, 'read_excel_category'])->name('read_excel_category');
 

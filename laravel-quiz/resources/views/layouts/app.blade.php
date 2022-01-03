@@ -22,8 +22,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="/statistics">
-                    Statistics
+                <a class="navbar-brand" href="/">
+                    Pharmacies
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -31,14 +31,21 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    {{-- <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="category" href="/statistics">Statistics </a>
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Statistics</a>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="{{ route('statistics.products') }}">Products</a></li>
+                              <li><a class="dropdown-item" href="{{ route('statistics.categories') }}">Categories</a></li>
+                            </ul>
+                          </li>
+                        {{-- <li class="nav-item">
+                            <a class="nav-link active" aria-current="category" href="/statistics">Statistic Category </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/statistic_product">Statistic product</a>
-                        </li>
-                    </ul> --}}
+                        </li> --}}
+                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto align-items-center">

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Product;
-use App\Models\Category_mark;
+use App\Models\CategoryMark;
 
 class Category extends Model
 {
@@ -26,10 +26,10 @@ class Category extends Model
     {
         if($this->marks) return $this->marks;
 
-        $marks = Category_mark::where('category_id', $this->id)
+        $marks = CategoryMark::where('category_id', $this->id)
             ->where('pharmacy_id', $pharmacy_id)
                 ->where('user_id', auth()->user()->id)->first();
-        if (!$marks) $marks = new Category_mark();
+        if (!$marks) $marks = new CategoryMark();
 
         $this->marks = $marks;
 

@@ -20,10 +20,10 @@
             </div>
         </div>
 
-        <div class="list-img d-flex col-sm-2 my-5">
-            @foreach ($pharmacy->images as $image)
-                <img class="col-sm-3" src="{{asset ('pharmacy_images/' . $image->url)}}" alt="">
-            @endforeach
+        <div class="list-img row my-5">
+                @foreach ($pharmacy->images as $image)
+                <img class="col-sm-3" src="{{ $image->asset() }}" alt="">
+                @endforeach
         </div>
 
         <form action="{{ route('pharmacies.load_images') }}" class="input-group my-5" enctype='multipart/form-data' method="POST">

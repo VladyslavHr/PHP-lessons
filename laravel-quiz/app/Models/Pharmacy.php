@@ -19,7 +19,7 @@ class Pharmacy extends Model
 
     public function images()
     {
-        return $this->hasMany(Pharmacy_image::class);
+        return $this->hasMany(PharmacyImage::class);
     }
 
     // public function marks($pharmacy_id)

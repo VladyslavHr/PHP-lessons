@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::post('/excel-export', [App\Http\Controllers\StatisticController::class, 'excel_export']);
+
+Route::post('/excel-export-cat', [App\Http\Controllers\StatisticController::class, 'excel_export_cat']);
+

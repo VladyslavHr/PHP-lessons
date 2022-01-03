@@ -6,8 +6,8 @@ use App\Models\Pharmacy;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
-use App\Models\Category_mark;
-use App\Models\Pharmacy_image;
+use App\Models\CategoryMark;
+use App\Models\PharmacyImage;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -88,13 +88,13 @@ class PharmacyController extends Controller
             'user_id' => auth()->user()->id,
         ];
 
-        $category_mark = Category_mark::where('category_id', $category_id)
+        $category_mark = CategoryMark::where('category_id', $category_id)
             ->where('pharmacy_id', $pharmacy_id)
                 ->where('user_id', auth()->user()->id)->first();
         if($category_mark){
             $category_mark->update($category_data);
         }else{
-            Category_mark::create($category_data);
+            CategoryMark::create($category_data);
         }
         return redirect()->back();
 
@@ -114,7 +114,7 @@ class PharmacyController extends Controller
 
                 $name = time().rand(1,100).'.'.$file->extension();
                 $file->move(public_path('pharmacy_images'), $name);
-                $file= new Pharmacy_image();
+                $file= new PharmacyImage();
                 $file->url = $name;
                 $file->pharmacy_id = $request->get('pharmacy_id');
                 $file->save();

@@ -9,6 +9,7 @@
         <div class="input row justify-content-md-center">
             <form class="id-search  col-sm-8">
                 <div class="input-group mb-6">
+                    <input type="hidden" name="search" value="search">
                     <input type="text" class="form-control" placeholder="PZS code" aria-label="Recipient's username" aria-describedby="button-addon2">
                     <button class="btn btn-outline-primary" type="submit" id="button-addon2">Search</button>
                   </div>
