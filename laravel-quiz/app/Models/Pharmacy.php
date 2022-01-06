@@ -14,12 +14,25 @@ class Pharmacy extends Model
         'pzs_kod',
         'address',
         'city',
+        'location',
     ];
 
 
     public function images()
     {
         return $this->hasMany(PharmacyImage::class);
+    }
+
+    public function location($pharmacy_id)
+    {
+        if($this->location) return $this->location;
+
+        $location = Pharmacy::where('pharmacy_id', $this->id);
+        if (!$location) $location = new Pharmacy();
+
+        $this->location = $location;
+
+        return $location;
     }
 
     // public function marks($pharmacy_id)

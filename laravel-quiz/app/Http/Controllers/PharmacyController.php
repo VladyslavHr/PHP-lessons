@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\User;
 use App\Models\CategoryMark;
 use App\Models\PharmacyImage;
+use App\Models\PharmacyLocation;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -22,8 +23,22 @@ class PharmacyController extends Controller
     public function index()
     {
         return view('pharmacy.index', [
-            'pharmacies' => Pharmacy::all(),
-            'users' => User::all(),
+            'pharmacies' => Pharmacy::paginate(20),
+            // 'pharmacies' => [],
+            'query' => '',
+            // 'pzs_kodes' => Pharmacy::all('pzs_kod'),
+            // 'addresses' => Pharmacy::all('address'),
+            // 'cites' => Pharmacy::all('city'),
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        // dd($request->get('query'));
+        $query = $request->get('query');
+        return view('pharmacy.index', [
+            'pharmacies' => Pharmacy::where('pzs_kod', 'like', "%$query%")->orwhere('city', 'like', "%$query%")->orwhere('address', 'like', "%$query%")->paginate(20),
+            'query' => $query,
             // 'pzs_kodes' => Pharmacy::all('pzs_kod'),
             // 'addresses' => Pharmacy::all('address'),
             // 'cites' => Pharmacy::all('city'),
@@ -71,6 +86,26 @@ class PharmacyController extends Controller
             'categories' => Category::all(),
             'pharmacy' => $pharmacy,
         ]);
+    }
+
+    public function pharmacy_location(Request $request)
+    {
+        $pharmacy_id = $request->get('pharmacy_id');
+
+        $location_data = [
+            'pharmacy_id' => $pharmacy_id,
+            'location' => $request->get('location'),
+        ];
+
+        $pharmacy_location = Pharmacy::where('pharmacy_id', $pharmacy_id);
+
+        if($pharmacy_location){
+            $pharmacy_location->update($location_data);
+        }else{
+            Pharmacy::create($location_data);
+        }
+        return redirect()->back();
+
     }
 
     public function estimate_category(Request $request)
@@ -159,7 +194,7 @@ class PharmacyController extends Controller
         //
     }
 
-    public function read_exel_pharmacy()
+    public function read_excel_pharmacies()
     {
 
         // $inputFileName = __DIR__ . '/sampleData/example1.xls';
@@ -168,10 +203,14 @@ class PharmacyController extends Controller
         $spreadsheet = IOFactory::load($inputFileName);
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
         echo "<pre>";
+        print_r(count($sheetData));
         print_r($sheetData);
         // print_r(scandir(resource_path('excel')));
         echo "<pre>";
 
+
+
+        $pharm_arr = [];
         foreach ($sheetData as $key => $row) {
             // if ($key > 5) {
             //    breake;
@@ -186,7 +225,48 @@ class PharmacyController extends Controller
         // return 'Hello exel';
     }
 
-    public function read_excel_category()
+    public function read_excel_pharmacies_copies()
+    {
+
+        // $inputFileName = __DIR__ . '/sampleData/example1.xls';
+        $inputFileName = resource_path('excel1/1.xlsx');
+        // $helper->log('Loading file ' . pathinfo($inputFileName, PATHINFO_BASENAME) . ' using IOFactory to identify the format');
+        $spreadsheet = IOFactory::load($inputFileName);
+        $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+        echo "<pre>";
+        print_r(count($sheetData));
+        // print_r($sheetData);
+        // print_r(scandir(resource_path('excel')));
+        echo "<pre>";
+
+
+
+        $pharm_arr = [];
+        foreach ($sheetData as $key => $row) {
+            // if ($key > 5) {
+            //    breake;
+            // }
+            $pzs_kod = trim($row['A']);
+            @$pharm_arr[$pzs_kod]++;
+            // Pharmacy::firstOrCreate(['pzs_kod' => trim($row['A'])], [
+            //     'pzs_kod' => trim($row['A']),
+            //     'address' => trim($row['B']),
+            //     'city' => trim($row['C']),
+            // ]);
+        }
+        arsort($pharm_arr);
+        echo "<pre>";
+        print_r(count($pharm_arr));
+        echo '<hr>';
+        print_r($pharm_arr);
+        // print_r($sheetData);
+        // print_r(scandir(resource_path('excel')));
+        echo "<pre>";
+
+        // return 'Hello exel';
+    }
+
+    public function read_excel_categories()
     {
 
         // $inputFileName = __DIR__ . '/sampleData/example1.xls';

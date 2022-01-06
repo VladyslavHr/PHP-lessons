@@ -37,16 +37,9 @@ class CategoryController extends Controller
     {
         $product_id = $request->get('product_id');
         $pharmacy_id = $request->get('pharmacy_id');
-        $pharmacy_pzs = $request->get('pharmacy_pzs');
-        $product_title = $request->get('product_title');
-        $product_brand = $request->get('product_brand');
-
         $data = [
             'product_id' => $product_id,
             'pharmacy_id' => $pharmacy_id,
-            'pharmacy_pzs' => $pharmacy_pzs,
-            'product_title' => $product_title,
-            'product_brand' => $product_brand,
             'mark_1' => $request->get('mark_1'),
             'mark_2' => $request->get('mark_2'),
             'mark_3' => $request->get('mark_3'),
@@ -56,9 +49,6 @@ class CategoryController extends Controller
 
         $mark = Mark::where('product_id', $product_id)
             ->where('pharmacy_id', $pharmacy_id)
-            ->where('product_title', $product_title)
-            ->where('product_brand', $product_brand)
-            ->where('pharmacy_pzs', $pharmacy_pzs)
                 ->where('user_id', auth()->user()->id)->first();
         if($mark){
             $mark->update($data);

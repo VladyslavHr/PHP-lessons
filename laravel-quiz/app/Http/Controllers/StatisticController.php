@@ -19,7 +19,7 @@ class StatisticController extends Controller
      */
     public function products()
     {
-        $marks = Mark::with(['pharmacy', 'product', 'user', 'product.category'])->get();
+        $marks = Mark::with(['pharmacy:id,pzs_kod', 'product:id,title,brand,category_id', 'user:id,name', 'product.category:id,name'])->get();
         return view('statistics.products', [
             'marks' => $marks,
         ]);
@@ -35,7 +35,7 @@ class StatisticController extends Controller
 
     public function excel_export()
     {
-        $marks = Mark::with(['pharmacy', 'product', 'user', 'product.category'])->get();
+        $marks = Mark::with(['pharmacy:id,pzs_kod', 'product:id,title,brand,category_id', 'user:id,name', 'product.category:id,name'])->get();
 
 
 

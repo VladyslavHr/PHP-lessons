@@ -34,57 +34,55 @@
         </form>
     </div>
     <div class="list-group">
+        <form action="{{ route('pharmacies.pharmacy_location') }}" method="POST">
+            @csrf
+            <input type="hidden" name="pharmacy_id" value="{{ $pharmacy->id }}">
+            <div class="select-location">
+                <label for="location">Choose pharmacy location</label>
+                <select name="location" class="form-select form-select-sm" aria-label=".form-select-sm example" id="location">
+                    <option value="none">None</option>
+                    <option value="nákupné centrum"{{ $pharmacy->location($pharmacy->id)->location == 'nákupné centrum' ? 'selected' : '' }}>nákupné centrum</option>
+                    <option value="mestká"{{ $pharmacy->location($pharmacy->id)->location == 'mestká' ? 'selected' : '' }}>mestká</option>
+                    <option value="dedinská"{{ $pharmacy->location($pharmacy->id)->location == 'dedinská' ? 'selected' : '' }}>dedinská</option>
+                    <option value="nemocničná"{{ $pharmacy->location($pharmacy->id)->location == 'nemocničná' ? 'selected' : '' }}>nemocničná</option>
+                </select>
+            </div>
+        </form>
+        <div class="save-button col-xxl-1 mt-2">
+            <button type="submit" class="btn btn-outline-primary">Save</button>
+        </div>
         @foreach ($categories as $category)
-        <form action="{{ route('pharmacies.estimate_category') }}" method="POST">
+        <form class="list-group-item list-group-item-action" action="{{ route('pharmacies.estimate_category') }}" method="POST">
             @csrf
             <input type="hidden" name="category_id" value="{{ $category->id }}">
             <input type="hidden" name="pharmacy_id" value="{{ $pharmacy->id }}">
-            <div  class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">
-                <a href="{{ route('pharmacies.categories.show', [ 'pharmacy' => $pharmacy, 'category' => $category->id] ) }}" class="category-title col-sm-3">
+            <div  class=" d-flex row align-items-center justify-content-between">
+                <a href="{{ route('pharmacies.categories.show', [ 'pharmacy' => $pharmacy, 'category' => $category->id] ) }}" class="category-title col-xxl-3">
                     {{ $category->name }}
                 </a>
 
-                <div class="select-1 col-sm-2">
-                    <label for="mark1" class="label-mark">Počet Face-kategória-120-180 cm (úroveň očí)</label>
+
+                <div class="input-group mb-3">
+                    <input type="number" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+                  </div>
+                <div class="select-1 col-xxl-2">
+                    <label for="mark1" class="label-mark">Počet Face-kategóry celkem</label>
                     <select name="mark_1" class="form-select form-select-sm" aria-label=".form-select-sm example" id="mark1">
                         <option value="0">Mark</option>
                         <option value="1"{{  $category->marks($pharmacy->id)->mark_1 == 1 ? 'selected' : '' }}>1</option>
                         <option value="2"{{  $category->marks($pharmacy->id)->mark_1 == 2 ? 'selected' : '' }}>2</option>
                         <option value="3"{{  $category->marks($pharmacy->id)->mark_1 == 3 ? 'selected' : '' }}>3</option>
                         <option value="4"{{  $category->marks($pharmacy->id)->mark_1 == 4 ? 'selected' : '' }}>4</option>
+                        <option value="4"{{  $category->marks($pharmacy->id)->mark_1 == 5 ? 'selected' : '' }}>5</option>
+                        <option value="4"{{  $category->marks($pharmacy->id)->mark_1 == 6 ? 'selected' : '' }}>6</option>
+                        <option value="4"{{  $category->marks($pharmacy->id)->mark_1 == 7 ? 'selected' : '' }}>7</option>
+                        <option value="4"{{  $category->marks($pharmacy->id)->mark_1 == 8 ? 'selected' : '' }}>8</option>
+                        <option value="4"{{  $category->marks($pharmacy->id)->mark_1 == 9 ? 'selected' : '' }}>9</option>
+                        <option value="4"{{  $category->marks($pharmacy->id)->mark_1 == 10 ? 'selected' : '' }}>10</option>
                     </select>
                 </div>
-                <div class="select-1 col-sm-2">
-                    <label for="mark2" class="label-mark">Počet Face kategória-(mimo úroveň očí)</label>
-                    <select name="mark_2" class="form-select form-select-sm" aria-label=".form-select-sm example" id="mark2">
-                        <option value="0">Mark</option>
-                        <option value="1"{{  $category->marks($pharmacy->id)->mark_2 == 1 ? 'selected' : '' }}>1</option>
-                        <option value="2"{{  $category->marks($pharmacy->id)->mark_2 == 2 ? 'selected' : '' }}>2</option>
-                        <option value="3"{{  $category->marks($pharmacy->id)->mark_2 == 3 ? 'selected' : '' }}>3</option>
-                        <option value="4"{{  $category->marks($pharmacy->id)->mark_2 == 4 ? 'selected' : '' }}>4</option>
-                    </select>
-                </div>
-                <div class="select-1 col-sm-2">
-                    <label for="mark3" class="label-mark">Počet Face( druhotné vystavenie)</label>
-                    <select name="mark_3" class="form-select form-select-sm" aria-label=".form-select-sm example" id="mark3">
-                        <option value="0">Mark</option>
-                        <option value="1"{{  $category->marks($pharmacy->id)->mark_3 == 1 ? 'selected' : '' }}>1</option>
-                        <option value="2"{{  $category->marks($pharmacy->id)->mark_3 == 2 ? 'selected' : '' }}>2</option>
-                        <option value="3"{{  $category->marks($pharmacy->id)->mark_3 == 3 ? 'selected' : '' }}>3</option>
-                        <option value="4"{{  $category->marks($pharmacy->id)->mark_3 == 4 ? 'selected' : '' }}>4</option>
-                    </select>
-                </div>
-                <div class="select-1 col-sm-2">
-                    <label for="mark4" class="label-mark">Druhotné vystavenie (krátkodobé, dlhodobé)</label>
-                    <select name="mark_4" class="form-select form-select-sm" aria-label=".form-select-sm example" id="mark4">
-                        <option value="0">Mark</option>
-                        <option value="1"{{  $category->marks($pharmacy->id)->mark_4 == 1 ? 'selected' : '' }}>1</option>
-                        <option value="2"{{  $category->marks($pharmacy->id)->mark_4 == 2 ? 'selected' : '' }}>2</option>
-                        <option value="3"{{  $category->marks($pharmacy->id)->mark_4 == 3 ? 'selected' : '' }}>3</option>
-                        <option value="4"{{  $category->marks($pharmacy->id)->mark_4 == 4 ? 'selected' : '' }}>4</option>
-                    </select>
-                </div>
-                <div class="save-button">
+                <div class="save-button col-xxl-1 mt-2">
                     <button type="submit" class="btn btn-outline-primary">Save</button>
                 </div>
 

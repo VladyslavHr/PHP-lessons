@@ -18,11 +18,13 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // Auth::routes();
-Auth::routes(['register' => false]);
+Auth::routes(['register' => true]);
 
 Route::middleware('auth')->group(function () {
 
     Route::get('/', [App\Http\Controllers\PharmacyController::class, 'index'])->name('pharmacies.index');
+
+    Route::get('/pharmacies/search', [App\Http\Controllers\PharmacyController::class, 'search'])->name('pharmacies.search');
 
     Route::get('/pharmacies/{pharmacy}', [App\Http\Controllers\PharmacyController::class, 'show'])->name('pharmacies.show');
 
@@ -37,6 +39,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/pharmacies/estimate_category', [App\Http\Controllers\PharmacyController::class, 'estimate_category'])->name('pharmacies.estimate_category');
 
+    Route::post('/pharmacies/pharmacy_location', [App\Http\Controllers\PharmacyController::class, 'pharmacy_location'])->name('pharmacies.pharmacy_location');
+
     Route::post('/pharmacies/load_images', [App\Http\Controllers\PharmacyController::class, 'load_images'])->name('pharmacies.load_images');
 
     Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])->name('product.index');
@@ -45,8 +49,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/statistics/categories', [App\Http\Controllers\StatisticController::class, 'categories'])->name('statistics.categories');
 
-    Route::get('/excel-cat', [App\Http\Controllers\PharmacyController::class, 'read_excel_category'])->name('read_excel_category');
+    Route::get('/excel-cat', [App\Http\Controllers\PharmacyController::class, 'read_excel_categories'])->name('read_excel_categories');
 
     Route::get('/excel-prod', [App\Http\Controllers\PharmacyController::class, 'read_excel_products'])->name('read_excel_products');
+
+    Route::get('/excel-pharm', [App\Http\Controllers\PharmacyController::class, 'read_excel_pharmacies'])->name('read_excel_pharmacies');
+
+    Route::get('/excel-pharm-copies', [App\Http\Controllers\PharmacyController::class, 'read_excel_pharmacies_copies'])->name('read_excel_pharmacies_copies');
 
 });

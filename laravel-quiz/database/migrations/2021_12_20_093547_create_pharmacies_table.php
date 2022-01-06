@@ -18,6 +18,7 @@ class CreatePharmaciesTable extends Migration
             $table->string('pzs_kod');
             $table->string('address')->default('');
             $table->string('city')->default('');
+            $table->string('location')->default('');
             $table->timestamps();
         });
     }

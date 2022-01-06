@@ -18,10 +18,7 @@ class CreateCategoryMarksTable extends Migration
             $table->integer('category_id')->nullable();
             $table->integer('pharmacy_id')->nullable();
             $table->integer('user_id')->nullable();
-            $table->tinyInteger('mark_1')->default(0);
-            $table->tinyInteger('mark_2')->default(0);
-            $table->tinyInteger('mark_3')->default(0);
-            $table->tinyInteger('mark_4')->default(0);
+            $table->integer('total')->default(0);
             $table->timestamps();
         });
     }
