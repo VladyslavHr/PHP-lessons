@@ -39,9 +39,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/pharmacies/estimate_category', [App\Http\Controllers\PharmacyController::class, 'estimate_category'])->name('pharmacies.estimate_category');
 
-    Route::post('/pharmacies/pharmacy_location', [App\Http\Controllers\PharmacyController::class, 'pharmacy_location'])->name('pharmacies.pharmacy_location');
-
     Route::post('/pharmacies/load_images', [App\Http\Controllers\PharmacyController::class, 'load_images'])->name('pharmacies.load_images');
+
+    Route::post('/pharmacies/change_location', [App\Http\Controllers\PharmacyController::class, 'change_location'])->name('pharmacies.change_location');
 
     Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])->name('product.index');
 

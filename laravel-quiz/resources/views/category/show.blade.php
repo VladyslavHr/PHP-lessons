@@ -19,7 +19,9 @@
         </div>
     </div>
     <div class="prod-total">
-        <span>Products total:{{ count($category->products) }}</span>
+        <div>Products total:
+           <span>{{ count($category->products) }}</span>
+        </div>
     </div>
     <div class="list-group-product">
         @foreach ($category->products as $product)
@@ -30,9 +32,11 @@
                 <input type="hidden" name="pharmacy_pzs" value="{{ $pharmacy->pzs_kod }}">
                 <input type="hidden" name="product_title" value="{{ $product->title }}">
                 <input type="hidden" name="product_brand" value="{{ $product->brand }}">
+
                 <div class="product-image col-xxl-1 mb-2">
-                    <img src="{{ asset('images/no-image.jpg') }}" alt="">
+                    <img src="{{ $product->image_src() }}" alt="{{ $product->title }}">
                 </div>
+
                 <div class="product-title col-xxl-2">
                     {{ $product->title }}
                 </div>

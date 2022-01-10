@@ -23,18 +23,6 @@ class Pharmacy extends Model
         return $this->hasMany(PharmacyImage::class);
     }
 
-    public function location($pharmacy_id)
-    {
-        if($this->location) return $this->location;
-
-        $location = Pharmacy::where('pharmacy_id', $this->id);
-        if (!$location) $location = new Pharmacy();
-
-        $this->location = $location;
-
-        return $location;
-    }
-
     // public function marks($pharmacy_id)
     // {
     //     if($this->marks) return $this->marks;

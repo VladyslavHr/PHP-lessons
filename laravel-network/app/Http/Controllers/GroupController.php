@@ -58,7 +58,20 @@ class GroupController extends Controller
         ]);
         // dd($data['name']);
 
-        $data['avatar'] = '//via.placeholder.com/600x150';
+        if($request->hasFile('avatar'))
+        {
+            $path = $request->file('avatar')->store('group-avatars', 'public');
+            $data['avatar'] = 'storage/' .$path;
+        }else{
+            $data['avatar'] = '//via.placeholder.com/600x150';
+        }
+        // $path = $request->file('avatar')->store('group-avatars');
+
+
+        dd($path);
+
+
+
 
         // $res = Group::create($data);
 

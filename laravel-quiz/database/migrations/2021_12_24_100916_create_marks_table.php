@@ -21,7 +21,6 @@ class CreateMarksTable extends Migration
             $table->tinyInteger('mark_1')->default(0);
             $table->tinyInteger('mark_2')->default(0);
             $table->tinyInteger('mark_3')->default(0);
-            $table->string('mark_4')->default('');
             $table->timestamps();
         });
     }

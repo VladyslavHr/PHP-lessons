@@ -80,11 +80,12 @@ class StatisticController extends Controller
         $row = $key + 2;
          $sheet->setCellValue("A{$row}", $mark->user->name );
          $sheet->setCellValue("B{$row}", $mark->pharmacy->pzs_kod );
-         $sheet->setCellValue("C{$row}", $mark->category->name );
-         $sheet->setCellValue("D{$row}", $mark->mark_1 );
-         $sheet->setCellValue("E{$row}", $mark->mark_2 );
-         $sheet->setCellValue("F{$row}", $mark->mark_3 );
-         $sheet->setCellValue("G{$row}", $mark->mark_4 );
+         $sheet->setCellValue("C{$row}", $mark->pharmacy->location );
+         $sheet->setCellValue("D{$row}", $mark->category->name );
+         $sheet->setCellValue("E{$row}", $mark->mark_1 );
+        //  $sheet->setCellValue("E{$row}", $mark->mark_2 );
+        //  $sheet->setCellValue("F{$row}", $mark->mark_3 );
+        //  $sheet->setCellValue("G{$row}", $mark->mark_4 );
 
         }
 

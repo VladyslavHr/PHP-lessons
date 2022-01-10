@@ -11,6 +11,6 @@ class PharmacyImage extends Model
 
     public function asset()
     {
-        return asset ('pharmacy_images/' . $this->url);
+        return asset ('pharmacy-images/' . $this->url);
     }
 }

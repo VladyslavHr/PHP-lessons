@@ -1,7 +1,7 @@
 <div class="head-menu">
     <div class="links">
         <ul class= "links-list">
-            <li><a href="/profile/vlad">profile</a></li>
+            <li><a href="/profile">profile</a></li>
             <li><a href="/groups">groups</a></li>
             <li><a href="/friends">friendds</a></li>
         </ul>

@@ -12,7 +12,7 @@ class CategoryMark extends Model
     protected $fillable = [
         'category_id',
         'pharmacy_id',
-        'total',
+        'mark_1',
         'user_id',
     ];
 

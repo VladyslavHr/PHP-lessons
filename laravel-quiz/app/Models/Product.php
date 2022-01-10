@@ -39,4 +39,15 @@ class Product extends Model
 
         return $marks;
     }
+
+    public function image_src()
+    {
+        if (file_exists(public_path('/product-images/' . $this->title . '.jpg')))
+        {
+            return '/product-images/' . $this->title . '.jpg';
+        }else{
+            return '/images/no-image.jpg';
+        }
+
+    }
 }

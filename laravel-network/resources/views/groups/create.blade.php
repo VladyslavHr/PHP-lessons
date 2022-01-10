@@ -33,7 +33,7 @@
     </div>
     @endif
 
-    <form action="{{ route('groups.store') }}" method="POST">
+    <form action="{{ route('groups.store') }}" method="POST" enctype='multipart/form-data'>
 
         @csrf
 
@@ -51,7 +51,7 @@
             <input name="avatar" class="form-control" type="file" id="formFile">
           </div>
         <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+    </form>
 </div>
 
 

@@ -88,50 +88,53 @@ class PharmacyController extends Controller
         ]);
     }
 
-    public function pharmacy_location(Request $request)
+    public function change_location(Request $request)
     {
         $pharmacy_id = $request->get('pharmacy_id');
 
-        $location_data = [
-            'pharmacy_id' => $pharmacy_id,
-            'location' => $request->get('location'),
-        ];
+        $pharmacy = Pharmacy::find($pharmacy_id);
 
-        $pharmacy_location = Pharmacy::where('pharmacy_id', $pharmacy_id);
+        if($pharmacy){
+            $pharmacy->location = $request->get('location');
+            $pharmacy->save();
 
-        if($pharmacy_location){
-            $pharmacy_location->update($location_data);
+            return redirect()->back()->with('status', 'Location updated!');
         }else{
-            Pharmacy::create($location_data);
+            return redirect()->back()->withErrors(['message' => 'Pharmacy not found!']);
         }
-        return redirect()->back();
+
+
 
     }
+
 
     public function estimate_category(Request $request)
     {
         $category_id = $request->get('category_id');
         $pharmacy_id = $request->get('pharmacy_id');
+        $user_id = auth()->user()->id;
 
-        $category_data = [
-            'category_id' => $category_id,
-            'pharmacy_id' => $pharmacy_id,
-            'mark_1' => $request->get('mark_1'),
-            'mark_2' => $request->get('mark_2'),
-            'mark_3' => $request->get('mark_3'),
-            'mark_4' => $request->get('mark_4'),
-            'user_id' => auth()->user()->id,
-        ];
+        $category_data = $request->validate([
+            'category_id' => 'required',
+            'pharmacy_id' => 'required',
+            'mark_1' => 'required|integer|min:0|max:50',
+        ],[
+            'mark_1.required' => '"Počet Face-kategóry celkem" is required!',
+            'mark_1.min' => '"Počet Face-kategóry celkem" between 0 and 50 !',
+            'mark_1.max' => '"Počet Face-kategóry celkem" between 0 and 50!',
+        ]);
+
+        $category_data['user_id'] = $user_id;
 
         $category_mark = CategoryMark::where('category_id', $category_id)
             ->where('pharmacy_id', $pharmacy_id)
-                ->where('user_id', auth()->user()->id)->first();
+                ->where('user_id', $user_id)->first();
         if($category_mark){
             $category_mark->update($category_data);
         }else{
             CategoryMark::create($category_data);
         }
-        return redirect()->back();
+        return redirect()->back()->with('status', 'Updated!');
 
     }
 
@@ -144,15 +147,15 @@ class PharmacyController extends Controller
 
         if($request->hasfile('filenames'))
         {
-            foreach($request->file('filenames') as $file)
+            foreach($request->file('filenames') as $key => $file)
             {
 
-                $name = time().rand(1,100).'.'.$file->extension();
-                $file->move(public_path('pharmacy_images'), $name);
-                $file= new PharmacyImage();
-                $file->url = $name;
-                $file->pharmacy_id = $request->get('pharmacy_id');
-                $file->save();
+                $name = time().'-'.($key+1).'.'.$file->extension();
+                $file->move(public_path('pharmacy-images'), $name);
+                $pharmacy_image= new PharmacyImage();
+                $pharmacy_image->url = $name;
+                $pharmacy_image->pharmacy_id = $request->get('pharmacy_id');
+                $pharmacy_image->save();
 
             }
         }
@@ -219,6 +222,7 @@ class PharmacyController extends Controller
                 'pzs_kod' => trim($row['A']),
                 'address' => trim($row['B']),
                 'city' => trim($row['C']),
+                'location' => trim($row['D']),
             ]);
         }
 
