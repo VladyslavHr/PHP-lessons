@@ -119,3 +119,11 @@
     width: 60px;
     margin-left: 15px;
 }
+
+.list-group-product .list-group-item.bg-red{
+    background: rgba(255 0 0 / 20%);
+}
+
+.list-group-product .list-group-item.bg-green{
+    background: rgba(0 128 0 / 20%)
+}

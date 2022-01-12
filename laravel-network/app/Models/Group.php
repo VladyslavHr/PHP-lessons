@@ -13,6 +13,7 @@ class Group extends Model
         'name',
         'description',
         'avatar',
+        'creator_id',
     ];
 
     protected $hidden = [

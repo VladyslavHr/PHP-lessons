@@ -117,7 +117,6 @@
                             <input type="text" placeholder="Напишите что-нибудь">
                             <button type="submit">Поделиться</button>
                         </div>
-
                     </div>
                 </div>
                 <div class="publishing">

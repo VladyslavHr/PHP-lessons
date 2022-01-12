@@ -38,7 +38,7 @@ col-xl-3 col-lg-4 col-md-6 col-sm-12 --}}
                     </a>
                 </div>
                 <div class="groups-name-desc-subsc col-sm-12">
-                    <a href="#">
+                    <a href="{{ route('groups.show', $group->id ) }}">
                         <div class="group-name">{{$group->name}}</div>
                         <div class="group-description">{{$group->description}}</div>
                         <div class="group-subscribe">

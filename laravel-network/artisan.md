@@ -24,3 +24,5 @@ php artisan rout:list ;
 php artisan make:model Product -mcrf ;
 
 php artisan migrate:rollback // откатить миграцию
+
+php artisan db:seed 

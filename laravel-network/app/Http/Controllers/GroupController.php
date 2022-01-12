@@ -61,14 +61,14 @@ class GroupController extends Controller
         if($request->hasFile('avatar'))
         {
             $path = $request->file('avatar')->store('group-avatars', 'public');
-            $data['avatar'] = 'storage/' .$path;
+            $data['avatar'] = '/storage/' .$path;
         }else{
             $data['avatar'] = '//via.placeholder.com/600x150';
         }
         // $path = $request->file('avatar')->store('group-avatars');
 
 
-        dd($path);
+        // dd($path);
 
 
 
@@ -92,8 +92,10 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
+        $users = User::all();
         return view('groups.show', [
             'group' => $group,
+            'users' => $users,
         ]);
     }
 

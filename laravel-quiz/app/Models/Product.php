@@ -33,7 +33,12 @@ class Product extends Model
         $marks = Mark::where('product_id', $this->id)
             ->where('pharmacy_id', $pharmacy_id)
                 ->where('user_id', auth()->user()->id)->first();
-        if (!$marks) $marks = new Mark();
+        if (!$marks){
+            $marks = new Mark();
+            $marks->no_marks_class = 'bg-red';
+        }else{
+            $marks->no_marks_class = 'bg-green';
+        }
 
         $this->marks = $marks;
 

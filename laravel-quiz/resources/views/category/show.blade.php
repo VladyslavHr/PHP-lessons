@@ -25,7 +25,9 @@
     </div>
     <div class="list-group-product">
         @foreach ($category->products as $product)
-            <form action="{{ route('category.estimate') }}" method="POST" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between row">
+        <?php  ?>
+            <form action="{{ route('category.estimate') }}" method="POST"
+            class="{{ $product->marks($pharmacy->id)->no_marks_class }} list-group-item list-group-item-action d-flex align-items-center justify-content-between row">
                 @csrf
                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                 <input type="hidden" name="pharmacy_id" value="{{ $pharmacy->id }}">
