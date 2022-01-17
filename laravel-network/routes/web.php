@@ -56,5 +56,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/friends', [App\Http\Controllers\HomeController::class, 'friends'])->name('friends');
-Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'show'])->name('profiles.show');
+
 Route::resource('groups', App\Http\Controllers\GroupController::class);

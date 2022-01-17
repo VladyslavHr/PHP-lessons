@@ -17,7 +17,7 @@ class CreateGroupsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('avatar');
-            $table->string('description');
+            $table->text('description');
             $table->timestamps();
         });
     }

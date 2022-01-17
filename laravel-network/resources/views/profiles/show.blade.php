@@ -56,54 +56,20 @@
                         <span>Вам может понравиться</span>
                     </div>
                     <ul class="possibles-list">
-                        <li>
-                            <a href="#">
-                                <div class="group-image">
-                                    <img src="{{ asset ('images/banner1.jpg')}}" alt="">
-                                </div>
-                                <div class="groups-info">
-                                    <span class="group-name">Group name</span>
-                                    <span class="group-topic">Topic</span>
-                                </div>
-                                <button class="group-follow"><i class="bi bi-suit-heart"></i></button>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="group-image">
-                                    <img src="{{ asset ('images/banner1.jpg')}}" alt="">
-                                </div>
-                                <div class="groups-info">
-                                    <span class="group-name">Group name</span>
-                                    <span class="group-topic">Topic</span>
-                                </div>
-                                <button class="group-follow"><i class="bi bi-suit-heart"></i></button>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="group-image">
-                                    <img src="{{ asset ('images/banner1.jpg')}}" alt="">
-                                </div>
-                                <div class="groups-info">
-                                    <span class="group-name">Group name</span>
-                                    <span class="group-topic">Topic</span>
-                                </div>
-                                <button class="group-follow"><i class="bi bi-suit-heart"></i></button>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="group-image">
-                                    <img src="{{ asset ('images/banner1.jpg')}}" alt="">
-                                </div>
-                                <div class="groups-info">
-                                    <span class="group-name">Group name</span>
-                                    <span class="group-topic">Topic</span>
-                                </div>
-                                <button class="group-follow"><i class="bi bi-suit-heart"></i></button>
-                            </a>
-                        </li>
+                        @foreach ($user->groups as $group)
+                            <li>
+                                <a href="#">
+                                    <div class="group-image">
+                                        <img src="{{ $group->avatar}}" alt="">
+                                    </div>
+                                    <div class="groups-info">
+                                        <span class="group-name">{{ $group->name }}</span>
+                                        <span class="group-topic">{{ $group->description }}</span>
+                                    </div>
+                                    <button class="group-follow"><i class="bi bi-suit-heart"></i></button>
+                                </a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

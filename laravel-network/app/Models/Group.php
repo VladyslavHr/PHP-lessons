@@ -20,4 +20,15 @@ class Group extends Model
         'created_at',
         'updated_at',
     ];
+
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'creator_id');
+    }
+
+    public function posts()
+    {
+       return $this->morphMany(Post::class, 'postable');
+    }
 }

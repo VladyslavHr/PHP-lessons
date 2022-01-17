@@ -330,22 +330,56 @@ body{
 }
 
 .publish-block{
-    display: inline-block;
-    background: #f1f1f1;
-    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    background: #fff;
     border-radius: 15px;
-    height: 50px;
 }
 
 .publish-block input{
-    background: none;
+    background: #f1f1f1;
     width: 75%;
     border: 0;
     margin-left: 5px;
-    margin-top: 10px;
+    border-radius: 6px;
+    padding: 5px;
 }
 
 .publish-block input:focus-visible{
+    outline: 0;
+}
+
+.post-status-select{
+    margin-left: 64px;
+    padding: 15px 5px 5px 25px;
+    color: #6c6a6a;
+}
+
+.post-status-choose{
+    width: 53%;
+    margin-top: 10px;
+    border: 1px solid #dc4734;
+    border-radius: 6px;
+}
+
+.post-status-choose:focus-visible{
+    outline: 0;
+}
+
+.post-text-place{
+    width: 75%;
+    margin-left: 84px;
+    margin-top: 15px;
+    width: 75%;
+    margin-left: 84px;
+    margin-top: 15px;
+    border: 0;
+    background: #f1f1f1;
+    padding: 5px;
+    border-radius: 6px;
+}
+
+.post-text-place:focus-visible{
     outline: 0;
 }
 
@@ -354,8 +388,10 @@ body{
     background: #dc4734;
     border-radius: 20px;
     padding: 6px;
-    margin-top: 7px;
     color: #fff;
+    margin-left: auto;
+    margin-top: 15px;
+    margin-right: 85px;
 }
 
 .publish-block button:hover{

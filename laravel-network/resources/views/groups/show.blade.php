@@ -43,6 +43,11 @@ col-xl-3 col-lg-4 col-md-6 col-sm-12 --}}
                         <div class="group-subscribe">
                         <button type="submit">Subcribe</button>
                         </div>
+                        <div class="group-description">{{$group->creator->name}}
+                            @if ($group->creator->id === $group->creator->id)
+                                <a href="{{ route('groups.edit', $group) }}"><i class="bi bi-pencil-square"></i></a>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
@@ -58,24 +63,33 @@ col-xl-3 col-lg-4 col-md-6 col-sm-12 --}}
         </div>
         <div class="col-sm-7">
             <div class="group-publish">
-                <div class="avatar-publish">
-                    <img src="{{ asset ('images/cat.jpg') }}" alt="">
+                <form class="avatar-publish" action="" method="POST">
+
                     <div class="publish-block">
-                        <input type="text" placeholder="Напишите что-нибудь">
+                        <img src="{{ asset ('images/cat.jpg') }}" alt="">
+                        <input type="text" placeholder="Заголовок">
+                        <label class="post-status-select">Доступ публикаций</label>
+                        <select class="post-status-choose" name="post_status">
+                            <option value="0">Выберите доступ</option>
+                            <option value="1">Доступно всем</option>
+                            <option value="2">Доступно только подписчикам</option>
+                        </select>
+                        <label for="post_text"></label>
+                        <textarea class="post-text-place" name="publish_text" type="text" id="post_text" placeholder="Напишите что-нибудь"></textarea>
                         <button type="submit">Поделиться</button>
                     </div>
-                </div>
+                </form>
             </div>
             <div class="publishing">
-                @foreach ($users as $user)
+                @foreach ($group->posts as $post)
                 <div class="post-block">
                     <div class="post-title">
                         <div class="user-image">
                             <img src="{{ asset ('images/cat.jpg') }}" alt="">
                         </div>
                         <div class="user-info">
-                            <span class="user-name">{{ $user->name }}</span>
-                            <span class="post-time">20 min ago</span>
+                            <span class="user-name">{{ $post->author->name }}</span>
+                            <span class="post-time">{{ $post->date_formated() }}</span>
                         </div>
                         <div class="post-set-bar">
                             <a href="#"><i class="bi bi-list"></i></a>
@@ -83,8 +97,7 @@ col-xl-3 col-lg-4 col-md-6 col-sm-12 --}}
                     </div>
                     <div class="post-content">
                         <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa quam voluptate perferendis dolores cum doloremque
-                            quia mollitia voluptas saepe, fugit eveniet beatae tempore omnis sed repellendus error laborum, vel vitae.
+                            {{$post->content}}
                         </p>
                         <img src="{{ asset ('images/banner1.jpg') }}" alt="">
                     </div>
@@ -98,7 +111,7 @@ col-xl-3 col-lg-4 col-md-6 col-sm-12 --}}
                         <div class="post-comments">
                             <a href="#">
                                 <i class="bi bi-chat-dots"></i>
-                                <span  class="count">20</span>
+                                <span  class="count">{{$post->comment_count}}</span>
                             </a>
                         </div>
                         <div class="post-share">

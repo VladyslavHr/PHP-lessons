@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Group;
+// use App\Models\Group;
+// use App\Models\User;
+use App\Models\{Group,User};
 use Illuminate\Http\Request;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
@@ -22,11 +23,10 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups = Group::all();
-        return view('groups.index',[
+        return view('groups.index', [
             'title' => 'groups',
-            'groups' => $groups,
             'user' => Auth::user(),
+            'groups' => Group::all(),
         ]);
     }
 
@@ -37,7 +37,12 @@ class GroupController extends Controller
      */
     public function create()
     {
-        return view('groups.create');
+        $group = new Group();
+        $group->form_action = 'groups.store';
+        $group->avatar = '';
+        return view('groups.create', [
+            'group' => $group,
+        ]);
     }
 
     /**
@@ -52,36 +57,25 @@ class GroupController extends Controller
         $data = $request->validate([
             'name' => 'required|min:4|max:255',
             'description' => 'required|min:4|max:255',
+            'avatar' => 'image',
         ],[
             'name.required' => 'Введите имя группы',
-            'description.required' => 'Введите описание',
+            'description.required' => 'Введите описание группы',
         ]);
         // dd($data['name']);
 
-        if($request->hasFile('avatar'))
-        {
+        if ($request->hasFile('avatar')) {
             $path = $request->file('avatar')->store('group-avatars', 'public');
-            $data['avatar'] = '/storage/' .$path;
+            $data['avatar'] = '/storage/'.$path;
         }else{
             $data['avatar'] = '//via.placeholder.com/600x150';
         }
-        // $path = $request->file('avatar')->store('group-avatars');
-
-
-        // dd($path);
-
-
-
-
-        // $res = Group::create($data);
-
-        // dd($res);
 
         $group = new Group($data);
-        $save = $group->save();
+        $saved = $group->save();
 
-        if($save) return redirect()->back()->with('status', 'Группа добавлена!');
-        else return redirect()->back()->with('status', 'Группа Не добавлена!');
+        if($saved) return redirect()->back()->with('status', 'Группа добавлена!');
+        else return redirect()->back()->with('status', 'Группа НЕ добавлена!');
     }
 
     /**
@@ -107,7 +101,11 @@ class GroupController extends Controller
      */
     public function edit(Group $group)
     {
-        //
+        // dd($group);
+        $group->form_action = 'groups.update';
+        return view('groups.create', [
+            'group' => $group,
+        ]);
     }
 
     /**
@@ -119,7 +117,26 @@ class GroupController extends Controller
      */
     public function update(Request $request, Group $group)
     {
-        //
+        $data = $request->all();
+        $data = $request->validate([
+            'name' => 'required|min:4|max:255',
+            'description' => 'required|min:4|max:255',
+            'avatar' => 'image',
+        ],[
+            'name.required' => 'Введите имя группы',
+            'description.required' => 'Введите описание группы',
+        ]);
+        // dd($data['name']);
+
+        if ($request->hasFile('avatar')) {
+            $path = $request->file('avatar')->store('group-avatars', 'public');
+            $data['avatar'] = '/storage/'.$path;
+        }
+
+        $saved = $group->update($data);
+
+        return redirect()->back()->with('status', 'Группа обновлена!');
+        // else return redirect()->back()->with('status', 'Группа НЕ добавлена!');
     }
 
     /**
