@@ -10,7 +10,7 @@
 
 <div class="prof-main-content container">
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-lg-3">
             <div class="left-content">
                 <div class="user-info-block">
                     <div class="name">
@@ -59,14 +59,18 @@
                         @foreach ($user->groups as $group)
                             <li>
                                 <a href="#">
-                                    <div class="group-image">
-                                        <img src="{{ $group->avatar}}" alt="">
+                                    <div class="d-flex">
+                                        <div class="group-image">
+                                            <img src="{{ $group->avatar}}" alt="">
+                                        </div>
+                                        <h3 class="group-name text-truncate">{{ $group->name }}</h3>
+                                        <button class="group-follow"><i class="bi bi-suit-heart"></i></button>
                                     </div>
-                                    <div class="groups-info">
-                                        <span class="group-name">{{ $group->name }}</span>
-                                        <span class="group-topic">{{ $group->description }}</span>
-                                    </div>
-                                    <button class="group-follow"><i class="bi bi-suit-heart"></i></button>
+
+                                    <p class="group-info">
+                                        {{ $group->description }}
+                                    </p>
+
                                 </a>
                             </li>
                         @endforeach
@@ -74,20 +78,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-xl-6 col-lg-9">
             <div class="center-content">
                 <div class="prof-publish">
-                    <div class="avatar-publish">
-                        <img src="{{ asset ('images/cat.jpg') }}" alt="">
-                        <div class="publish-block">
-                            <input type="text" placeholder="Напишите что-нибудь">
-                            <button type="submit">Поделиться</button>
-                        </div>
-                    </div>
+                    @include('blocks.add-post-form')
                 </div>
                 <div class="publishing">
-                    @foreach ($users as $user)
-
+                    {{ $user->posts_paginated->links() }}
+                    @foreach ($user->posts_paginated as $post)
 
                     <div class="post-block">
                         <div class="post-title">
@@ -95,8 +93,8 @@
                                 <img src="{{ asset ('images/cat.jpg') }}" alt="">
                             </div>
                             <div class="user-info">
-                                <span class="user-name">{{ $user->name }}</span>
-                                <span class="post-time">20 min ago</span>
+                                <span class="user-name">{{ $post->title }}</span>
+                                <span class="post-time">{{ $post->date_formated() }}</span>
                             </div>
                             <div class="post-set-bar">
                                 <a href="#"><i class="bi bi-list"></i></a>
@@ -105,8 +103,7 @@
                         </div>
                         <div class="post-content">
                             <p>
-                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa quam voluptate perferendis dolores cum doloremque
-                                quia mollitia voluptas saepe, fugit eveniet beatae tempore omnis sed repellendus error laborum, vel vitae.
+                                {{$post->content}}
                             </p>
                             <img src="{{ asset ('images/banner1.jpg') }}" alt="">
                         </div>
@@ -132,10 +129,11 @@
                         </div>
                     </div>
                     @endforeach
+                    {{ $user->posts_paginated->links() }}
                 </div>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-xl-3 col-lg-12">
             <div class="right-content">
                 <div class="notif-block">
                     <div class="title">

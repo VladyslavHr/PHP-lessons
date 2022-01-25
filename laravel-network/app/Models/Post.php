@@ -26,23 +26,38 @@ class Post extends Model
 
     public function date_formated()
     {
-        $arr = [
-            'января',
-            'февраля',
-            'марта',
-            'апреля',
-            'мая',
-            'июня',
-            'июля',
-            'августа',
-            'сентября',
-            'октября',
-            'ноября',
-            'декабря',
+        $month_ru = [
+            'Января',
+            'Февраля',
+            'Марта',
+            'Апреля',
+            'Мая',
+            'Июня',
+            'Июля',
+            'Августа',
+            'Сентября',
+            'Октября',
+            'Ноября',
+            'Декабря',
+        ];
+        $month_eng = [
+            'January',
+            'February ',
+            'March ',
+            'April',
+            'May',
+            'June ',
+            'July ',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December',
         ];
         $month = date('n')-1;
-        $date = $this->created_at->format('d Y H:i');
-        return $arr[$month].' '.$date;
+        $date = $this->created_at->format('d F Y H:i');
+        // return $arr[$month].' '.$date;
+        return str_replace($month_eng, $month_ru, $date);
     }
 
     public function author()

@@ -16,6 +16,38 @@ class GroupController extends Controller
         $this->middleware('auth');
     }
 
+    public function uploadAvatar(Request $request)
+    {
+        // dd($request->all());
+        $data = $request->validate([
+            'id' => 'required',
+            'avatar' => 'image:jpg,jpeg,png',
+        ]);
+        // dd($data['name']);
+
+        if ($request->hasFile('avatar')) {
+            $path = $request->file('avatar')->store('group-avatars', 'public');
+            $data['avatar'] = '/storage/'.$path;
+        }else{
+            $data['avatar'] = '//via.placeholder.com/600x150';
+        }
+
+        $group = Group::find($request->get('id'));
+        $old_image_url = $group->avatar;
+        $saved = $group->update($data);
+
+        $path = storage_path(str_replace('/storage/', '/app/public/', $old_image_url));
+        $deleted = unlink($path);
+
+        // delete old avatar
+
+        return [
+            'status' => $saved ? 'ok' : 'error',
+            // '$path' => $path,
+            // 'deleted' => $deleted ? 'deleted' : 'error',
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -53,7 +85,7 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        // $data = $request->all();
         $data = $request->validate([
             'name' => 'required|min:4|max:255',
             'description' => 'required|min:4|max:255',

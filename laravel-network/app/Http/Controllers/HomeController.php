@@ -8,6 +8,12 @@ use App\Models\User;
 
 class HomeController extends Controller
 {
+    public function test()
+    {
+        # code...
+    }
+
+
     /**
      * Create a new controller instance.
      *

@@ -51,4 +51,14 @@ class User extends Authenticatable
     {
        return $this->morphMany(Post::class, 'postable');
     }
+
+    public function getPostsPaginatedAttribute()
+    {
+        return $this->posts()->paginate(2, ['title', 'content', 'created_at'], 'posts-page');
+    }
+
+    public function avatarUrl()
+    {
+        return asset($this->avatar);
+    }
 }
