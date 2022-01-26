@@ -7,10 +7,44 @@
 @include('/blocks.profile-header')
 
 <div class="container mt-5 bg-white">
-    <div class="row">
+    <div class="groups-show-menu-wrap row">
         <div class="col-sm-3"></div>
-        <div class="col-lg-12 col-xl-9 col-xxl-9">
-            <div class="top-navi">
+        <div class=" col-lg-12 col-xl-9 col-xxl-9">
+            <nav class="group-show-menu-navbar navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="{{ route('groups.index') }}">Groups</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="list-groups-show navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Все</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Мои группы</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Мои подписки</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{{ route('groups.create') }}">Создать группу</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Может быть интересным</a>
+                      </li>
+                      {{-- <li class="nav-item">
+                        <a class="nav-link disabled">Disabled</a>
+                      </li> --}}
+                    </ul>
+                    <form class="d-flex">
+                      {{-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> --}}
+                      <button class="groups-menu-show-btn btn btn-outline-success" type="submit">Редактировать группу</button>
+                    </form>
+                  </div>
+                </div>
+              </nav>
+            {{-- <div class="top-navi">
                 <div class="friends-count">Группы (кол-во)</div>
                     <ul class="navi-list">
                         <li><a href="#">Все</a></li>
@@ -20,7 +54,7 @@
                         <li><a href="#">Может быть интересным</a></li>
                         <li><button type="submit"><i class="bi bi-list"></i></button></li>
                     </ul>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
@@ -34,8 +68,14 @@ col-xl-3 col-lg-4 col-md-6 col-sm-12 --}}
                 <div class="groups-image">
                     <div>
                         <label class="upload-image-label">
-                            <img id="ui_avatar" src="{{ $group->avatar }}" alt="">
-                            <input class="d-none" id="ui_input" type="file">
+                            <img id="group_avatar_{{ $group->id }}" src="{{ $group->avatar }}" alt="">
+                            <script>
+                                window.addEventListener('DOMContentLoaded', function () {
+                                    upload_image({
+                                        ui_avatar: 'group_avatar_{{ $group->id }}'
+                                    })
+                                });
+                            </script>
                             <input type="hidden" name="group_id" value="{{ $group->id }}">
                         </label>
                     </div>
@@ -145,118 +185,9 @@ col-xl-3 col-lg-4 col-md-6 col-sm-12 --}}
   </div>
 {{-- Upload image modal --}}
 
-<script>
-    window.addEventListener('DOMContentLoaded', function () {
-      var avatar = document.getElementById('ui_avatar');
-      var image = document.getElementById('ui_image');
-      var input = document.getElementById('ui_input');
-    //   var $alert = $('.alert');
-      var $modal = $('#ui_modal');
-      var cropper;
 
-      $('[data-toggle="tooltip"]').tooltip();
-
-      input.addEventListener('change', function (e) {
-        var files = e.target.files;
-        var done = function (url) {
-          input.value = '';
-          image.src = url;
-        //   $alert.hide();
-          $modal.modal('show');
-        };
-        var reader;
-        var file;
-        var url;
-
-        if (files && files.length > 0) {
-          file = files[0];
-          const fileType = file['type'];
-          const validImageTypes = ['image/jpeg', 'image/png'];
-          if(!validImageTypes.includes(fileType)){
-            jQuery('#ui_alert').show()
-            jQuery(image).hide()
-          }else{
-            jQuery('#ui_alert').hide()
-            jQuery(image).show()
-          }
-
-          if (URL) {
-            done(URL.createObjectURL(file));
-          } else if (FileReader) {
-            reader = new FileReader();
-            reader.onload = function (e) {
-              done(reader.result);
-            };
-            reader.readAsDataURL(file);
-          }
-        }
-      });
-
-      $modal.on('shown.bs.modal', function () {
-        cropper = new Cropper(image, {
-          aspectRatio: 4/1,
-          viewMode: 3,
-        });
-      }).on('hidden.bs.modal', function () {
-        cropper.destroy();
-        cropper = null;
-      });
-
-      document.getElementById('crop').addEventListener('click', function () {
-        var initialAvatarURL;
-        var canvas;
-
-        $modal.modal('hide');
-
-        if (cropper) {
-          canvas = cropper.getCroppedCanvas({
-            width: 600,
-            height: 200,
-          });
-          initialAvatarURL = avatar.src;
-          avatar.src = canvas.toDataURL();
-        //   $alert.removeClass('alert-success alert-warning');
-          canvas.toBlob(function (blob) {
-            var formData = new FormData();
-
-            var csrf_token = jQuery('meta[name="csrf-token"]').attr('content');
-            var group_id = jQuery('input[name="group_id"]').attr('value');
-
-            formData.append('avatar', blob, 'avatar.jpg');
-            formData.append('_token', csrf_token);
-            formData.append('id', group_id);
-
-            $.ajax('/groups/uploadAvatar', {
-              method: 'POST',
-              data: formData,
-              cache: false,
-              processData: false,
-              contentType: false,
-
-            //   xhr: function () {
-            //     var xhr = new XMLHttpRequest();
-
-            //     return xhr;
-            //   },
-
-              success: function () {
-                // $alert.show().addClass('alert-success').text('Upload success');
-              },
-
-              error: function () {
-                avatar.src = initialAvatarURL;
-                // $alert.show().addClass('alert-warning').text('Upload error');
-              },
-
-              complete: function () {
-
-              },
-            });
-          });
-        }
-      });
-    });
-  </script>
 
 
 @endsection
+
+

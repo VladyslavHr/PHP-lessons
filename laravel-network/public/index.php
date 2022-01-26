@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
+// require_once __DIR__ . '/../app/helpers.php';
 /*
 |--------------------------------------------------------------------------
 | Check If The Application Is Under Maintenance

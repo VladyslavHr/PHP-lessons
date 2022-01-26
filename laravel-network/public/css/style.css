@@ -857,26 +857,48 @@ body{
 }
 
 .profile-list-menu-mobile{
-    box-shadow: var(--blockShadow);
     margin-top: 10px;
 }
 
-.profile-edit-btn{
+.navbar-light .navbar-brand.profile-edit-btn{
     color: #fff;
     background: var(--orangeColor);
     border: none;
 }
 
-.profile-edit-btn:hover{
+.navbar-light .navbar-brand.profile-edit-btn:hover{
     background: #333333;
 }
 
+.menu-wrap-groups-ind{
+    padding: 0;
+}
 
+.list-groups-ind{
+    width: 100%;
+}
 
+.groups-update-btn,
+.groups-menu-show-btn{
+    background: var(--orangeColor);
+    color: #fff;
+    border: none;
+}
 
+.groups-update-btn:hover,
+.groups-menu-show-btn:hover{
+    background: #333333;
 
+}
 
+.group-ind-menu-navbar{
+    box-shadow: var(--blockShadow);
+}
 
+.groups-show-menu-wrap{
+    box-shadow: var(--blockShadow);
+    margin-bottom: 0;
+}
 
 
 
@@ -888,7 +910,11 @@ body{
 
 
 @media (max-width: 1399px){
-
+    .list-groups-ind,
+    .list-groups-show{
+        display: flex;
+        align-items: center;
+    }
 }
 
 @media (max-width: 1199px){
@@ -899,6 +925,10 @@ body{
 
     .left-content{
         padding-top: 18px;
+    }
+
+    .group-ind-menu-navbar{
+        margin-top: 20px;
     }
 
 
@@ -932,8 +962,16 @@ body{
 
     .profile-list-menu-mobile{
         width: 100%;
-        box-shadow: var(--blockShadow);
     }
+
+    .list-groups-ind,
+    .list-groups-show{
+        display: flex;
+        align-items: flex-start;
+    }
+
+
+
 
 }
 
@@ -944,6 +982,5 @@ body{
 @media (max-width: 575px){
     .profile-list-menu-mobile{
         margin-top: 170px;
-        box-shadow: var(--blockShadow);
     }
 }

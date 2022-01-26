@@ -122,6 +122,7 @@ class GroupController extends Controller
         return view('groups.show', [
             'group' => $group,
             'users' => $users,
+            'user' => Auth::user(),
         ]);
     }
 
