@@ -5,17 +5,15 @@
     <div class="container">
 
         <div class="profile-wrapp row align-items-start">
-            <label class="prof-avatar-main col-sm-3">
-                <img id="profile_avatar_{{ $user->id }}" src="{{ asset ('images/cat.jpg') }}" alt="">
+            <label class="prof-avatar-main col-sm-3 upload-image-label">
+                <img src="{{ $user->avatar }}" alt=""
+                data-upload="image"
+                data-ajaxurl="{{ route('profile.uploadAvatar') }}"
+                data-width="500"
+                data-height="500"
+                data-modelid="{{ $user->id }}"
+            >
             </label>
-
-            <script>
-                window.addEventListener('DOMContentLoaded', function () {
-                    upload_image({
-                    ui_avatar: 'profile_avatar_{{ $user->id }}'
-                })
-                });
-            </script>
 
             <div class="col-lg-9 ">
 
@@ -51,7 +49,7 @@
                           {{-- <button class="profile-edit-btn btn btn-outline-success" type="submit">Редактировать</button> --}}
                         </form>
                       </div>
-                      <a class="navbar-brand profile-edit-btn btn btn-outline-success" href="/">Редактировать</a>
+                      <a class="navbar-brand profile-edit-btn btn btn-outline-success" href="{{ route('profiles.edit') }}">Редактировать</a>
                     </div>
                   </nav>
 

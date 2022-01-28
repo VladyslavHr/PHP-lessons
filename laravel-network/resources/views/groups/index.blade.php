@@ -4,7 +4,7 @@
 
 @section('content')
 
-@include('/blocks.profile-header')
+@include('blocks.profile-header')
 
 <div class="container mt-5">
     <div class="row">

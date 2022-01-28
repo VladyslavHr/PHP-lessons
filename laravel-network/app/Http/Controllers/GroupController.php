@@ -37,7 +37,9 @@ class GroupController extends Controller
         $saved = $group->update($data);
 
         $path = storage_path(str_replace('/storage/', '/app/public/', $old_image_url));
-        $deleted = unlink($path);
+        if (file_exists($path)) {
+            $deleted = unlink($path);
+        }
 
         // delete old avatar
 
@@ -74,6 +76,7 @@ class GroupController extends Controller
         $group->avatar = '';
         return view('groups.create', [
             'group' => $group,
+            'user' => Auth::user(),
         ]);
     }
 

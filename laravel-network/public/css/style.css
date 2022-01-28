@@ -2,6 +2,7 @@
     --blockShadow: 0px 1px 5px 0px rgb(51 51 51 / 20%);
     --blockOffset: 30px;
     --orangeColor: #dc4734;
+    --bgBlackColor: #333333;
 }
 
 body{
@@ -809,6 +810,30 @@ body{
     position: relative;
 }
 
+.upload-image-label::before{
+    content: "\f1bc";
+    display: inline-block;
+    font-family: bootstrap-icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: -0.125em;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    position: absolute;
+    color: var(--orangeColor);
+    font-size: 40px;
+    top: 20px;
+    left: 27px;
+    text-shadow: 0 0 4px #fff;
+}
+
+.upload-image-label:hover::before{
+    display: none;
+}
+
 .upload-image-label:hover::after{
     content: 'Upload Image';
     position: absolute;
@@ -901,6 +926,56 @@ body{
 }
 
 
+.edit-form{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 200px;
+    margin-bottom: 20px;
+}
+
+.edit-password{
+    margin-top: 15px;
+    width: 105%;
+}
+
+.button-in-form{
+    text-align: end;
+}
+
+.edit-page-btn{
+    background: var(--orangeColor);
+    border: none;
+    line-height: 2;
+}
+
+.edit-page-btn:hover{
+    background: #333333;
+}
+
+.edit-form-input{
+    /* margin: 5px; */
+}
+
+.edit-form-wrapp,
+.edit-password{
+    background: #fff;
+    box-shadow: var(--blockShadow);
+    padding: 10px;
+}
+
+.edit-form-input textarea{
+    line-height: 3;
+}
+
+.edit-form-input textarea:focus,
+.edit-form-input input:focus{
+    border-color: var(--orangeColor);
+    box-shadow: 0 0 0 0.25rem rgb(220 71 52/25%);
+}
+
+
+
+
 
 
 
@@ -929,6 +1004,10 @@ body{
 
     .group-ind-menu-navbar{
         margin-top: 20px;
+    }
+
+    .edit-form{
+        margin-top: 100px;
     }
 
 
@@ -970,6 +1049,9 @@ body{
         align-items: flex-start;
     }
 
+    .edit-form{
+        margin-top: 50px;
+    }
 
 
 
