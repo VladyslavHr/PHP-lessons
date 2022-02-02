@@ -80,13 +80,14 @@ class ProfileController extends Controller
             'secondname' => 'required|min:4|max:255',
             'date' => 'required',
             'city' => 'required|min:1|max:255',
-            'birth-place' => 'required|min:1|max:255',
+            'birth_place' => 'required|min:1|max:255',
             'work' => 'required|min:4|max:255',
             'study' => 'required|min:4|max:255',
-            'family-status' => 'required|min:4|max:255',
+            'family_status' => 'required|min:4|max:255',
             'phone' => 'required|min:4|max:255',
             'email' => 'required|min:4|max:255',
             'avatar' => 'image',
+            'about_yourself' => '',
         ],[
             'name.required' => 'Введите имя',
             'email.required' => 'Введите электронную почту',
@@ -146,27 +147,42 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
-        $data = $request->all();
+        // $data = $request->all();
         $data = $request->validate([
             'name' => 'required|min:4|max:255',
-            'secondname' => 'required|min:4|max:255',
-            'date' => 'required',
-            'city' => 'required|min:1|max:255',
-            'birth-place' => 'required|min:1|max:255',
-            'work' => 'required|min:4|max:255',
-            'study' => 'required|min:4|max:255',
-            'family-status' => 'required|min:4|max:255',
-            'phone' => 'required|min:4|max:255',
-            'email' => 'required|min:4|max:255',
-            'avatar' => 'image',
+            'last_name' => 'max:255',
+            'birth_date' => 'date|nullable',
+            'city' => 'max:255',
+            'birth_city' => 'max:255',
+            'work' => 'max:255',
+            'study' => 'max:255',
+            'family_status' => 'max:255',
+            'phone' => 'max:255',
+            'email' => 'required|min:4|max:191',
+            'about_yourself' => '',
         ],[
             'name.required' => 'Введите имя',
             'email.required' => 'Введите электронную почту',
         ]);
+        // dd($data);
 
-        $saved = $user->update($data);
+        $user = Auth::user();
+        $user->update($data);
+
+        return redirect()->back()->with('status', 'Информация обновлена!');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $data = $request->validate([
+            'password' => ['required', 'string', 'min:3', 'confirmed'],
+        ]);
+
+        $data['password'] = bcrypt($data['password']);
+        // dd($data);
+        Auth::user()->update($data);
 
         return redirect()->back()->with('status', 'Информация обновлена!');
     }

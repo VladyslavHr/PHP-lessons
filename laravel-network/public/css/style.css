@@ -339,63 +339,107 @@ body{
     border-radius: 15px;
 }
 
-.publish-block input{
-    background: #f1f1f1;
+.publish-block .text-input{
+    background: #fff;
     width: 85%;
     border: 0;
     margin-left: 5px;
     border-radius: 6px;
     padding: 5px;
+    border: 1px solid #dddddd;
 }
 
-.publish-block input:focus-visible{
+.publish-block .text-input:focus-visible{
     outline: 0;
+    border-color: var(--orangeColor);
+    box-shadow: 0 0 0 0.25rem rgb(220 71 52/25%);
 }
 
-.post-status-select{
-    margin-left: 64px;
-    padding: 15px 5px 5px 25px;
+.publish-block .form-check-label{
+    margin-left: auto;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+.publish-block .imgs-input{
+    width: 85%;
+    margin-top: 15px;
+    margin-left: 84px;
+    border: 1px solid #dddddd;
+}
+
+.publish-block .imgs-input:focus{
+    border-color: var(--orangeColor);
+    box-shadow: 0 0 0 0.25rem rgb(220 71 52/25%);
+}
+
+.publish-block .post-status-select-wrapp{
+    display: flex;
+    width: 85%;
+    margin-left: 84px;
+    border: 1px solid #dddddd;
+    padding: 0px;
+    margin-top: 15px;
+}
+
+.publish-block .post-status-select{
+    padding: 15px 25px 5px 25px;
     color: #6c6a6a;
-    width: 35%;
+    width: 45%;
 }
 
-.post-status-choose{
-    width: 53%;
-    margin-top: 10px;
+.publish-block .post-status-choose{
+    width: 55%;
     border: 1px solid #dc4734;
     border-radius: 6px;
+    margin: 15px;
 }
 
-.post-status-choose:focus-visible{
+.publish-block .post-status-choose:focus-visible{
     outline: 0;
+    border-color: var(--orangeColor);
+    box-shadow: 0 0 0 0.25rem rgb(220 71 52/25%);
 }
 
-.post-text-place{
-    width: 75%;
-    margin-left: 84px;
-    margin-top: 15px;
+.publish-block .post-text-place{
     width: 85%;
     margin-left: 84px;
     margin-top: 15px;
     border: 0;
-    background: #f1f1f1;
+    background: #fff;
     padding: 5px;
+    border: 1px solid #dddddd;
     border-radius: 6px;
 }
 
-.post-text-place:focus-visible{
+.publish-block .post-text-place:focus-visible{
     outline: 0;
+    border-color: var(--orangeColor);
+    box-shadow: 0 0 0 0.25rem rgb(220 71 52/25%);
+}
+
+.publish-block .checkbox-style{
+    border-color: var(--orangeColor);
+}
+
+.publish-block .checkbox-style:focus{
+    box-shadow: 0 0 0 0.25rem rgb(220 71 52/25%);
+}
+
+.publish-block .checkbox-style:checked{
+    background-color: var(--orangeColor);
+    border-color: var(--orangeColor);
 }
 
 .publish-block button{
     border: 0;
     background: #dc4734;
     border-radius: 20px;
-    padding: 6px;
+    padding: 6px 20px;
     color: #fff;
-    margin-left: auto;
     margin-top: 15px;
     margin-right: 15px;
+    font-weight: bold;
 }
 
 .publish-block button:hover{
@@ -925,12 +969,16 @@ body{
     margin-bottom: 0;
 }
 
+.edit-profile-container{
+    margin-top: 200px;
+}
 
 .edit-form{
+    background: #fff;
     display: flex;
     flex-wrap: wrap;
-    margin-top: 200px;
     margin-bottom: 20px;
+    box-shadow: var(--blockShadow);
 }
 
 .edit-password{
@@ -958,8 +1006,6 @@ body{
 
 .edit-form-wrapp,
 .edit-password{
-    background: #fff;
-    box-shadow: var(--blockShadow);
     padding: 10px;
 }
 
@@ -972,6 +1018,73 @@ body{
     border-color: var(--orangeColor);
     box-shadow: 0 0 0 0.25rem rgb(220 71 52/25%);
 }
+
+.navbar-brand-name{
+    color: var(--orangeColor);
+}
+
+.login-button,
+.regist-button{
+    background-color: var(--orangeColor);
+    border-color: var(--orangeColor);
+}
+
+.login-button:hover,
+.regist-button:hover{
+    background-color: var(--bgBlackColor);
+    border-color: var(--bgBlackColor);
+}
+
+.login-forgot-pas{
+    color: var(--orangeColor);
+}
+
+.login-forgot-pas:hover{
+    color: var(--bgBlackColor);
+}
+
+.login-check-box{
+    border-color: var(--orangeColor);
+}
+
+.login-check-box:focus{
+    border-color: var(--orangeColor);
+    box-shadow: 0 0 0 0.25rem rgb(220 71 52/25%);
+}
+
+.login-check-box:checked{
+    background-color: var(--orangeColor);
+    border-color: var(--orangeColor);
+}
+
+.login-email:focus,
+.login-pass:focus,
+.regist-name:focus,
+.regist-email:focus,
+.regist-pass:focus,
+.regist-pass-cont:focus{
+    border-color: var(--orangeColor);
+    box-shadow: 0 0 0 0.25rem rgb(220 71 52/25%);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -35,7 +35,29 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'title' => ['required', 'string', 'min:3'],
+            'content' => ['required'],
+            'post_status' => ['required'],
+            'postable_id' => '',
+            'postable_type' => '',
+
+        ]);
+
+        $data = array_merge([
+            'comment_status' => 'all',
+            'author_id' => auth()->user()->id,
+            // 'postable_id' => auth()->user()->id,
+            // 'postable_type' => 'App\Models\Group',
+            'comment_count' => '0',
+        ], $data);
+
+
+
+        $post = Post::create($data);
+
+
+        return redirect()->back()->with('status', 'Пост обновлен!');
     }
 
     /**
