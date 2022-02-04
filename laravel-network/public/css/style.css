@@ -327,23 +327,20 @@ body{
 }
 
 .avatar-publish img{
-    width: 55px;
+    display: block;
+    max-width: 55px;
     border-radius: 50%;
-    margin-right: 25px;
+    margin-bottom: -20px;
+    margin-left: auto;
 }
 
 .publish-block{
-    display: flex;
-    flex-wrap: wrap;
-    background: #fff;
-    border-radius: 15px;
+
 }
 
 .publish-block .text-input{
     background: #fff;
-    width: 85%;
-    border: 0;
-    margin-left: 5px;
+    width: 100%;
     border-radius: 6px;
     padding: 5px;
     border: 1px solid #dddddd;
@@ -362,9 +359,8 @@ body{
 }
 
 .publish-block .imgs-input{
-    width: 85%;
+    width: 100%;
     margin-top: 15px;
-    margin-left: 84px;
     border: 1px solid #dddddd;
 }
 
@@ -375,11 +371,10 @@ body{
 
 .publish-block .post-status-select-wrapp{
     display: flex;
-    width: 85%;
-    margin-left: 84px;
     border: 1px solid #dddddd;
-    padding: 0px;
+    border-radius: 6px;
     margin-top: 15px;
+    background: #fff;
 }
 
 .publish-block .post-status-select{
@@ -402,14 +397,11 @@ body{
 }
 
 .publish-block .post-text-place{
-    width: 85%;
-    margin-left: 84px;
-    margin-top: 15px;
-    border: 0;
-    background: #fff;
+    width: 100%;
     padding: 5px;
     border: 1px solid #dddddd;
     border-radius: 6px;
+    margin-top: 15px;
 }
 
 .publish-block .post-text-place:focus-visible{
@@ -438,8 +430,8 @@ body{
     padding: 6px 20px;
     color: #fff;
     margin-top: 15px;
-    margin-right: 15px;
     font-weight: bold;
+    float: right;
 }
 
 .publish-block button:hover{
@@ -504,6 +496,7 @@ body{
 
 }
 
+.post-content h5,
 .post-content p{
     padding: 10px;
 }

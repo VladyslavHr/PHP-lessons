@@ -14,10 +14,11 @@ class Post extends Model
         'title',
         'content',
         'post_status',
-        'comment_status',
+        'allow_comments',
         'postable_id',
         'postable_type',
         'comment_count',
+        'images',
     ];
 
     protected $casts = [

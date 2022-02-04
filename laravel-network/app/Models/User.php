@@ -61,7 +61,7 @@ class User extends Authenticatable
 
     public function posts()
     {
-       return $this->morphMany(Post::class, 'postable');
+       return $this->morphMany(Post::class, 'postable')->orderByDesc('created_at');
     }
 
     public function getPostsPaginatedAttribute()

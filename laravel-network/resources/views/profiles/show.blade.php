@@ -87,21 +87,23 @@
                     {{ $user->posts_paginated->links() }}
                     @foreach ($user->posts_paginated as $post)
 
-                    <div class="post-block">
+                    @include('blocks.post-block')
+
+                    {{-- <div class="post-block">
                         <div class="post-title">
                             <div class="user-image">
-                                <img src="{{ asset ('images/cat.jpg') }}" alt="">
+                                <img src="{{ $user->avatar }}" alt="">
                             </div>
                             <div class="user-info">
-                                <span class="user-name">{{ $post->title }}</span>
+                                <span class="user-name">{{ $user->name }}</span>
                                 <span class="post-time">{{ $post->date_formated() }}</span>
                             </div>
                             <div class="post-set-bar">
                                 <a href="#"><i class="bi bi-list"></i></a>
                             </div>
-
                         </div>
                         <div class="post-content">
+                            <h5>{{ $post->title }}</h3>
                             <p>
                                 {{$post->content}}
                             </p>
@@ -127,7 +129,7 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     @endforeach
                     {{ $user->posts_paginated->links() }}
                 </div>

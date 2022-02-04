@@ -41,11 +41,12 @@ class PostController extends Controller
             'post_status' => ['required'],
             'postable_id' => '',
             'postable_type' => '',
-
+            'allow_comments' => 'integer',
+            'images.*' => 'image',
         ]);
 
         $data = array_merge([
-            'comment_status' => 'all',
+            'allow_comments' => '0',
             'author_id' => auth()->user()->id,
             // 'postable_id' => auth()->user()->id,
             // 'postable_type' => 'App\Models\Group',
@@ -53,9 +54,25 @@ class PostController extends Controller
         ], $data);
 
 
+        if($request->hasfile('images'))
+        {
+            $pathes = [];
+            foreach($request->file('images') as $key => $file)
+            {
+
+                $path = $file->store('post-images', 'public');
+                $pathes[] = '/storage/'.$path;
+
+                // $name = time().'-'.($key+1).'.'.$file->extension();
+                // $file->move(public_path('pharmacy-images'), $name);
+
+            }
+            $data['images'] = implode(',', $pathes);
+        }
+
+
 
         $post = Post::create($data);
-
 
         return redirect()->back()->with('status', 'Пост обновлен!');
     }

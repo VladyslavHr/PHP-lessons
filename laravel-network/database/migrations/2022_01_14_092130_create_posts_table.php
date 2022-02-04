@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->longText('content');
             $table->string('post_status');
-            $table->string('comment_status');
+            $table->tinyInteger('allow_comments')->default('0');
             $table->integer('postable_id');
             $table->string('postable_type');
             $table->integer('comment_count');

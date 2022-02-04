@@ -126,6 +126,8 @@ class GroupController extends Controller
             'group' => $group,
             'users' => $users,
             'user' => Auth::user(),
+            'postable_id' => $group->id,
+            'postable_type' => 'App\Models\Group',
         ]);
     }
 

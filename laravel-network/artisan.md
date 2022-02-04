@@ -8,7 +8,7 @@ php artisan migrate --seed .. запуск миграции , создание �
 
 $ composer require laravel/ui // авторизация ларавел;
 
-$ php artisan ui bootstrap --auth .. мехфнизм авторизации;
+$ php artisan ui bootstrap --auth .. механизм авторизации;
 
 $ npm install .. установка пакета фронт енд;
 

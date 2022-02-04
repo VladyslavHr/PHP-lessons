@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/seeds', [App\Http\Controllers\SeedsController::class, 'seeds'])->name('seeds.index');

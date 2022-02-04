@@ -116,11 +116,14 @@ class ProfileController extends Controller
      */
     public function profile()
     {
+        $user = Auth::user();
         $users = User::all();
         return view('profiles.show', [
             'title' => 'My profile',
             'users' => $users,
-            'user' => Auth::user()
+            'user' => Auth::user(),
+            'postable_id' => $user->id,
+            'postable_type' => 'App\Models\User',
         ]);
     }
 
