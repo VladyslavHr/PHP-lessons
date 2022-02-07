@@ -17,4 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/seeds', [App\Http\Controllers\SeedsController::class, 'seeds'])->name('seeds.index');
+Route::get('/seeds', [App\Http\Controllers\SeedsController::class, 'index'])->name('seeds.index');

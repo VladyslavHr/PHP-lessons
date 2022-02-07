@@ -450,89 +450,91 @@ body{
     margin-bottom: 25px;
 }
 
-.post-block .post-title{
+.post-block .post-header{
     display: flex;
     align-items: center;
     margin-bottom: 15px;
 }
 
-.post-title .user-image{
+.post-header .user-image{
     margin-right: 25px;
 }
 
-.post-title .user-image img{
+.post-header .user-image img{
     width: 55px;
     border-radius: 50%;
 }
 
-.post-title .user-info .user-name{
+.post-header .user-info .user-name{
     display: block;
     font-weight: 700;
     font-size: 17px;
 }
 
-.post-title .user-info .post-time{
+.post-header .user-info .post-time{
     font-size: 13px;
 }
 
-.post-title .post-set-bar{
+.post-header .post-set-bar{
     margin-left: auto;
 }
 
-.post-title .post-set-bar a{
+.post-header .post-set-bar a{
     color: #444444;
 
 }
 
-.post-title .post-set-bar a:hover{
+.post-header .post-set-bar a:hover{
     color: #dc4734;
 }
 
-.post-title .post-set-bar i{
+.post-header .post-set-bar i{
     font-size: 20px;
 }
 
-.post-content{
+.post-body{
 
 }
 
-.post-content h5,
-.post-content p{
-    padding: 10px;
+.post-body .post-title,
+.post-body .post-content{
+
 }
 
-.post-content img{
+.post-body img{
     width: 100%;
     padding: 10px;
 }
 
-.post-summery{
+.post-summary{
     display: flex;
+    margin: 10px 0;
 }
 
-.post-summery .post-like{
+.post-summary .post-like{
     margin-right: auto;
-    margin-left: 25px;
     font-size: 22px;
     color: #333333;
 }
 
-.post-summery .post-like a,
-.post-summery .post-comments a,
-.post-summery .post-share a{
+.post-summary .post-like a,
+.post-summary .post-comments a,
+.post-summary .post-share a{
     color: #333333;
     text-decoration: none;
 }
 
-.post-summery .post-like a:hover,
-.post-summery .post-comments a:hover,
-.post-summery .post-share a:hover{
+.post-summary .post-like a:hover,
+.post-summary .post-comments a:hover,
+.post-summary .post-share a:hover,
+.post-summary .post-comments a:not(.collapsed)
+{
     color: #dc4734;
 }
 
-.post-summery .post-comments,
-.post-summery .post-share{
-    margin-right: 30px;
+.post-summary .post-comments,
+.post-summary .post-share{
+    margin-left: 30px;
     font-size: 22px;
 }
 
@@ -540,13 +542,12 @@ body{
 
 }
 
-.post-summery .like-count{
+.post-summary .like-count{
     font-size: 15px;
 }
 
-.post-summery .count{
+.post-summary .count{
     font-size: 15px;
-    position: absolute;
     margin: 0px 5px 0px 5px;
 }
 
@@ -1060,16 +1061,67 @@ body{
     box-shadow: 0 0 0 0.25rem rgb(220 71 52/25%);
 }
 
+.post-block .carousel-indicators{
+    bottom: -58px;
+    margin-right: 25%;
+}
 
+.post-block .carousel-indicators button{
+    height: 7px;
+    background-color: #444;
+}
 
+.post-block .post-image{
+    height: 400px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 
+.add-comments-wrap{
+    margin: 15px 0;
+    align-items: center;
+}
 
+.add-comments-smiles{
+    font-size: 25px;
+    color: var(--orangeColor);
 
+}
 
+.add-comments-smile,
+.add-comments-text,
+.add-comments-btn{
+    padding: 0;
+}
 
+.add-comments-smiles:hover{
+    color: var(--bgBlackColor);
+}
 
+.add-comments-text-input{
+    width: 100%;
+    border: 0;
+}
 
+.add-comments-text-input:focus-visible{
+    outline: 0;
+}
 
+.add-comments-send{
+    float: right;
+    background: #dc473473;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    color: #fff;
+    padding: 6px 20px;
+}
+
+.add-comments-send:hover{
+    background: var(--bgBlackColor);
+    transition: 0.5s;
+}
 
 
 
@@ -1159,6 +1211,9 @@ body{
         margin-top: 50px;
     }
 
+    .add-comments-send{
+        padding: 3px 6px;
+    }
 
 
 }
@@ -1170,5 +1225,17 @@ body{
 @media (max-width: 575px){
     .profile-list-menu-mobile{
         margin-top: 170px;
+    }
+
+    .post-block .post-image{
+        height: 200px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .add-comments-send{
+        margin-top: 7px;
+        float: left;
     }
 }

@@ -56,6 +56,9 @@ class PostController extends Controller
 
         if($request->hasfile('images'))
         {
+            if (count($request->file('images')) > 8) {
+                return redirect()->back()->withErrors('Максимум 8 изображений')->withInput($request->all);
+            }
             $pathes = [];
             foreach($request->file('images') as $key => $file)
             {

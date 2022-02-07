@@ -31,4 +31,9 @@ class Group extends Model
     {
        return $this->morphMany(Post::class, 'postable')->orderByDesc('created_at');
     }
+
+    public function getPostsPaginatedAttribute()
+    {
+        return $this->posts()->paginate(2, ['*'], 'posts-page');
+    }
 }

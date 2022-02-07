@@ -66,7 +66,7 @@ class User extends Authenticatable
 
     public function getPostsPaginatedAttribute()
     {
-        return $this->posts()->paginate(2, ['title', 'content', 'created_at'], 'posts-page');
+        return $this->posts()->paginate(2, ['*'], 'posts-page');
     }
 
     public function avatarUrl()

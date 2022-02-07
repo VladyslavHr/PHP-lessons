@@ -71,4 +71,13 @@ class Post extends Model
     {
         return $this->morphTo();
     }
+
+    public function images()
+    {
+        if ($this->images) {
+            return explode(',', $this->images);
+        }else{
+            return[];
+        }
+    }
 }

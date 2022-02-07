@@ -89,47 +89,7 @@
 
                     @include('blocks.post-block')
 
-                    {{-- <div class="post-block">
-                        <div class="post-title">
-                            <div class="user-image">
-                                <img src="{{ $user->avatar }}" alt="">
-                            </div>
-                            <div class="user-info">
-                                <span class="user-name">{{ $user->name }}</span>
-                                <span class="post-time">{{ $post->date_formated() }}</span>
-                            </div>
-                            <div class="post-set-bar">
-                                <a href="#"><i class="bi bi-list"></i></a>
-                            </div>
-                        </div>
-                        <div class="post-content">
-                            <h5>{{ $post->title }}</h3>
-                            <p>
-                                {{$post->content}}
-                            </p>
-                            <img src="{{ asset ('images/banner1.jpg') }}" alt="">
-                        </div>
-                        <div class="post-summery">
-                            <div class="post-like">
-                                <a href="#">
-                                    <i class="bi bi-suit-heart"></i>
-                                    <span class="like-count">Вам и еще 110 людям это понравилось</span>
-                                </a>
-                            </div>
-                            <div class="post-comments">
-                                <a href="#">
-                                    <i class="bi bi-chat-dots"></i>
-                                    <span  class="count">20</span>
-                                </a>
-                            </div>
-                            <div class="post-share">
-                                <a href="#">
-                                    <i class="bi bi-share"></i>
-                                    <span class="count">6</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div> --}}
+
                     @endforeach
                     {{ $user->posts_paginated->links() }}
                 </div>

@@ -12,3 +12,11 @@ if (!function_exists('routeIs')) {
     }
 }
 
+if (!function_exists('pa')) {
+    function pa($arr)
+    {
+        echo '<pre>';
+        print_r($arr);
+        echo '</pre>';
+    }
+}

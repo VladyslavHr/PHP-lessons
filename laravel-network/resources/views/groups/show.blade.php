@@ -109,48 +109,13 @@ col-xl-3 col-lg-4 col-md-6 col-sm-12 --}}
                 @include('blocks.add-post-form')
             </div>
             <div class="publishing">
-                @foreach ($group->posts as $post)
-                <div class="post-block">
-                    <div class="post-title">
-                        <div class="user-image">
-                            <img src="{{ asset ('images/cat.jpg') }}" alt="">
-                        </div>
-                        <div class="user-info">
-                            <span class="user-name">{{ $post->author->name }}</span>
-                            <span class="post-time">{{ $post->date_formated() }}</span>
-                        </div>
-                        <div class="post-set-bar">
-                            <a href="#"><i class="bi bi-list"></i></a>
-                        </div>
-                    </div>
-                    <div class="post-content">
-                        <p>
-                            {{$post->content}}
-                        </p>
-                        <img src="{{ asset ('images/banner1.jpg') }}" alt="">
-                    </div>
-                    <div class="post-summery">
-                        <div class="post-like">
-                            <a href="#">
-                                <i class="bi bi-suit-heart"></i>
-                                <span class="like-count">Вам и еще 110 людям это понравилось</span>
-                            </a>
-                        </div>
-                        <div class="post-comments">
-                            <a href="#">
-                                <i class="bi bi-chat-dots"></i>
-                                <span  class="count">{{$post->comment_count}}</span>
-                            </a>
-                        </div>
-                        <div class="post-share">
-                            <a href="#">
-                                <i class="bi bi-share"></i>
-                                <span class="count">6</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                {{ $group->posts_paginated->links() }}
+                @foreach ($group->posts_paginated as $post)
+
+                @include('blocks.post-block')
+
                 @endforeach
+                {{ $group->posts_paginated->links() }}
             </div>
         </div>
     </div>
