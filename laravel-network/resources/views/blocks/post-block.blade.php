@@ -74,8 +74,7 @@
                         <img src="{{ $user->avatar }}" alt="">
                     </div>
                     <div class="accordion-user-name col-sm-9">
-                        {{-- {{ $user->name }} --}}
-                        Владислав Гребенников
+                        {{ $user->name }}
                     </div>
                     <div class="accordion-user-time col-sm-2">
                         time
@@ -91,8 +90,7 @@
                         <img src="{{ $user->avatar }}" alt="">
                     </div>
                     <div class="accordion-user-name col-sm-9">
-                        {{-- {{ $user->name }} --}}
-                        Владислав Гребенников
+                        {{ $user->name }}
                     </div>
                     <div class="accordion-user-time col-sm-2">
                         time
@@ -108,8 +106,7 @@
                         <img src="{{ $user->avatar }}" alt="">
                     </div>
                     <div class="accordion-user-name col-sm-9">
-                        {{-- {{ $user->name }} --}}
-                        Владислав Гребенников
+                        {{ $user->name }}
                     </div>
                     <div class="accordion-user-time col-sm-2">
                         time
@@ -125,8 +122,7 @@
                         <img src="{{ $user->avatar }}" alt="">
                     </div>
                     <div class="accordion-user-name col-sm-9">
-                        {{-- {{ $user->name }} --}}
-                        Владислав Гребенников
+                        {{ $user->name }}
                     </div>
                     <div class="accordion-user-time col-sm-2">
                         time
