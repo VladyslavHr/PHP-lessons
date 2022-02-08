@@ -25,7 +25,19 @@
 
 @include('modals.upload-image')
 
+<div class="axaj-loader-wrap" id="ajax_loader">
+    <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
 
+<div class="errors-list section-shadow" id="errors_list">
+    @include('blocks.errors')
+    @include('blocks.status')
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/2.0.0-alpha.2/cropper.min.js" crossorigin="anonymous"></script>

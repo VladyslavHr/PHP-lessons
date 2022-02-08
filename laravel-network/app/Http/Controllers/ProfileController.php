@@ -41,7 +41,7 @@ class ProfileController extends Controller
 
         return [
             'status' => $saved ? 'ok' : 'error',
-            '$data' => $data,
+            'data' => $data,
             // '$path' => $path,
             // 'deleted' => $deleted ? 'deleted' : 'error',
         ];

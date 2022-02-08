@@ -1,7 +1,5 @@
 
 <form class="avatar-publish" action="{{ route('posts.store') }}" enctype='multipart/form-data' method="POST">
-    @include('blocks.errors')
-    @include('blocks.status')
 
     @csrf
     <input type="hidden" name="postable_id" value="{{ $postable_id }}">

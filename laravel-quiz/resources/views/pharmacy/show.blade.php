@@ -19,9 +19,6 @@
             </div>
         </div>
 
-        @include('blocks.errors')
-        @include('blocks.status')
-
         <div class="list-img row my-5">
                 @foreach ($pharmacy->images as $image)
                 <img class="col-sm-3" src="{{ $image->asset() }}" alt="">

@@ -9,7 +9,7 @@ $('[data-upload]').each(function(){
 		avatar: this,
 		width: this.dataset.width,
 		height: this.dataset.height,
-		model_id: this.dataset.modelid,
+        model_id: this.dataset.modelid,
 	})
 })
 
@@ -75,7 +75,7 @@ function upload_image(options) {
 				height: options.height,
 			});
 			initialAvatarURL = avatar.src;
-
+			avatar.src = canvas.toDataURL();
 			canvas.toBlob(function (blob) {
 				var formData = new FormData();
 
@@ -91,18 +91,10 @@ function upload_image(options) {
 					cache: false,
 					processData: false,
 					contentType: false,
-					success: function (response) {
-                        if (response.status && response.status === 'ok') {
-                            $(`img[src$="${initialAvatarURL.replace(location.origin, '')}"]`).attr('src', response.data.avatar)
-                            alert('success', 'Аватар обновлен')
-                        }else{
-                            alert('danger', 'Error')
-                        }
-
-					},
+					success: function () {},
 					error: function () {
-                        alert('danger', 'Server error')
-                    },
+						avatar.src = initialAvatarURL;
+					},
 					complete: function () {},
 				});
 			});
@@ -110,28 +102,8 @@ function upload_image(options) {
 	});
 }
 
-function alert(status, text) {
-    var alert = `<div class="alert alert-${status} alert-dismissible fade show">
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    ${text}
-    </div>`
-    $('#errors_list').html(alert)
-    $(".alert-success").delay(4000).slideUp(400, function () {
-        $(this).alert('close');
-    })
-}
 
-$(".alert-success").delay(4000).slideUp(400, function () {
-    $(this).alert('close');
-})
 
-$( document ).ajaxStart(function() {
-    $('#ajax_loader').addClass('active')
-});
-
-$( document ).ajaxStop(function() {
-    $('#ajax_loader').removeClass('active')
-});
 
 
 }) // jQuery ready

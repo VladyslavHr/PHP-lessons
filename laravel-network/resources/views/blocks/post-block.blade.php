@@ -68,7 +68,74 @@
         <div class="accordion-item">
           <div id="collapse{{ $post->id }}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#post_comments{{ $post->id }}">
             <div class="accordion-body">
-              <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+              <div class="accordion-comments-list">
+                <div class="accordion-user-info-ava row">
+                    <div class="accordion-user-avatar col-sm-1">
+                        <img src="{{ $user->avatar }}" alt="">
+                    </div>
+                    <div class="accordion-user-name col-sm-9">
+                        {{-- {{ $user->name }} --}}
+                        Владислав Гребенников
+                    </div>
+                    <div class="accordion-user-time col-sm-2">
+                        time
+                    </div>
+                </div>
+                <div class="accordion-comment-text">
+                    comment
+                </div>
+              </div>
+              <div class="accordion-comments-list">
+                <div class="accordion-user-info-ava row">
+                    <div class="accordion-user-avatar col-sm-1">
+                        <img src="{{ $user->avatar }}" alt="">
+                    </div>
+                    <div class="accordion-user-name col-sm-9">
+                        {{-- {{ $user->name }} --}}
+                        Владислав Гребенников
+                    </div>
+                    <div class="accordion-user-time col-sm-2">
+                        time
+                    </div>
+                </div>
+                <div class="accordion-comment-text">
+                    comment
+                </div>
+              </div>
+              <div class="accordion-comments-list">
+                <div class="accordion-user-info-ava row">
+                    <div class="accordion-user-avatar col-sm-1">
+                        <img src="{{ $user->avatar }}" alt="">
+                    </div>
+                    <div class="accordion-user-name col-sm-9">
+                        {{-- {{ $user->name }} --}}
+                        Владислав Гребенников
+                    </div>
+                    <div class="accordion-user-time col-sm-2">
+                        time
+                    </div>
+                </div>
+                <div class="accordion-comment-text">
+                    comment
+                </div>
+              </div>
+              <div class="accordion-comments-list">
+                <div class="accordion-user-info-ava row">
+                    <div class="accordion-user-avatar col-sm-1">
+                        <img src="{{ $user->avatar }}" alt="">
+                    </div>
+                    <div class="accordion-user-name col-sm-9">
+                        {{-- {{ $user->name }} --}}
+                        Владислав Гребенников
+                    </div>
+                    <div class="accordion-user-time col-sm-2">
+                        time
+                    </div>
+                </div>
+                <div class="accordion-comment-text">
+                    comment
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -76,7 +143,7 @@
     {{-- comments --}}
 
     {{-- add comments --}}
-    <div class="row add-comments-wrap">
+    <form action="{{ route('comments.store') }}" class="row add-comments-wrap">
         <a href="#" class="col-sm-1 add-comments-smile">
             <i class="bi bi-emoji-smile add-comments-smiles"></i>
         </a>
@@ -86,6 +153,6 @@
         <div class="col-sm-3 add-comments-btn">
             <button class="add-comments-send" type="submit">Опубликовать</button>
         </div>
-    </div>
+    </form>
     {{-- add comments --}}
 </div>

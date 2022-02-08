@@ -39,4 +39,6 @@ Route::resource('groups', App\Http\Controllers\GroupController::class);
 
 Route::resource('posts', App\Http\Controllers\PostController::class);
 
+Route::resource('comments', App\Http\Controllers\CommentController::class);
+
 });

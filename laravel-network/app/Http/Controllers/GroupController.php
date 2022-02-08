@@ -45,6 +45,7 @@ class GroupController extends Controller
 
         return [
             'status' => $saved ? 'ok' : 'error',
+            'data' => $data,
             // '$path' => $path,
             // 'deleted' => $deleted ? 'deleted' : 'error',
         ];

@@ -10,10 +10,6 @@
 
 <div class="container overflow-hidden edit-profile-container">
 
-    <div class="col-sm-12 mb-3">
-        @include('blocks.errors')
-        @include('blocks.status')
-    </div>
     <form class="edit-form mb-5" action="{{ route('profiles.update') }}" method="POST" enctype='multipart/form-data'>
 
         @csrf
