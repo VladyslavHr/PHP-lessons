@@ -47,10 +47,10 @@ class CommentController extends Controller
 		$validator = validator($request->all(), $rules);
 
 		if($validator->fails()){
-			return response( [
+			return response()->json([
                 'status' => 'error',
                 'message' => implode('<br>', $validator->messages()->all())
-            ] , 406);
+            ]);
 		}
 
         return [

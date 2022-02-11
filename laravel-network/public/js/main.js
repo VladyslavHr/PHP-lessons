@@ -110,16 +110,7 @@ function upload_image(options) {
 	});
 }
 
-function alert(status, text) {
-    var alert = `<div class="alert alert-${status} alert-dismissible fade show">
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    ${text}
-    </div>`
-    $('#errors_list').html(alert)
-    $(".alert-success").delay(4000).slideUp(400, function () {
-        $(this).alert('close');
-    })
-}
+
 
 $(".alert-success").delay(4000).slideUp(400, function () {
     $(this).alert('close');
@@ -134,17 +125,29 @@ $( document ).ajaxStop(function() {
 });
 
 
-    function add_comment(form) {
-        event.preventDefault()
-        $.post(form.action, $(form).serialize(), function (data) {
-            if(data && data.status === 'ok') {
-
-            }else{
-                alert('danger', data.message || ' Error!')
-            }
-        })
-    }
-
-
-
 }) // jQuery ready
+
+
+
+
+function add_comment(form, event) {
+    event.preventDefault()
+    $.post(form.action, $(form).serialize(), function (data) {
+        if(data && data.status === 'ok') {
+            alert('success', 'Комментарий добавлен!')
+        }else{
+            alert('danger', data.message || ' Error!')
+        }
+    })
+}
+
+function alert(status, text) {
+    var alert = `<div class="alert alert-${status} alert-dismissible fade show">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    ${text}
+    </div>`
+    $('#errors_list').prepend(alert)
+    $(".alert-success").delay(4000).slideUp(400, function () {
+        $(this).alert('close');
+    })
+}

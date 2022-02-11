@@ -111,7 +111,7 @@
             <i class="bi bi-emoji-smile add-comments-smiles"></i>
         </a>
         <div class="col-sm-8 add-comments-text">
-            <input class="add-comments-text-input text-truncate" type="text" name="text" id="" placeholder="Добавьте комментарий...">
+            <input class="add-comments-text-input text-truncate" type="text" name="text" id="" placeholder="Добавьте комментарий..." autocomplete="off">
         </div>
         <div class="col-sm-3 add-comments-btn">
             <button class="add-comments-send" type="submit">Опубликовать</button>
