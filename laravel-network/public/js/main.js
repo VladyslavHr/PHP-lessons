@@ -134,4 +134,17 @@ $( document ).ajaxStop(function() {
 });
 
 
+    function add_comment(form) {
+        event.preventDefault()
+        $.post(form.action, $(form).serialize(), function (data) {
+            if(data && data.status === 'ok') {
+
+            }else{
+                alert('danger', data.message || ' Error!')
+            }
+        })
+    }
+
+
+
 }) // jQuery ready

@@ -35,7 +35,28 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+			'text' => 'required|string|min:5|max:1000',
+		];
+
+		// $messages = [
+		// 	'text.required' => 'Введіть імейл!',
+		// 	'email.email' => 'Не валідний імейл!',
+		// ];
+
+		$validator = validator($request->all(), $rules);
+
+		if($validator->fails()){
+			return response( [
+                'status' => 'error',
+                'message' => implode('<br>', $validator->messages()->all())
+            ] , 406);
+		}
+
+        return [
+            'status' => 'ok',
+            '$request' => $request->all(),
+        ];
     }
 
     /**

@@ -110,7 +110,7 @@ col-xl-3 col-lg-4 col-md-6 col-sm-12 --}}
             </div>
             <div class="publishing">
                 {{ $group->posts_paginated->links() }}
-                @foreach ($group->posts_paginated as $post)
+                @foreach ($group->posts_paginated as $post_key => $post)
 
                 @include('blocks.post-block')
 

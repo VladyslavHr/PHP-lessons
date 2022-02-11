@@ -80,4 +80,9 @@ class Post extends Model
             return[];
         }
     }
+
+    public function comments()
+    {
+       return $this->hasMany(Comment::class)->orderByDesc('created_at')->limit(10);
+    }
 }

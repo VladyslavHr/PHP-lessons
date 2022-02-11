@@ -56,6 +56,21 @@
                         <option value="8" {{  $product->marks($pharmacy->id)->mark_1 == 8 ? 'selected' : '' }}>8</option>
                         <option value="9" {{  $product->marks($pharmacy->id)->mark_1 == 9 ? 'selected' : '' }}>9</option>
                         <option value="10" {{  $product->marks($pharmacy->id)->mark_1 == 10 ? 'selected' : '' }}>10</option>
+                        <option value="11" {{  $product->marks($pharmacy->id)->mark_1 == 10 ? 'selected' : '' }}>11</option>
+                        <option value="12" {{  $product->marks($pharmacy->id)->mark_1 == 10 ? 'selected' : '' }}>12</option>
+                        <option value="13" {{  $product->marks($pharmacy->id)->mark_1 == 10 ? 'selected' : '' }}>13</option>
+                        <option value="14" {{  $product->marks($pharmacy->id)->mark_1 == 10 ? 'selected' : '' }}>14</option>
+                        <option value="15" {{  $product->marks($pharmacy->id)->mark_1 == 10 ? 'selected' : '' }}>15</option>
+                        <option value="16" {{  $product->marks($pharmacy->id)->mark_1 == 10 ? 'selected' : '' }}>16</option>
+                        <option value="17" {{  $product->marks($pharmacy->id)->mark_1 == 10 ? 'selected' : '' }}>17</option>
+                        <option value="18" {{  $product->marks($pharmacy->id)->mark_1 == 10 ? 'selected' : '' }}>18</option>
+                        <option value="19" {{  $product->marks($pharmacy->id)->mark_1 == 10 ? 'selected' : '' }}>19</option>
+                        <option value="20" {{  $product->marks($pharmacy->id)->mark_1 == 10 ? 'selected' : '' }}>20</option>
+                        <option value="21" {{  $product->marks($pharmacy->id)->mark_1 == 10 ? 'selected' : '' }}>21</option>
+                        <option value="22" {{  $product->marks($pharmacy->id)->mark_1 == 10 ? 'selected' : '' }}>22</option>
+                        <option value="23" {{  $product->marks($pharmacy->id)->mark_1 == 10 ? 'selected' : '' }}>23</option>
+                        <option value="24" {{  $product->marks($pharmacy->id)->mark_1 == 10 ? 'selected' : '' }}>24</option>
+                        <option value="25" {{  $product->marks($pharmacy->id)->mark_1 == 25 ? 'selected' : '' }}>25</option>
                     </select>
                 </div>
                 <div class="select-1 col-xxl-2">
@@ -72,6 +87,21 @@
                         <option value="8" {{  $product->marks($pharmacy->id)->mark_2 == 8 ? 'selected' : '' }}>8</option>
                         <option value="9" {{  $product->marks($pharmacy->id)->mark_2 == 9 ? 'selected' : '' }}>9</option>
                         <option value="10" {{  $product->marks($pharmacy->id)->mark_2 == 10 ? 'selected' : '' }}>10</option>
+                        <option value="11" {{  $product->marks($pharmacy->id)->mark_2 == 10 ? 'selected' : '' }}>11</option>
+                        <option value="12" {{  $product->marks($pharmacy->id)->mark_2 == 10 ? 'selected' : '' }}>12</option>
+                        <option value="13" {{  $product->marks($pharmacy->id)->mark_2 == 10 ? 'selected' : '' }}>13</option>
+                        <option value="14" {{  $product->marks($pharmacy->id)->mark_2 == 10 ? 'selected' : '' }}>14</option>
+                        <option value="15" {{  $product->marks($pharmacy->id)->mark_2 == 10 ? 'selected' : '' }}>15</option>
+                        <option value="16" {{  $product->marks($pharmacy->id)->mark_2 == 10 ? 'selected' : '' }}>16</option>
+                        <option value="17" {{  $product->marks($pharmacy->id)->mark_2 == 10 ? 'selected' : '' }}>17</option>
+                        <option value="18" {{  $product->marks($pharmacy->id)->mark_2 == 10 ? 'selected' : '' }}>18</option>
+                        <option value="19" {{  $product->marks($pharmacy->id)->mark_2 == 10 ? 'selected' : '' }}>19</option>
+                        <option value="20" {{  $product->marks($pharmacy->id)->mark_2 == 10 ? 'selected' : '' }}>20</option>
+                        <option value="21" {{  $product->marks($pharmacy->id)->mark_2 == 10 ? 'selected' : '' }}>21</option>
+                        <option value="22" {{  $product->marks($pharmacy->id)->mark_2 == 10 ? 'selected' : '' }}>22</option>
+                        <option value="23" {{  $product->marks($pharmacy->id)->mark_2 == 10 ? 'selected' : '' }}>23</option>
+                        <option value="24" {{  $product->marks($pharmacy->id)->mark_2 == 10 ? 'selected' : '' }}>24</option>
+                        <option value="25" {{  $product->marks($pharmacy->id)->mark_2 == 25 ? 'selected' : '' }}>25</option>
                     </select>
                 </div>
                 <div class="select-1 col-xxl-2">
@@ -88,6 +118,21 @@
                         <option value="8" {{  $product->marks($pharmacy->id)->mark_3 == 8 ? 'selected' : '' }}>8</option>
                         <option value="9" {{  $product->marks($pharmacy->id)->mark_3 == 9 ? 'selected' : '' }}>9</option>
                         <option value="10" {{  $product->marks($pharmacy->id)->mark_3 == 10 ? 'selected' : '' }}>10</option>
+                        <option value="11" {{  $product->marks($pharmacy->id)->mark_3 == 11 ? 'selected' : '' }}>11</option>
+                        <option value="12" {{  $product->marks($pharmacy->id)->mark_3 == 12 ? 'selected' : '' }}>12</option>
+                        <option value="13" {{  $product->marks($pharmacy->id)->mark_3 == 13 ? 'selected' : '' }}>13</option>
+                        <option value="14" {{  $product->marks($pharmacy->id)->mark_3 == 14 ? 'selected' : '' }}>14</option>
+                        <option value="15" {{  $product->marks($pharmacy->id)->mark_3 == 15 ? 'selected' : '' }}>15</option>
+                        <option value="16" {{  $product->marks($pharmacy->id)->mark_3 == 16 ? 'selected' : '' }}>16</option>
+                        <option value="17" {{  $product->marks($pharmacy->id)->mark_3 == 17 ? 'selected' : '' }}>17</option>
+                        <option value="18" {{  $product->marks($pharmacy->id)->mark_3 == 18 ? 'selected' : '' }}>18</option>
+                        <option value="19" {{  $product->marks($pharmacy->id)->mark_3 == 19 ? 'selected' : '' }}>19</option>
+                        <option value="20" {{  $product->marks($pharmacy->id)->mark_3 == 20 ? 'selected' : '' }}>20</option>
+                        <option value="21" {{  $product->marks($pharmacy->id)->mark_3 == 21 ? 'selected' : '' }}>21</option>
+                        <option value="22" {{  $product->marks($pharmacy->id)->mark_3 == 22 ? 'selected' : '' }}>22</option>
+                        <option value="23" {{  $product->marks($pharmacy->id)->mark_3 == 23 ? 'selected' : '' }}>23</option>
+                        <option value="24" {{  $product->marks($pharmacy->id)->mark_3 == 24 ? 'selected' : '' }}>24</option>
+                        <option value="25" {{  $product->marks($pharmacy->id)->mark_3 == 25 ? 'selected' : '' }}>25</option>
                     </select>
                 </div>
                 <div class="select-1 col-xxl-2">

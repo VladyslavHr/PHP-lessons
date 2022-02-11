@@ -85,7 +85,7 @@
                 </div>
                 <div class="publishing">
                     {{ $user->posts_paginated->links() }}
-                    @foreach ($user->posts_paginated as $post)
+                    @foreach ($user->posts_paginated as $post_key => $post)
 
                     @include('blocks.post-block')
 

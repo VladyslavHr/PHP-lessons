@@ -542,13 +542,8 @@ body{
 
 }
 
-.post-summary .like-count{
-    font-size: 15px;
-}
-
 .post-summary .count{
-    font-size: 15px;
-    margin: 0px 5px 0px 5px;
+    font-size: 12px;
 }
 
 .right-content .notif-block,
@@ -1187,7 +1182,7 @@ body{
     margin-top: 1rem;
 }
 
-.accordion-comments-list{
+.accordion-comment{
     margin: 0;
     list-style: none;
     background: #f0f2f5;
@@ -1196,7 +1191,7 @@ body{
     margin-bottom: 1rem;
 }
 
-.accordion-comments-list:last-child{
+.accordion-comment:last-child{
     margin-bottom: 0;
 }
 
@@ -1207,6 +1202,7 @@ body{
 
 .accordion-user-time{
     text-align: end;
+    font-size: 0.8em;
 }
 
 .accordion-comment-text{
@@ -1215,8 +1211,64 @@ body{
     margin-top: 4px;
 }
 
+.post-block .accordion-item{
+    border: 0;
+    border-radius: 0;
+    border-top: 1px solid rgba(0,0,0,.125);
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
 
+.post-block .accordion-body{
+    padding: 1rem 0;
+}
 
+.accordion-user-name{
+    font-weight: bold;
+}
+
+.post-menu-btn{
+    margin-left: auto;
+}
+
+.post-menu-btn button{
+    background: none;
+    border: 0;
+    border-radius: 0.25rem;
+}
+
+.post-menu-btn button:hover{
+    background: none;
+}
+
+.post-menu-btn button:focus{
+
+    box-shadow: none
+}
+
+.post-menu-btn i{
+    color: #333333;
+}
+
+.post-menu-list{
+    display: block;
+    margin-left: 100%;
+}
+
+.post-menu-list li{
+    padding: 5px;
+}
+
+.post-menu-link{
+    color: #050505;
+    text-decoration: none;
+}
+
+.post-menu-link:hover{
+    color: #fff;
+    background: var(--bgBlackColor);
+    border-radius: 0.25rem;
+    padding: 5px;
+}
 
 
 

@@ -34,6 +34,6 @@ class Group extends Model
 
     public function getPostsPaginatedAttribute()
     {
-        return $this->posts()->paginate(2, ['*'], 'posts-page');
+        return $this->posts()->paginate(5, ['*'], 'posts-page');
     }
 }
