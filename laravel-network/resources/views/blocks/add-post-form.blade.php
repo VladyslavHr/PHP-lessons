@@ -1,5 +1,5 @@
 
-<form class="avatar-publish" action="{{ route('posts.store') }}" enctype='multipart/form-data' method="POST">
+<form class="avatar-publish" action="{{ route('posts.store') }}" enctype='multipart/form-data' method="POST" onsubmit="add_post(this, event)">
 
     @csrf
     <input type="hidden" name="postable_id" value="{{ $postable_id }}">

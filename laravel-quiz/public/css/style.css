@@ -127,3 +127,18 @@
 .list-group-product .list-group-item.bg-green{
     background: rgba(0 128 0 / 20%)
 }
+
+
+.errors-list{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 600px;
+    padding: 0 15px;
+    background: #fff;
+    z-index: 9999;
+}
+
+.errors-list .alert{
+    margin-top: 1rem;
+}

@@ -36,7 +36,7 @@
             </div>
             <div class="col-md-6">
                 <label for="location">Pharmacy location</label>
-                <form action="{{ route('pharmacies.change_location') }}" method="POST" class="d-flex">
+                <form action="{{ route('pharmacies.change_location') }}" method="POST" class="d-flex" onsubmit="check_location(this, event)">
                     @csrf
                     <input type="hidden" name="pharmacy_id" value="{{ $pharmacy->id }}">
 
@@ -56,7 +56,7 @@
     </div>
     <div class="list-group">
         @foreach ($categories as $category)
-        <form class="list-group-item list-group-item-action" action="{{ route('pharmacies.estimate_category') }}" method="POST">
+        <form class="list-group-item list-group-item-action" action="{{ route('pharmacies.estimate_category') }}" method="POST" onsubmit="mark_category(this, event)">
             @csrf
             <input type="hidden" name="category_id" value="{{ $category->id }}">
             <input type="hidden" name="pharmacy_id" value="{{ $pharmacy->id }}">

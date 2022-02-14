@@ -90,6 +90,9 @@ class PharmacyController extends Controller
 
     public function change_location(Request $request)
     {
+        if ($request->has('ajax')) {
+            return $this->change_location_api($request);
+         }
         $pharmacy_id = $request->get('pharmacy_id');
 
         $pharmacy = Pharmacy::find($pharmacy_id);
@@ -107,9 +110,38 @@ class PharmacyController extends Controller
 
     }
 
+    public function change_location_api(Request $request)
+    {
+        $pharmacy_id = $request->get('pharmacy_id');
+
+        $pharmacy = Pharmacy::find($pharmacy_id);
+
+        if($pharmacy){
+            $pharmacy->location = $request->get('location');
+            $pharmacy->save();
+
+            return [
+                'status' => 'ok',
+                'message' => 'Location updated!'
+            ];
+        }else{
+            return [
+                'status' => 'fail',
+                'message' => 'Pharmacy not found!'
+            ];
+        }
+
+
+
+    }
+
+
 
     public function estimate_category(Request $request)
     {
+        if ($request->has('ajax')) {
+            return $this->estimate_category_api($request);
+         }
         $category_id = $request->get('category_id');
         $pharmacy_id = $request->get('pharmacy_id');
         $user_id = auth()->user()->id;
@@ -134,7 +166,49 @@ class PharmacyController extends Controller
         }else{
             CategoryMark::create($category_data);
         }
-        return redirect()->back()->with('status', 'Updated!');
+        return redirect()->back()->with('status', 'Graded');
+
+    }
+
+    public function estimate_category_api(Request $request)
+    {
+        // if ($request->get('mark_1') == 0 &&
+        // $request->get('mark_2') == 0 &&
+        // $request->get('mark_3') == 0 &&
+        // $request->get('mark_4') == 0 ) {
+        //     return response()->json([
+        //         'status' => 'error',
+        //         'message' => 'Please add at least one mark',
+        //     ]);
+
+        $category_id = $request->get('category_id');
+        $pharmacy_id = $request->get('pharmacy_id');
+        $user_id = auth()->user()->id;
+
+        $category_data = $request->validate([
+            'category_id' => 'required',
+            'pharmacy_id' => 'required',
+            'mark_1' => 'required|integer|min:0|max:100',
+        ],[
+            'mark_1.required' => '"Počet Face-kategóry celkem" is required!',
+            'mark_1.min' => '"Počet Face-kategóry celkem" between 0 and 100 !',
+            'mark_1.max' => '"Počet Face-kategóry celkem" between 0 and 100!',
+        ]);
+
+        $category_data['user_id'] = $user_id;
+
+        $category_mark = CategoryMark::where('category_id', $category_id)
+            ->where('pharmacy_id', $pharmacy_id)
+                ->where('user_id', $user_id)->first();
+        if($category_mark){
+            $category_mark->update($category_data);
+        }else{
+            CategoryMark::create($category_data);
+        }
+        return [
+            'status' => 'ok',
+            'message' => 'Graded'
+        ];
 
     }
 

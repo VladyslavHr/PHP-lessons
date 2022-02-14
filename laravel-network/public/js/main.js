@@ -127,14 +127,23 @@ $( document ).ajaxStop(function() {
 
 }) // jQuery ready
 
-
+function add_post(form, event) {
+    event.preventDefault()
+    $.post(form.action, $(form).serialize(), function (data) {
+        if(data && data.status === 'ok') {
+            alert('success', data.message || 'Success!')
+        }else{
+            alert('danger', data.message || ' Error!')
+        }
+    })
+}
 
 
 function add_comment(form, event) {
     event.preventDefault()
     $.post(form.action, $(form).serialize(), function (data) {
         if(data && data.status === 'ok') {
-            alert('success', 'Комментарий добавлен!')
+            alert('success', data.message || 'Success!')
         }else{
             alert('danger', data.message || ' Error!')
         }

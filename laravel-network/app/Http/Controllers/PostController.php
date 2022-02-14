@@ -35,7 +35,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $rules = [
             'title' => ['required', 'string', 'min:3'],
             'content' => ['required'],
             'post_status' => ['required'],
@@ -43,7 +43,18 @@ class PostController extends Controller
             'postable_type' => '',
             'allow_comments' => 'integer',
             'images.*' => 'image',
-        ]);
+		];
+
+		$validator = validator($request->all(), $rules);
+
+		if($validator->fails()){
+			return [
+                'status' => 'error',
+                'message' => implode('<br>', $validator->messages()->all())
+            ];
+		}
+
+        $data = $validator->validated();
 
         $data = array_merge([
             'allow_comments' => '0',
@@ -58,6 +69,10 @@ class PostController extends Controller
         {
             if (count($request->file('images')) > 8) {
                 return redirect()->back()->withErrors('Максимум 8 изображений')->withInput($request->all);
+                return [
+                    'status' => 'error',
+                    'message' => 'Максимум 8 изображений',
+                ];
             }
             $pathes = [];
             foreach($request->file('images') as $key => $file)
@@ -77,7 +92,10 @@ class PostController extends Controller
 
         $post = Post::create($data);
 
-        return redirect()->back()->with('status', 'Пост обновлен!');
+        return [
+            'status' => 'ok',
+            'message' => 'Пост добавлен!'
+        ];
     }
 
     /**
