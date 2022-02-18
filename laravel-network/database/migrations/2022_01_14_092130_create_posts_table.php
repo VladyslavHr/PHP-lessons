@@ -22,7 +22,7 @@ class CreatePostsTable extends Migration
             $table->tinyInteger('allow_comments')->default('0');
             $table->integer('postable_id');
             $table->string('postable_type');
-            $table->integer('comment_count');
+            $table->integer('comments_count');
             $table->timestamps();
         });
     }

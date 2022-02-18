@@ -108,15 +108,19 @@ col-xl-3 col-lg-4 col-md-6 col-sm-12 --}}
             <div class="group-publish">
                 @include('blocks.add-post-form')
             </div>
-            <div class="publishing">
-                {{ $group->posts_paginated->links() }}
+
+            {{ $group->posts_paginated->links() }}
+            <div class="publishing" id="post_list">
+
                 @foreach ($group->posts_paginated as $post_key => $post)
 
                 @include('blocks.post-block')
 
                 @endforeach
-                {{ $group->posts_paginated->links() }}
+
             </div>
+            {{ $group->posts_paginated->links() }}
+
         </div>
     </div>
 </div>

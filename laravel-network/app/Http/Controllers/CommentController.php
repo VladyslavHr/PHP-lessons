@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -14,7 +15,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -36,6 +37,7 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $rules = [
+            'post_id' => 'required',
 			'text' => 'required|string|min:5|max:1000',
 		];
 
@@ -49,13 +51,29 @@ class CommentController extends Controller
 		if($validator->fails()){
 			return response()->json([
                 'status' => 'error',
-                'message' => implode('<br>', $validator->messages()->all())
+                'message' => implode('<br>', $validator->messages()->all()),
+                'errors' => $validator->messages()->all(),
             ]);
 		}
 
+        $data = $validator->validated();
+
+        $data['user_id'] = auth()->user()->id;
+
+        $comment = Comment::create($data);
+
+        $comments_count = Comment::where('post_id', $data['post_id'])->count();
+
+
+        Post::where('id', $data['post_id'])->update(['comments_count' => $comments_count]);
+
         return [
             'status' => 'ok',
-            '$request' => $request->all(),
+            'message' => 'Комментарий добавлен!',
+            'comments_count' => $comments_count,
+            'comment_block' => view('blocks.comment-block', [
+                'comment' => $comment,
+            ])->render(),
         ];
     }
 

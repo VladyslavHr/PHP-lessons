@@ -116,7 +116,7 @@ class PharmacyController extends Controller
 
         $pharmacy = Pharmacy::find($pharmacy_id);
 
-        if($pharmacy){
+        if($pharmacy && $request->has('location')){
             $pharmacy->location = $request->get('location');
             $pharmacy->save();
 
@@ -126,7 +126,7 @@ class PharmacyController extends Controller
             ];
         }else{
             return [
-                'status' => 'fail',
+                'status' => 'error',
                 'message' => 'Pharmacy not found!'
             ];
         }
@@ -185,7 +185,7 @@ class PharmacyController extends Controller
         $pharmacy_id = $request->get('pharmacy_id');
         $user_id = auth()->user()->id;
 
-        $category_data = $request->validate([
+        $validator = validator($request->all(), [
             'category_id' => 'required',
             'pharmacy_id' => 'required',
             'mark_1' => 'required|integer|min:0|max:100',
@@ -194,6 +194,16 @@ class PharmacyController extends Controller
             'mark_1.min' => '"Počet Face-kategóry celkem" between 0 and 100 !',
             'mark_1.max' => '"Počet Face-kategóry celkem" between 0 and 100!',
         ]);
+
+		if($validator->fails()){
+			return [
+                'status' => 'error',
+                'message' => implode('<br>', $validator->messages()->all()),
+                'errors' => $validator->messages()->all(),
+            ];
+		}
+
+        $category_data = $validator->validated();
 
         $category_data['user_id'] = $user_id;
 

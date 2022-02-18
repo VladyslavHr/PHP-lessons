@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlbumController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,6 +27,8 @@ Route::get('/', [App\Http\Controllers\ProfileController::class, 'profile'])->nam
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/test', [App\Http\Controllers\HomeController::class, 'test'])->name('test');
 Route::get('/friends', [App\Http\Controllers\HomeController::class, 'friends'])->name('friends');
+
+Route::get('/albums', [App\Http\Controllers\AlbumController::class, 'index'])->name('albums.index');
 
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');
 Route::get('/profiles/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profiles.edit');

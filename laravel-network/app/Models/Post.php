@@ -72,7 +72,7 @@ class Post extends Model
         return $this->morphTo();
     }
 
-    public function images()
+    public function getPostImagesAttribute()
     {
         if ($this->images) {
             return explode(',', $this->images);
@@ -80,6 +80,15 @@ class Post extends Model
             return[];
         }
     }
+
+    // public function images()
+    // {
+    //     if ($this->images) {
+    //         return explode(',', $this->images);
+    //     }else{
+    //         return[];
+    //     }
+    // }
 
     public function comments()
     {

@@ -32,7 +32,7 @@
                             <a class="nav-link" href="#">О себе</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" href="#">Фотографии</a>
+                            <a class="nav-link" href="{{ route('albums.index') }}">Фотографии</a>
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" href="{{ route('friends') }}">Друзья</a>

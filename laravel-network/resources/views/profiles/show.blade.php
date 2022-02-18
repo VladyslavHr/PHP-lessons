@@ -83,16 +83,13 @@
                 <div class="prof-publish">
                     @include('blocks.add-post-form')
                 </div>
-                <div class="publishing">
-                    {{ $user->posts_paginated->links() }}
+                {{ $user->posts_paginated->links() }}
+                <div class="publishing" id="post_list">
                     @foreach ($user->posts_paginated as $post_key => $post)
-
                     @include('blocks.post-block')
-
-
                     @endforeach
-                    {{ $user->posts_paginated->links() }}
                 </div>
+                {{ $user->posts_paginated->links() }}
             </div>
         </div>
         <div class="col-xl-3 col-lg-12">

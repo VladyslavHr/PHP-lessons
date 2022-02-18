@@ -129,13 +129,35 @@ $( document ).ajaxStop(function() {
 
 function add_post(form, event) {
     event.preventDefault()
-    $.post(form.action, $(form).serialize(), function (data) {
-        if(data && data.status === 'ok') {
-            alert('success', data.message || 'Success!')
-        }else{
-            alert('danger', data.message || ' Error!')
-        }
-    })
+
+    var formData = new FormData(form)
+
+    $.ajax(form.action, {
+        method: 'POST',
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+            if(data && data.status === 'ok') {
+                alert('success', data.message || 'Success!')
+                form.reset()
+                $('#post_list').prepend(data.post_block)
+            }else{
+                if (data.errors && data.errors.length) {
+                    data.errors.forEach(err => alert('danger', err))
+                }else{
+                    alert('danger', data.message || ' Error!')
+                }
+
+            }
+        },
+        error: function () {
+            alert('danger', 'Server error')
+        },
+        complete: function () {},
+    });
+
 }
 
 
@@ -144,6 +166,11 @@ function add_comment(form, event) {
     $.post(form.action, $(form).serialize(), function (data) {
         if(data && data.status === 'ok') {
             alert('success', data.message || 'Success!')
+
+            var post_id = $(form).find('input[name="post_id"]').val()
+            $('#post_'+post_id+' .js-comments-list').append(data.comment_block)
+            $('#post_'+post_id+' .comments-count').html(data.comments_count)
+            form.reset()
         }else{
             alert('danger', data.message || ' Error!')
         }

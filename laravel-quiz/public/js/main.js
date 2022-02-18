@@ -22,14 +22,20 @@ function mark_category(form, event) {
         if(data && data.status === 'ok') {
             alert('success', data.message || 'Graded')
         }else{
-            alert('danger', data.message || ' Error!')
+            if (data.errors && data.errors.length) {
+                data.errors.forEach(err => alert('danger', err))
+            }else{
+                alert('danger', data.message || ' Error!')
+            }
+
         }
-    }).fail(function (data) {
+    }).fail(function (_data) {
         alert('danger', ' Server Error!')
+
     })
 }
 
-function check_location(form, event) {
+function change_location(form, event) {
     event.preventDefault()
 
     $.post(form.action, $(form).serialize() + '&ajax', function (data) {

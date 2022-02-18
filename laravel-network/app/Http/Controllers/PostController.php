@@ -50,7 +50,8 @@ class PostController extends Controller
 		if($validator->fails()){
 			return [
                 'status' => 'error',
-                'message' => implode('<br>', $validator->messages()->all())
+                'message' => implode('<br>', $validator->messages()->all()),
+                'errors' => $validator->messages()->all(),
             ];
 		}
 
@@ -94,7 +95,10 @@ class PostController extends Controller
 
         return [
             'status' => 'ok',
-            'message' => 'Пост добавлен!'
+            'message' => 'Пост добавлен!',
+            'post_block' => view('blocks.post-block', [
+                'post' => $post,
+            ])->render(),
         ];
     }
 

@@ -36,7 +36,7 @@
             </div>
             <div class="col-md-6">
                 <label for="location">Pharmacy location</label>
-                <form action="{{ route('pharmacies.change_location') }}" method="POST" class="d-flex" onsubmit="check_location(this, event)">
+                <form action="{{ route('pharmacies.change_location') }}" method="POST" class="d-flex" onsubmit="change_location(this, event)">
                     @csrf
                     <input type="hidden" name="pharmacy_id" value="{{ $pharmacy->id }}">
 

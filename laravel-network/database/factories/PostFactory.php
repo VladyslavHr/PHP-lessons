@@ -36,7 +36,7 @@ class PostFactory extends Factory
             'comment_status' => ['open', 'close'][rand(0, 1)],
             'postable_id' => $postable['id'],
             'postable_type' => $postable['type'],
-            'comment_count' => 0,
+            'comments_count' => 0,
         ];
     }
 }
