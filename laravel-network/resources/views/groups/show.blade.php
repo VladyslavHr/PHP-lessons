@@ -97,7 +97,7 @@ col-xl-3 col-lg-4 col-md-6 col-sm-12 --}}
             <div class="groups-block">
                 <ul class="group-list-link">
                     <li><a href="#" class="group-info-link">Подписчики</a></li>
-                    <li><a href="#" class="group-info-link">Фото</a></li>
+                    <li><a href="{{ route('albums.index') }}" class="group-info-link">Фото</a></li>
                     <li><a href="#" class="group-info-link">Мероприятия</a></li>
                     <li><a href="#" class="group-info-link">Темы</a></li>
                     <li><a href="#" class="group-info-link">Файлы</a></li>
