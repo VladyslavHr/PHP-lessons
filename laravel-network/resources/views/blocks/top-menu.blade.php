@@ -22,7 +22,7 @@
                 <a class="nav-link {{ request()->routeIs('groups*') ? 'active' : '' }}" href="{{ route('groups.index') }}">Groups</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('friends') ? 'active' : '' }}" href="{{ route('friends') }}">Friendds</a>
+                <a class="nav-link {{ request()->routeIs('profiles.friends') ? 'active' : '' }}" href="{{ route('profiles.friends') }}">Friendds</a>
             </li>
             </ul>
 
@@ -30,10 +30,26 @@
                 <img src="{{ asset('images/logo.png') }}" alt="">
             </div>
 
-            <form class="navbar-search-form">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <form class="navbar-search-form" action="{{ route('profiles.search') }}">
+            <input name="query" value="{{ request()->get('query') }}" class="form-control global-search me-2" type="search" placeholder="Search" aria-label="Search" autocomplete="off">
+            <ul class="search-autocomplete" id="search_autocomplete">
+                <li> <a href="#">Hello</a> </li>
+                <li> <a href="#">World</a> </li>
+            </ul>
+            <button class="btn btn-outline global-search-btn" type="submit">Search</button>
             </form>
+            <script>
+                $('input[name="query"]').on('keyup', function(e){
+                    log(this.value)
+                    if(this.value.lenght > 1 ) {
+                        $.get('/api/search', {
+                            query: this.value
+                        }, function(data){
+
+                        })
+                    }
+                })
+            </script>
 
             <ul class="navbar-nav ms-auto">
                 <!-- Authentication Links -->

@@ -1,9 +1,9 @@
 <div class="accordion-comment">
     <div class="accordion-user-info-ava row">
-        <div class="accordion-user-avatar col-2">
+        <div class="accordion-user-avatar col-1">
             <img src="{{ $comment->user->avatar . '?rand=' . rand()}}" alt="">
         </div>
-        <div class="accordion-user-name col-7">
+        <div class="accordion-user-name col-8">
             {{ $comment->user->name }}
         </div>
         <div class="accordion-user-time col-3">

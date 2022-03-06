@@ -188,11 +188,11 @@ class PharmacyController extends Controller
         $validator = validator($request->all(), [
             'category_id' => 'required',
             'pharmacy_id' => 'required',
-            'mark_1' => 'required|integer|min:0|max:100',
+            'mark_1' => 'required|integer|min:0|max:250',
         ],[
             'mark_1.required' => '"Počet Face-kategóry celkem" is required!',
-            'mark_1.min' => '"Počet Face-kategóry celkem" between 0 and 100 !',
-            'mark_1.max' => '"Počet Face-kategóry celkem" between 0 and 100!',
+            'mark_1.min' => '"Počet Face-kategóry celkem" between 0 and 250 !',
+            'mark_1.max' => '"Počet Face-kategóry celkem" between 0 and 250!',
         ]);
 
 		if($validator->fails()){

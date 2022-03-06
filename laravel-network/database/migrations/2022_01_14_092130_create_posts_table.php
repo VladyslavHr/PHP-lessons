@@ -15,10 +15,10 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->integer('author');
+            $table->integer('author_id');
             $table->string('title');
             $table->longText('content');
-            $table->string('post_status');
+            $table->enum('post_status', ['public', 'protected']);
             $table->tinyInteger('allow_comments')->default('0');
             $table->integer('postable_id');
             $table->string('postable_type');

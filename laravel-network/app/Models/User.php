@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -54,6 +55,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
     public function groups()
     {
         return $this->hasMany(Group::class, 'creator_id')->limit(5);
@@ -66,7 +68,35 @@ class User extends Authenticatable
 
     public function getPostsPaginatedAttribute()
     {
-        return $this->posts()->paginate(5, ['*'], 'posts-page');
+        if ($this->is_friend){
+            $posts = Post::where('postable_id', $this->id)
+            ->where('postable_type', get_class($this) ) //'App\Models\User'
+            ->orderByDesc('created_at')
+            ->paginate(5, ['*'], 'posts-page');
+        }else{
+            $posts = Post::where('postable_id', $this->id)
+            ->where('postable_type', get_class($this) ) //'App\Models\User'
+            ->where('post_status', 'public')
+            ->orderByDesc('created_at')
+            ->paginate(5, ['*'], 'posts-page');
+        }
+
+
+
+
+        return $posts;
+        // return $this->posts()->paginate(5, ['*'], 'posts-page');
+    }
+
+    public function getIsFriendAttribute()
+    {
+        $current_user_id = auth()->user()->id;
+        $friend_user_id = $this->id;
+        $is_friend = Db::table('followers')
+            ->where('current_user_id', $current_user_id)
+            ->where('friend_user_id', $friend_user_id)
+            ->first();
+       return $is_friend ? 1 : 0;
     }
 
     public function avatarUrl()

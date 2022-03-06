@@ -2,11 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\{Post, User, Group};
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+
+    public function reloadPosts(Request $request)
+    {
+
+        $user = User::find($request->user_id);
+        if ($request->postable_type === 'App\Models\Group'){
+            $object = Group::find($request->postable_id);
+        } elseif ($request->postable_type === 'App\Models\User') {
+            $object = User::find($request->postable_id);
+        }else{
+            return [
+                'status' => 'error',
+                'message' => 'Something wrong!',
+            ];
+        }
+
+        // $posts_html = $object->posts_paginated->links();
+        // $posts_html .= '<div class="publishing" id="post_list">';
+
+        // foreach ($object->posts_paginated as $post) {
+        //     $posts_html .= view('blocks.post-block', [
+        //         'post' => $post,
+        //     ])->render();
+        // }
+
+        // $posts_html .= '</div>';
+        // $posts_html .= $object->posts_paginated->links();
+
+        return[
+            'status' => 'ok',
+            'posts_html' => view('blocks.posts-list', [
+                'object' => $object,
+            ])->render(),
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -62,7 +98,7 @@ class PostController extends Controller
             'author_id' => auth()->user()->id,
             // 'postable_id' => auth()->user()->id,
             // 'postable_type' => 'App\Models\Group',
-            'comment_count' => '0',
+            'comments_count' => '0',
         ], $data);
 
 
@@ -91,6 +127,7 @@ class PostController extends Controller
 
 
 
+
         $post = Post::create($data);
 
         return [
@@ -98,6 +135,7 @@ class PostController extends Controller
             'message' => 'Пост добавлен!',
             'post_block' => view('blocks.post-block', [
                 'post' => $post,
+                'user' => User::find($request->postable_id),
             ])->render(),
         ];
     }
@@ -144,6 +182,22 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+    foreach ($post->post_images as $key => $image_url) {
+        $path = storage_path(str_replace('/storage/', '/app/public/', $image_url));
+        if (file_exists($path)) {
+            $deleted = unlink($path);
+        }
+    }
+
+        if ($post->delete()) {
+            return [
+                'status' => 'ok',
+            ];
+        }else{
+            return [
+                'status' => 'error'
+            ];
+        }
+
     }
 }

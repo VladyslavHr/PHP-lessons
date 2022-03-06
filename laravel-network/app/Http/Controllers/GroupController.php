@@ -11,6 +11,29 @@ use Illuminate\Support\Facades\Auth;
 class GroupController extends Controller
 {
 
+    public function search(Request $request)
+    {
+       $query = trim($request->get('query'));
+
+        if($query) {
+            $groups = Group::where('name', 'LIKE', '%'.$query.'%')->get();
+            if($groups){
+                $count = count($groups);
+                $message = $count ." ".s_ending($count, 'group', 'groups'). " was found";
+            }
+        }else{
+            $groups = [];
+            $message = 'Wrong search query';
+        }
+
+        return view('pages.search', [
+            'search_type' => 'groups',
+            'results' => $groups,
+            'message' => $message,
+            'user' => auth()->user(),
+        ]);
+    }
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -58,10 +81,12 @@ class GroupController extends Controller
      */
     public function index()
     {
+        $users = User::all();
         return view('groups.index', [
             'title' => 'groups',
             'user' => Auth::user(),
             'groups' => Group::all(),
+            'users' => $users,
         ]);
     }
 
@@ -72,12 +97,14 @@ class GroupController extends Controller
      */
     public function create()
     {
+        $users = User::all();
         $group = new Group();
         $group->form_action = 'groups.store';
         $group->avatar = '';
         return view('groups.create', [
             'group' => $group,
             'user' => Auth::user(),
+            'users' => $users,
         ]);
     }
 
@@ -141,9 +168,12 @@ class GroupController extends Controller
     public function edit(Group $group)
     {
         // dd($group);
+        $users = User::all();
         $group->form_action = 'groups.update';
         return view('groups.create', [
             'group' => $group,
+            'user' => Auth::user(),
+            'users' => $users,
         ]);
     }
 

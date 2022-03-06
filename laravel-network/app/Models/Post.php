@@ -17,7 +17,7 @@ class Post extends Model
         'allow_comments',
         'postable_id',
         'postable_type',
-        'comment_count',
+        'comments_count',
         'images',
     ];
 

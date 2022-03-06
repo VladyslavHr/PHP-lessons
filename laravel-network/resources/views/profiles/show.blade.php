@@ -80,16 +80,12 @@
         </div>
         <div class="col-xl-6 col-lg-9">
             <div class="center-content">
-                <div class="prof-publish">
-                    @include('blocks.add-post-form')
+
+                @include('blocks.add-post-form')
+
+                <div id="post_list_paginated">
+                    @include('blocks.posts-list', [ 'object' => $user,  ])
                 </div>
-                {{ $user->posts_paginated->links() }}
-                <div class="publishing" id="post_list">
-                    @foreach ($user->posts_paginated as $post_key => $post)
-                    @include('blocks.post-block')
-                    @endforeach
-                </div>
-                {{ $user->posts_paginated->links() }}
             </div>
         </div>
         <div class="col-xl-3 col-lg-12">
@@ -188,8 +184,8 @@
                     <div class="title">
                         <span>Друзья</span>
                     </div>
-                    @foreach ($users as $user)
                     <ul class="list">
+                        @foreach ($users as $user)
                         <li>
                             <div class="friend-block-inf">
                                 <a href="#">
@@ -206,8 +202,8 @@
                                 </a>
                             </div>
                         </li>
+                        @endforeach
                     </ul>
-                    @endforeach
                 </div>
             </div>
         </div>

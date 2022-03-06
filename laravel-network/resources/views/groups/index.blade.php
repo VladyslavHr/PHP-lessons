@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="menu-wrap-groups-ind col-xl-9">
-            <nav class="group-ind-menu-navbar navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="group-ind-menu-navbar navbar navbar-expand-lg navbar-light section-shadow">
                 <div class="container-fluid">
                     {{-- <a class="navbar-brand" href="{{ route('groups.index') }}">Groups</a> --}}
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">

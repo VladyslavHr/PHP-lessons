@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('/search', [App\Http\Controllers\ApiController::class, 'search']);
+
+// Route::post(function (Request $request)
+// {
+
+// });
+
+
+// Route::post('posts/reloadPosts', [App\Http\Controllers\PostController::class, 'reloadPosts'])->name('posts.reloadPosts');

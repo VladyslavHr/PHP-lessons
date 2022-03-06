@@ -30,7 +30,7 @@
     <div class="friends-main row">
         @foreach ($users as $user)
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-            <div class="friend-block row">
+            <a href="{{ route('profiles.show', $user) }}" class="friend-block row">
                 <div class="friend-img col-sm-3">
                     <img src="{{ $user->avatar }}" alt="">
                 </div>
@@ -38,7 +38,7 @@
                     <div class="friend-name text-truncate">{{ $user->name }}</div>
                     <div class="friend-status">Add friend</div>
                 </div>
-            </div>
+            </a>
         </div>
 
         @endforeach

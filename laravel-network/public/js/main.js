@@ -125,6 +125,23 @@ $( document ).ajaxStop(function() {
 });
 
 
+
+
+$('#post_list').on('keyup', '.js-comment-input', function(){
+    if(this.value) {
+        if(!this.btn) this.btn =  $(this).closest('.post-block').find('.add-comments-send')
+        this.btn.addClass('active').attr('disabled', false)
+    }else{
+        if(this.btn){
+            this.btn.removeClass('active').attr('disabled', true)
+        }
+        this.btn = false
+    }
+
+})
+
+
+
 }) // jQuery ready
 
 function add_post(form, event) {
@@ -142,7 +159,13 @@ function add_post(form, event) {
             if(data && data.status === 'ok') {
                 alert('success', data.message || 'Success!')
                 form.reset()
-                $('#post_list').prepend(data.post_block)
+                // $('#post_list').prepend(data.post_block)
+                log(formData.get('postable_id'))
+                reload_posts({
+                    postable_id: formData.get('postable_id'),
+                    postable_type: formData.get('postable_type'),
+                    page: 1,
+                })
             }else{
                 if (data.errors && data.errors.length) {
                     data.errors.forEach(err => alert('danger', err))
@@ -152,8 +175,13 @@ function add_post(form, event) {
 
             }
         },
-        error: function () {
-            alert('danger', 'Server error')
+        error: function (xhr) {
+            if (xhr.responseJSON && xhr.responseJSON.message){
+                alert('danger', xhr.responseJSON.message)
+            }else{
+                alert('danger', 'Server error')
+            }
+
         },
         complete: function () {},
     });
@@ -170,12 +198,76 @@ function add_comment(form, event) {
             var post_id = $(form).find('input[name="post_id"]').val()
             $('#post_'+post_id+' .js-comments-list').append(data.comment_block)
             $('#post_'+post_id+' .comments-count').html(data.comments_count)
+            $('#collapse_'+post_id).addClass('show')
+            $(form).find('.add-comments-send').removeClass('active').attr('disabled', true)
             form.reset()
         }else{
             alert('danger', data.message || ' Error!')
         }
     })
 }
+
+
+function delete_post(button){
+    var post_id = button.dataset.postid
+
+    var csrf_token = jQuery('meta[name="csrf-token"]').attr('content')
+    $.ajax('/posts/' +post_id,
+    {
+        type : 'DELETE',
+        data : {
+            _token: csrf_token
+        },
+        success: function(data) {
+            log(data)
+            if(data && data.status === 'ok') {
+                $(button).closest('.post-block').remove()
+            }
+
+        }
+    }
+
+    )
+}
+
+function follow(link, event) {
+    event.preventDefault()
+    // var csrf_token = jQuery('meta[name="csrf-token"]').attr('content')
+    $.post(link.href, {
+        _token: jQuery('meta[name="csrf-token"]').attr('content'),
+        friend_user_id: link.dataset.frienduserid,
+    }, function (data) {
+        if(data && data.status === 'ok') {
+            alert('success', data.message || 'Success!')
+            link.href = data.new_href
+            link.innerHTML = data.new_text
+            // reload_posts(link.dataset.frienduserid)
+            reload_posts({
+                postable_id: link.dataset.frienduserid,
+                postable_type: 'App\\Models\\User',
+                page: 1,
+            })
+        }else{
+            alert('danger', data.message || ' Error!')
+        }
+    })
+}
+
+function reload_posts(options) {
+    $.post('/posts/reloadPosts', {
+        _token: jQuery('meta[name="csrf-token"]').attr('content'),
+        postable_id: options.postable_id,
+        postable_type: options.postable_type,
+        page: options.page,
+    }, function(data) {
+        if(data && data.status === 'ok'){
+            $('#post_list_paginated').html(data.posts_html)
+        }
+
+    })
+
+}
+
 
 function alert(status, text) {
     var alert = `<div class="alert alert-${status} alert-dismissible fade show">

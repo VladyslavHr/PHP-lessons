@@ -15,7 +15,7 @@ class GroupFactory extends Factory
     {
         return [
             'name' => $this->faker->country,
-            'avatar' => '//via.placeholder.com/600x150',
+            'avatar' => '/images/600x200.png',
             'description' => $this->faker->address,
         ];
     }

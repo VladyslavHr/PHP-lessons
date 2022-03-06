@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use App\Models\{User,Group};
 
 class HomeController extends Controller
 {
@@ -54,13 +54,5 @@ class HomeController extends Controller
         ]);
     }
 
-    public function friends()
-    {
-        $users = User::all();
-        return view('friends', [
-            'title' => 'friends',
-            'users' => $users,
-            'user' => Auth::user(),
-        ]);
-    }
+
 }

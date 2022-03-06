@@ -15,7 +15,6 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
         return view('albums.index', [
             'user' => Auth::user(),
         ]);

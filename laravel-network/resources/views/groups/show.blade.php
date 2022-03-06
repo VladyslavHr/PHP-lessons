@@ -87,7 +87,7 @@ col-xl-3 col-lg-4 col-md-6 col-sm-12 --}}
                         <button type="submit">Subcribe</button>
                         </div>
                         <div class="group-description">{{$group->creator->name}}
-                            @if ($group->creator->id === $group->creator->id)
+                            @if ($group->creator->id === auth()->user()->id)
                                 <a href="{{ route('groups.edit', $group) }}"><i class="bi bi-pencil-square"></i></a>
                             @endif
                         </div>
@@ -105,22 +105,12 @@ col-xl-3 col-lg-4 col-md-6 col-sm-12 --}}
             </div>
         </div>
         <div class="col-md-7">
-            <div class="group-publish">
-                @include('blocks.add-post-form')
+
+            @include('blocks.add-post-form')
+
+            <div id="post_list_paginated">
+                @include('blocks.posts-list', [ 'object' => $group,  ])
             </div>
-
-            {{ $group->posts_paginated->links() }}
-            <div class="publishing" id="post_list">
-
-                @foreach ($group->posts_paginated as $post_key => $post)
-
-                @include('blocks.post-block')
-
-                @endforeach
-
-            </div>
-            {{ $group->posts_paginated->links() }}
-
         </div>
     </div>
 </div>

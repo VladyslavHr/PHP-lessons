@@ -1,11 +1,14 @@
 <div class="profile-banner">
     <img src="{{ asset ('images/banner1.jpg') }}" alt="">
 </div>
-<div class="bg-white">
+<div class="bg-white section-shadow">
     <div class="container">
 
         <div class="profile-wrapp row align-items-start">
-            <label class="prof-avatar-main col-sm-3 upload-image-label">
+            <label class="prof-avatar-main col-sm-3  @if ($user->id === auth()->user()->id) {{'upload-image-label'}} @endif">
+                @if ($user->id === auth()->user()->id)
+
+
                 <img src="{{ $user->avatar }}" alt=""
                 data-upload="image"
                 data-ajaxurl="{{ route('profile.uploadAvatar') }}"
@@ -13,6 +16,9 @@
                 data-height="500"
                 data-modelid="{{ $user->id }}"
             >
+            @else
+                <img src="{{ $user->avatar }}" alt="">
+            @endif
             </label>
 
             <div class="col-lg-9 ">
@@ -35,7 +41,7 @@
                             <a class="nav-link" href="{{ route('albums.index') }}">Фотографии</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" href="{{ route('friends') }}">Друзья</a>
+                            <a class="nav-link" href="{{ route('profiles.friends') }}">Друзья</a>
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" href="#">Еще</a>
@@ -49,7 +55,20 @@
                           {{-- <button class="profile-edit-btn btn btn-outline-success" type="submit">Редактировать</button> --}}
                         </form>
                       </div>
-                      <a class="navbar-brand profile-edit-btn btn btn-outline-success" href="{{ route('profiles.edit') }}">Редактировать</a>
+                    @if ($user->id === auth()->user()->id)
+                        <a class="navbar-brand profile-edit-btn btn btn-outline-success" href="{{ route('profiles.edit') }}">Редактировать</a>
+                    @elseif($user->is_friend)
+                        <a class="navbar-brand profile-edit-btn btn btn-outline-success"
+                        href="{{ route('profiles.unfollow') }}"
+                        data-frienduserid="{{ $user->id }}"
+                        onclick="follow(this, event)">Отписаться</a>
+                    @else
+                        <a class="navbar-brand profile-edit-btn btn btn-outline-success"
+                        href="{{ route('profiles.follow') }}"
+                        data-frienduserid="{{ $user->id }}"
+                        onclick="follow(this, event)">Подписаться</a>
+                    @endif
+
                     </div>
                   </nav>
 

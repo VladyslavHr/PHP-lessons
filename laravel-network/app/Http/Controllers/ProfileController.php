@@ -4,10 +4,39 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
 
 class ProfileController extends Controller
 {
+
+    public function search(Request $request)
+    {
+       $query = trim($request->get('query'));
+
+        if($query) {
+            $users = User::where('name', 'LIKE', '%'.$query.'%')
+                ->orWhere('last_name', 'LIKE', '%'.$query.'%')
+                ->orWhere('email', 'LIKE', '%'.$query.'%')
+                ->get();
+            if($users){
+                $count = count($users);
+                $message = $count ." ".s_ending($count, 'user', 'users'). " was found";
+            }
+        }else{
+            $users = [];
+            $message = 'Wrong search query';
+        }
+
+        return view('pages.search', [
+            'search_type' => 'users',
+            'results' => $users,
+            'message' => $message,
+            'user' => auth()->user(),
+        ]);
+    }
+
+
     public function uploadAvatar(Request $request)
     {
         // dd($request->all());
@@ -117,13 +146,38 @@ class ProfileController extends Controller
     public function profile()
     {
         $user = Auth::user();
-        $users = User::all();
+        $users = User::limit(10)->inRandomOrder()->get();
         return view('profiles.show', [
             'title' => 'My profile',
             'users' => $users,
             'user' => Auth::user(),
             'postable_id' => $user->id,
             'postable_type' => 'App\Models\User',
+        ]);
+    }
+
+
+    public function show(User $user)
+    {
+
+        $users = User::limit(10)->inRandomOrder()->get();
+        return view('profiles.show', [
+            'title' => 'Profile',
+            'users' => $users,
+            'user' => $user,
+            'postable_id' => $user->id,
+            'postable_type' => 'App\Models\User',
+        ]);
+    }
+
+
+    public function friends()
+    {
+        $users = User::all();
+        return view('profiles.friends', [
+            'title' => 'friends',
+            'users' => $users,
+            'user' => Auth::user(),
         ]);
     }
 
@@ -199,5 +253,68 @@ class ProfileController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function follow(Request $request)
+    {
+        $friend_user_id = (int)$request->get('friend_user_id');
+
+        if (!$friend_user_id || !auth()->user()) {
+            return [
+                'status' => 'error',
+                'message' => 'Wrong data',
+            ];
+        }
+
+        $current_user_id = auth()->user()->id;
+
+        // $is_friends = Db::table('followers')
+        //     ->where('current_user_id', $current_user_id)
+        //     ->where('friend_user_id', $friend_user_id)
+        //     ->first();
+
+
+            Db::table('followers')->insert([
+                'current_user_id' => $current_user_id,
+                'friend_user_id' => $friend_user_id,
+            ]);
+
+
+        return [
+            'status' => 'ok',
+            'new_href' => route('profiles.unfollow'),
+            'new_text' => 'Отписаться',
+            'posts_html' => '',
+        ];
+    }
+
+    public function unfollow(Request $request)
+    {
+        $friend_user_id = (int)$request->get('friend_user_id');
+
+        if (!$friend_user_id || !auth()->user()) {
+            return [
+                'status' => 'error',
+                'message' => 'Wrong data',
+            ];
+        }
+
+        $current_user_id = auth()->user()->id;
+
+        // $is_friends = Db::table('followers')
+        //     ->where('current_user_id', $current_user_id)
+        //     ->where('friend_user_id', $friend_user_id)
+        //     ->first();
+
+            Db::table('followers')
+                ->where('current_user_id', $current_user_id)
+                ->where('friend_user_id', $friend_user_id)
+                ->delete();
+
+            return [
+                'status' => 'ok',
+                'new_href' => route('profiles.follow'),
+                'new_text' => 'Подписаться'
+            ];
     }
 }

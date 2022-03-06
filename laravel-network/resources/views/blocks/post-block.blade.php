@@ -1,3 +1,6 @@
+
+
+
 <div class="post-block" id="post_{{ $post->id }}">
     <div class="post-header">
         <div class="user-image">
@@ -7,19 +10,19 @@
             <span class="user-name">{{ $post->author->name }}</span>
             <span class="post-time">{{ $post->date_formated() }}</span>
         </div>
-        {{-- <div class="post-set-bar">
-            <a href="#"><i class="bi bi-list"></i></a>
-        </div> --}}
-
-        <!-- Default dropend button -->
-        <div class="btn-group dropend post-menu-btn">
-            <button id="" type="button" class="btn dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true">
-                <i class="bi bi-three-dots-vertical"></i>
-            </button>
-            <ul class="dropdown-menu post-menu-list">
-                <li><a class="post-menu-link" href="#">Delete</a></li>
-            </ul>
+        <div class="post-set-bar">
+            <div class="btn-group">
+                <a href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-list"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li>
+                      <button class="dropdown-item" style="color: red" onclick="delete_post(this)" data-postid={{ $post->id }}>
+                        Delete post <i class="bi bi-trash"></i>
+                        </button></li>
+                </ul>
+              </div>
         </div>
+
+
     </div>
     <div class="post-slider">
 
@@ -55,7 +58,7 @@
             </a>
         </div>
         <div class="post-comments">
-            <a href="#" class="collapsed"  data-bs-toggle="collapse" data-bs-target="#collapse{{ $post->id }}">
+            <a href="#" class="collapsed"  data-bs-toggle="collapse" data-bs-target="#collapse_{{ $post->id }}">
                 <i class="bi bi-chat-dots"></i>
                 <span  class="count comments-count">{{ $post->comments_count }}</span>
             </a>
@@ -74,10 +77,12 @@
             </p>
     </div>
     {{-- comments --}}
+    @if ($post->allow_comments)
+
     <div class="accordion" id="post_comments_{{ $post->id }}">
         <div class="accordion-item">
             {{-- add class show to comments list {{ $post_key === 0 ? 'show' : ''}} --}}
-          <div id="collapse{{ $post->id }}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#post_comments_{{ $post->id }}">
+          <div id="collapse_{{ $post->id }}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#post_comments_{{ $post->id }}">
             <div class="accordion-body js-comments-list">
 
                 @foreach ($post->comments as $comment_key => $comment)
@@ -98,11 +103,14 @@
             <i class="bi bi-emoji-smile add-comments-smiles"></i>
         </a>
         <div class="col-sm-8 add-comments-text">
-            <input class="add-comments-text-input text-truncate" type="text" name="text" id="" placeholder="Добавьте комментарий..." autocomplete="off">
+            <input class="add-comments-text-input text-truncate js-comment-input" type="text" name="text"
+            placeholder="Добавьте комментарий..." autocomplete="off">
         </div>
         <div class="col-sm-3 add-comments-btn">
-            <button class="add-comments-send" type="submit">Опубликовать</button>
+            <button class="add-comments-send" type="submit" disabled>Опубликовать</button>
         </div>
     </form>
     {{-- add comments --}}
+    @endif {{-- allow comments --}}
 </div>
+
