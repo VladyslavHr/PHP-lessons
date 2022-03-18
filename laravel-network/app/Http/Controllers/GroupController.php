@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 // use App\Models\Group;
 // use App\Models\User;
 use App\Models\{Group,User};
@@ -10,6 +10,73 @@ use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
 {
+    public function subscribed_groups(Request $request)
+    {
+        $users = User::all();
+        $groups = Group::find($request->get('group_id'));
+        $subscribes = Db::table('subscribers')->select([
+            'user_id' => auth()->user()->id,
+            'group_id' => $request->get('group_id'),
+        ]);
+
+
+
+        // if ($groups->is_subscribed()) {
+        //     Db::table('subscribers')->select([
+        //         'user_id' => auth()->user()->id,
+        //         'group_id' => $request->get('group_id'),
+        //     ]);
+        // }
+
+        // $groups->is_subscribed();
+
+
+        // if( $group->is_subscribed()){
+        //     Db::table('subscribers')
+        //     ->where('user_id', auth()->user()->id)
+        //     ->where('group_id', $group->id);
+        // };
+        return view('groups.subscribed-groups',[
+            'user' => Auth::user(),
+            'users' => $users,
+            'groups' => $groups,
+            '$request' => $request->all(),
+            'subscribes' => $subscribes,
+        ]);
+    }
+
+
+    public function subscribe(Request $request)
+    {
+
+        $group = Group::find($request->get('group_id'));
+
+        if (!$group) {
+            return [
+                'status' => 'error',
+            ];
+        }
+        if ($group->is_subscribed()) {
+            Db::table('subscribers')
+            ->where('user_id', auth()->user()->id)
+            ->where('group_id', $group->id)
+            ->delete();
+            $button_text = 'Subscribe';
+        }else{
+            Db::table('subscribers')->insert([
+                'user_id' => auth()->user()->id,
+                'group_id' => $request->get('group_id'),
+            ]);
+            $button_text = 'Unsubscribe';
+        }
+
+        return [
+            'status' => 'ok',
+            '$request' => $request->all(),
+            'user' => auth()->user(),
+            'button_text' => $button_text
+        ];
+    }
 
     public function search(Request $request)
     {
@@ -19,7 +86,7 @@ class GroupController extends Controller
             $groups = Group::where('name', 'LIKE', '%'.$query.'%')->get();
             if($groups){
                 $count = count($groups);
-                $message = $count ." ".s_ending($count, 'group', 'groups'). " was found";
+                $message = "Search for <b>\"$query\"</b>- ". $count ." ".s_ending($count, 'group', 'groups'). " was found";
             }
         }else{
             $groups = [];

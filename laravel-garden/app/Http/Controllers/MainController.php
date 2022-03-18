@@ -2,16 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Seeds;
+use App\Models\Main;
 use Illuminate\Http\Request;
 
-class SeedsController extends Controller
+class MainController extends Controller
 {
-
-    public function js_test()
-    {
-        return view('seeds.js-test');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +14,7 @@ class SeedsController extends Controller
      */
     public function index()
     {
-        return view('seeds.index');
+        return view('main.index');
     }
 
     /**
@@ -46,21 +41,21 @@ class SeedsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Seeds  $seeds
+     * @param  \App\Models\Main  $main
      * @return \Illuminate\Http\Response
      */
-    public function show(Seeds $seeds)
+    public function show(Main $main)
     {
-        //
+        return view('main.show');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Seeds  $seeds
+     * @param  \App\Models\Main  $main
      * @return \Illuminate\Http\Response
      */
-    public function edit(Seeds $seeds)
+    public function edit(Main $main)
     {
         //
     }
@@ -69,10 +64,10 @@ class SeedsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Seeds  $seeds
+     * @param  \App\Models\Main  $main
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Seeds $seeds)
+    public function update(Request $request, Main $main)
     {
         //
     }
@@ -80,10 +75,10 @@ class SeedsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Seeds  $seeds
+     * @param  \App\Models\Main  $main
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Seeds $seeds)
+    public function destroy(Main $main)
     {
         //
     }

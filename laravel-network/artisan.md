@@ -1,4 +1,4 @@
-composer create-project laravel/laravel example-app// создание ларавель проекта
+composer create-project laravel/laravel example-app // создание ларавель проекта
 
 php artisan db:seed // запускает сиды;
 

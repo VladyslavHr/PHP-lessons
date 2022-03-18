@@ -8,7 +8,15 @@
 
 @include('/blocks.profile-header')
 
-<div class="container overflow-hidden edit-profile-container">
+<div class="container edit-profile-container">
+
+    <form action="{{ route('profile.delete', $user) }}"
+        class="delete-profile-form" method="POST"
+        onsubmit="if(!confirm('Are you sure?')) return false">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i>Delete profile</button>
+    </form>
 
     <form class="edit-form mb-5" action="{{ route('profiles.update') }}" method="POST" enctype='multipart/form-data'>
 

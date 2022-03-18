@@ -25,7 +25,7 @@
                         <a class="nav-link" href="#">Мои группы</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">Мои подписки</a>
+                        <a class="nav-link" href="{{ route('groups.subscribed_groups') }}">Мои подписки</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="{{ route('groups.create') }}">Создать группу</a>
@@ -37,13 +37,30 @@
                         <a class="nav-link disabled">Disabled</a>
                       </li> --}}
                     </ul>
-                    <form class="d-flex">
-                      {{-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> --}}
-                      <button class="groups-menu-show-btn btn btn-outline-success" type="submit">Редактировать группу</button>
-                    </form>
+                    @if ($group->is_subscribed())
+                        <a href="{{ route('groups.subscribe') }}" class="groups-menu-show-btn btn btn-outline-success"
+                        onclick="group_subscribe(this, event)" data-groupid = {{ $group->id }}>Unsubscribe</a>
+                    @else
+                        <a href="{{ route('groups.subscribe') }}" class="groups-menu-show-btn btn btn-outline-success"
+                        onclick="group_subscribe(this, event)" data-groupid = {{ $group->id }}>Subscribe</a>
+
+                    @endif
                   </div>
                 </div>
               </nav>
+              <script>
+                  function group_subscribe(link, event) {
+                      event.preventDefault()
+                      $.post(link.href, {
+                        group_id: link.dataset.groupid,
+                        _token: jQuery('meta[name="csrf-token"]').attr('content'),
+                      }, function (data) {
+                          if (data.status && data.status === 'ok' && data.button_text) {
+                              link.innerHTML = data.button_text
+                          }
+                      })
+                  }
+              </script>
             {{-- <div class="top-navi">
                 <div class="friends-count">Группы (кол-во)</div>
                     <ul class="navi-list">

@@ -117,7 +117,9 @@ $(".alert-success").delay(4000).slideUp(400, function () {
 })
 
 $( document ).ajaxStart(function() {
-    $('#ajax_loader').addClass('active')
+    if (document.body.classList.contains('ajax_loader')) {
+        $('#ajax_loader').addClass('active')
+    }
 });
 
 $( document ).ajaxStop(function() {

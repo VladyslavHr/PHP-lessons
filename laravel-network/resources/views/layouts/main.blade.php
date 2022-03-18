@@ -14,7 +14,7 @@
 
     <script src="https://unpkg.com/jquery@3/dist/jquery.min.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="ajax_loader">
 
 @include('blocks.top-menu')
 
@@ -34,6 +34,10 @@
     </div>
 </div>
 
+<footer>
+    @include('blocks.footer-block')
+</footer>
+
 <div class="errors-list section-shadow" id="errors_list">
     @include('blocks.errors')
     @include('blocks.status')
@@ -43,7 +47,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/2.0.0-alpha.2/cropper.min.js" crossorigin="anonymous"></script>
 <script src="{{ asset ('js/main.js?v=' . filemtime(public_path('js/main.js')) ) }}"></script>
 </body>
-<footer>
-    @include('blocks.footer-block')
-</footer>
 </html>

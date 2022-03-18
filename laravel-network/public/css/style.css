@@ -4,6 +4,7 @@
     --orangeColor: #dc4734;
     --bgBlackColor: #333333;
     --boxShadowFocus:0 0 0 0.25rem rgb(220 71 52 / 35%);
+    --redLight: #dc473454;
 
 
 }
@@ -332,7 +333,7 @@ body{
 
 .post-publish .accordion-button:not(.collapsed) {
     color: #000;
-    background: #dc473454;
+    background: var(--redLight);
 }
 
 .post-publish .accordion-button:not(.collapsed)::after{
@@ -690,7 +691,6 @@ body{
 
 .friends-count{
     margin-right: auto;
-    font-weight: 700;
     font-size: 20px;
 }
 
@@ -938,33 +938,49 @@ body{
     width: 100%;
     background: #fff;
     list-style: none;
-    padding: 10px;
+    padding: 0;
     box-shadow: var(--blockShadow);
     margin-top: 5px;
+    z-index: 1;
+    display: none;
 }
 
 .search-autocomplete li{
-    margin-bottom: 5px;
+    padding: 5px 10px;
 }
 
-.search-autocomplete li:last-child{
-    margin-bottom: 0;
+.search-autocomplete li.result-item.active,
+.search-autocomplete li.result-item:hover{
+    background: var(--redLight);
+}
+
+.search-autocomplete li.hor-line{
     border-bottom: 1px solid #ccc;
 }
 
 .search-autocomplete a{
+    display: block;
+    padding: 5px 10px;
     color: black;
     text-decoration: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
-.search-autocomplete a:hover{
+.search-autocomplete-title{
+    padding-left: 10px;
     color: var(--orangeColor);
-    transition: 0.3s;
+}
+
+.more-results{
+    text-align: center;
+    text-decoration: underline;
 }
 
 .global-search:focus{
     box-shadow: var(--boxShadowFocus);
-    border: var(--orangeColor);
+    border-color: var(--orangeColor);
 }
 
 .global-search:focus-visible,
@@ -1036,6 +1052,13 @@ body{
 
 .edit-profile-container{
     margin-top: 200px;
+}
+
+.delete-profile-form{
+    text-align: right;
+    margin-top: -48px;
+    margin-bottom: 10px;
+    height: 38px;
 }
 
 .edit-form{
@@ -1543,6 +1566,26 @@ body{
     color: var(--bgBlackColor);
     transition: 0.3s;
 }
+
+.search-autocomplete-group{
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    background: #fff;
+    list-style: none;
+    padding: 10px;
+    box-shadow: var(--blockShadow);
+    margin-top: 5px;
+}
+
+
+
+
+
+
+
+
+
 
 
 

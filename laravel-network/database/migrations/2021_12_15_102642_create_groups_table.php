@@ -18,7 +18,11 @@ class CreateGroupsTable extends Migration
             $table->string('name');
             $table->string('avatar');
             $table->text('description');
+            $table->bigInteger('creator_id')->unsigned()->nullable()->default(1);
             $table->timestamps();
+
+
+            $table->foreign('creator_id')->on('users')->references('id')->onDelete('set null');
         });
     }
 

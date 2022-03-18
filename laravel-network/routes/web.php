@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/profiles/update', 'update')->name('profiles.update');
         Route::post('/profiles/updatePassword', 'updatePassword')->name('profiles.updatePassword');
         Route::post('/profile/uploadAvatar', 'uploadAvatar')->name('profile.uploadAvatar');
+        Route::delete('/profile/{user}', 'destroy')->name('profile.delete');
     });
 
 
@@ -45,6 +46,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('groups/uploadAvatar', [App\Http\Controllers\GroupController::class, 'uploadAvatar'])->name('groups.uploadAvatar');
     Route::get('/groups/search', [App\Http\Controllers\GroupController::class, 'search'])->name('groups.search');
+    Route::get('/groups/subscribed_groups', [App\Http\Controllers\GroupController::class, 'subscribed_groups'])->name('groups.subscribed_groups');
+    Route::post('groups/subscribe', [App\Http\Controllers\GroupController::class, 'subscribe'])->name('groups.subscribe');
     Route::resource('groups', App\Http\Controllers\GroupController::class);
 
     Route::resource('posts', App\Http\Controllers\PostController::class);

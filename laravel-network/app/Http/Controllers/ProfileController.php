@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Models\User;
+use Illuminate\Support\Facades\Storage;
+use App\Models\{User, Group, Post};
+
 
 class ProfileController extends Controller
 {
@@ -21,7 +23,7 @@ class ProfileController extends Controller
                 ->get();
             if($users){
                 $count = count($users);
-                $message = $count ." ".s_ending($count, 'user', 'users'). " was found";
+                $message = "Search for <b>\"$query\"</b>- ". $count ." ".s_ending($count, 'user', 'users'). " was found";
             }
         }else{
             $users = [];
@@ -60,7 +62,8 @@ class ProfileController extends Controller
         // $user->avatar = $data['avatar'];
         // $saved = $user->save();
 
-        $path = storage_path(str_replace('/storage/', '/app/public/', $old_image_url));
+        // Storage::delete(public_path('/storage/', '/app/public/', $old_image_url));
+        $path = public_path($old_image_url);
         if (file_exists($path)) {
             $deleted = unlink($path);
         }
@@ -71,7 +74,8 @@ class ProfileController extends Controller
         return [
             'status' => $saved ? 'ok' : 'error',
             'data' => $data,
-            // '$path' => $path,
+            '$path' => $path,
+            '$old_image_url' => $old_image_url
             // 'deleted' => $deleted ? 'deleted' : 'error',
         ];
     }
@@ -250,9 +254,33 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        // delete post img
+        $posts = Post::where('author_id', $user->id)->get();
+        foreach ($posts as $key => $post) {
+            if ($post->images) {
+                $images = explode(',', $post->images);
+                foreach ($images as $image) {
+                    $path = public_path($image);
+                    if (file_exists($path)) { unlink($path); }
+                }
+            }
+
+        }
+
+        // delete avatar file
+        $path = public_path($user->avatar);
+            if (file_exists($path)) { unlink($path); }
+
+        $user->delete();
+
+        $groups = Group::whereNull('creator_id')->update([
+            'creator_id' => '1',
+        ]);
+
+        auth()->logout();
+        return redirect()->route('login');
     }
 
     public function follow(Request $request)

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Group extends Model
 {
@@ -20,6 +21,17 @@ class Group extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function is_subscribed()
+    {
+        $subscription = Db::table('subscribers')
+            ->where('user_id', auth()->user()->id)
+            ->where('group_id', $this->id)
+            ->first();
+
+        return $subscription ? 1 : 0;
+
+    }
 
 
     public function creator()

@@ -12,11 +12,13 @@
         <div class="col-sm-3"></div>
         <div class="col-sm-9">
             <div class="top-navi">
-                <div class="friends-count">{{ $message }}</div>
+                <div class="friends-count">{!! $message !!}</div>
                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                     @if ($search_type === 'users')
                         <a href="{{ route('groups.search') }}?query={{ request()->get('query') }}" type="button" class="btn btn-outline-primary" >Groups</a>
+                        <a href="{{ route('profiles.search') }}?query={{ request()->get('query') }}" type="button" class="btn btn-outline-primary disabled" >Users</a>
                     @elseif($search_type === 'groups')
+                        <a href="{{ route('groups.search') }}?query={{ request()->get('query') }}" type="button" class="btn btn-outline-primary disabled" >Groups</a>
                         <a href="{{ route('profiles.search') }}?query={{ request()->get('query') }}" type="button" class="btn btn-outline-primary" >Users</a>
                     @endif
                 </div>

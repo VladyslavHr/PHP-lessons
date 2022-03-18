@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,4 +18,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/seeds', [App\Http\Controllers\SeedsController::class, 'index'])->name('seeds.index');
+Auth::routes();
+
+Route::middleware('auth')->group(function () {
+    Route::get('/main', [App\Http\Controllers\MainController::class, 'index'])->name('main.index');
+    Route::get('/main/show', [App\Http\Controllers\MainController::class, 'show'])->name('main.show');
+    Route::get('/seeds', [App\Http\Controllers\SeedsController::class, 'index'])->name('seeds.index');
+    Route::get('/seeds/js_test', [App\Http\Controllers\SeedsController::class, 'js_test'])->name('seeds.js_test');
+
+
+
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+
+
+
+});
+
+

@@ -19,7 +19,7 @@
                             <i class="bi bi-x-lg"></i>
                         </div>
                     </div>
-                @foreach ($users as $user)
+                @foreach (auth()->user()->friends as $user)
                     <div class="footer-user-list">
                         <a href="#" class="footer-user-link">
                             <div class="footer-user-avatar-search col-sm-2">
@@ -35,7 +35,7 @@
         <div class="col-sm-6">
             {{-- <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false"> --}}
                     <div class="scrolling-carousel">
-                        @foreach ($users as $user)
+                        @foreach (auth()->user()->friends as $user)
                         <div class="scrolling-carousel-item">
                                 <div class="footer-user-avatar-block">
                                     <a href="#">

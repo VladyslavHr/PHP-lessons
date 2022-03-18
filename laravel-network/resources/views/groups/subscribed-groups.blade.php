@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
-@section('title', 'Groups page')
+
+@section('title', 'Create group')
 
 @section('content')
 
@@ -44,40 +45,27 @@
                     </div>
                 </div>
             </nav>
-            {{-- <div class="top-navi">
-                <div class="friends-count">Группы (кол-во)</div>
-                    <ul class="navi-list">
-                        <li><a href="#">Все</a></li>
-                        <li><a href="#">Мои группы</a></li>
-                        <li><a href="#">Мои подписки</a></li>
-                        <li><a href="{{ route('groups.create') }}">Создать группу</a></li>
-                        <li><a href="#">Может быть интересным</a></li>
-                        <li><button type="submit"><i class="bi bi-list"></i></button></li>
-                    </ul>
-            </div> --}}
         </div>
     </div>
 </div>
-{{--
-col-xl-3 col-lg-4 col-md-6 col-sm-12 --}}
 
 <div class="groups-main-wrap container">
     <div class="groups-main row">
-        @foreach ($groups as $group)
+        @foreach ($subscribes as $subscribe)
         <div class="col-sm-4">
             <div class="groups-block row">
                 <div class="groups-image col-sm-12">
-                    <a href="{{ route('groups.show', $group->id ) }}">
-                        <img src="{{ $group->avatar }}" alt="">
+                    <a href="{{ route('groups.show', $subscribe->id ) }}">
+                        <img src="{{ $subscribe->avatar }}" alt="">
                     </a>
                 </div>
                 <div class="groups-name-desc-subsc col-sm-12">
-                    <a href="{{ route('groups.show', $group->id ) }}">
-                        <div class="group-name">{{$group->name}}</div>
-                        <div class="group-description">{{$group->description}}</div>
-                        <div class="group-subscribe">
+                    <a href="{{ route('groups.show', $subscribe->id ) }}">
+                        <div class="group-name">{{$subscribe->name}}</div>
+                        <div class="group-description">{{$subscribe->description}}</div>
+                        {{-- <div class="group-subscribe">
                            <button type="submit">Subcribe</button>
-                        </div>
+                        </div> --}}
                     </a>
                 </div>
             </div>

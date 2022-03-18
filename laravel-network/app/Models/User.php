@@ -66,6 +66,11 @@ class User extends Authenticatable
        return $this->morphMany(Post::class, 'postable')->orderByDesc('created_at');
     }
 
+    public function getFriendsAttribute()
+    {
+        return User::limit(10)->get();
+    }
+
     public function getPostsPaginatedAttribute()
     {
         if ($this->is_friend){
@@ -99,9 +104,15 @@ class User extends Authenticatable
        return $is_friend ? 1 : 0;
     }
 
+
+    // public function getAvatarAttribute()
+    // {
+    //     return asset('/storage/'.$this->attributes['avatar']);
+    // }
+
     public function avatarUrl()
     {
-        return asset($this->avatar);
+        return asset('/storage/'.$this->avatar);
     }
 
 }
