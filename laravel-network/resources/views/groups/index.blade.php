@@ -25,7 +25,7 @@
                         <a class="nav-link" href="#">Мои группы</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('groups.subscribed_groups') }}">Мои подписки</a>
+                            <a class="nav-link" href="{{ route('groups.subscribedGroups') }}">Мои подписки</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('groups.create') }}">Создать группу</a>

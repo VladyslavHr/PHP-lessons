@@ -11,6 +11,68 @@ use App\Models\{User, Group, Post};
 
 class ProfileController extends Controller
 {
+    public function mutualFollow()
+    {
+
+        // $mutual = $user->getIsFriendAttribut();
+
+
+
+        $users = User::all();
+
+
+
+        return view('profiles.friends', [
+            'users' => $users,
+            'user' => Auth::user(),
+        ]);
+    }
+
+    public function followers()
+    {
+        $users = User::all();
+
+
+        // $current_user_id = auth()->user()->id;
+        $friend_user_id = Db::table('followers')
+            ->where(['friend_user_id' => 'id'])->join('users', 'followers.friend_user_id', '=', 'users.id')->get();
+
+
+            dd($friend_user_id);
+            // $followers = [];
+            // foreach ($users as $key => $user) {
+            //     if ($friend_user_id && $current_user_id === $current_user_id) {
+            //         $followers[] = $user;
+            //     }
+            // }
+            // dd($followers);
+
+
+
+        // return view('profiles.friends', [
+        //     'users' => $followers,
+        //     'user' => Auth::user(),
+        // ]);
+    }
+
+    public function following()
+    {
+        // $users = User::all();
+
+        // $following = [];
+        // foreach ($users as $key => $user) {
+        //     if ($user->getIsFriendAttribute()) {
+        //         $following[] = $user;
+        //     }
+        // }
+
+        $following = auth()->user()->followings();
+
+        return view('profiles.friends', [
+            'users' => $following,
+            'user' => Auth::user(),
+        ]);
+    }
 
     public function search(Request $request)
     {
@@ -271,7 +333,7 @@ class ProfileController extends Controller
 
         // delete avatar file
         $path = public_path($user->avatar);
-            if (file_exists($path)) { unlink($path); }
+            if (file_exists($path) && strpos($user->avatar, '/images/') === false) { unlink($path); }
 
         $user->delete();
 

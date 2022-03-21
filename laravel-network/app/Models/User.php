@@ -55,6 +55,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function subscribes($with = [])
+    {
+       return Group::with($with)->where([
+        'user_id' => auth()->user()->id,
+    ])->rightjoin('subscribers', 'subscribers.group_id', '=', 'groups.id')->get();
+    }
+
+    public function followings($with = [])
+    {
+       return User::with($with)->where([
+        'current_user_id' => auth()->user()->id,
+    ])->rightjoin('followers', 'followers.friend_user_id', '=', 'users.id')->get();
+    }
+
+
+
 
     public function groups()
     {

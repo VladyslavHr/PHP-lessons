@@ -28,6 +28,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/profile/{user}', 'show')->name('profiles.show');
         Route::get('/profiles/edit', 'edit')->name('profiles.edit');
         Route::get('/profiles/search', 'search')->name('profiles.search');
+        Route::get('/profiles/following', 'following')->name('profiles.following');
+        Route::get('/profiles/followers', 'followers')->name('profiles.followers');
+        Route::get('/profiles/mutualFollow', 'mutualFollow')->name('profiles.mutualFollow');
         Route::post('/profiles/follow', 'follow')->name('profiles.follow');
         Route::post('/profiles/unfollow', 'unfollow')->name('profiles.unfollow');
         Route::post('/profiles/update', 'update')->name('profiles.update');
@@ -46,7 +49,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('groups/uploadAvatar', [App\Http\Controllers\GroupController::class, 'uploadAvatar'])->name('groups.uploadAvatar');
     Route::get('/groups/search', [App\Http\Controllers\GroupController::class, 'search'])->name('groups.search');
-    Route::get('/groups/subscribed_groups', [App\Http\Controllers\GroupController::class, 'subscribed_groups'])->name('groups.subscribed_groups');
+    Route::get('/groups/subscribedGroups', [App\Http\Controllers\GroupController::class, 'subscribedGroups'])->name('groups.subscribedGroups');
     Route::post('groups/subscribe', [App\Http\Controllers\GroupController::class, 'subscribe'])->name('groups.subscribe');
     Route::resource('groups', App\Http\Controllers\GroupController::class);
 

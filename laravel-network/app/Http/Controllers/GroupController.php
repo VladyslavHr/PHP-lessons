@@ -10,15 +10,18 @@ use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
 {
-    public function subscribed_groups(Request $request)
+    public function subscribedGroups(Request $request)
     {
         $users = User::all();
-        $groups = Group::find($request->get('group_id'));
-        $subscribes = Db::table('subscribers')->select([
-            'user_id' => auth()->user()->id,
-            'group_id' => $request->get('group_id'),
-        ]);
+        // $groups = Group::find($request->get('group_id'));
+        // $subscribes = Db::table('subscribers')->where([
+        //     'user_id' => auth()->user()->id,
+        // ])->join('groups', 'subscribers.group_id', '=', 'groups.id')->get();
 
+
+        $subscribes = auth()->user()->subscribes(['creator', 'posts']);
+
+        // dd($subscribes);
 
 
         // if ($groups->is_subscribed()) {
@@ -30,6 +33,17 @@ class GroupController extends Controller
 
         // $groups->is_subscribed();
 
+        // $groups = Group::all();
+
+        // $subscribes = $groups->filter(fn($group) => $group->is_subscribed());
+
+        // $subscribes = [];
+        // foreach ($groups as $key => $group) {
+        //     if ($group->is_subscribed()) {
+        //         $subscribes[] = $group;
+        //     }
+        // }
+
 
         // if( $group->is_subscribed()){
         //     Db::table('subscribers')
@@ -39,9 +53,7 @@ class GroupController extends Controller
         return view('groups.subscribed-groups',[
             'user' => Auth::user(),
             'users' => $users,
-            'groups' => $groups,
-            '$request' => $request->all(),
-            'subscribes' => $subscribes,
+            'groups' => $subscribes,
         ]);
     }
 

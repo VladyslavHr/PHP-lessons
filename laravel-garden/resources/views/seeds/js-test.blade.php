@@ -99,6 +99,44 @@
 
         // }
 
+
+        // var name = prompt("Whats your name?");
+        // console.log("Hello " + name);
+
+        // var likesCats = confirm("Do you loke cats?");
+        // if (likesCats) {
+        //     console.log("You're a coll cat!");
+        // }else{
+        //     console.log("Yeah, that's fine. You are still coll!");
+        // }
+
+        // alert("java Script is awesome")
+
+        var words = [
+            "javascript",
+            "monkey",
+            "amazing",
+            "pancake"
+        ];
+
+        var word = words[Math.floor(Math.random() * words.length)];
+
+        var answerArray = [];
+        for (var i = 0; i < word.length; i++) {
+            answerArray[i] = "_";
+        }
+
+        var remainingLetters = word.length;
+
+        var guess = prompt("Guess a letter, or click Cancel to stop playing.");
+        if (guess === null) {
+            break;
+        }else if (guess.length !== 1){
+            alert("Please enter a single letter.")
+        }else{
+
+        }
+
     </script>
 
 @endsection

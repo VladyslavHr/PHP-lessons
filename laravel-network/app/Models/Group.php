@@ -22,6 +22,9 @@ class Group extends Model
         'updated_at',
     ];
 
+
+
+
     public function is_subscribed()
     {
         $subscription = Db::table('subscribers')

@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'network-friends')
+@section('title', 'followers')
 
 
 

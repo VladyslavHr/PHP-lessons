@@ -26,7 +26,7 @@
                         <a class="nav-link" href="#">Мои группы</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('groups.subscribed_groups') }}">Мои подписки</a>
+                            <a class="nav-link" href="{{ route('groups.subscribedGroups') }}">Мои подписки</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('groups.create') }}">Создать группу</a>
@@ -51,22 +51,26 @@
 
 <div class="groups-main-wrap container">
     <div class="groups-main row">
-        @foreach ($subscribes as $subscribe)
-        <div class="col-sm-4">
+
+        @foreach ($groups as $group)
+            <div class="col-sm-4">
             <div class="groups-block row">
                 <div class="groups-image col-sm-12">
-                    <a href="{{ route('groups.show', $subscribe->id ) }}">
-                        <img src="{{ $subscribe->avatar }}" alt="">
+                    <a href="{{ route('groups.show', $group->id ) }}">
+                        <img src="{{ $group->avatar }}" alt="">
                     </a>
                 </div>
                 <div class="groups-name-desc-subsc col-sm-12">
-                    <a href="{{ route('groups.show', $subscribe->id ) }}">
-                        <div class="group-name">{{$subscribe->name}}</div>
-                        <div class="group-description">{{$subscribe->description}}</div>
-                        {{-- <div class="group-subscribe">
-                           <button type="submit">Subcribe</button>
-                        </div> --}}
+                    <a href="{{ route('groups.show', $group->id ) }}">
+                        <div class="group-name">{{$group->name}}</div>
+                        <div class="group-name">Has {{count($group->posts)}} posts</div>
+                        <div class="group-description">{{$group->description}}</div>
                     </a>
+                    <div class="group-subscribe">
+                        <a href="{{ route('profiles.show', $group->creator->id) }}">
+                            <b>{{ $group->creator->name }}</b>
+                        </a>
+                     </div>
                 </div>
             </div>
         </div>
