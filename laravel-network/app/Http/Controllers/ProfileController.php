@@ -11,19 +11,34 @@ use App\Models\{User, Group, Post};
 
 class ProfileController extends Controller
 {
-    public function mutualFollow()
+    public function friends()
     {
 
         // $mutual = $user->getIsFriendAttribut();
 
 
 
-        $users = User::all();
 
+        $friends = auth()->user()->friends();
+
+        // $users = User::whereIn('id', function($query)
+        // {
+        //     $query->select('users.id')
+        //     ->from('users')->where([
+        //         'friend_user_id' => auth()->user()->id,
+        //     ])->join('followers', 'followers.current_user_id', '=', 'users.id')->get();
+        // })->whereIn('id', function($query)
+        // {
+        //     $query->select('users.id')
+        //     ->from('users')->where([
+        //         'current_user_id' => auth()->user()->id,
+        //     ])->join('followers', 'followers.friend_user_id', '=', 'users.id')->get();
+        // })
+        // ->get();
 
 
         return view('profiles.friends', [
-            'users' => $users,
+            'users' => $friends,
             'user' => Auth::user(),
         ]);
     }
@@ -34,11 +49,14 @@ class ProfileController extends Controller
 
 
         // $current_user_id = auth()->user()->id;
-        $friend_user_id = Db::table('followers')
-            ->where(['friend_user_id' => 'id'])->join('users', 'followers.friend_user_id', '=', 'users.id')->get();
+        // $friend_user_id = Db::table('followers')
+        //     ->where(['friend_user_id' => 'id'])->join('users', 'followers.friend_user_id', '=', 'users.id')->get();
 
 
-            dd($friend_user_id);
+        //     dd($friend_user_id);
+
+
+        $followers = auth()->user()->followers();
             // $followers = [];
             // foreach ($users as $key => $user) {
             //     if ($friend_user_id && $current_user_id === $current_user_id) {
@@ -49,10 +67,10 @@ class ProfileController extends Controller
 
 
 
-        // return view('profiles.friends', [
-        //     'users' => $followers,
-        //     'user' => Auth::user(),
-        // ]);
+        return view('profiles.friends', [
+            'users' => $followers,
+            'user' => Auth::user(),
+        ]);
     }
 
     public function following()
@@ -212,10 +230,10 @@ class ProfileController extends Controller
     public function profile()
     {
         $user = Auth::user();
-        $users = User::limit(10)->inRandomOrder()->get();
+        $friends = auth()->user()->friends();
         return view('profiles.show', [
             'title' => 'My profile',
-            'users' => $users,
+            'friends' => $friends,
             'user' => Auth::user(),
             'postable_id' => $user->id,
             'postable_type' => 'App\Models\User',
@@ -226,10 +244,11 @@ class ProfileController extends Controller
     public function show(User $user)
     {
 
-        $users = User::limit(10)->inRandomOrder()->get();
+        // $user = Auth::user();
+        $friends = auth()->user()->friends();
         return view('profiles.show', [
             'title' => 'Profile',
-            'users' => $users,
+            'friends' => $friends,
             'user' => $user,
             'postable_id' => $user->id,
             'postable_type' => 'App\Models\User',
@@ -237,15 +256,15 @@ class ProfileController extends Controller
     }
 
 
-    public function friends()
-    {
-        $users = User::all();
-        return view('profiles.friends', [
-            'title' => 'friends',
-            'users' => $users,
-            'user' => Auth::user(),
-        ]);
-    }
+    // public function friends()
+    // {
+    //     $users = User::all();
+    //     return view('profiles.friends', [
+    //         'title' => 'friends',
+    //         'users' => $users,
+    //         'user' => Auth::user(),
+    //     ]);
+    // }
 
     /**
      * Show the form for editing the specified resource.

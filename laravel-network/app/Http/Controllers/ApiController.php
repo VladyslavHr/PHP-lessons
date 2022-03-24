@@ -19,8 +19,8 @@ class ApiController extends Controller
         }
 
         // Вернуть запрос
-        DB::enableQueryLog();
-        $search_list_html = '';
+        // DB::enableQueryLog();
+        // $search_list_html = '';
 
 
         $users = User::where('role', '=', 'user')
@@ -30,34 +30,37 @@ class ApiController extends Controller
                 $db->orwhere('name', 'like', '%'.$query.'%');
             })->limit(5)->get();
 
-            if(count($users)){
-                $search_list_html .= '<li class="search-autocomplete-title"><small>users</small></li>';
-            }
-            foreach ($users as $user) {
-                $name = $user->name.' '.$user->last_name;
-                $search_list_html .= '<li class="result-item"><a href="/profile/'.$user->id.'">'.$name.'</a></li>';
-            }
+            // if(count($users)){
+            //     $search_list_html .= '<li class="search-autocomplete-title"><small>users</small></li>';
+            // }
+            // foreach ($users as $user) {
+            //     $name = $user->name.' '.$user->last_name;
+            //     $search_list_html .= '<li class="result-item"><a href="/profile/'.$user->id.'">'.$name.'</a></li>';
+            // }
 
 
         $groups = Group::where('name', 'like', '%'.$query.'%')->limit(5)->get();
 
-        if(count($groups)){
-            $search_list_html .= '<li class="search-autocomplete-title"><small>groups</small></li>';
-        }
-        foreach ($groups as $group) {
-            $search_list_html .= '<li class="result-item" title="'.$group->name.'"><a href="/groups/'.$group->id.'">'.$group->name.'</a></li>';
-        }
+        // if(count($groups)){
+        //     $search_list_html .= '<li class="search-autocomplete-title"><small>groups</small></li>';
+        // }
+        // foreach ($groups as $group) {
+        //     $search_list_html .= '<li class="result-item" title="'.$group->name.'"><a href="/groups/'.$group->id.'">'.$group->name.'</a></li>';
+        // }
 
-        if ($search_list_html) {
-            $search_list_html .= '<li class="result-item more-results" title=" More Results "><a href="/profiles/search?query='.$query.'">More Results</a></li>';
-        }
+        // if ($search_list_html) {
+        //     $search_list_html .= '<li class="result-item more-results" title=" More Results "><a href="/profiles/search?query='.$query.'">More Results</a></li>';
+        // }
 
         return  [
             'status' => 'ok',
             'users' => $users,
-            'sql' => DB::getQueryLog(),
+            // 'sql' => DB::getQueryLog(),
             'results_count' => count($users) + count($groups) + 1,
-            'search_list_html' => $search_list_html,
+            'search_list_html' => view('blocks.search-list-ajax',[
+                'users' => $users,
+                'groups' => $groups,
+            ])->render(),
         ];
     }
 }

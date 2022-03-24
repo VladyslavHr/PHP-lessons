@@ -185,7 +185,7 @@
                         <span>Друзья</span>
                     </div>
                     <ul class="list">
-                        @foreach ($users as $user)
+                        @forelse ($friends as $friend)
                         <li>
                             <div class="friend-block-inf">
                                 <a href="#">
@@ -193,7 +193,7 @@
                                         <img src="{{ asset ('images/cat.jpg') }}" alt="">
                                     </div>
                                     <div class="under-block">
-                                        <span class="friend-name">{{ $user->name }}</span>
+                                        <span class="friend-name">{{ $friend->name }}</span>
                                         <span class="friend-active">Activness</span>
                                     </div>
                                     <button class="like">
@@ -202,7 +202,9 @@
                                 </a>
                             </div>
                         </li>
-                        @endforeach
+                        @empty
+                            <p>You don't have friends</p>
+                        @endforelse
                     </ul>
                 </div>
             </div>

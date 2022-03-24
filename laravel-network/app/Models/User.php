@@ -59,14 +59,40 @@ class User extends Authenticatable
     {
        return Group::with($with)->where([
         'user_id' => auth()->user()->id,
-    ])->rightjoin('subscribers', 'subscribers.group_id', '=', 'groups.id')->get();
+    ])->join('subscribers', 'subscribers.group_id', '=', 'groups.id')->get();
     }
 
     public function followings($with = [])
     {
        return User::with($with)->where([
         'current_user_id' => auth()->user()->id,
-    ])->rightjoin('followers', 'followers.friend_user_id', '=', 'users.id')->get();
+    ])->join('followers', 'followers.friend_user_id', '=', 'users.id')->paginate(12);
+    }
+
+    public function followers($with = [])
+    {
+        return User::with($with)->where([
+            'friend_user_id' => auth()->user()->id,
+        ])->join('followers', 'followers.current_user_id', '=', 'users.id')->paginate(12);
+    }
+
+    public function friends($with = [])
+    {
+        return User::whereIn('id', function($query)
+        {
+            $query->select('users.id')
+            ->from('users')->where([
+                'friend_user_id' => auth()->user()->id,
+            ])->join('followers', 'followers.current_user_id', '=', 'users.id')->get();
+        })->whereIn('id', function($query)
+        {
+            $query->select('users.id')
+            ->from('users')->where([
+                'current_user_id' => auth()->user()->id,
+            ])->join('followers', 'followers.friend_user_id', '=', 'users.id')->get();
+        })
+        ->with($with)
+        ->paginate(12);
     }
 
 

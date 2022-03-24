@@ -30,7 +30,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/profiles/search', 'search')->name('profiles.search');
         Route::get('/profiles/following', 'following')->name('profiles.following');
         Route::get('/profiles/followers', 'followers')->name('profiles.followers');
-        Route::get('/profiles/mutualFollow', 'mutualFollow')->name('profiles.mutualFollow');
         Route::post('/profiles/follow', 'follow')->name('profiles.follow');
         Route::post('/profiles/unfollow', 'unfollow')->name('profiles.unfollow');
         Route::post('/profiles/update', 'update')->name('profiles.update');

@@ -5,8 +5,7 @@
             <div class="top-navi">
                 <div class="friends-count">Друзья (кол-во)</div>
                     <ul class="navi-list">
-                        <li><a href="{{ route('profiles.friends') }}">Все</a></li>
-                        <li><a href="{{ route('profiles.mutualFollow') }}">Друзья</a></li>
+                        <li><a href="{{ route('profiles.friends') }}">Друзья</a></li>
                         <li><a href="{{ route('profiles.following') }}">Подписки</a></li>
                         <li><a href="{{ route('profiles.followers') }}">Подписчики</a></li>
                         <li><a href="#">Запрос</a></li>
