@@ -1,6 +1,6 @@
-@extends('layouts.main')
+{{-- page of current name --}}
 
-{{-- @section('title', 'name days') --}}
+@extends('layouts.main')
 
 @section('content')
 
@@ -8,9 +8,9 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card-main bg-dark">
-                <div class="card-date">Today is  </div>
+                <div class="card-date">{{ $name->day }} {{ $monthName }} </div>
                 <div class="card-question">Who have name day today?</div>
-                <div class="card-name">Name </div>
+                <div class="card-name">{{$name->name}} </div>
             </div>
         </div>
     </div>

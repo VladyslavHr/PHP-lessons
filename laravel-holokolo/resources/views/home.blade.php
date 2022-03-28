@@ -1,3 +1,5 @@
+{{-- page of todays date and names on main page --}}
+
 @extends('layouts.main')
 
 @section('content')

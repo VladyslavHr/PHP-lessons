@@ -229,6 +229,8 @@ class ProfileController extends Controller
      */
     public function profile()
     {
+        $message_date = date('d-F');
+        $message_time = date('H:i');
         $user = Auth::user();
         $friends = auth()->user()->friends();
         return view('profiles.show', [
@@ -237,6 +239,8 @@ class ProfileController extends Controller
             'user' => Auth::user(),
             'postable_id' => $user->id,
             'postable_type' => 'App\Models\User',
+            'message_date' => $message_date,
+            'message_time' => $message_time,
         ]);
     }
 

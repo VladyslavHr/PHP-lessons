@@ -1,3 +1,5 @@
+{{-- main page with all includes and links --}}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

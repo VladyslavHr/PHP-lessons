@@ -1,0 +1,105 @@
+:root{
+    --textColor: #fff;
+    --backGroundColor: #212529;
+}
+
+.top-menu{
+    margin-bottom: 35px;
+    padding: 20px;
+}
+
+.card-main{
+    display: block;
+    text-align: center;
+    box-shadow: 10px 20px 20px 24px #ccc;
+    padding: 25px;
+    border-radius: 5px;
+    margin-top: 15rem;
+}
+
+.card-date{
+    padding: 10px;
+    font-size: 1.2em;
+    color: var(--textColor);
+}
+
+.card-question,
+.card-name{
+    padding: 10px;
+    color: var(--textColor);
+}
+
+.names-block{
+    padding: 1rem;
+}
+
+.names-block-list{
+    background: var(--backGroundColor);
+    padding: 10px 10px 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 10px 13px 5px darkgrey;
+}
+
+.names-list{
+    padding: 0;
+    list-style: none;
+}
+
+.names-block-month{
+    color: var(--textColor);
+}
+
+.names-block-month h4{
+    border-bottom: 1px solid #ccc;
+    padding: 7px;
+}
+
+.name-link a{
+    text-decoration: none;
+    color: var(--textColor);
+}
+
+.name-link a:hover{
+    color: #198754;
+    transition: 0.4s;
+}
+
+.search-autocomplete{
+    position: absolute;
+    top: 60px;
+    list-style: none;
+    background: #fff;
+    border-radius: 5px;
+    width: 15%;
+    box-shadow: 0px 10px 4px #ccc;
+    padding: 0;
+    /* display: none; */
+}
+
+.search-autocomplete li.result-item.active,
+.search-autocomplete li.result-item:hover{
+    background: #198754;
+}
+
+.result-item{
+    padding: 5px 10px;
+}
+
+.result-item a{
+    display: block;
+    padding: 5px 10px;
+    color: black;
+    text-decoration: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.result-item a:hover{
+    color: #fff;
+}
+
+/* .global-search:focus{
+    box-shadow: var(--boxShadowFocus);
+    border-color: var(--orangeColor);
+} */

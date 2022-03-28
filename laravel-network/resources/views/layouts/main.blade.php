@@ -35,7 +35,7 @@
 </div>
 
 <footer>
-    {{-- @include('blocks.footer-block') --}}
+    @include('blocks.footer-block')
 </footer>
 
 <div class="errors-list section-shadow" id="errors_list">

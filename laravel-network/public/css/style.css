@@ -1444,13 +1444,15 @@ body{
 }
 
 .footer-search-block{
+    height: 70px;
     width: 100%;
     box-shadow: var(--blockShadow);
-    padding: 25px 0;
+    background: #fff;
 }
 
 .footer-search-block button{
     border: none;
+    background: #fff;
 }
 
 .footer-search-block button:focus-visible{
@@ -1460,8 +1462,7 @@ body{
 .footer-search-input{
     width: 100%;
     border: none;
-    margin-left: 5px;
-
+    padding: 15px;
 }
 
 .footer-search-input:focus-visible{
@@ -1476,7 +1477,7 @@ body{
     padding: 0;
     border: none;
     box-shadow: var(--blockShadow);
-
+    inset: auto auto 20px 0px !important;
 }
 
 .footer-search-menu .show{
@@ -1484,7 +1485,7 @@ body{
 }
 
 .footer-search-menu-head{
-    padding: 20px 0;
+    padding: 10px 0;
     background: var(--orangeColor);
 }
 
@@ -1529,10 +1530,11 @@ body{
     border-radius: 50%;
 }
 
-.scrolling-carousel{
+footer .scrolling-carousel{
     display: flex;
     box-shadow: var(--blockShadow);
     padding: 15px;
+    background: #fff;
 }
 
 .footer-user-avatar-block{
@@ -1540,17 +1542,21 @@ body{
 }
 
 .footer-user-avatar-block img{
-    width: 65%;
+    max-width: 40px;
+    max-height: 40px;
     border-radius: 50%;
 }
 
 .footer-message-block{
     box-shadow: var(--blockShadow);
+    height: 70px;
+    position: relative;
 }
 
 .footer-textarea{
     border: none;
     padding: 15px;
+    height: 70px;
 }
 
 .footer-textarea:focus-visible{
@@ -1560,6 +1566,7 @@ body{
 .footer-textarea-button{
     border: none;
     color: var(--orangeColor);
+    background: #fff;
 }
 
 .footer-textarea-button:hover{
@@ -1578,19 +1585,94 @@ body{
     margin-top: 5px;
 }
 
+.chat-messages{
+    height: 500px;
+    overflow: auto;
+    overflow-x: hidden;
+    padding: 0;
+    border: none;
+    box-shadow: var(--blockShadow);
+    bottom: 94px;
+    position: absolute;
+    background: #fff;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
 
+.messages-list{
+    overflow: auto;
+    max-height: 100%;
+}
 
+.messages-list .message{
+    margin: 10px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    padding: 5px 10px;
+    line-height: 18px;
+    font-size: 14px;
+}
 
+.messages-list .message.not-my{
+    background: #0000ff42;
+    margin-right: 20%;
+}
 
+.messages-list .message.my{
+    background: #00800066;
+    margin-left: 20%;
+}
 
+.message-date{
+    display: block;
+    text-align: center;
+    padding: 5px;
+    font-size: 12px;
+}
 
+.message-time.my{
+    float: right;
+    font-size: 9px;
+}
 
+.message-time.not-my{
+    float: right;
+    font-size: 9px;
+}
 
+.message-date-content{
+    display: inline;
+    padding: 3px;
+    background: var(--orangeColor);
+    color: #fff;
+    border-radius: 7px;
+}
 
+.messages_user_info{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+}
 
+.message_user-avatar{
+    width: 30%;
+}
 
+.message_user-avatar img{
+    width: 100%;
+}
 
+.message_user_name{
+    width: 70%;
+}
 
+.message_user_status{
+    font-size: 10px;
+    margin-left: auto;
+}
 
 
 @media (max-width: 1399px){

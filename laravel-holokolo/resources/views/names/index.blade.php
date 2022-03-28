@@ -9,11 +9,14 @@
         <div class="names-block col-sm-3">
 
             <div class="names-block-list ">
-                <div class="names-block-month">
-                    <h4>{{ $result->month}}</h4>
-                    <a href="{{ route('names.show') }}">Link</a>
-                </div>
+                @foreach ($monthNum as $str)
 
+
+                <div class="names-block-month">
+                    <h4>{{ $str}}</h4>
+                    {{-- <a href="{{ route('names.show') }}">Link</a> --}}
+                </div>
+                @endforeach
                 <div class="names-list-wrapp">
                     <ul class="names-list">
                         <li class="name-link">

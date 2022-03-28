@@ -99,7 +99,22 @@
     color: #fff;
 }
 
-/* .global-search:focus{
-    box-shadow: var(--boxShadowFocus);
-    border-color: var(--orangeColor);
-} */
+.resul-list-wrapp{
+    width: 30%;
+}
+
+.list-result{
+    display: block;
+    text-align: center;
+}
+
+.list-result-link{
+    background: var(--backGroundColor);
+    color: var(--textColor);
+    border-color: #435443;
+}
+
+.list-result-link:hover{
+    color: #198754;
+    transition: 0.4s;
+}

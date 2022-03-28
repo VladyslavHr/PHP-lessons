@@ -23,3 +23,17 @@ php artisan rout:list ;
 
 php artisan migrate:rollback // откатить миграцию
 
+
+
+
+//
+установка пректа
+
+1. git clone
+2. composer install 
+3. create env file
+4. npm install
+5. npm run dev 
+6. migrate
+  
+//
