@@ -59,7 +59,7 @@
         </div>
         <div class="col-sm-3">
             <form class="footer-message-block d-flex" onsubmit="send_message(this, event)">
-                <input id="chat_input" class="footer-textarea col-sm-10" type="text" placeholder="text message" autocomplete="off">
+                <input {{-- name="{{ auth()->user()->name }}" --}} id="chat_input" class="footer-textarea col-sm-10" type="text" placeholder="text message" autocomplete="off">
                 <button class="col-sm-2 footer-textarea-button" type="submit">
                     Send
                     {{-- <i class="bi bi-send-fill"></i> --}}
@@ -67,14 +67,8 @@
 
                 <div class="chat-messages">
                     <div class="footer-search-menu-head row align-items-center">
-                        <div class="footer-search-title col-sm-8 text-center">
-                            <a href="{{ route('profiles.show', $user->id) }}" class="messages_user_info">
-                                <div class="message_user-avatar">
-                                    <img src="{{ $user->avatar }}" alt="">
-                                </div>
-                                <div class="message_user_name">{{ $user->name }}</div>
-                                <div class="message_user_status">Online</div>
-                            </a>
+                        <div class="footer-search-title col-sm-8 ps-4">
+                           {{ auth()->user()->name }}
 
                         </div>
                         <a href="#" class="footer-search-settings col-sm-2 text-center">
@@ -87,16 +81,21 @@
 
                     <div class="messages-list" id="messages_list">
                         <div class="message-date">
-                            <div class="message-date-content">{{ $message_date }}</div>
+                            <div class="message-date-content">{{ date('d-F') }}</div>
                         </div>
-                        <div class="message my">
-                            Me
-                            <div class="message-time my">{{ $message_time }}</div>
+                        {{-- <div class="message my">
+                            <div class="msg-head">
+                                <div class="msg-user">User name</div>
+                                <div class="message-time">{{ date('H:i') }}</div>
+                            </div>
                         </div>
-
+--}}
                         <div class="message not-my">
-                            User
-                            <div class="message-time not-my">{{ $message_time }}</div>
+                            <div class="msg-head">
+                                <div class="msg-user">System</div>
+                                <div class="message-time">{{ date('d-m-y H:i') }}</div>
+                            </div>
+                            Wellcome
                         </div>
 
                     </div>
@@ -109,30 +108,126 @@
     </div>
 </div>
 
+<template id="chat_message_tpl">
+    <div class="message {msg_class}">
+        <div class="msg-head">
+            <div class="msg-user elipsis">user_name</div>
+            <div class="message-time">{date}</div>
+        </div>
+        {message}
+    </div>
+</template>
 
 <script>
+
+function start_chat() {
+
+    $('#chat_input').focus(function(){
+        // document.body.classList.remove('ajax_loader')
+        $('.chat-messages').css('display', 'block')
+    })
+
+    $('body').on('click', function(e){
+        if ($(e.target).closest('.footer-search-close').length)
+        {
+            $('.chat-messages').css('display', 'none')
+        }
+
+        if (!$(e.target).closest('.footer-message-block').length && !$('#chat_input:focus').length)
+        {
+            $('.chat-messages').css('display', 'none')
+        }
+
+    })
+
+    return false
+
     // Создаёт WebSocket - подключение.
-const socket = new WebSocket('ws://localhost:2346');
+    const socket = new WebSocket('ws://localhost:2346');
 
-// Соединение открыто
-socket.addEventListener('open', function (event) {
-    socket.send('Hello Server!');
-});
+    if(socket.readyState === 3) {
+        return false
+    }
 
-// Наблюдает за сообщениями
-socket.addEventListener('message', function (event) {
-    // console.log('Message from server ', event.data);
+    // Соединение открыто
+    socket.addEventListener('open', function (event) {
+        // socket.send('Hello Server!');
+        socket.send(JSON.stringify({
+            s: 'new',
+            u: auth_user.name
+        }));
+    });
 
-    var messages_list = document.getElementById('messages_list')
-    $(messages_list).append(`<div class="message not-my">${event.data}</div>`)
-    messages_list.scrollTop = messages_list.scrollHeight;
-});
+    // Наблюдает за сообщениями
+    socket.addEventListener('message', function (event) {
+        // console.log('Message from server ', event.data);
 
-var counter = 1
-function send_message(form, event) {
-    event.preventDefault()
-    var message = $('#chat_input').val()
-    socket.send(message);
-    $(messages_list).append(`<div class="message my">${message}</div>`)
+        var data = JSON.parse(event.data)
+
+// compare my user name and message username
+        if(data.id === auth_user.id){
+            var is_my_class = (data.id === auth_user.id) ? 'my' : 'not-my'
+        }
+
+        var messages_list = document.getElementById('messages_list')
+        var message_html = $('#chat_message_tpl').html()
+        .replace('{msg_class}', is_my_class)
+        .replace('user_name', data.u)
+        .replace('{date}', now_date )
+        .replace('{message}', data.m)
+        $(messages_list).append(message_html)
+        messages_list.scrollTop = messages_list.scrollHeight;
+    });
+
+
+
+
+
+    var counter = 1
+    window.send_message = function (form, event) {
+        event.preventDefault()
+
+
+        // var user = $('#chat_input').attr('name')
+        // var message = $('#chat_input').val()
+
+
+
+
+        var data = {
+            s: 'msg',
+            id: auth_user.id,
+            u: auth_user.name,
+            m: $('#chat_input').val()
+        }
+
+        $('#chat_input').val('') // reset input
+        socket.send(JSON.stringify(data));
+        var messages_list = document.getElementById('messages_list')
+
+        var message_html = $('#chat_message_tpl').html()
+        .replace('{msg_class}', 'my')
+        .replace('user_name', data.u)
+        .replace('{date}', now_date )
+        .replace('{message}', data.m)
+        $(messages_list).append(message_html)
+        messages_list.scrollTop = messages_list.scrollHeight;
+
+
+
+    }
+
+    function now_date() {
+        var date = new Date
+        return date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear() + ' ' + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes()
+    }
+
+
 }
+
+start_chat()
+
+
+
+
 </script>

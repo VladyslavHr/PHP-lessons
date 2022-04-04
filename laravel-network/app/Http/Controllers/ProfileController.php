@@ -11,6 +11,36 @@ use App\Models\{User, Group, Post};
 
 class ProfileController extends Controller
 {
+
+    public function productCreate()
+    {
+       return view('profiles.product-create', [
+           'user' => auth()->user(),
+       ]);
+    }
+
+    public function shop()
+    {
+
+        $products = [1,11,111,111,1.1,1,1,1,111];
+
+
+        return view('profiles.shop',[
+            'products' => $products,
+            'user' => auth()->user(),
+        ]);
+    }
+
+    public function product()
+    {
+
+        $products = [1,11,111,111,1.1,1,1,1,111];
+        return view('profiles.product', [
+            'products' => $products,
+            'user' => auth()->user(),
+        ]);
+    }
+
     public function friends()
     {
 
@@ -229,8 +259,7 @@ class ProfileController extends Controller
      */
     public function profile()
     {
-        $message_date = date('d-F');
-        $message_time = date('H:i');
+
         $user = Auth::user();
         $friends = auth()->user()->friends();
         return view('profiles.show', [
@@ -239,8 +268,6 @@ class ProfileController extends Controller
             'user' => Auth::user(),
             'postable_id' => $user->id,
             'postable_type' => 'App\Models\User',
-            'message_date' => $message_date,
-            'message_time' => $message_time,
         ]);
     }
 

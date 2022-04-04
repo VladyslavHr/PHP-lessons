@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="{{ asset ('css/style.css?v=' . filemtime(public_path('css/style.css')) ) }}">
 
     <script src="https://unpkg.com/jquery@3/dist/jquery.min.js" crossorigin="anonymous"></script>
+    <script>
+        var auth_user = {!! json_encode(auth()->user()) !!};
+    </script>
 </head>
 <body class="ajax_loader">
 
@@ -34,7 +37,7 @@
     </div>
 </div>
 
-<footer>
+<footer style="padding-top: 35px;">
     @include('blocks.footer-block')
 </footer>
 
@@ -44,7 +47,12 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/2.0.0-alpha.2/cropper.min.js" crossorigin="anonymous"></script>
+
+
 <script src="{{ asset ('js/main.js?v=' . filemtime(public_path('js/main.js')) ) }}"></script>
+
+
 </body>
 </html>

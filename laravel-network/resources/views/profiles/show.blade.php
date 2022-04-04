@@ -25,13 +25,20 @@
                     <div class="info-list-wrap">
                         <ul class="info-list">
                             <li>
-                                <a><i class="bi bi-briefcase"></i>Работа</a></li>
+                                <a href="{{ route('profiles.shop') }}"><i class="bi bi-basket2"></i>Магазин</a>
+                            </li>
                             <li>
-                                <a><i class="bi bi-house-door"></i>Дом</a></li>
+                                <a><i class="bi bi-briefcase"></i>Работа</a>
+                            </li>
                             <li>
-                                <a><i class="bi bi-geo-alt"></i>Место</a></li>
+                                <a><i class="bi bi-house-door"></i>Дом</a>
+                            </li>
                             <li>
-                                <a><i class="bi bi-hand-thumbs-up"></i>Интересы</a></li>
+                                <a><i class="bi bi-geo-alt"></i>Место</a>
+                            </li>
+                            <li>
+                                <a><i class="bi bi-hand-thumbs-up"></i>Интересы</a>
+                            </li>
                         </ul>
                     </div>
                 </div>

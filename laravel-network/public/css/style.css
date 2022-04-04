@@ -9,6 +9,12 @@
 
 }
 
+.elipsis{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 body{
     background: #f1f1f1;
     margin: 0;
@@ -1631,13 +1637,8 @@ footer .scrolling-carousel{
     font-size: 12px;
 }
 
-.message-time.my{
-    float: right;
-    font-size: 9px;
-}
-
-.message-time.not-my{
-    float: right;
+.message-time{
+    min-width: 72px;
     font-size: 9px;
 }
 
@@ -1673,6 +1674,115 @@ footer .scrolling-carousel{
     font-size: 10px;
     margin-left: auto;
 }
+
+.msg-head{
+    display: flex;
+    justify-content: space-between;
+}
+
+.msg-user{
+    font-weight: bold;
+}
+
+.product-card-wrapper{
+    padding: 15px;
+}
+
+.product-card{
+    display: block;
+    background: #fff;
+    height: 100%;
+    margin: 15px 0;
+    text-decoration: none;
+    box-shadow: 5px 3px 5px 0px rgb(51 51 51 / 20%);
+}
+
+.product-image{
+    max-width: 100%;
+    margin-bottom: 30px;
+}
+
+.product-title{
+    padding-left: 10px;
+    color: #555;
+    size: 24px;
+}
+
+.product-price{
+    padding-left: 10px;
+    color: #777;
+    letter-spacing: 1px;
+}
+
+.main-good-img img{
+    width: 100%;
+}
+
+.small-goods-img{
+    display: flex;
+    width: 100%;
+    padding: 15px 0px;
+    flex-wrap: wrap;
+}
+
+.small-goods-img img{
+    width: 100%;
+    padding: 10px;
+}
+
+.goods-info-title{
+    padding: 10px;
+    color: #555;
+}
+
+.goods-info-describtion{
+    padding: 10px;
+}
+
+.goods-info-price{
+    padding: 10px;
+    color: #777;
+    letter-spacing: 1px;
+}
+
+.goods-info-buttons{
+    padding: 15px 10px;
+}
+
+.goods-info-add-cart{
+    background: var(--bgBlackColor);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 30px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.goods-info-add-cart:hover{
+    color: var(--orangeColor);
+    transition: .3s;
+}
+
+.goods-info-buy{
+    background: var(--orangeColor);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 30px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.goods-info-buy:hover{
+    color: var(--bgBlackColor);
+    transition: .3s;
+}
+
+.small-goods-img_{
+    width: 25%;
+}
+
 
 
 @media (max-width: 1399px){

@@ -86,11 +86,6 @@
                     document.body.classList.remove('ajax_loader')
                     $('#search_autocomplete').css('display', 'block')
                 })
-                // $('input[name="query"]').blur(function(){
-                //     setTimeout(function(){
-                // $('#search_autocomplete').css('display', 'none')
-                //     }, 100)
-                // })
 
                 $('body').on('click', function(e){
                     if (!$(e.target).closest('#main_search_form').length && !$('input[name="query"]').length)

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Inspiring;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Artisan;
 use PhpParser\Builder\Class_;
 use App\Models\{User, Group, Post};
@@ -69,4 +70,23 @@ Artisan::command('asd', function () {
         }
 
     }
+});
+
+
+
+Artisan::command('bot', function () {
+
+    $message = 'Hii ii aaa';
+    $send_message_url = 'https://api.telegram.org/bot5193208083:AAFA7HE-qZwbB3I24aL034RnrFmcbsntcEU/sendMessage?chat_id=-1001741099979&text=' . $message;
+
+file_get_contents($send_message_url);
+// echo $send_message_url;
+
+
+// $response = Http::get($send_message_url);
+
+// print_r($response->json());
+
+
+
 });

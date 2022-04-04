@@ -28,6 +28,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/profile/{user}', 'show')->name('profiles.show');
         Route::get('/profiles/edit', 'edit')->name('profiles.edit');
         Route::get('/profiles/search', 'search')->name('profiles.search');
+        Route::get('/profiles/shop', 'shop')->name('profiles.shop');
+        Route::get('/profiles/product', 'product')->name('profiles.product');
+        Route::get('/profiles/productCreate', 'productCreate')->name('profiles.productCreate');
         Route::get('/profiles/following', 'following')->name('profiles.following');
         Route::get('/profiles/followers', 'followers')->name('profiles.followers');
         Route::post('/profiles/follow', 'follow')->name('profiles.follow');
