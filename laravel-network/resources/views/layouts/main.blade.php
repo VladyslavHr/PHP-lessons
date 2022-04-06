@@ -37,7 +37,7 @@
     </div>
 </div>
 
-<footer style="padding-top: 35px;">
+<footer class="mt-5">
     @include('blocks.footer-block')
 </footer>
 

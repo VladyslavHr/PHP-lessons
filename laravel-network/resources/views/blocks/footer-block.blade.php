@@ -65,7 +65,7 @@
                     {{-- <i class="bi bi-send-fill"></i> --}}
                 </button>
 
-                <div class="chat-messages">
+                <div class="chat-messages" style="display: none;">
                     <div class="footer-search-menu-head row align-items-center">
                         <div class="footer-search-title col-sm-8 ps-4">
                            {{ auth()->user()->name }}

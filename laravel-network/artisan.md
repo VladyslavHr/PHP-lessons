@@ -25,6 +25,16 @@ php artisan migrate:rollback // откатить миграцию
 
 
 
+//// Создание сущность(контроллер модель....)
+
+php artisan make:model Product -mcrf ; (m(миграция)c(контроллер)r(ресурс)f(фактори))
+
+php artisan migrate
+
+php artisan db:seed
+
+
+
 
 //
 установка пректа

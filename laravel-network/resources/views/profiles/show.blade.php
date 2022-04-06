@@ -186,6 +186,15 @@
                     <a href="#">
                         <img src="{{ asset ('images/banner1.jpg') }}" alt="">
                     </a>
+                    @if($user->role === 'admin')
+
+                        <form class="download-image">
+                            <input type="file" class="form-control download-image-input" id="inputGroupFile02">
+                            <label class="input-group-text download-image-label" for="inputGroupFile02">Upload</label>
+                        </form>
+                    @endif
+
+
                 </div>
                 <div class="friends-block">
                     <div class="title">

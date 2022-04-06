@@ -59,4 +59,6 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('comments', App\Http\Controllers\CommentController::class);
 
+    Route::resource('products', App\Http\Controllers\ProductController::class);
+
 });
