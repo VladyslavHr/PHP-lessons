@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable(true);
             $table->double('price', 10, 2);
-            $table->string('image');
+            $table->string('image')->nullable(true);
             $table->string('slug');
             $table->string('status')->default('in_stock'); // in_stock, out_of_stock,
             $table->timestamps();

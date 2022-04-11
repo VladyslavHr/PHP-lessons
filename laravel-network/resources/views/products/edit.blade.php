@@ -12,8 +12,9 @@
 
 <div class="container mt-5 mb-5 pt-5">
 
-    <form class="section-shadow p-3" action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+    <form class="section-shadow p-3" action="{{ route('products.update', $product) }}" method="POST" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
         <div class="row">
 
             <div class="col-sm-6">
@@ -23,26 +24,26 @@
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Title</label>
-                    <input value="{{ old('title') }}" name="title" type="text" class="form-control" id="" placeholder="Title">
+                    <input value="{{ $product->title }}" name="title" type="text" class="form-control" id="" placeholder="Title">
                 </div>
                 <div class="mb-3">
                     <div class="row">
                         <div class="col-6">
                             <label for="" class="form-label">Price</label>
-                            <input value="{{ old('price') }}" name="price" type="text" class="form-control" id="" placeholder="Price">
+                            <input value="{{ $product->price }}" name="price" type="text" class="form-control" id="" placeholder="Price">
                         </div>
                         <div class="col-6">
                             <label for="" class="form-label">Status</label>
                             <select class="form-select" name="status">
-                                <option value="in_stock">in_stock</option>
-                                <option value="out_of_stock">out_of_stock</option>
+                                <option value="in_stock" {{ $product->status == 'in_stock' ? 'selected' : '' }}>in_stock</option>
+                                <option value="out_of_stock" {{ $product->status == 'out_of_stock' ? 'selected' : '' }}>out_of_stock</option>
                             </select>
                         </div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label  for="" class="form-label">Description</label>
-                    <textarea name="description" class="form-control" rows="3">{{ old('description') }}</textarea>
+                    <textarea name="description" class="form-control" rows="3">{{ $product->description }}</textarea>
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary groups-update-btn">
@@ -52,7 +53,7 @@
             </div>
             <div class="col-sm-6">
                 <label class="text-center cursor-pointer d-block" for="create_product_image_input">
-                    <img class="img-thumbnail" src="/images/no-image.png" alt="" id="create_product_image_preloader">
+                    <img class="img-thumbnail" src="{{ $product->image }}" alt="" id="create_product_image_preloader">
                 </label>
             </div>
 

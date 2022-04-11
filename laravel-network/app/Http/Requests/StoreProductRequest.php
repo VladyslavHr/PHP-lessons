@@ -13,7 +13,7 @@ class StoreProductRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,21 @@ class StoreProductRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required|min:6|max:100',
+            'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+            'description' => 'nullable|max:10000',
+            'image' => 'nullable|dimensions:min_width=100,min_height=100|mimes:jpg,png',
+            'status' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'Название обязательно',
+            'title.min' => 'Минимум :min символов',
+            'title.max' => 'Максимум :max символов',
+            'price.regex' => 'Введите цену',
         ];
     }
 }

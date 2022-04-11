@@ -36,7 +36,15 @@
         </div>
         <div class="goods-info col-sm-6">
             <div class="goods-info-title">
-                <h2>{{ $product->title }}</h2>
+                <h2>{{ $product->title }}
+                    <a href="{{ route('products.edit', $product) }}" class="float-end goods-edit-link"><i class="bi bi-pencil-fill"></i></a>
+                    <form action="{{ route('products.destroy', $product) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="float-end goods-destroy-button"><i class="bi bi-trash"></i></button>
+                    </form>
+                </h2>
+
             </div>
             <div class="goods-info-describtion">
                 <p>

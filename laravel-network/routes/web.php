@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/profiles/update', 'update')->name('profiles.update');
         Route::post('/profiles/updatePassword', 'updatePassword')->name('profiles.updatePassword');
         Route::post('/profile/uploadAvatar', 'uploadAvatar')->name('profile.uploadAvatar');
+        Route::post('/profile/adImage', 'adImage')->name('profile.adImage');
         Route::delete('/profile/{user}', 'destroy')->name('profile.delete');
     });
 

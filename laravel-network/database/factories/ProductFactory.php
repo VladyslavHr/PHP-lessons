@@ -19,7 +19,7 @@ class ProductFactory extends Factory
     public function definition()
     {
 
-        $image = 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1099&q=80';
+        $image = '/images/no-image.png';
 
         // $title = $this->faker->sentence(3, true);
         $title = $this->faker->catchPhrase();

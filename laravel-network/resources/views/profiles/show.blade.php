@@ -183,14 +183,18 @@
                     <div class="title">
                         <span>Реклама</span>
                     </div>
-                    <a href="#">
-                        <img src="{{ asset ('images/banner1.jpg') }}" alt="">
-                    </a>
-                    @if($user->role === 'admin')
+                    <label class="ad-block-label cursor-pointer" for="ad_image">
+                        @isset($path)
+                            <img src="{{ asset ('/storage/' . $path) }}" alt="">
+                        @endisset
 
-                        <form class="download-image">
-                            <input type="file" class="form-control download-image-input" id="inputGroupFile02">
-                            <label class="input-group-text download-image-label" for="inputGroupFile02">Upload</label>
+                    </label>
+                    @if($user->role === 'admin')
+                        <form class="download-image" action="{{ route('profile.adImage') }}"  method="POST" enctype="mmultipart/form-dataulti">
+                            @csrf
+                            <input name="image" type="file" class="form-control download-image-input" id="ad_image">
+                            <button class="groups-update-btn" type="submit">Сохранить</button>
+                            {{-- <label class="input-group-text download-image-label cursor-pointer" for="ad_image">Upload</label> --}}
                         </form>
                     @endif
 

@@ -9,16 +9,21 @@
 
 }
 
+body{
+    background: #f1f1f1;
+    margin: 0;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
 .elipsis{
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-body{
-    background: #f1f1f1;
-    margin: 0;
-}
 
 .section-shadow{
     box-shadow: 0px 1px 15px 0px rgb(51 51 51 / 20%);
@@ -1027,7 +1032,7 @@ body{
 }
 
 .menu-wrap-groups-ind{
-    padding: 0;
+    /* padding: 0; */
 }
 
 .list-groups-ind{
@@ -1799,6 +1804,79 @@ footer .scrolling-carousel{
 .download-image-input{
     font-size: 14px;
 }
+
+.goods-edit-link{
+    font-size: 1rem;
+    color: var(--orangeColor);
+}
+
+.goods-edit-link:hover{
+    color: var(--bgBlackColor);
+    transition: .4s;
+}
+
+.goods-destroy-button{
+    font-size: 1.3rem;
+    border: none;
+    padding: 0;
+    color: black;
+}
+
+.goods-destroy-button:hover{
+    color: red;
+    transition: 0.4s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media (max-width: 1399px){
     .list-groups-ind,

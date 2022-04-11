@@ -216,6 +216,18 @@ class ProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function adImage(Request $request)
+    {
+        $path = $request->file('image')->store('ad-image', 'public');
+
+        return [
+            'path' => $path,
+        ];
+    }
+
+
+
     public function store(Request $request, User $user)
     {
         $data = $request->validate([
