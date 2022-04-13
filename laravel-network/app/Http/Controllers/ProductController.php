@@ -10,6 +10,17 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
+
+    public function cart(Product $product)
+    {
+        return view('products.cart',[
+            'product' => $product,
+            'user' => auth()->user(),
+        ]);
+    }
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -153,6 +164,9 @@ class ProductController extends Controller
         }
         $product->delete();
 
-        return redirect()->route('products.index')->with('notification', 'Товар "' . $title . '" удален');
+        return redirect()->route('products.index')->with('status', 'Товар "' . $title . '" удален');
     }
+
+
+
 }

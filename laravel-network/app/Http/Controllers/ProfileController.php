@@ -217,13 +217,19 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function adImage(Request $request)
+    public function changeBanner(Request $request)
     {
-        $path = $request->file('image')->store('ad-image', 'public');
 
-        return [
-            'path' => $path,
-        ];
+        $request->validate([
+            'banner' => 'required|dimensions:min_width=100,min_height=100|mimes:jpg'
+        ]);
+
+        if ($request->hasFile('banner')) {
+            $request->file('banner')->move(public_path('images'), 'profile-banner.jpg');
+        }
+
+
+        return redirect()->back()->with('status', 'Баннер обнавлен');
     }
 
 

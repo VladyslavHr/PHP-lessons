@@ -34,3 +34,6 @@ class ProductFactory extends Factory
         ];
     }
 }
+
+
+// Загрузка картинок рандомных с файла

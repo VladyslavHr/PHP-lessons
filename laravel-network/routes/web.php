@@ -38,13 +38,14 @@ Route::middleware('auth')->group(function () {
         Route::post('/profiles/update', 'update')->name('profiles.update');
         Route::post('/profiles/updatePassword', 'updatePassword')->name('profiles.updatePassword');
         Route::post('/profile/uploadAvatar', 'uploadAvatar')->name('profile.uploadAvatar');
-        Route::post('/profile/adImage', 'adImage')->name('profile.adImage');
         Route::delete('/profile/{user}', 'destroy')->name('profile.delete');
+        Route::post('/profile/changeBanner', 'changeBanner')->name('profile.changeBanner');
     });
 
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/test', [App\Http\Controllers\HomeController::class, 'test'])->name('test');
+
 
     Route::get('/albums', [App\Http\Controllers\AlbumController::class, 'index'])->name('albums.index');
 
@@ -54,6 +55,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/groups/search', [App\Http\Controllers\GroupController::class, 'search'])->name('groups.search');
     Route::get('/groups/subscribedGroups', [App\Http\Controllers\GroupController::class, 'subscribedGroups'])->name('groups.subscribedGroups');
     Route::post('groups/subscribe', [App\Http\Controllers\GroupController::class, 'subscribe'])->name('groups.subscribe');
+
+    Route::get('/products/cart', [App\Http\Controllers\ProductController::class, 'cart'])->name('products.cart');
+
     Route::resource('groups', App\Http\Controllers\GroupController::class);
 
     Route::resource('posts', App\Http\Controllers\PostController::class);
@@ -61,5 +65,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('comments', App\Http\Controllers\CommentController::class);
 
     Route::resource('products', App\Http\Controllers\ProductController::class);
+
 
 });

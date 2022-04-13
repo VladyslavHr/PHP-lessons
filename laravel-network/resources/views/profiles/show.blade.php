@@ -183,17 +183,22 @@
                     <div class="title">
                         <span>Реклама</span>
                     </div>
-                    <label class="ad-block-label cursor-pointer" for="ad_image">
-                        @isset($path)
-                            <img src="{{ asset ('/storage/' . $path) }}" alt="">
-                        @endisset
+                    <label class="ad-block-label cursor-pointer @if(auth()->user()->role === 'admin') upload-image-label @endif" for="changeBanner">
+                        @if (file_exists(public_path('images/profile-banner.jpg')))
+                            <img src="{{ asset ('images/profile-banner.jpg?v=' . filemtime(public_path('images/profile-banner.jpg'))) }}"
+                            alt="banner">
+                        @else
+                            <img src="/images/no-image.png" alt="">
+                        @endif
+
 
                     </label>
-                    @if($user->role === 'admin')
-                        <form class="download-image" action="{{ route('profile.adImage') }}"  method="POST" enctype="mmultipart/form-dataulti">
+                    @if(auth()->user()->role === 'admin')
+                        <form class="download-image" action="{{ route('profile.changeBanner') }}"  method="POST" enctype="multipart/form-data">
                             @csrf
-                            <input name="image" type="file" class="form-control download-image-input" id="ad_image">
-                            <button class="groups-update-btn" type="submit">Сохранить</button>
+                            <input name="banner" type="file" class="form-control download-image-input d-none" id="changeBanner"
+                            oninput="this.closest('form').submit()">
+                            {{-- <button class="groups-update-btn" type="submit">Сохранить</button> --}}
                             {{-- <label class="input-group-text download-image-label cursor-pointer" for="ad_image">Upload</label> --}}
                         </form>
                     @endif

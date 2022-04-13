@@ -24,6 +24,9 @@
                         <li class="nav-item">
                              <a class="nav-link" href="#">Может быть интересным</a>
                         </li>
+                        <li>
+                            <a class="nav-link" href="{{ route('products.cart') }}">Корзина <i class="bi bi-bag"></i></a>
+                        </li>
                     </ul>
                     <form class="d-flex">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="col-sm-6">
-                <label class="text-center cursor-pointer d-block" for="create_product_image_input">
+                <label class="text-center cursor-pointer d-block upload-image-label" for="create_product_image_input">
                     <img class="img-thumbnail" src="/images/no-image.png" alt="" id="create_product_image_preloader">
                 </label>
             </div>
