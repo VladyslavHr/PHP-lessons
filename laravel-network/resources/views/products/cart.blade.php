@@ -11,8 +11,11 @@
 @include('blocks.products-menu')
 
 <div class="container mt-5 pt-5">
-    <h3 class="mb-3">Товары в корзине (count)</h3>
-    <div class="row align-items-center">
+    <h3 class="mb-3">Товары в корзине ({{ count($products) }})</h3>
+    @foreach ($products as $product)
+
+
+    <div class="row mt-5 mb-5 align-items-center">
         <div class="cart-product-img col-sm-2">
             <img src="{{ $product->image }}" alt="">
         </div>
@@ -44,6 +47,7 @@
     </div>
 
 
+    @endforeach
     <div class="row mt-5 cart-products-summary">
         <div class="col-sm-6">
             <div class="cart-products-total-item">Всего за товары</div>
@@ -51,8 +55,8 @@
             <div class="cart-products-pay-method">Способ оплаты</div>
         </div>
         <div class="col-sm-6 cart-products-res-sum">
-            <div class="cart-products-total-item-sum">5165 $</div>
-            <div class="cart-products-delivery-sum">100 $</div>
+            <div class="cart-products-total-item-sum">{{ $total }} $</div>
+            <div class="cart-products-delivery-sum">{{ $delivery_price }} $</div>
             <div class="cart-products-pay-method-result">
                 <select class="cart-products-select" name="pay_method" id="">
                     <option value="cash">Наличные</option>
@@ -69,7 +73,7 @@
         </div>
         <div class="col-sm-6 text-end">
             <h3>
-                5668651 $
+                {{ $total + $delivery_price }} $
             </h3>
         </div>
     </div>

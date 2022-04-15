@@ -28,6 +28,7 @@ class StoreProductRequest extends FormRequest
             'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
             'description' => 'nullable|max:10000',
             'image' => 'nullable|dimensions:min_width=100,min_height=100|mimes:jpg,png',
+            'gallery.*' => 'nullable|mimes:jpg,png',
             'status' => 'required',
         ];
     }
@@ -39,6 +40,7 @@ class StoreProductRequest extends FormRequest
             'title.min' => 'Минимум :min символов',
             'title.max' => 'Максимум :max символов',
             'price.regex' => 'Введите цену',
+            'gallery.*.mimes' => 'Use jpg,png format',
         ];
     }
 }

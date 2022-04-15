@@ -19,7 +19,11 @@
             <div class="col-sm-6">
                 <div class="input-group mb-3">
                     <input name="image" type="file" class="form-control" id="create_product_image_input">
-                    <label class="input-group-text" for="create_product_image_input">Download</label>
+                    <label class="input-group-text" for="create_product_image_input">Основное изображение</label>
+                </div>
+                <div class="input-group mb-3">
+                    <input name="gallery[]" type="file" class="form-control" id="create_product_gallery_input" multiple>
+                    <label class="input-group-text" for="create_product_gallery_input">Галерея</label>
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Title</label>
@@ -45,8 +49,11 @@
                     <textarea name="description" class="form-control" rows="3">{{ old('description') }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-primary groups-update-btn">
-                        Save
+                    <button type="submit" name="save" class="btn btn-primary groups-update-btn">
+                        Save and edit <i class="bi bi-pencil ms-2"></i>
+                    </button>
+                    <button type="submit" name="view" class="btn btn-primary groups-update-btn">
+                        Save and view <i class="bi bi-eye ms-2"></i>
                     </button>
                 </div>
             </div>
