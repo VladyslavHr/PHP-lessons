@@ -56,7 +56,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/groups/subscribedGroups', [App\Http\Controllers\GroupController::class, 'subscribedGroups'])->name('groups.subscribedGroups');
     Route::post('groups/subscribe', [App\Http\Controllers\GroupController::class, 'subscribe'])->name('groups.subscribe');
 
-    Route::get('/products/cart', [App\Http\Controllers\ProductController::class, 'cart'])->name('products.cart');
+
 
     Route::resource('groups', App\Http\Controllers\GroupController::class);
 
@@ -64,6 +64,10 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('comments', App\Http\Controllers\CommentController::class);
 
+
+
+    Route::get('/products/cart', [App\Http\Controllers\ProductController::class, 'cart'])->name('products.cart');
+    Route::get('/products/productImageDelete/{product_image}', [App\Http\Controllers\ProductController::class, 'productImageDelete'])->name('productImageDelete');
     Route::resource('products', App\Http\Controllers\ProductController::class);
 
 

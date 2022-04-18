@@ -2,7 +2,23 @@
 
 @section('title', 'Profile-page')
 
+@section('styles-header')
 
+<link href="/css/lightbox.min.css" rel="stylesheet" />
+
+@endsection
+
+@section('scripts-body')
+
+<script src="/js/lightbox.min.js"></script>
+<script>
+    lightbox.option({
+      'resizeDuration': 200,
+      'wrapAround': true
+    })
+</script>
+
+@endsection
 
 @section('content')
 
@@ -48,12 +64,14 @@
                         <span>Воспоминания</span>
                     </div>
                     <div class="memories-pictures row row-5">
-                    <div class="col-4"><a href="#"><img src="{{ asset ('images/banner1.jpg') }}" alt=""></a></div>
-                    <div class="col-4"><a href="#"><img src="{{ asset ('images/banner1.jpg') }}" alt=""></a></div>
-                    <div class="col-4"><a href="#"><img src="{{ asset ('images/banner1.jpg') }}" alt=""></a></div>
-                    <div class="col-4"><a href="#"><img src="{{ asset ('images/banner1.jpg') }}" alt=""></a></div>
-                    <div class="col-4"><a href="#"><img src="{{ asset ('images/banner1.jpg') }}" alt=""></a></div>
-                    <div class="col-4"><a href="#"><img src="{{ asset ('images/banner1.jpg') }}" alt=""></a></div>
+
+                        @for ($i = 1; $i <= 6; $i++)
+                            <div class="col-4">
+                                <a data-lightbox="image-remember" href="{{ asset ('/images/dreams/'. $i .'.jpg') }}">
+                                    <img src="{{ asset ('/images/dreams/'. $i .'.jpg') }}" alt="">
+                                </a>
+                            </div>
+                        @endfor
                     </div>
 
                 </div>

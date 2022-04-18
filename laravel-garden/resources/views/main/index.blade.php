@@ -16,6 +16,7 @@
 </head>
 <body>
 
+    @include('blocks/page-heade')
 
 
     @yield('content')

@@ -90,3 +90,20 @@ file_get_contents($send_message_url);
 
 
 });
+
+
+Artisan::command('img', function(){
+
+print_r(get_rand_img_()) ;
+
+});
+
+
+function get_rand_img_()
+{
+    $fiels = scandir(public_path('images/products-examples'));
+
+    for ($i=0; $i < count($fiels) ; $i++) {
+        return $fiels;
+    }
+}

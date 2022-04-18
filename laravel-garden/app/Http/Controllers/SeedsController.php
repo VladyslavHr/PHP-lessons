@@ -29,7 +29,7 @@ class SeedsController extends Controller
      */
     public function create()
     {
-        //
+        return view('seeds.create');
     }
 
     /**
@@ -51,7 +51,7 @@ class SeedsController extends Controller
      */
     public function show(Seeds $seeds)
     {
-        //
+        return view('seeds.show');
     }
 
     /**

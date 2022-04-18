@@ -24,6 +24,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/main', [App\Http\Controllers\MainController::class, 'index'])->name('main.index');
     Route::get('/main/show', [App\Http\Controllers\MainController::class, 'show'])->name('main.show');
     Route::get('/seeds', [App\Http\Controllers\SeedsController::class, 'index'])->name('seeds.index');
+    Route::get('/seeds/show', [App\Http\Controllers\SeedsController::class, 'show'])->name('seeds.show');
+    Route::get('/seeds/create', [App\Http\Controllers\SeedsController::class, 'create'])->name('seeds.create');
+
+
+
     Route::get('/seeds/js_test', [App\Http\Controllers\SeedsController::class, 'js_test'])->name('seeds.js_test');
 
 

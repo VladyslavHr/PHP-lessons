@@ -275,7 +275,7 @@ body{
 }
 
 .memories-pictures {
-    padding: 25px 15px 10px 5px;
+    padding: 10px;
 }
 
 .memories-pictures .col-4{
@@ -285,8 +285,9 @@ body{
 .memories-pictures .col-4 img{
     width: 100%;
     border-radius: 5px;
-    height: 70px;
-    margin: 5px;
+    max-height: 70px;
+    margin: 5px 0;
+    image-rendering: pixelated;
 }
 
 .possibles-block{
@@ -1742,11 +1743,49 @@ footer .scrolling-carousel{
     padding: 15px 0px;
     flex-wrap: wrap;
     gap: 2%;
+
 }
 
 .small-goods-img img{
-    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
 }
+
+.small-goods-img_{
+    position: relative;
+    width: 23.5%;
+    margin-bottom: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 140px;
+}
+
+.small-goods-img .controls{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff45;
+}
+
+.small-goods-img .controls a{
+    font-size: 30px;
+    padding: 0 10px;
+    color: var(--orangeColor);
+}
+
+.small-goods-img .controls a:hover{
+    color: #fff;
+    background: #dc473454;
+    border-radius: 6px;
+
+}
+
 
 .goods-info-title{
     padding: 10px;
@@ -1795,11 +1834,6 @@ footer .scrolling-carousel{
 .goods-info-buy:hover{
     color: var(--bgBlackColor);
     transition: .3s;
-}
-
-.small-goods-img_{
-    width: 23.5%;
-    margin-bottom: 13px;
 }
 
 .create-block-img img{
@@ -1911,9 +1945,22 @@ footer .scrolling-carousel{
     transition: 0.3s;
 }
 
+.product-block-cart-link a{
+    color: var(--orangeColor);
+    text-decoration: none;
+    border-radius: 3px;
+}
 
+.product-block-cart-link i{
+    padding: 1px;
+}
 
+.product-block-cart-link a:hover{
+    box-shadow: 0px 2px 7px 1px;
+    background: #dc47343b;
+    transition: 0.3s;
 
+}
 
 
 

@@ -30,7 +30,9 @@
                             @method('DELETE')
                             <button class="float-end goods-destroy-button me-2"><i class="bi bi-trash"></i></button>
                         </form>
-                        <a href="{{ route('products.cart', $product) }}"><i class="bi bi-bag"></i></a>
+                        <div class="product-block-cart-link">
+                            <a href="{{ route('products.cart', $product) }}"><i class="bi bi-bag"></i></a>
+                        </div>
                         {{-- <a href="{{ route('products.destroy', $product) }}" class="float-end me-2"><i class="bi bi-trash"></i></a> --}}
                     </div>
                 </div>

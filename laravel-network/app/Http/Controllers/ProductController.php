@@ -210,10 +210,17 @@ class ProductController extends Controller
         $saved = $product->update($validated);
 
         // if($saved) {
-            return redirect()->route('products.show', $product->id)->with('status', 'Товар обновлен');
+            // return redirect()->route('products.show', $product->id)->with('status', 'Товар обновлен');
         // }else{
             // return redirect()->back()->withInput()->withErrors('error', 'Server error');
         // }
+
+        if($request->has('save')) {
+            return redirect()->route('products.edit', $product)->with('status', 'Товар сохранен');
+        }
+        if($request->has('view')){
+            return redirect()->route('products.show', $product)->with('status', 'Товар создан');
+        }
 
 
     }
@@ -237,6 +244,11 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('status', 'Товар "' . $title . '" удален');
     }
 
+    public function productImageDelete(ProductImage $product_image)
+    {
+        $product_image->delete();
+        return redirect()->back()->with('status', 'Picture removed');
+    }
 
 
 }

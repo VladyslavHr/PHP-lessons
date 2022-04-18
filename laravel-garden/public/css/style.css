@@ -1,0 +1,49 @@
+:root{
+    --greenColor: #198754;
+    --blackColor: #212529;
+}
+
+
+.seed-block-wrapp{
+    padding: 0px;
+    text-decoration: none;
+    color: #fff;
+
+}
+
+.seed-block-wrapp:hover{
+    color: var(--greenColor);
+    transition: 0.3s;
+}
+
+.seed-block{
+    background: var(--blackColor);
+    padding: 0px;
+    margin: 0px 15px 15px 0;
+    box-shadow: 3px 2px 7px 2px #198754;
+}
+
+.seed-block-image img{
+    width: 100%;
+    image-rendering: pixelated;
+}
+
+.seeds-navigation .nav-link{
+    color: var(--blackColor);
+}
+
+.seeds-navigation .nav-link.active{
+    color: var(--greenColor);
+}
+
+.seed-create-block{
+    color: #fff;
+    padding: 13px;
+    border-radius: 8px;
+}
+
+.seed-create-block input:focus,
+.seed-create-block textarea:focus{
+    border-color: #198754;
+    box-shadow: 0 0 0 0.25rem rgb(25, 135, 84);
+}

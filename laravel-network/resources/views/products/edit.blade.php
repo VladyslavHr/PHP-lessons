@@ -2,7 +2,23 @@
 
 @section('title', 'Products-shop')
 
+@section('styles-header')
 
+<link href="/css/lightbox.min.css" rel="stylesheet" />
+
+@endsection
+
+@section('scripts-body')
+
+<script src="/js/lightbox.min.js"></script>
+<script>
+    lightbox.option({
+      'resizeDuration': 200,
+      'wrapAround': true
+    })
+</script>
+
+@endsection
 
 @section('content')
 
@@ -20,7 +36,11 @@
             <div class="col-sm-6">
                 <div class="input-group mb-3">
                     <input name="image" type="file" class="form-control" id="create_product_image_input">
-                    <label class="input-group-text" for="create_product_image_input">Download</label>
+                    <label class="input-group-text" for="create_product_image_input">Основное изображение</label>
+                </div>
+                <div class="input-group mb-3">
+                    <input name="gallery[]" type="file" class="form-control" id="create_product_gallery_input" multiple>
+                    <label class="input-group-text" for="create_product_gallery_input">Галерея</label>
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Title</label>
@@ -46,8 +66,11 @@
                     <textarea name="description" class="form-control" rows="3">{{ $product->description }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-primary groups-update-btn">
-                        Save
+                    <button type="submit" name="save" class="btn btn-primary groups-update-btn">
+                        Save <i class="bi bi-pencil ms-2"></i>
+                    </button>
+                    <button type="submit" name="view" class="btn btn-primary groups-update-btn">
+                        Save and view <i class="bi bi-eye ms-2"></i>
                     </button>
                 </div>
             </div>
@@ -55,6 +78,25 @@
                 <label class="text-center cursor-pointer d-block upload-image-label" for="create_product_image_input">
                     <img class="img-thumbnail" src="{{ $product->image }}" alt="" id="create_product_image_preloader">
                 </label>
+                <div class="small-goods-img">
+
+                    @foreach ($product->images as $image)
+                    <div class="small-goods-img_">
+                        <img src="{{ $image->url }}" alt="">
+                        <div class="controls">
+                            <a href="{{ $image->url }}" data-lightbox="img-preview"><i class="bi bi-eye"></i></a>
+                            <a href="{{ route('productImageDelete', $image) }}"><i class="bi bi-trash"></i></a>
+
+                            {{-- <form action="{{ route('productImageDelete', $image) }}" method="POST">
+                                @csrf
+                                <button type="submit"> Delete </button>
+                            </form> --}}
+                        </div>
+
+
+                    </div>
+                    @endforeach
+                </div>
             </div>
 
 

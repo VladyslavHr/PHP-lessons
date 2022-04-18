@@ -174,8 +174,8 @@ class ProfileController extends Controller
 
         // Storage::delete(public_path('/storage/', '/app/public/', $old_image_url));
         $path = public_path($old_image_url);
-        if (file_exists($path)) {
-            $deleted = unlink($path);
+        if (file_exists($path) && strpos($path, '/images/') === false ) {
+            unlink($path);
         }
 
 
