@@ -278,6 +278,7 @@ class ProfileController extends Controller
     public function profile()
     {
 
+        $text = get_random_paragraph();
         $user = Auth::user();
         $friends = auth()->user()->friends();
         return view('profiles.show', [
@@ -286,12 +287,15 @@ class ProfileController extends Controller
             'user' => Auth::user(),
             'postable_id' => $user->id,
             'postable_type' => 'App\Models\User',
+            'text' => $text,
         ]);
     }
 
 
     public function show(User $user)
     {
+
+
 
         // $user = Auth::user();
         $friends = auth()->user()->friends();

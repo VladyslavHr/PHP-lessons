@@ -55,3 +55,22 @@ if (!function_exists('s_ending')) {
 }
 
 
+if (!function_exists('get_random_paragraph')){
+    function get_random_paragraph()
+    {
+
+        $text = file_get_contents(public_path('phrases.txt'));
+
+        $new_str = explode("\n\n", $text);
+
+        $trimmedArray = array_map('trim', $new_str);
+
+        $emptyRemoved = array_filter($trimmedArray);
+
+        $key = array_rand($emptyRemoved);
+
+        return $emptyRemoved[$key];
+    }
+}
+
+

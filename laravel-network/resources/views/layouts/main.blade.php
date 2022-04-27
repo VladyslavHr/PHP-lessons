@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/css/cropper.min.css" >
     <link href="/css/bootstrap.min.css" rel="stylesheet" >
     <link rel="stylesheet" href="/css/bootstrap-icons.css">
-    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"> --}}
+
     @yield('styles-header')
 
 
@@ -18,11 +18,12 @@
 
 
 
-    {{-- <link rel="stylesheet" href="/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" /> --}}
-    {{-- <link href="path/to/lightbox.css" rel="stylesheet" /> --}}
-
     <script src="/js/jquery.min.js"></script>
+
+
     <script>
+
+
         var auth_user = {!! json_encode(auth()->user()) !!};
     </script>
 </head>
@@ -32,8 +33,9 @@
 
 
 
-
-@yield('content')
+<div id="yield_content">
+    @yield('content')
+</div>
 
 @include('modals.upload-image')
 

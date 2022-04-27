@@ -1,17 +1,23 @@
 var { log } = console
 
 
-jQuery(function($){
+// jQuery(function($){
 
-$('[data-upload]').each(function(){
-	upload_image({
-		ajax_url: this.dataset.ajaxurl,
-		avatar: this,
-		width: this.dataset.width,
-		height: this.dataset.height,
-		model_id: this.dataset.modelid,
-	})
-})
+
+function ln_init() {
+    $('[data-upload]').each(function(){
+        upload_image({
+            ajax_url: this.dataset.ajaxurl,
+            avatar: this,
+            width: this.dataset.width,
+            height: this.dataset.height,
+            model_id: this.dataset.modelid,
+        })
+    })
+}
+
+ln_init()
+
 
 function upload_image(options) {
 	var avatar = options.avatar; // input id (options.ui_avatar)
@@ -143,8 +149,46 @@ $('#post_list').on('keyup', '.js-comment-input', function(){
 })
 
 
+$('body').on('click', '.js-no-reload a', function(e) {
+    e.preventDefault();
+    var url = this.href
+    $.get(url, function(data) {
+        var htmlDoc = document.implementation.createHTMLDocument('data');
+        htmlDoc.open();
+        htmlDoc.write(data)
+        htmlDoc.close();
 
-}) // jQuery ready
+        var yield_content_current = document.getElementById('yield_content')
+        var yield_content_loaded_html = htmlDoc.getElementById('yield_content').innerHTML
+        yield_content_current.innerHTML = yield_content_loaded_html
+
+        document.title = htmlDoc.title;
+
+     	window.history.pushState({},"", url);
+
+        ln_init()
+
+        document.querySelectorAll('.MagicZoom_').forEach(function(link)
+        {
+            MagicZoom.refresh(link)
+        })
+
+     	// window.scrollTo(0, 0)
+    })
+})
+
+function scrollToTop () {
+  const c = document.documentElement.scrollTop || document.body.scrollTop
+  if (c > 0) {
+    window.requestAnimationFrame(scrollToTop)
+    window.scrollTo(0, c - c / 8)
+  }
+}
+
+
+
+// })
+// jQuery ready
 
 function add_post(form, event) {
     event.preventDefault()
@@ -281,3 +325,14 @@ function alert(status, text) {
         $(this).alert('close');
     })
 }
+
+
+
+
+
+// $('#summernote').summernote({
+//     height: 300,                 // set editor height
+//     minHeight: null,             // set minimum height of editor
+//     maxHeight: null,             // set maximum height of editor
+//     focus: true                  // set focus to editable area after initializing summernote
+//     });

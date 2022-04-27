@@ -11,10 +11,18 @@ use Illuminate\Support\Str;
 class ProductController extends Controller
 {
 
+    public function checkout()
+    {
+        return view('products.checkout', [
+            'user' => auth()->user(),
+        ]);
+    }
+
+
     public function cart()
     {
 
-        $total = product::paginate(5)->sum('price');
+        $total = Product::paginate(5)->sum('price');
 
         $delivery_price = 100;
 
@@ -24,6 +32,12 @@ class ProductController extends Controller
             'total' => $total,
             'delivery_price' => $delivery_price,
         ]);
+    }
+
+    public function addToCart($product_id)
+    {
+        auth()->user()->cart_add($product_id);
+        return back()->with('status', 'Товар добавлен в корзину.');
     }
 
 
@@ -137,6 +151,15 @@ class ProductController extends Controller
         ]);
     }
 
+    public function bySlug($slug)
+    {
+        $product = Product::where('slug', $slug)->firstOrFail();
+        return view('products.show', [
+            'product' => $product,
+            'user' => auth()->user(),
+        ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -239,6 +262,15 @@ class ProductController extends Controller
         {
             unlink($path);
         }
+
+        foreach ($product->image as $product_image) {
+            $path = public_path($product_image->url);
+            if (file_exists($path) && strpos($product_image, '/images/') === false )
+            {
+                unlink($path);
+            }
+            $product_image->delete();
+        }
         $product->delete();
 
         return redirect()->route('products.index')->with('status', 'Товар "' . $title . '" удален');
@@ -246,6 +278,11 @@ class ProductController extends Controller
 
     public function productImageDelete(ProductImage $product_image)
     {
+        $path = public_path($product_image->url);
+        if (file_exists($path) && strpos($product_image, '/images/') === false )
+        {
+            unlink($path);
+        }
         $product_image->delete();
         return redirect()->back()->with('status', 'Picture removed');
     }

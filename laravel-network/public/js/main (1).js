@@ -3,6 +3,8 @@ var { log } = console
 
 jQuery(function($){
 
+
+
 $('[data-upload]').each(function(){
 	upload_image({
 		ajax_url: this.dataset.ajaxurl,
@@ -101,6 +103,8 @@ function upload_image(options) {
 		}
 	});
 }
+
+
 
 
 

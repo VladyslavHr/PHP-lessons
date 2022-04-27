@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'log.cart')->group(function () {
 
     Route::post('posts/reloadPosts', [App\Http\Controllers\PostController::class, 'reloadPosts'])->name('posts.reloadPosts');
 
@@ -65,8 +65,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('comments', App\Http\Controllers\CommentController::class);
 
 
-
     Route::get('/products/cart', [App\Http\Controllers\ProductController::class, 'cart'])->name('products.cart');
+    Route::get('/products/checkout', [App\Http\Controllers\ProductController::class, 'checkout'])->name('products.checkout');
+    Route::get('/product/{product}', [App\Http\Controllers\ProductController::class, 'bySlug'])->name('product.bySlug');
+    Route::post('/product/addToCart/{product_id}', [App\Http\Controllers\ProductController::class, 'addToCart'])->name('product.addToCart');
     Route::get('/products/productImageDelete/{product_image}', [App\Http\Controllers\ProductController::class, 'productImageDelete'])->name('productImageDelete');
     Route::resource('products', App\Http\Controllers\ProductController::class);
 

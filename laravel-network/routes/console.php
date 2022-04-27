@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Artisan;
 use PhpParser\Builder\Class_;
 use App\Models\{User, Group, Post};
+use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\TryCatch;
 
 /*
 |--------------------------------------------------------------------------
@@ -104,6 +106,39 @@ function get_rand_img_()
     $fiels = scandir(public_path('images/products-examples'));
 
     for ($i=0; $i < count($fiels) ; $i++) {
-        return $fiels;
+        return array_rand($fiels);
     }
 }
+
+
+Artisan::command('db2', function(){
+    $products = DB::connection('rozetka')->table('products')->limit(300)->pluck('card')->toArray();
+
+    $this->withProgressBar( $products, function ($url) {
+        try{
+            copy($url, public_path('images/products-examples/'.pathinfo($url, PATHINFO_BASENAME)));
+        } catch (Exception $e) {
+
+        }
+    });
+
+    // foreach ($products as $url) {
+    //     echo pathinfo($url, PATHINFO_BASENAME);
+
+    // }
+    // print_r((array)$products);
+
+
+});
+
+// copy
+
+//$this->withProgressBar($arr, function ($months) use (&$month_num)
+
+
+Artisan::command('text', function(){
+    echo get_random_paragraph();
+
+});
+
+

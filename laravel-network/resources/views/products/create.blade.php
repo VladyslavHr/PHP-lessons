@@ -2,7 +2,37 @@
 
 @section('title', 'Products-shop')
 
+@section('styles-header')
 
+
+<link rel="stylesheet" href="/css/summernote-lite.min.css">
+
+<style>
+    .note-editable { background-color: white !important; }
+</style>
+
+@endsection
+
+@section('scripts-body')
+
+<script src="/js/summernote-lite.min.js"></script>
+
+{{-- <script src="/lang/summernote-uk-UA.min.js"></script> --}}
+
+<script>
+        $(document).ready(function() {
+    $('#summernote').summernote({
+        lang: 'uk-UA',
+        height: 250,                 // set editor height
+        minHeight: null,             // set minimum height of editor
+        maxHeight: null,             // set maximum height of editor
+        focus: true,                  // set focus to editable area after initializing summernote
+
+    });
+});
+</script>
+
+@endsection
 
 @section('content')
 
@@ -46,7 +76,7 @@
                 </div>
                 <div class="mb-3">
                     <label  for="" class="form-label">Description</label>
-                    <textarea name="description" class="form-control" rows="3">{{ old('description') }}</textarea>
+                    <textarea id="summernote" name="description"  class="form-control" rows="3">{{ old('description') }}</textarea>
                 </div>
                 <div class="mb-3">
                     <button type="submit" name="save" class="btn btn-primary groups-update-btn">
@@ -70,6 +100,8 @@
 
 
 <script>
+
+
 
     var log = console.log
     var create_product_image_input = document.getElementById('create_product_image_input')
@@ -97,3 +129,7 @@
     });
 </script>
 @endsection
+
+
+
+{{-- name="description" --}}

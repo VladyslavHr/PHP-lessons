@@ -76,10 +76,17 @@
                 {{ $product->price }}$
             </div>
             <div class="goods-info-buttons">
-                <a href="{{ route('products.cart', $product) }}" class="goods-info-add-cart">
-                    Добавить в корзину
-                </a>
-                <a href="#" class="goods-info-buy">
+                <form class="d-inline-block" action="{{ route('product.addToCart', $product->id) }}" method="POST">
+                    @csrf
+                    <button type="submit"  class="goods-info-buy ">
+                        Добавить в корзину
+                        @if (isset($user->cart_array[$product->id]))
+                        <span class="ms-2 badge rounded-pill bg-light text-dark">{{ $user->cart_array[$product->id] }}</span>
+                        @endif
+                    </button>
+                </form>
+
+                <a href="{{route('products.checkout')}}" class="goods-info-add-cart">
                     Купить
                 </a>
             </div>

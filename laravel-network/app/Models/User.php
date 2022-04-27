@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
 {
@@ -34,6 +35,7 @@ class User extends Authenticatable
         'family_status',
         'phone',
         'about_yourself',
+        'cart',
     ];
 
     /**
@@ -156,5 +158,52 @@ class User extends Authenticatable
     {
         return asset('/storage/'.$this->avatar);
     }
+
+    public function cart_add($product_id)
+    {
+        if ($this->cart && $cart = json_decode($this->cart, true)) {
+            if (isset($cart[$product_id])) {
+                $cart[$product_id]++;
+            }else{
+                $cart[$product_id] = 1;
+            }
+        }else{
+            $cart = [$product_id => 1];
+        }
+        $this->cart = json_encode($cart);
+        $this->save();
+    }
+
+    public function cart_delete_row($product_id)
+    {
+        # code...
+    }
+
+    public function cart_destroy()
+    {
+        $this->cart = null;
+        $this->save();
+    }
+
+    public function getCartArrayAttribute()
+    // : Attribute
+    {
+        // return Attribute::make(
+        //     get: fn ($value, $attributes) => json_decode($attributes['cart'], true),
+        // );
+
+        return json_decode($this->cart, true);
+    }
+
+    public function getCartProductsAttribute()
+    {
+        $ids = array_keys($this->cart_array);
+        $products = Product::whereIN('id', $ids)->get();
+
+        // \Debugbar::info($ids);
+
+        return $products;
+    }
+
 
 }

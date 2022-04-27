@@ -34,8 +34,7 @@
                     </div>
                     <div class="info-text">
                         <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam incidunt, perferendis eius modi voluptates atque, numquam quae ducimus
-                            sed architecto eligendi veniam repellat nesciunt fuga earum optio culpa molestias. Accusantium.
+                            {{ get_random_paragraph() }}
                         </p>
                     </div>
                     <div class="info-list-wrap">

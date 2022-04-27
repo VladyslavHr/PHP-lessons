@@ -22,7 +22,7 @@ class ProductFactory extends Factory
     public function definition()
     {
 
-        $image =  '/images/no-image.png';
+        $image =  get_rand_img_();
 
         // $title = $this->faker->sentence(3, true);
         $title = $this->faker->catchPhrase();
@@ -41,6 +41,47 @@ class ProductFactory extends Factory
 
 // Загрузка картинок рандомных с файла
 // scandir()
+
+function get_rand_img_()
+{
+    // $dir = public_path('images/products-examples');
+    $files = scandir(public_path('images/products-examples'));
+
+    unset($files[0]);
+    unset($files[1]);
+
+    // $result = [];
+
+    // foreach ($files as $file) {
+    //     $extension = pathinfo($file, PATHINFO_EXTENSION);
+    //     if (in_array(strtolower($extension), ['jpg', 'png'])) {
+    //         $result[] = $file;
+    //     }
+    // }
+
+    $result = array_filter($files, function ($file){
+        $extension = pathinfo($file, PATHINFO_EXTENSION);
+        return in_array(strtolower($extension), ['jpg', 'png']);
+    });
+
+    return '/images/products-examples/' . $result[array_rand($result)];
+
+    // return;
+    // $images = glob($dir . '/*.{[jJ][pP][gG],[jJ][pP][eE][gG],png,}', GLOB_BRACE);
+
+    // if(!$images) return '/images/no-image.png';
+
+    // $image = array_map(function($path) {
+
+    //     return pathinfo($path, PATHINFO_BASENAME);
+    //     // $ret = explode('/', $path);
+
+    //     // return end($ret);
+    // }, $images);
+
+    // return '/images/products-examples/' . $images[array_rand($images)];
+
+}
 
 
 // function RandImg()
@@ -139,3 +180,8 @@ class ProductFactory extends Factory
 //         return $fiels[$i];
 //     }
 // }
+
+
+
+
+//

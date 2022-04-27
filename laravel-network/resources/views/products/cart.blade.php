@@ -12,35 +12,45 @@
 
 <div class="container mt-5 pt-5">
     <h3 class="mb-3">Товары в корзине ({{ count($products) }})</h3>
-    @foreach ($products as $product)
+    @foreach ($user->cart_products as $product)
 
 
-    <div class="row mt-5 mb-5 align-items-center">
+    <div class="row mt-5 mb-5 align-items-center cart-product">
         <div class="cart-product-img col-sm-2">
             <img src="{{ $product->image }}" alt="">
         </div>
-        <div class="cart-product-title col-sm-3">
+        <div class="cart-product-title col-sm-6">
             <h6 class="elipsis" title="{{ $product->title }}">
                 {{ $product->title }}
             </h6>
         </div>
-        <div class="cart-product-description col-sm-4">
-            <p>
-                {{ $product->description }}
-            </p>
-        </div>
-        <div class="cart-product-status col-sm-1">
-            <span>
-                {{ $product->status }}
+        <div class="cart-product-status col-sm-2">
+            @if ($product->status === 'in_stock')
+            <span class="badge rounded-pill bg-success">
+                <i class="bi bi-check-circle"></i>
+                В наличии
             </span>
+            @else
+            <span class="badge rounded-pill bg-danger">
+                <i class="bi bi-x-circle"></i>
+                Товар отсутсвует
+            </span>
+
+            @endif
         </div>
         <div class="cart-product-quantity col-sm-1">
+            <span class="cart-product-quantity-plusminus">
+                <i class="bi bi-dash-circle"></i>
+            </span>
             <span>
-                1
+                {{ $user->cart_array[$product->id]}}
+            </span>
+            <span class="cart-product-quantity-plusminus">
+                <i class="bi bi-plus-circle"></i>
             </span>
         </div>
         <div class="cart-product-price col-sm-1">
-            <span>
+            <span >
                 {{ $product->price }}
             </span>
         </div>
@@ -83,7 +93,7 @@
             <a class="cart-products-back-shop" href="{{ route('products.index') }}">Продолжить покупки</a>
         </div>
         <div class="col-sm-6 text-end">
-            <a class="cart-products-submit-order" href="#">Оформить заказ</a>
+            <a class="cart-products-submit-order" href="{{ route('products.checkout') }}">Оформить заказ</a>
         </div>
     </div>
 
