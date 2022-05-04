@@ -24,6 +24,7 @@ Route::middleware('auth', 'log.cart')->group(function () {
     Route::controller(App\Http\Controllers\ProfileController::class)->group(function () {
         Route::get('/', 'profile')->name('main');
         Route::get('/friends', 'friends')->name('profiles.friends');
+        Route::get('/profiles', 'index')->name('profiles.index');
         Route::get('/profile', 'profile')->name('profile');
         Route::get('/profile/{user}', 'show')->name('profiles.show');
         Route::get('/profiles/edit', 'edit')->name('profiles.edit');
@@ -38,6 +39,7 @@ Route::middleware('auth', 'log.cart')->group(function () {
         Route::post('/profiles/update', 'update')->name('profiles.update');
         Route::post('/profiles/updatePassword', 'updatePassword')->name('profiles.updatePassword');
         Route::post('/profile/uploadAvatar', 'uploadAvatar')->name('profile.uploadAvatar');
+        Route::post('/profile/changeCoverPhoto', 'changeCoverPhoto')->name('prodile.changeCoverPhoto');
         Route::delete('/profile/{user}', 'destroy')->name('profile.delete');
         Route::post('/profile/changeBanner', 'changeBanner')->name('profile.changeBanner');
     });
@@ -66,9 +68,13 @@ Route::middleware('auth', 'log.cart')->group(function () {
 
 
     Route::get('/products/cart', [App\Http\Controllers\ProductController::class, 'cart'])->name('products.cart');
+    Route::post('/products/cartItemDelete{product_id}', [App\Http\Controllers\ProductController::class, 'cartItemDelete'])->name('products.cartItemDelete');
+    Route::post('/products/cartItemMinus{product_id}', [App\Http\Controllers\ProductController::class, 'cartItemMinus'])->name('products.cartItemMinus');
+    Route::post('/products/cartItemPlus{product_id}', [App\Http\Controllers\ProductController::class, 'cartItemPlus'])->name('products.cartItemPlus');
     Route::get('/products/checkout', [App\Http\Controllers\ProductController::class, 'checkout'])->name('products.checkout');
     Route::get('/product/{product}', [App\Http\Controllers\ProductController::class, 'bySlug'])->name('product.bySlug');
     Route::post('/product/addToCart/{product_id}', [App\Http\Controllers\ProductController::class, 'addToCart'])->name('product.addToCart');
+    Route::post('/products/cartDestroy', [App\Http\Controllers\ProductController::class, 'cartDestroy'])->name('products.cartDestroy');
     Route::get('/products/productImageDelete/{product_image}', [App\Http\Controllers\ProductController::class, 'productImageDelete'])->name('productImageDelete');
     Route::resource('products', App\Http\Controllers\ProductController::class);
 

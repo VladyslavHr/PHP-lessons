@@ -1,11 +1,11 @@
-<div class="profile-banner">
+{{-- <div class="profile-banner">
     <img src="{{ asset ('images/banner1.jpg') }}" alt="">
-</div>
-<div class="bg-white section-shadow">
+</div> --}}
+<div class="section-shadow mt-3" style="background-image: url('/images/cover-photo.jpg">
     <div class="container">
 
-        <div class="profile-wrapp row align-items-start">
-            <label class="prof-avatar-main col-sm-3  @if ($user->id === auth()->user()->id) {{'upload-image-label'}} @endif">
+        <div class="profile-wrapp row">
+            <label class="prof-avatar-main col-md-3  @if ($user->id === auth()->user()->id) {{'upload-image-label'}} @endif">
                 @if ($user->id === auth()->user()->id)
 
 
@@ -21,9 +21,9 @@
             @endif
             </label>
 
-            <div class="col-lg-9 ">
+            <div class="col-md-9 profile-header-right">
 
-                <nav class="profile-list-menu-mobile navbar navbar-expand-lg navbar-light">
+                <nav class="profile-list-menu-mobile navbar navbar-expand-lg navbar-light section-shadow">
                     <div class="container-fluid">
                       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo04" aria-controls="navbarTogglerDemo04" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -46,9 +46,7 @@
                           <li class="nav-item">
                             <a class="nav-link" href="#">Еще</a>
                           </li>
-                          {{-- <li class="nav-item">
-                            <a class="nav-link disabled">Disabled</a>
-                          </li> --}}
+
                         </ul>
                         <form class="d-flex">
                           {{-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> --}}
@@ -72,18 +70,10 @@
                     </div>
                   </nav>
 
+                  @yield('dynamic-menu')
 
-                {{-- <ul class="prof-list">
-                    <li><a href="#">Публикации</a></li>
-                    <li><a href="#">О себе</a></li>
-                    <li><a href="#">Фотографии</a></li>
-                    <li><a href="/friends">Друзья</a></li>
-                    <li><a href="#">Еще</a></li>
-                </ul>
-                <div class="prof-edit">
-                    <a href="#">Редактировать</a>
-                </div> --}}
-            </div>
+            </div>{{--col-9--}}
+
         </div>
 
 

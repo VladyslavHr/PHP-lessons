@@ -16,7 +16,8 @@ class LogCart
      */
     public function handle(Request $request, Closure $next)
     {
-        \Debugbar::info(json_decode(auth()->user()->cart));
+        view()->share('user', auth()->user());
+     \Debugbar::info(auth()->user()->cart_array);
         return $next($request);
     }
 }

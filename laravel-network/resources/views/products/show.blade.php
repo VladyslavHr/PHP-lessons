@@ -34,44 +34,35 @@
 
         <div class="goods-images col-sm-6">
             @include('blocks.fancybox')
-            {{-- <div class="main-good-img">
-                <a href="{{ $product->image }}" data-lightbox="image" data-title="Product image">
-                    <img  src="{{ $product->image }}" alt="">
-                </a>
 
-            </div> --}}
-
-            {{-- {{-- <div class="small-goods-img"> --}}
-
-                {{-- @foreach ($product->images as $image)
-                <div class="small-goods-img_">
-                    <a href="{{ $image->url }}" data-lightbox="image" data-title="Product image">
-                        <img src="{{ $image->url }}" alt="">
-                    </a>
-
-                </div>
-                @endforeach --}}
-                {{-- https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1099&q=80 --}}
-            {{-- </div> --}}
         </div>
         <div class="goods-info col-sm-6">
             <div class="goods-info-title">
                 <h2>{{ $product->title }}
-                    <a href="{{ route('products.edit', $product) }}" class="float-end goods-edit-link"><i class="bi bi-pencil-fill"></i></a>
-                    <form action="{{ route('products.destroy', $product) }}" method="POST"
-                        onsubmit="if(!confirm('Удалять?')) return false">
-                        @csrf
-                        @method('DELETE')
-                        <button class="float-end goods-destroy-button"><i class="bi bi-trash"></i></button>
-                    </form>
+
+                    @if (auth()->user()->id === $product->user_id)
+                    <div class="btn-group float-end">
+                        <a href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-list"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                          <li>
+                            <a href="{{ route('products.edit', $product) }}" class="btn"><i class="bi bi-pencil-fill"></i></a>
+                          </li>
+                          <li>
+                            <form action="{{ route('products.destroy', $product) }}" method="POST"
+                            onsubmit="if(!confirm('Удалять?')) return false">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn text-danger"><i class="bi bi-trash"></i> Delete </button>
+                            </form>
+                          </li>
+                        </ul>
+                    </div>
+                    @endif
+
                 </h2>
 
             </div>
-            <div class="goods-info-describtion">
-                <p>
-                    {!! $product->description !!}
-                </p>
-            </div>
+
             <div class="goods-info-price">
                 {{ $product->price }}$
             </div>
@@ -91,6 +82,11 @@
                 </a>
             </div>
 
+            <div class="goods-info-describtion">
+                <p>
+                    {!! $product->description !!}
+                </p>
+            </div>
         </div>
     </div>
 

@@ -2,13 +2,15 @@
 
 @section('title', 'Profile-page-edit')
 
-
+@section('dynamic-menu')
+    @include('blocks.profile-menu')
+@endsection
 
 @section('content')
 
 @include('/blocks.profile-header')
 
-<div class="container edit-profile-container">
+<div class="container mt-5 pt-2">
 
     <form action="{{ route('profile.delete', $user) }}"
         class="delete-profile-form" method="POST"
@@ -67,6 +69,10 @@
                 <label for="email" class="form-label">Електронная почта</label>
                 <input value="{{ $user->email }}" name="email" type="email" class="form-control" id="email" placeholder="Ваша электронная почта">
             </div>
+            {{-- <div class="edit-form-input col-sm-12">
+                <label for="cover_photo" class="form-label">Фото обложки</label>
+                <input type="file" name="cover_photo" class="form-control" id="cover_photo">
+            </div> --}}
             <div class="edit-form-input col-sm-12">
                 <label for="about_yourself" class="form-label">О себе</label>
                 <textarea name="about_yourself" type="text" class="form-control" id="about_yourself" placeholder="Расскажите о себе">{{ $user->about_yourself }}</textarea>
@@ -79,6 +85,19 @@
 
     </form>
     {{-- {{ route('profiles.update.password') }} --}}
+    <form class="edit-form mb-5" action="{{ route('prodile.changeCoverPhoto') }}" method="POST" enctype='multipart/form-data'>
+        @csrf
+        <div class="edit-password row">
+            <div class="edit-form-input col-sm-12">
+                <label for="cover_photo" class="form-label">Фото обложки</label>
+                <input type="file" name="cover_photo" class="form-control" id="cover_photo">
+            </div>
+            <div class="button-in-form mt-3">
+                <button type="submit" class="edit-page-btn btn btn-primary">Подтвердить</button>
+            </div>
+        </div>
+
+    </form>
 
     <form class="edit-form mb-5" action="{{ route('profiles.updatePassword') }}" method="POST">
         @csrf

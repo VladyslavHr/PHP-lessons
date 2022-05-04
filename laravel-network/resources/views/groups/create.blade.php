@@ -3,6 +3,9 @@
 
 @section('title', 'Create group')
 
+@section('dynamic-menu')
+    @include('blocks.groups-menu')
+@endsection
 
 @section('content')
 

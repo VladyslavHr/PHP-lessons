@@ -2,15 +2,20 @@
 
 @section('title', 'network-friends')
 
-
+@section('dynamic-menu')
+    @include('blocks.friends-menu')
+@endsection
 
 @section('content')
-@include('/blocks.profile-header')
+@include('blocks.profile-header')
 
-@include('/blocks.friends-menu')
+{{-- @include('/blocks.friends-menu') --}}
 
 <div class="friends-blocks-wrap container">
     <div class="friends-main row">
+    <div class="js-no-reload">
+        {{ $users->links() }}
+    </div>
         @foreach ($users as $user)
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
             <a href="{{ route('profiles.show', $user) }}" class="friend-block row">
@@ -25,6 +30,10 @@
         </div>
 
         @endforeach
+        <div class="js-no-reload">
+            {{ $users->links() }}
+        </div>
+
     </div>
 </div>
 @endsection

@@ -22,7 +22,7 @@
                 <a class="nav-link {{ request()->routeIs('groups*') ? 'active' : '' }}" href="{{ route('groups.index') }}">Groups</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('profiles.friends') ? 'active' : '' }}" href="{{ route('profiles.friends') }}">Friendds</a>
+                <a class="nav-link {{ request()->routeIs('profiles.index') ? 'active' : '' }}" href="{{ route('profiles.index') }}">Users</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('products.index') ? 'active' : '' }}" href="{{ route('products.index') }}">Products</a>

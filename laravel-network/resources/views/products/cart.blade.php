@@ -2,16 +2,19 @@
 
 @section('title', 'product-cart')
 
+@section('dynamic-menu')
+    @include('blocks.products-menu')
+@endsection
 
 
 @section('content')
 
 @include('blocks.profile-header')
 
-@include('blocks.products-menu')
 
-<div class="container mt-5 pt-5">
-    <h3 class="mb-3">Товары в корзине ({{ count($products) }})</h3>
+<div class="container pt-2 section-shadow page-margin-top">
+    <h2 class="text-center">Корзина</h2>
+    <h3 class="mb-3">Товары в корзине ({{ count($user->cart_products) }})</h3>
     @foreach ($user->cart_products as $product)
 
 
@@ -19,7 +22,7 @@
         <div class="cart-product-img col-sm-2">
             <img src="{{ $product->image }}" alt="">
         </div>
-        <div class="cart-product-title col-sm-6">
+        <div class="cart-product-title col-sm-5">
             <h6 class="elipsis" title="{{ $product->title }}">
                 {{ $product->title }}
             </h6>
@@ -39,20 +42,37 @@
             @endif
         </div>
         <div class="cart-product-quantity col-sm-1">
-            <span class="cart-product-quantity-plusminus">
-                <i class="bi bi-dash-circle"></i>
-            </span>
+            <form class="cart-product-quantity-plusminus" action="{{route('products.cartItemMinus', $product->id)}}" method="POST">
+                @csrf
+                <button class="btn" type="submit">
+                    <i class="bi bi-dash-circle"></i>
+                </button>
+            </form>
             <span>
                 {{ $user->cart_array[$product->id]}}
             </span>
-            <span class="cart-product-quantity-plusminus">
-                <i class="bi bi-plus-circle"></i>
-            </span>
+            <form class="cart-product-quantity-plusminus" action="{{route('products.cartItemPlus', $product->id)}}" method="POST">
+                @csrf
+                <button class="btn" type="submit">
+                    <i class="bi bi-plus-circle"></i>
+                </button>
+            </form>
         </div>
         <div class="cart-product-price col-sm-1">
-            <span >
-                {{ $product->price }}
+            <span class="d-block">
+                {{ $product->price }} $
             </span>
+            <span class="d-block">
+                {{ $user->cart_array[$product->id] * $product->price }} $
+            </span>
+        </div>
+        <div class="cart-product-delete col-sm-1">
+            <form action="{{ route('products.cartItemDelete', $product->id) }}" method="POST">
+                @csrf
+                <button type="submit" class="btn">
+                    <i class="bi bi-x-square text-danger"></i>
+                </button>
+            </form>
         </div>
     </div>
 
@@ -65,7 +85,14 @@
             <div class="cart-products-pay-method">Способ оплаты</div>
         </div>
         <div class="col-sm-6 cart-products-res-sum">
-            <div class="cart-products-total-item-sum">{{ $total }} $</div>
+            {{-- @for ($i = 0; count($product->price; ++$i))
+            {
+                {{ $res = sum($product->price[$i]) }}
+
+            }
+
+            @endfor --}}
+            {{-- <div class="cart-products-total-item-sum">{{ sum($user->cart_array[$product->id] * $product->price) }} $</div> --}}
             <div class="cart-products-delivery-sum">{{ $delivery_price }} $</div>
             <div class="cart-products-pay-method-result">
                 <select class="cart-products-select" name="pay_method" id="">
@@ -83,17 +110,22 @@
         </div>
         <div class="col-sm-6 text-end">
             <h3>
-                {{ $total + $delivery_price }} $
+                {{-- {{ $total + $delivery_price }} $ --}}
             </h3>
         </div>
     </div>
 
-    <div class="row mt-5 mb-5">
-        <div class="col-sm-6">
-            <a class="cart-products-back-shop" href="{{ route('products.index') }}">Продолжить покупки</a>
+    <div class="row pt-5 pb-5">
+        <div class="col-sm-6 ">
+            <a class="btn cart-products-back-shop" href="{{ route('products.index') }}">Продолжить покупки</a>
+            <form class="d-inline-block" action="{{ route('products.cartDestroy') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn cart-products-back-shop">Очистить корзину</button>
+            </form>
+            {{-- <a class="cart-products-back-shop" href="{{ route('products.cartDestroy') }}"></a> --}}
         </div>
         <div class="col-sm-6 text-end">
-            <a class="cart-products-submit-order" href="{{ route('products.checkout') }}">Оформить заказ</a>
+            <a class="btn cart-products-submit-order d-inline-block" href="{{ route('products.checkout') }}">Оформить заказ</a>
         </div>
     </div>
 

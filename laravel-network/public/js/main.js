@@ -14,7 +14,17 @@ function ln_init() {
             model_id: this.dataset.modelid,
         })
     })
+
+    setTimeout(function () {
+        document.querySelectorAll('.MagicZoom_').forEach(function(link)
+    {
+            MagicZoom.start(link)
+
+        })
+    },100)
 }
+
+
 
 ln_init()
 
@@ -168,10 +178,10 @@ $('body').on('click', '.js-no-reload a', function(e) {
 
         ln_init()
 
-        document.querySelectorAll('.MagicZoom_').forEach(function(link)
-        {
-            MagicZoom.refresh(link)
-        })
+        // document.querySelectorAll('.MagicZoom_').forEach(function(link)
+        // {
+        //     MagicZoom.refresh(link)
+        // })
 
      	// window.scrollTo(0, 0)
     })
@@ -323,6 +333,18 @@ function alert(status, text) {
     $('#errors_list').prepend(alert)
     $(".alert-success").delay(4000).slideUp(400, function () {
         $(this).alert('close');
+    })
+}
+
+function group_subscribe(link, event) {
+    event.preventDefault()
+    $.post(link.href, {
+      group_id: link.dataset.groupid,
+      _token: jQuery('meta[name="csrf-token"]').attr('content'),
+    }, function (data) {
+        if (data.status && data.status === 'ok' && data.button_text) {
+            link.innerHTML = data.button_text
+        }
     })
 }
 

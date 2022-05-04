@@ -23,6 +23,7 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'role' => 'user',
             'avatar' => '/images/user-icon.png',
+            'cover_photo' => '/images/banner1.jpg',
         ];
     }
 

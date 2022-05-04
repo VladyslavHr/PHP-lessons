@@ -24,6 +24,7 @@ class AddColumnsToUsersTable extends Migration
         $table->string('family_status')->nullable();
         $table->text('about_yourself')->nullable();
         $table->text('cart')->nullable(true);
+        $table->string('cover_photo')->nullable(true);
 
         });
     }
@@ -46,6 +47,7 @@ class AddColumnsToUsersTable extends Migration
             $table->dropColumn('family_status');
             $table->dropColumn('about_yourself');
             $table->dropColumn('cart');
+            $table->dropColumn('cover_photo');
         });
     }
 }

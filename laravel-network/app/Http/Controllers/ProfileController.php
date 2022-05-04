@@ -11,7 +11,6 @@ use App\Models\{User, Group, Post};
 
 class ProfileController extends Controller
 {
-
     public function productCreate()
     {
        return view('profiles.product-create', [
@@ -27,7 +26,7 @@ class ProfileController extends Controller
 
         return view('profiles.shop',[
             'products' => $products,
-            'user' => auth()->user(),
+            // 'user' => auth()->user(),
         ]);
     }
 
@@ -37,7 +36,7 @@ class ProfileController extends Controller
         $products = [1,11,111,111,1.1,1,1,1,111];
         return view('profiles.product', [
             'products' => $products,
-            'user' => auth()->user(),
+            // 'user' => auth()->user(),
         ]);
     }
 
@@ -69,7 +68,7 @@ class ProfileController extends Controller
 
         return view('profiles.friends', [
             'users' => $friends,
-            'user' => Auth::user(),
+            // 'user' => Auth::user(),
         ]);
     }
 
@@ -99,7 +98,7 @@ class ProfileController extends Controller
 
         return view('profiles.friends', [
             'users' => $followers,
-            'user' => Auth::user(),
+            // 'user' => Auth::user(),
         ]);
     }
 
@@ -118,7 +117,7 @@ class ProfileController extends Controller
 
         return view('profiles.friends', [
             'users' => $following,
-            'user' => Auth::user(),
+            // 'user' => Auth::user(),
         ]);
     }
 
@@ -190,6 +189,49 @@ class ProfileController extends Controller
         ];
     }
 
+    public function changeCoverPhoto(Request $request)
+    {
+        $data = $request->validate([
+            'id' => '',
+            'cover_photo' => 'image:jpg,jpeg,png',
+        ]);
+
+        if ($request->hasFile('cover_photo')) {
+            $path = $request->file('cover_photo')->store('user-cover-photos', 'public');
+            $data['cover_photo'] = '/storage/'.$path;
+        }else{
+            $data['cover_photo'] = '//banner1.jpg';
+        }
+
+        $user = User::find($request->get('id'));
+        $old_image_url = $user->cover_photo;
+        $saved = $user->update($data);
+
+        $path = public_path($old_image_url);
+        if (file_exists($path) && strpos($path, '/images/') === false ) {
+            unlink($path);
+        }
+
+        return [
+            'status' => $saved ? 'ok' : 'error',
+            'data' => $data,
+            '$path' => $path,
+            '$old_image_url' => $old_image_url
+            // 'deleted' => $deleted ? 'deleted' : 'error',
+        ];
+
+        // $request->validate([
+        //     'cover_photo' => 'image:jpg,jpeg,png'
+        // ]);
+
+        // if ($request->hasFile('cover_photo')) {
+        //     $request->file('cover_photo')->move(public_path('images'), 'cover-photo.jpg');
+        // }
+
+
+        // return redirect()->back()->with('status', 'Обложка обнавлена');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -197,7 +239,10 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        return view('profiles.friends', [
+            'users' => User::paginate(24),
+            // 'user' => auth()->user(),
+        ]);
     }
 
     /**
@@ -216,6 +261,8 @@ class ProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
 
     public function changeBanner(Request $request)
     {
@@ -248,6 +295,7 @@ class ProfileController extends Controller
             'phone' => 'required|min:4|max:255',
             'email' => 'required|min:4|max:255',
             'avatar' => 'image',
+            'cover_photo' => 'image:jpg,jpeg,png',
             'about_yourself' => '',
         ],[
             'name.required' => 'Введите имя',
@@ -284,7 +332,6 @@ class ProfileController extends Controller
         return view('profiles.show', [
             'title' => 'My profile',
             'friends' => $friends,
-            'user' => Auth::user(),
             'postable_id' => $user->id,
             'postable_type' => 'App\Models\User',
             'text' => $text,
@@ -331,7 +378,7 @@ class ProfileController extends Controller
         return view('profiles.edit', [
             'title' => 'My profile edit',
             'users' => $users,
-            'user' => Auth::user()
+            // 'user' => Auth::user()
         ]);
     }
 
@@ -356,12 +403,16 @@ class ProfileController extends Controller
             'family_status' => 'max:255',
             'phone' => 'max:255',
             'email' => 'required|min:4|max:191',
+            'cover_photo' => 'image:jpg,jpeg,png',
             'about_yourself' => '',
         ],[
             'name.required' => 'Введите имя',
             'email.required' => 'Введите электронную почту',
         ]);
         // dd($data);
+        if ($data->hasFile('cover_photo')) {
+            $data->file('cover_photo')->move(public_path('images'), 'profile-banner.jpg');
+        }
 
         $user = Auth::user();
         $user->update($data);

@@ -20,6 +20,10 @@
 
 @endsection
 
+@section('dynamic-menu')
+    @include('blocks.friends-menu')
+@endsection
+
 @section('content')
 
 @include('/blocks.profile-header')
